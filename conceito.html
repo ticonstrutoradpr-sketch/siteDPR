@@ -1,0 +1,1141 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPR | Conceitos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho: #ff0000;
+            --vermelho-profundo: #a60000;
+            --grafite: #505050;
+            --cinza-claro: #a0a0a0;
+            --branco: #ffffff;
+            --preto: #050505;
+            --gelo: #f4f4f4;
+            --vidro: rgba(255,255,255,0.07);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body {
+            background: var(--preto);
+            color: var(--branco);
+            font-family: 'Archivo', sans-serif;
+            overflow-x: hidden;
+        }
+        img { max-width: 100%; display: block; }
+        ::selection { background: var(--vermelho); color: #fff; }
+
+        /* ============================= */
+        /* HEADER                        */
+        /* ============================= */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            padding: 22px 90px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            width: 100%;
+            background: rgba(5,5,5,0.76);
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+            backdrop-filter: blur(18px);
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: 0.35s ease;
+        }
+        .brand-mark:hover { transform: translateY(-2px); }
+        .brand-logo {
+            display: block;
+            width: auto;
+            height: 42px;
+            max-width: 150px;
+            object-fit: contain;
+            filter: drop-shadow(0 4px 14px rgba(0,0,0,0.45));
+        }
+
+        .nav-container { display: flex; align-items: center; gap: 26px; }
+        .nav-menu { display: flex; list-style: none; gap: 24px; }
+
+        .nav-menu a {
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 0.66rem;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-weight: 600;
+            position: relative;
+            padding: 5px 0 5px 12px;
+            transition: all 0.4s ease;
+            opacity: 0.7;
+            white-space: nowrap;
+        }
+        .nav-menu a::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 50%;
+            width: 1px;
+            height: 0;
+            background-color: var(--vermelho);
+            transition: all 0.4s ease;
+            transform: translateY(-50%);
+        }
+        .nav-menu a:hover, .nav-menu a.active { opacity: 1; letter-spacing: 4px; }
+        .nav-menu a:hover::before, .nav-menu a.active::before { height: 70%; }
+
+        .menu-toggle {
+            display: none;
+            width: 42px;
+            height: 42px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .menu-toggle span { width: 20px; height: 2px; background: var(--branco); transition: 0.35s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--vermelho); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--vermelho); }
+
+        .header-controls { display: flex; align-items: center; gap: 18px; }
+        .lang-switch { color: var(--branco); font-size: 0.68rem; font-weight: 900; opacity: 0.55; cursor: pointer; transition: 0.3s; }
+        .lang-switch:hover { opacity: 1; }
+
+        .search-wrapper { display: flex; align-items: center; position: relative; }
+        .search-input {
+            width: 0;
+            opacity: 0;
+            background: none;
+            border: none;
+            border-bottom: 1px solid var(--vermelho);
+            color: var(--branco);
+            font-family: 'Archivo', sans-serif;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            outline: none;
+            transition: all 0.6s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+        .search-wrapper.active .search-input { width: 180px; opacity: 1; margin-right: 12px; padding: 5px; }
+        .search-trigger { cursor: pointer; width: 36px; height: 36px; display: inline-flex; align-items: center; justify-content: center; }
+        .search-trigger svg { width: 18px; height: 18px; fill: none; stroke: var(--branco); stroke-width: 2.3; opacity: 0.72; transition: 0.3s ease; }
+        .search-wrapper.active .search-trigger svg { stroke: var(--vermelho); opacity: 1; }
+
+        /* ============================= */
+        /* HERO                          */
+        /* ============================= */
+        .concept-hero {
+            position: relative;
+            min-height: 100vh;
+            padding: 150px 10% 80px;
+            display: grid;
+            grid-template-columns: 1.08fr 0.92fr;
+            gap: 72px;
+            align-items: center;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 18% 20%, rgba(255,0,0,0.22) 0%, rgba(255,0,0,0.06) 24%, transparent 45%),
+                radial-gradient(circle at 82% 70%, rgba(255,255,255,0.08) 0%, transparent 35%),
+                linear-gradient(135deg, #050505 0%, #101010 48%, #050505 100%);
+        }
+        .concept-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px);
+            background-size: 82px 82px;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 16%, black 88%, transparent 100%);
+            pointer-events: none;
+        }
+        .concept-hero::after {
+            content: 'CONCEITO';
+            position: absolute;
+            right: 3%;
+            top: 98px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(4rem, 12vw, 12rem);
+            font-weight: 800;
+            letter-spacing: -10px;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.055);
+            pointer-events: none;
+        }
+
+        .hero-copy, .hero-art { position: relative; z-index: 3; }
+        .kicker {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            color: var(--vermelho);
+            font-size: 0.58rem;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 26px;
+        }
+        .kicker::before { content: ''; width: 44px; height: 1px; background: var(--vermelho); }
+
+        .concept-hero h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2.6rem, 7vw, 6.8rem);
+            line-height: 0.84;
+            letter-spacing: -6px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            text-shadow: 0 14px 36px rgba(0,0,0,0.85);
+        }
+        .concept-hero h1 span { color: var(--vermelho); }
+        .hero-copy p {
+            max-width: 620px;
+            color: var(--cinza-claro);
+            font-size: 1.06rem;
+            line-height: 1.85;
+            font-weight: 300;
+            border-left: 2px solid var(--vermelho);
+            padding-left: 24px;
+        }
+
+        .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; margin-top: 34px; }
+        .btn-dpr {
+            display: inline-flex;
+            align-items: center;
+            gap: 14px;
+            color: var(--branco);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.64rem;
+            letter-spacing: 3px;
+            font-weight: 900;
+            padding: 17px 24px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.04);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 11px), calc(100% - 11px) 100%, 0 100%);
+            transition: 0.4s ease;
+        }
+        .btn-dpr.primary { background: linear-gradient(135deg, var(--vermelho-profundo), var(--vermelho)); border-color: var(--vermelho); box-shadow: 0 16px 36px rgba(255,0,0,0.24); }
+        .btn-dpr:hover { transform: translateY(-4px); border-color: var(--vermelho); }
+        .btn-dpr svg { width: 16px; height: 16px; stroke: currentColor; stroke-width: 2.4; fill: none; }
+
+        .hero-art {
+            min-height: 580px;
+            display: grid;
+            grid-template-columns: 1fr 0.74fr;
+            gap: 20px;
+            align-items: stretch;
+        }
+        .art-card {
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.09);
+            background: #111;
+            min-height: 260px;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 34px), calc(100% - 34px) 100%, 0 100%);
+        }
+        .art-card img {
+            width: 100%; height: 100%; object-fit: cover;
+            filter: grayscale(0.2) brightness(0.62) contrast(1.18);
+            transform: scale(1.08);
+            transition: 1s cubic-bezier(0.19,1,0.22,1);
+        }
+        .art-card:hover img { filter: grayscale(0) brightness(0.8) contrast(1.1); transform: scale(1); }
+        .art-card.large { grid-row: span 2; }
+        .art-card::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,0.78), transparent 58%);
+        }
+        .art-caption {
+            position: absolute;
+            left: 24px;
+            bottom: 24px;
+            z-index: 3;
+            font-size: 0.56rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: rgba(255,255,255,0.85);
+            font-weight: 900;
+        }
+
+        /* ============================= */
+        /* MANIFESTO                     */
+        /* ============================= */
+        .manifesto {
+            position: relative;
+            padding: 130px 10%;
+            background: var(--branco);
+            color: var(--preto);
+            overflow: hidden;
+        }
+        .manifesto::before {
+            content: 'DPR';
+            position: absolute;
+            right: 6%;
+            bottom: -36px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(7rem, 18vw, 17rem);
+            font-weight: 800;
+            letter-spacing: -12px;
+            color: rgba(0,0,0,0.035);
+            pointer-events: none;
+        }
+        .manifesto-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 0.8fr 1.2fr;
+            gap: 80px;
+            align-items: start;
+        }
+        .section-label {
+            display: block;
+            color: var(--vermelho);
+            font-size: 0.58rem;
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            font-weight: 900;
+            margin-bottom: 22px;
+        }
+        .manifesto h2, .section-title {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2rem, 4.5vw, 4rem);
+            line-height: 0.95;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+        }
+        .manifesto-text {
+            border-left: 2px solid var(--vermelho);
+            padding-left: 40px;
+        }
+        .manifesto-text p {
+            color: #424242;
+            font-size: clamp(1.08rem, 1.7vw, 1.45rem);
+            line-height: 1.72;
+            font-weight: 300;
+            margin-bottom: 28px;
+        }
+        .manifesto-signature {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.82rem;
+            letter-spacing: 4px;
+            color: var(--vermelho);
+            text-transform: uppercase;
+            margin-top: 24px;
+        }
+
+        /* ============================= */
+        /* PILARES                       */
+        /* ============================= */
+        .pillars {
+            position: relative;
+            padding: 130px 10% 150px;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(255,0,0,0.13) 0%, transparent 40%),
+                linear-gradient(180deg, #050505 0%, #090909 100%);
+            overflow: hidden;
+        }
+        .pillars::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+            background-size: 80px 80px;
+            pointer-events: none;
+            mask-image: linear-gradient(to bottom, transparent 0%, black 12%, black 88%, transparent 100%);
+        }
+        .section-head {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1fr 0.8fr;
+            gap: 60px;
+            align-items: end;
+            margin-bottom: 70px;
+        }
+        .section-head p {
+            color: var(--cinza-claro);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .pillars-grid {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 18px;
+        }
+        .pillar-card {
+            position: relative;
+            min-height: 360px;
+            padding: 32px 26px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.075), rgba(255,255,255,0.025));
+            border: 1px solid rgba(255,255,255,0.09);
+            overflow: hidden;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 28px), calc(100% - 28px) 100%, 0 100%);
+            transition: 0.45s ease;
+        }
+        .pillar-card::before {
+            content: attr(data-number);
+            position: absolute;
+            top: 24px;
+            right: 22px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.72rem;
+            letter-spacing: 4px;
+            color: rgba(255,255,255,0.36);
+            border-bottom: 1px solid var(--vermelho);
+            padding-bottom: 8px;
+        }
+        .pillar-card::after {
+            content: '';
+            position: absolute;
+            left: -30%;
+            bottom: -30%;
+            width: 160px;
+            height: 160px;
+            background: radial-gradient(circle, rgba(255,0,0,0.28), transparent 70%);
+            opacity: 0;
+            transition: 0.45s ease;
+        }
+        .pillar-card:hover { transform: translateY(-10px); border-color: rgba(255,0,0,0.45); background: linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,0,0,0.04)); }
+        .pillar-card:hover::after { opacity: 1; }
+        .pillar-icon {
+            width: 56px;
+            height: 56px;
+            border: 1px solid rgba(255,255,255,0.12);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 92px;
+            background: rgba(255,255,255,0.04);
+        }
+        .pillar-icon svg { width: 26px; height: 26px; stroke: var(--vermelho); fill: none; stroke-width: 1.8; }
+        .pillar-card h3 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1rem;
+            line-height: 1.15;
+            letter-spacing: -0.5px;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            position: relative;
+            z-index: 2;
+        }
+        .pillar-card p {
+            color: rgba(255,255,255,0.68);
+            font-size: 0.92rem;
+            line-height: 1.65;
+            font-weight: 300;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* ============================= */
+        /* EXPERIENCIA                   */
+        /* ============================= */
+        .experience {
+            position: relative;
+            padding: 140px 10%;
+            background:
+                linear-gradient(90deg, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.58) 52%, rgba(5,5,5,0.88) 100%),
+                url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1800') center/cover fixed;
+            overflow: hidden;
+        }
+        .experience-inner {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 0.9fr 1.1fr;
+            gap: 70px;
+            align-items: center;
+        }
+        .experience-panel {
+            padding: 48px;
+            background: rgba(255,255,255,0.07);
+            border: 1px solid rgba(255,255,255,0.12);
+            backdrop-filter: blur(14px);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 34px), calc(100% - 34px) 100%, 0 100%);
+        }
+        .experience-panel p {
+            color: rgba(255,255,255,0.78);
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-top: 24px;
+        }
+        .experience-list {
+            display: grid;
+            gap: 14px;
+        }
+        .experience-item {
+            display: grid;
+            grid-template-columns: 82px 1fr;
+            gap: 24px;
+            align-items: center;
+            padding: 26px;
+            background: rgba(0,0,0,0.52);
+            border: 1px solid rgba(255,255,255,0.09);
+            backdrop-filter: blur(8px);
+            transition: 0.35s ease;
+        }
+        .experience-item:hover { border-color: rgba(255,0,0,0.45); transform: translateX(8px); }
+        .experience-item span {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.35rem;
+            color: var(--vermelho);
+        }
+        .experience-item h3 {
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 4px;
+            margin-bottom: 8px;
+        }
+        .experience-item p {
+            color: rgba(255,255,255,0.66);
+            font-size: 0.9rem;
+            line-height: 1.55;
+            font-weight: 300;
+        }
+
+        /* ============================= */
+        /* MATERIALIDADE                 */
+        /* ============================= */
+        .materials {
+            padding: 130px 10%;
+            background: var(--branco);
+            color: var(--preto);
+            position: relative;
+            overflow: hidden;
+        }
+        .materials-head {
+            display: grid;
+            grid-template-columns: 1fr 0.9fr;
+            gap: 60px;
+            align-items: end;
+            margin-bottom: 58px;
+            position: relative;
+            z-index: 2;
+        }
+        .materials-head p {
+            color: #4a4a4a;
+            font-size: 1rem;
+            line-height: 1.8;
+            font-weight: 300;
+        }
+        .materials-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr 1fr;
+            gap: 18px;
+            position: relative;
+            z-index: 2;
+        }
+        .material-card {
+            position: relative;
+            min-height: 420px;
+            overflow: hidden;
+            background: #111;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+        }
+        .material-card:nth-child(2) { margin-top: 70px; }
+        .material-card img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(0.1) brightness(0.74) contrast(1.08); transition: 0.8s ease; }
+        .material-card:hover img { transform: scale(1.06); filter: grayscale(0) brightness(0.85) contrast(1.08); }
+        .material-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.86), transparent 64%); }
+        .material-card div {
+            position: absolute;
+            left: 26px;
+            right: 26px;
+            bottom: 26px;
+            z-index: 2;
+        }
+        .material-card span {
+            display: inline-block;
+            color: #fff;
+            background: var(--vermelho);
+            font-size: 0.52rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            font-weight: 900;
+            padding: 7px 10px;
+            margin-bottom: 14px;
+        }
+        .material-card h3 {
+            color: #fff;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.05rem;
+            line-height: 1.12;
+            text-transform: uppercase;
+        }
+
+        /* ============================= */
+        /* CTA                           */
+        /* ============================= */
+        .concept-cta {
+            position: relative;
+            padding: 120px 10%;
+            text-align: center;
+            background:
+                radial-gradient(circle at 50% 0%, rgba(255,0,0,0.18) 0%, transparent 42%),
+                linear-gradient(180deg, #080808 0%, #050505 100%);
+            border-top: 1px solid rgba(255,255,255,0.08);
+        }
+        .concept-cta h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.9rem, 5vw, 4rem);
+            line-height: 0.95;
+            letter-spacing: -3px;
+            text-transform: uppercase;
+            max-width: 920px;
+            margin: 0 auto 34px;
+        }
+        .concept-cta h2 span { color: var(--vermelho); }
+
+        .vertical-marquee {
+            position: fixed;
+            right: 0;
+            top: 0;
+            height: 100%;
+            width: 75px;
+            background: rgba(255,255,255,0.01);
+            border-left: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+            z-index: 10;
+        }
+        .marquee-inner { display: flex; flex-direction: column; animation: scroll-vertical 25s linear infinite; }
+        .marquee-inner span {
+            writing-mode: vertical-rl;
+            text-transform: uppercase;
+            font-size: 0.72rem;
+            letter-spacing: 5px;
+            padding: 50px 0;
+            color: rgba(255,255,255,0.25);
+            white-space: nowrap;
+            font-weight: 600;
+        }
+        @keyframes scroll-vertical { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+        /* ============================= */
+        /* FOOTER                        */
+        /* ============================= */
+        .footer-dpr {
+            position: relative;
+            background:
+                radial-gradient(circle at 12% 0%, rgba(255,0,0,0.13) 0%, rgba(255,0,0,0.03) 28%, transparent 52%),
+                linear-gradient(180deg, #050505 0%, #0a0a0a 100%);
+            padding: 110px 10% 42px;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            overflow: hidden;
+        }
+        .footer-dpr::before {
+            content: 'DPR';
+            position: absolute;
+            right: 6%;
+            top: 22px;
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(5rem, 14vw, 13rem);
+            font-weight: 800;
+            letter-spacing: -10px;
+            color: transparent;
+            -webkit-text-stroke: 1px rgba(255,255,255,0.05);
+            pointer-events: none;
+        }
+        .footer-container {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            grid-template-columns: 1.4fr 0.8fr 1fr;
+            gap: 70px;
+            margin-bottom: 70px;
+        }
+        .footer-brand h2 { font-family: 'Syncopate', sans-serif; font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 22px; }
+        .footer-brand p { color: var(--cinza-claro); font-size: 0.92rem; line-height: 1.75; max-width: 360px; font-weight: 300; }
+        .footer-links h4, .footer-contact h4 { font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 22px; color: var(--vermelho); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--cinza-claro); text-decoration: none; font-size: 0.88rem; transition: 0.35s ease; }
+        .footer-links a:hover { color: var(--vermelho); padding-left: 6px; }
+        .footer-contact p { font-size: 0.88rem; color: var(--cinza-claro); margin-bottom: 10px; line-height: 1.5; }
+        .footer-bottom {
+            position: relative;
+            z-index: 2;
+            border-top: 1px solid rgba(255,255,255,0.08);
+            padding-top: 24px;
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            align-items: center;
+        }
+        .footer-bottom p { font-size: 0.68rem; color: rgba(255,255,255,0.42); letter-spacing: 2px; text-transform: uppercase; }
+        .footer-top-link {
+            color: var(--branco);
+            text-decoration: none;
+            font-size: 0.65rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            border: 1px solid rgba(255,255,255,0.12);
+            padding: 12px 14px;
+            transition: 0.35s ease;
+        }
+        .footer-top-link:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+        .reveal-up {
+            opacity: 0;
+            transform: translateY(36px);
+            transition: opacity 0.8s cubic-bezier(0.19,1,0.22,1), transform 0.8s cubic-bezier(0.19,1,0.22,1);
+        }
+        .reveal-up.visible { opacity: 1; transform: translateY(0); }
+
+        @media (max-width: 1180px) {
+            header { padding: 20px 5%; }
+            .nav-menu { gap: 18px; }
+            .nav-menu a { font-size: 0.62rem; letter-spacing: 2.4px; }
+            .concept-hero, .manifesto, .pillars, .experience, .materials, .concept-cta, .footer-dpr { padding-left: 7%; padding-right: 7%; }
+            .concept-hero { grid-template-columns: 1fr; gap: 50px; padding-top: 140px; }
+            .hero-art { min-height: 460px; }
+            .pillars-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+
+        @media (max-width: 768px) {
+            header { top: 0; padding: 16px 18px; }
+            .brand-logo { height: 34px; max-width: 125px; }
+            .menu-toggle { display: flex; }
+            nav {
+                position: fixed;
+                top: 72px;
+                left: 18px;
+                right: 18px;
+                background: rgba(5,5,5,0.96);
+                border: 1px solid rgba(255,255,255,0.1);
+                backdrop-filter: blur(18px);
+                padding: 22px;
+                opacity: 0;
+                visibility: hidden;
+                transform: translateY(-12px);
+                transition: 0.35s ease;
+            }
+            nav.active { opacity: 1; visibility: visible; transform: translateY(0); }
+            .nav-menu { flex-direction: column; gap: 18px; }
+            .nav-menu a { display: block; font-size: 0.72rem; letter-spacing: 4px; }
+            .nav-container { gap: 12px; }
+            .header-controls { gap: 12px; }
+            .search-wrapper.active .search-input { position: absolute; right: 24px; top: 30px; width: 145px; background: rgba(0,0,0,0.92); padding: 8px; }
+
+            .concept-hero { min-height: auto; padding-top: 120px; padding-bottom: 70px; }
+            .concept-hero::after { top: 90px; right: -12%; font-size: 5.2rem; letter-spacing: -5px; }
+            .concept-hero h1 { font-size: clamp(2.05rem, 11vw, 3.5rem); line-height: 0.96; letter-spacing: -2px; }
+            .hero-copy p { font-size: 0.94rem; line-height: 1.72; }
+            .hero-art { grid-template-columns: 1fr; min-height: auto; }
+            .art-card, .art-card.large { min-height: 260px; grid-row: auto; }
+
+            .manifesto-grid, .section-head, .experience-inner, .materials-head { grid-template-columns: 1fr; gap: 34px; }
+            .manifesto, .pillars, .experience, .materials, .concept-cta { padding-top: 82px; padding-bottom: 88px; }
+            .manifesto-text { padding-left: 24px; }
+            .section-title, .manifesto h2 { font-size: clamp(1.55rem, 8vw, 2.4rem); letter-spacing: -1.5px; }
+            .pillars-grid { grid-template-columns: 1fr; }
+            .pillar-card { min-height: 280px; }
+            .pillar-icon { margin-bottom: 64px; }
+            .experience { background-attachment: scroll; }
+            .experience-panel { padding: 30px 24px; }
+            .experience-item { grid-template-columns: 54px 1fr; gap: 18px; padding: 22px 18px; }
+            .materials-grid { grid-template-columns: 1fr; }
+            .material-card, .material-card:nth-child(2) { min-height: 320px; margin-top: 0; }
+            .vertical-marquee { display: none; }
+            .footer-container { grid-template-columns: 1fr; gap: 38px; margin-bottom: 48px; }
+            .footer-brand h2 { font-size: 1.55rem; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
+        }
+
+        @media (max-width: 480px) {
+            .concept-hero { padding-left: 6%; padding-right: 6%; }
+            .concept-hero h1 { font-size: 2.08rem; }
+            .kicker { font-size: 0.48rem; letter-spacing: 4px; }
+            .btn-dpr { width: 100%; justify-content: center; }
+            .pillar-card { padding: 28px 22px; }
+            .experience-item h3 { letter-spacing: 2.5px; }
+            .concept-cta h2 { font-size: 1.72rem; letter-spacing: -1px; }
+        }
+
+
+        /* ===================================================== */
+        /* POLIMENTO DE USABILIDADE MOBILE (somente refinamentos) */
+        /* nao altera layout desktop, conteudo nem o visual base   */
+        /* ===================================================== */
+        @media (max-width: 768px) {
+            /* impede o iOS de inflar o texto sozinho ao girar a tela */
+            html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+            /* remove o flash cinza ao tocar em links/botoes */
+            a, button, .menu-toggle, .search-trigger, .lang-switch, .btn-dpr,
+            .art-card, .pillar-card, .material-card, .experience-item, .footer-top-link {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* trava qualquer vazamento horizontal residual */
+            html, body { max-width: 100%; overflow-x: hidden; }
+
+            /* evita o zoom automatico do iOS ao focar o campo de busca */
+            .search-input { font-size: 16px; }
+
+            /* area de toque confortavel nos itens do menu e idioma */
+            .nav-menu a { min-height: 44px; display: flex; align-items: center; }
+            .lang-switch { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; }
+
+            /* impede selecao acidental de texto ao arrastar pelas imagens */
+            .art-card, .pillar-card,
+            .material-card { -webkit-user-select: none; user-select: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="brand-mark" aria-label="DPR"><img src="logo.png" alt="DPR" class="brand-logo"></a>
+
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <nav id="mainNav">
+                <ul class="nav-menu">
+                    <li><a href="index.html" data-pt="INÍCIO" data-en="HOME">INÍCIO</a></li>
+                    <li><a href="empreendimento.html" data-pt="EMPREENDIMENTOS" data-en="DEVELOPMENTS">EMPREENDIMENTOS</a></li>
+                    <li><a href="conceitos.html" class="active" data-pt="CONCEITOS" data-en="CONCEPTS">CONCEITOS</a></li>
+                    <li><a href="contato.html" data-pt="CONTATO" data-en="CONTACT">CONTATO</a></li>
+                </ul>
+            </nav>
+
+            <div class="header-controls">
+                <span class="lang-switch" id="langBtn">EN</span>
+                <div class="search-wrapper" id="searchWrapper">
+                    <input type="text" class="search-input" placeholder="SEARCH..." id="searchInput">
+                    <div class="search-trigger" id="searchBtn" aria-label="Buscar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                            <circle cx="10.8" cy="10.8" r="6.4"></circle>
+                            <line x1="15.7" y1="15.7" x2="20.5" y2="20.5"></line>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="concept-hero">
+            <div class="hero-copy reveal-up">
+                <span class="kicker" data-pt="DPR ESSÊNCIA" data-en="DPR ESSENCE">DPR ESSÊNCIA</span>
+                <h1 data-pt="Conceito<br><span>que habita.</span>" data-en="Concept<br><span>made to live.</span>">Conceito<br><span>que habita.</span></h1>
+                <p data-pt="Criamos espaços que unem arquitetura contemporânea, engenharia precisa e uma leitura sensível da vida real. Cada decisão nasce para transformar forma, função e emoção em uma experiência de moradia sofisticada, fluida e atemporal."
+                   data-en="We create spaces that unite contemporary architecture, precise engineering, and a sensitive reading of real life. Every decision is designed to transform form, function, and emotion into a sophisticated, fluid, and timeless living experience.">
+                   Criamos espaços que unem arquitetura contemporânea, engenharia precisa e uma leitura sensível da vida real. Cada decisão nasce para transformar forma, função e emoção em uma experiência de moradia sofisticada, fluida e atemporal.
+                </p>
+                <div class="hero-actions">
+                    <a href="empreendimento.html" class="btn-dpr primary">
+                        <span data-pt="Ver empreendimentos" data-en="View developments">Ver empreendimentos</span>
+                        <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
+                    </a>
+                    <a href="#manifesto" class="btn-dpr">
+                        <span data-pt="Conhecer visão" data-en="Discover vision">Conhecer visão</span>
+                        <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-art reveal-up">
+                <div class="art-card large">
+                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1100" alt="Arquitetura residencial contemporânea">
+                    <span class="art-caption" data-pt="Arquitetura viva" data-en="Living architecture">Arquitetura viva</span>
+                </div>
+                <div class="art-card">
+                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=900" alt="Interior elegante e moderno">
+                    <span class="art-caption" data-pt="Interiores sensoriais" data-en="Sensorial interiors">Interiores sensoriais</span>
+                </div>
+                <div class="art-card">
+                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=900" alt="Design de alto padrão">
+                    <span class="art-caption" data-pt="Detalhe e precisão" data-en="Detail and precision">Detalhe e precisão</span>
+                </div>
+            </div>
+        </section>
+
+        <section class="manifesto" id="manifesto">
+            <div class="manifesto-grid reveal-up">
+                <div>
+                    <span class="section-label" data-pt="MANIFESTO" data-en="MANIFESTO">MANIFESTO</span>
+                    <h2 data-pt="Não construímos apenas metros quadrados." data-en="We do not just build square meters.">Não construímos apenas metros quadrados.</h2>
+                </div>
+                <div class="manifesto-text">
+                    <p data-pt="Construímos a atmosfera de uma vida possível. A casa como refúgio, endereço, símbolo e escolha inteligente. Por isso, cada empreendimento da DPR parte de uma pergunta simples: como esse espaço pode melhorar a rotina de quem vive nele?"
+                       data-en="We build the atmosphere of a possible life. The home as refuge, address, symbol, and intelligent choice. That is why every DPR development starts with a simple question: how can this space improve the routine of those who live in it?">
+                       Construímos a atmosfera de uma vida possível. A casa como refúgio, endereço, símbolo e escolha inteligente. Por isso, cada empreendimento da DPR parte de uma pergunta simples: como esse espaço pode melhorar a rotina de quem vive nele?
+                    </p>
+                    <p data-pt="A resposta aparece nos fluxos, nas fachadas, nos materiais, na iluminação, no silêncio, na segurança e na sensação de pertencimento que cada projeto entrega."
+                       data-en="The answer appears in the flows, facades, materials, lighting, silence, safety, and sense of belonging that every project delivers.">
+                       A resposta aparece nos fluxos, nas fachadas, nos materiais, na iluminação, no silêncio, na segurança e na sensação de pertencimento que cada projeto entrega.
+                    </p>
+                    <div class="manifesto-signature">DPR Engenharia</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="pillars">
+            <div class="section-head reveal-up">
+                <div>
+                    <span class="section-label" data-pt="NOSSOS PILARES" data-en="OUR PILLARS">NOSSOS PILARES</span>
+                    <h2 class="section-title" data-pt="O método por trás da estética." data-en="The method behind the aesthetic.">O método por trás da estética.</h2>
+                </div>
+                <p data-pt="A DPR combina linguagem arquitetônica, rigor técnico e visão comercial para criar empreendimentos desejáveis hoje e relevantes no futuro."
+                   data-en="DPR combines architectural language, technical rigor, and commercial vision to create developments that are desirable today and relevant in the future.">
+                   A DPR combina linguagem arquitetônica, rigor técnico e visão comercial para criar empreendimentos desejáveis hoje e relevantes no futuro.
+                </p>
+            </div>
+
+            <div class="pillars-grid">
+                <article class="pillar-card reveal-up" data-number="01">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24"><path d="M3 21h18"></path><path d="M5 21V8l7-5 7 5v13"></path><path d="M9 21v-8h6v8"></path></svg>
+                    </div>
+                    <h3 data-pt="Arquitetura autoral" data-en="Signature architecture">Arquitetura autoral</h3>
+                    <p data-pt="Projetos com identidade própria, presença visual e soluções que fogem do óbvio sem perder funcionalidade."
+                       data-en="Projects with their own identity, strong visual presence, and solutions that avoid the obvious without losing functionality.">
+                       Projetos com identidade própria, presença visual e soluções que fogem do óbvio sem perder funcionalidade.
+                    </p>
+                </article>
+
+                <article class="pillar-card reveal-up" data-number="02">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 2l8 4v6c0 5-3.5 8.5-8 10-4.5-1.5-8-5-8-10V6l8-4z"></path><path d="M9 12l2 2 4-5"></path></svg>
+                    </div>
+                    <h3 data-pt="Engenharia precisa" data-en="Precise engineering">Engenharia precisa</h3>
+                    <p data-pt="Planejamento técnico, execução controlada e atenção aos detalhes que garantem segurança, durabilidade e qualidade."
+                       data-en="Technical planning, controlled execution, and attention to detail that ensure safety, durability, and quality.">
+                       Planejamento técnico, execução controlada e atenção aos detalhes que garantem segurança, durabilidade e qualidade.
+                    </p>
+                </article>
+
+                <article class="pillar-card reveal-up" data-number="03">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24"><path d="M12 21s7-5.1 7-11a7 7 0 0 0-14 0c0 5.9 7 11 7 11z"></path><circle cx="12" cy="10" r="2.5"></circle></svg>
+                    </div>
+                    <h3 data-pt="Localização inteligente" data-en="Smart location">Localização inteligente</h3>
+                    <p data-pt="Endereços pensados por potencial de valorização, acesso, conveniência e qualidade de vida."
+                       data-en="Addresses designed around appreciation potential, access, convenience, and quality of life.">
+                       Endereços pensados por potencial de valorização, acesso, conveniência e qualidade de vida.
+                    </p>
+                </article>
+
+                <article class="pillar-card reveal-up" data-number="04">
+                    <div class="pillar-icon">
+                        <svg viewBox="0 0 24 24"><path d="M4 20c6-1 12-7 16-16"></path><path d="M4 14c4 0 6 2 6 6"></path><path d="M14 4c0 4 2 6 6 6"></path></svg>
+                    </div>
+                    <h3 data-pt="Bem-estar real" data-en="Real well-being">Bem-estar real</h3>
+                    <p data-pt="Espaços desenhados para luz, ventilação, conforto, privacidade e uma rotina mais leve."
+                       data-en="Spaces designed for light, ventilation, comfort, privacy, and a lighter daily routine.">
+                       Espaços desenhados para luz, ventilação, conforto, privacidade e uma rotina mais leve.
+                    </p>
+                </article>
+            </div>
+        </section>
+
+        <section class="experience">
+            <div class="experience-inner">
+                <div class="experience-panel reveal-up">
+                    <span class="section-label" data-pt="EXPERIÊNCIA DPR" data-en="DPR EXPERIENCE">EXPERIÊNCIA DPR</span>
+                    <h2 class="section-title" data-pt="A sofisticação mora nos detalhes." data-en="Sophistication lives in the details.">A sofisticação mora nos detalhes.</h2>
+                    <p data-pt="Do primeiro traço à entrega final, o conceito DPR orienta escolhas técnicas e estéticas para que cada empreendimento tenha coerência, personalidade e valor percebido."
+                       data-en="From the first sketch to final delivery, the DPR concept guides technical and aesthetic choices so every development has coherence, personality, and perceived value.">
+                       Do primeiro traço à entrega final, o conceito DPR orienta escolhas técnicas e estéticas para que cada empreendimento tenha coerência, personalidade e valor percebido.
+                    </p>
+                </div>
+
+                <div class="experience-list">
+                    <div class="experience-item reveal-up">
+                        <span>01</span>
+                        <div>
+                            <h3 data-pt="Leitura do terreno" data-en="Site reading">Leitura do terreno</h3>
+                            <p data-pt="Entendemos vocação, entorno, insolação, acesso e potencial de valorização antes de desenhar."
+                               data-en="We understand vocation, surroundings, sunlight, access, and appreciation potential before designing.">
+                               Entendemos vocação, entorno, insolação, acesso e potencial de valorização antes de desenhar.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="experience-item reveal-up">
+                        <span>02</span>
+                        <div>
+                            <h3 data-pt="Conceito arquitetônico" data-en="Architectural concept">Conceito arquitetônico</h3>
+                            <p data-pt="Criamos uma narrativa visual clara para fachada, interiores, áreas comuns e experiência do morador."
+                               data-en="We create a clear visual narrative for the facade, interiors, common areas, and resident experience.">
+                               Criamos uma narrativa visual clara para fachada, interiores, áreas comuns e experiência do morador.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="experience-item reveal-up">
+                        <span>03</span>
+                        <div>
+                            <h3 data-pt="Execução com controle" data-en="Controlled execution">Execução com controle</h3>
+                            <p data-pt="Transformamos estética em obra viável, com qualidade, acompanhamento e precisão em cada etapa."
+                               data-en="We transform aesthetics into viable construction, with quality, monitoring, and precision at every stage.">
+                               Transformamos estética em obra viável, com qualidade, acompanhamento e precisão em cada etapa.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="materials">
+            <div class="materials-head reveal-up">
+                <div>
+                    <span class="section-label" data-pt="MATERIALIDADE" data-en="MATERIALITY">MATERIALIDADE</span>
+                    <h2 class="section-title" data-pt="Texturas que elevam a percepção." data-en="Textures that elevate perception.">Texturas que elevam a percepção.</h2>
+                </div>
+                <p data-pt="A escolha dos materiais comunica solidez, conforto e sofisticação. Priorizamos combinações que envelhecem bem, valorizam o imóvel e criam uma atmosfera contemporânea."
+                   data-en="The choice of materials communicates solidity, comfort, and sophistication. We prioritize combinations that age well, enhance the property, and create a contemporary atmosphere.">
+                   A escolha dos materiais comunica solidez, conforto e sofisticação. Priorizamos combinações que envelhecem bem, valorizam o imóvel e criam uma atmosfera contemporânea.
+                </p>
+            </div>
+
+            <div class="materials-grid">
+                <article class="material-card reveal-up">
+                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=1200" alt="Pedra natural e design contemporâneo">
+                    <div>
+                        <span data-pt="Natural" data-en="Natural">Natural</span>
+                        <h3 data-pt="Pedras, luz e permanência" data-en="Stone, light, and permanence">Pedras, luz e permanência</h3>
+                    </div>
+                </article>
+                <article class="material-card reveal-up">
+                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200" alt="Madeira e interiores elegantes">
+                    <div>
+                        <span data-pt="Sensorial" data-en="Sensorial">Sensorial</span>
+                        <h3 data-pt="Calor visual e conforto" data-en="Visual warmth and comfort">Calor visual e conforto</h3>
+                    </div>
+                </article>
+                <article class="material-card reveal-up">
+                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80&w=1200" alt="Fachada contemporânea e elegante">
+                    <div>
+                        <span data-pt="Urbano" data-en="Urban">Urbano</span>
+                        <h3 data-pt="Linhas limpas e presença" data-en="Clean lines and presence">Linhas limpas e presença</h3>
+                    </div>
+                </article>
+            </div>
+        </section>
+
+        <section class="concept-cta">
+            <span class="section-label" data-pt="PRÓXIMO PASSO" data-en="NEXT STEP">PRÓXIMO PASSO</span>
+            <h2 data-pt="Conheça os empreendimentos que carregam esse <span>conceito.</span>" data-en="Discover the developments that carry this <span>concept.</span>">Conheça os empreendimentos que carregam esse <span>conceito.</span></h2>
+            <a href="empreendimento.html" class="btn-dpr primary" style="margin: 0 auto;">
+                <span data-pt="Explorar portfólio" data-en="Explore portfolio">Explorar portfólio</span>
+                <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
+            </a>
+        </section>
+    </main>
+
+    <div class="vertical-marquee">
+        <div class="marquee-inner">
+            <span data-pt="CONCEITO • ARQUITETURA • PRECISÃO • DESIGN •" data-en="CONCEPT • ARCHITECTURE • PRECISION • DESIGN •">CONCEITO • ARQUITETURA • PRECISÃO • DESIGN • </span>
+            <span data-pt="CONCEITO • ARQUITETURA • PRECISÃO • DESIGN •" data-en="CONCEPT • ARCHITECTURE • PRECISION • DESIGN •">CONCEITO • ARQUITETURA • PRECISÃO • DESIGN • </span>
+        </div>
+    </div>
+
+    <footer class="footer-dpr">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>DPR</h2>
+                <p data-pt="Engenharia, construção e design com precisão, visão contemporânea e atenção absoluta aos detalhes."
+                   data-en="Engineering, construction, and design with precision, contemporary vision, and absolute attention to detail.">
+                   Engenharia, construção e design com precisão, visão contemporânea e atenção absoluta aos detalhes.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4 data-pt="Links" data-en="Links">Links</h4>
+                <ul>
+                    <li><a href="index.html" data-pt="Início" data-en="Home">Início</a></li>
+                    <li><a href="empreendimento.html" data-pt="Empreendimentos" data-en="Developments">Empreendimentos</a></li>
+                    <li><a href="conceitos.html" data-pt="Conceitos" data-en="Concepts">Conceitos</a></li>
+                    <li><a href="contato.html" data-pt="Contato" data-en="Contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-pt="Contato" data-en="Contact">Contato</h4>
+                <p>mktdprconstrutora@gmail.com</p>
+                <p>+55 11 94802-9430</p>
+                <p data-pt="São Paulo, Brasil" data-en="São Paulo, Brazil">São Paulo, Brasil</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-pt="© 2026 DPR Engenharia. Todos os direitos reservados." data-en="© 2026 DPR Engineering. All rights reserved.">© 2026 DPR Engenharia. Todos os direitos reservados.</p>
+            <a href="#" class="footer-top-link" data-pt="Voltar ao topo" data-en="Back to top">Voltar ao topo</a>
+        </div>
+    </footer>
+
+    <script>
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+
+        menuToggle.addEventListener('click', () => {
+            menuToggle.classList.toggle('active');
+            mainNav.classList.toggle('active');
+        });
+
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                menuToggle.classList.remove('active');
+                mainNav.classList.remove('active');
+            });
+        });
+
+        const searchBtn = document.getElementById('searchBtn');
+        const searchWrapper = document.getElementById('searchWrapper');
+        const searchInput = document.getElementById('searchInput');
+
+        searchBtn.addEventListener('click', () => {
+            searchWrapper.classList.toggle('active');
+            if (searchWrapper.classList.contains('active')) searchInput.focus();
+        });
+
+        const langBtn = document.getElementById('langBtn');
+        let currentLang = 'pt';
+
+        langBtn.addEventListener('click', () => {
+            currentLang = currentLang === 'pt' ? 'en' : 'pt';
+            langBtn.innerText = currentLang === 'pt' ? 'EN' : 'PT';
+
+            document.querySelectorAll('[data-pt]').forEach(el => {
+                el.innerHTML = el.getAttribute('data-' + currentLang);
+            });
+        });
+
+        const revealItems = document.querySelectorAll('.reveal-up');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    revealObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.16 });
+
+        revealItems.forEach(item => revealObserver.observe(item));
+    </script>
+</body>
+</html>

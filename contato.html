@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPR | Contato</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho: #ff0000;
+            --vermelho-fundo: #c40000;
+            --grafite: #505050;
+            --cinza-claro: #a0a0a0;
+            --branco: #ffffff;
+            --preto: #050505;
+            --gelo: #f4f4f4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--preto); color: var(--branco); font-family: 'Archivo', sans-serif; overflow-x: hidden; }
+        img { max-width: 100%; }
+        ::selection { background: var(--vermelho); color: #fff; }
+
+        /* HEADER */
+        header { position: fixed; top: 40px; left: 0; right: 0; padding: 0 100px; z-index: 1000; display: flex; align-items: center; justify-content: space-between; width: 100%; transition: background 0.4s ease, padding 0.4s ease, top 0.4s ease; }
+        header.scrolled { top: 0; padding-top: 18px; padding-bottom: 18px; background: rgba(5,5,5,0.82); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .brand-mark { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.15rem; letter-spacing: 4px; color: var(--branco); text-decoration: none; text-shadow: 0 2px 10px rgba(0,0,0,0.6); transition: 0.4s ease; display: inline-flex; align-items: center; }
+        .brand-logo { display: block; height: 44px; width: auto; max-width: 150px; object-fit: contain; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.55)); transition: transform 0.35s ease, opacity 0.35s ease; }
+        .brand-mark:hover .brand-logo { transform: scale(1.04); opacity: 0.92; }
+        .brand-mark span { color: var(--vermelho); }
+        .brand-mark:hover { letter-spacing: 6px; }
+        .nav-container { display: flex; align-items: center; gap: 30px; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+        .nav-menu a { color: var(--branco); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; position: relative; padding: 5px 0 5px 12px; transition: all 0.4s ease; opacity: 0.7; white-space: nowrap; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .nav-menu a.active { opacity: 1; }
+        .nav-menu a.active::before { height: 70%; }
+        .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: 0; background-color: var(--vermelho); transition: all 0.4s ease; transform: translateY(-50%); }
+        .nav-menu a:hover { opacity: 1; letter-spacing: 6px; }
+        .nav-menu a:hover::before { height: 70%; }
+        .menu-toggle { display: none; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.55); backdrop-filter: blur(10px); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+        .menu-toggle span { width: 20px; height: 2px; background: var(--branco); transition: 0.35s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--vermelho); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--vermelho); }
+        .header-controls { display: flex; align-items: center; gap: 20px; }
+        .lang-switch { color: var(--branco); font-size: 0.7rem; font-weight: 900; opacity: 0.5; cursor: pointer; transition: 0.3s; }
+        .lang-switch:hover { opacity: 1; }
+        .search-wrapper { display: flex; align-items: center; position: relative; }
+        .search-input { width: 0; opacity: 0; background: none; border: none; border-bottom: 1px solid var(--vermelho); color: var(--branco); font-family: 'Archivo', sans-serif; font-size: 0.8rem; letter-spacing: 2px; outline: none; transition: all 0.6s cubic-bezier(0.19,1,0.22,1); }
+        .search-wrapper.active .search-input { width: 200px; opacity: 1; margin-right: 15px; padding: 5px; }
+        .search-trigger { cursor: pointer; transition: transform 0.4s ease; }
+        .search-trigger svg { width: 18px; height: 18px; fill: none; stroke: var(--branco); stroke-width: 2.5; opacity: 0.7; }
+        .search-wrapper.active .search-trigger { transform: scale(1.2); }
+        .search-wrapper.active .search-trigger svg { stroke: var(--vermelho); opacity: 1; }
+
+        /* BUTTONS */
+        .btn-veja { display: inline-flex; align-items: center; justify-content: center; gap: 14px; background: linear-gradient(135deg, var(--vermelho-fundo) 0%, var(--vermelho) 100%); color: #fff; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 19px 30px; border: none; position: relative; overflow: hidden; cursor: pointer; box-shadow: 0 12px 30px rgba(255,0,0,0.22); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .btn-veja svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 2.4; fill: none; transition: transform 0.4s ease; }
+        .btn-veja::after { content: ''; position: absolute; top: 0; left: -80%; width: 60%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent); transform: skewX(-20deg); transition: left 0.6s ease; }
+        .btn-veja:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(255,0,0,0.35); }
+        .btn-veja:hover svg { transform: translateX(5px); }
+        .btn-veja:hover::after { left: 130%; }
+
+        /* HERO / INTRO */
+        .ct-hero { position: relative; padding: 200px 10% 60px; overflow: hidden; background: radial-gradient(circle at 16% 30%, rgba(255,0,0,0.16) 0%, transparent 44%), linear-gradient(180deg, #050505 0%, #0a0a0a 60%, #050505 100%); }
+        .ct-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to bottom, transparent, black 30%, black 80%, transparent); pointer-events: none; }
+        .ct-hero::after { content: 'DPR'; position: absolute; right: 4%; top: 70px; font-family: 'Syncopate', sans-serif; font-size: clamp(5rem, 16vw, 16rem); font-weight: 800; letter-spacing: -12px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; }
+        .ct-hero-inner { position: relative; z-index: 2; max-width: 760px; }
+        .ct-kicker { font-size: 0.62rem; letter-spacing: 9px; color: var(--vermelho); text-transform: uppercase; font-weight: 900; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+        .ct-kicker::before { content: ''; width: 40px; height: 1px; background: var(--vermelho); }
+        .ct-hero h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(2.4rem, 7vw, 5rem); line-height: 0.85; text-transform: uppercase; letter-spacing: -5px; margin-bottom: 26px; }
+        .ct-hero h1 span { color: var(--vermelho); }
+        .ct-hero p { color: var(--cinza-claro); font-size: 1.05rem; line-height: 1.8; font-weight: 300; max-width: 540px; border-left: 2px solid var(--vermelho); padding-left: 22px; }
+
+        /* MAIN GRID */
+        .ct-main { position: relative; padding: 70px 10% 120px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 60px; align-items: start; background: linear-gradient(180deg, #050505, #080808); }
+
+        /* INFO SIDE */
+        .ct-info { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 110px; }
+        .info-card { display: flex; align-items: center; gap: 20px; border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.02); padding: 22px 24px; text-decoration: none; color: var(--branco); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); transition: 0.4s cubic-bezier(0.19,1,0.22,1); }
+        .info-card:hover { border-color: rgba(255,0,0,0.5); background: rgba(255,0,0,0.04); transform: translateX(6px); }
+        .info-ico { width: 46px; height: 46px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,0,0,0.4); background: rgba(255,0,0,0.08); }
+        .info-ico svg { width: 20px; height: 20px; stroke: var(--vermelho); fill: none; stroke-width: 2; }
+        .info-card .lbl { display: block; font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 5px; }
+        .info-card .val { font-size: 0.95rem; color: var(--branco); font-weight: 600; }
+        .ct-social { display: flex; gap: 12px; margin-top: 8px; }
+        .ct-social a { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); transition: 0.35s ease; }
+        .ct-social a:hover { border-color: var(--vermelho); color: var(--vermelho); background: rgba(255,0,0,0.06); transform: translateY(-4px); }
+        .ct-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* FORM */
+        .ct-form-wrap { position: relative; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); padding: 50px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); }
+        .ct-form-wrap h2 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2rem); text-transform: uppercase; letter-spacing: -1px; margin-bottom: 8px; }
+        .ct-form-wrap h2 span { color: var(--vermelho); }
+        .ct-form-sub { color: var(--cinza-claro); font-size: 0.9rem; font-weight: 300; margin-bottom: 36px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-field { margin-bottom: 22px; }
+        .form-field label { display: block; font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; font-weight: 600; }
+        .form-field label .req { color: var(--vermelho); }
+        .form-field input, .form-field select, .form-field textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); color: var(--branco); font-family: 'Archivo', sans-serif; font-size: 0.95rem; padding: 15px 16px; outline: none; transition: 0.35s ease; }
+        .form-field textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+        .form-field select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ff0000' d='M6 8 0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+        .form-field select option { background: #111; color: #fff; }
+        .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--vermelho); background: rgba(255,0,0,0.05); }
+        .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .form-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 6px; }
+        .btn-email { display: inline-flex; align-items: center; gap: 10px; color: var(--cinza-claro); text-decoration: none; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; border: 1px solid rgba(255,255,255,0.16); padding: 19px 24px; transition: 0.35s ease; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+        .btn-email:hover { border-color: var(--vermelho); color: var(--vermelho); }
+        .form-note { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 18px; line-height: 1.6; }
+        .field-error { outline: 1px solid var(--vermelho); border-color: var(--vermelho) !important; }
+
+        /* MAP */
+        .ct-map-sec { position: relative; padding: 0 10% 120px; background: #080808; }
+        .ct-map { position: relative; min-height: 420px; border: 1px solid rgba(255,255,255,0.1); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); overflow: hidden; }
+        .ct-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(0.6) invert(0.9) contrast(0.9); }
+
+        /* MARQUEE */
+        .vertical-marquee { position: fixed; right: 0; top: 0; height: 100%; width: 75px; background: rgba(255,255,255,0.01); border-left: 1px solid rgba(255,255,255,0.03); display: flex; align-items: center; overflow: hidden; z-index: 10; }
+        .marquee-inner { display: flex; flex-direction: column; animation: scroll-vertical 25s linear infinite; }
+        .marquee-inner span { writing-mode: vertical-rl; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 5px; padding: 50px 0; color: rgba(255,255,255,0.25); white-space: nowrap; font-weight: 600; }
+        @keyframes scroll-vertical { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+        /* FOOTER */
+        .footer-dpr { position: relative; background: radial-gradient(circle at 12% 0%, rgba(255,0,0,0.13) 0%, rgba(255,0,0,0.03) 28%, transparent 52%), linear-gradient(180deg, #050505 0%, #0a0a0a 100%); padding: 110px 10% 42px; border-top: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
+        .footer-dpr::before { content: 'DPR'; position: absolute; right: 6%; top: 22px; font-family: 'Syncopate', sans-serif; font-size: clamp(5rem, 14vw, 13rem); font-weight: 800; letter-spacing: -10px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; }
+        .footer-container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 0.8fr 1fr; gap: 70px; margin-bottom: 70px; }
+        .footer-brand h2 { font-family: 'Syncopate', sans-serif; font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 22px; }
+        .footer-brand p { color: var(--cinza-claro); font-size: 0.92rem; line-height: 1.75; max-width: 360px; font-weight: 300; }
+        .footer-links h4, .footer-contact h4 { font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 22px; color: var(--vermelho); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--cinza-claro); text-decoration: none; font-size: 0.88rem; transition: 0.35s ease; }
+        .footer-links a:hover { color: var(--vermelho); padding-left: 6px; }
+        .footer-contact p { font-size: 0.88rem; color: var(--cinza-claro); margin-bottom: 10px; line-height: 1.5; }
+        .footer-bottom { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+        .footer-bottom p { font-size: 0.68rem; color: rgba(255,255,255,0.42); letter-spacing: 2px; text-transform: uppercase; }
+        .footer-top-link { color: var(--branco); text-decoration: none; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; transition: 0.35s ease; }
+        .footer-top-link:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            header { padding: 0 5%; }
+            .ct-hero, .ct-main, .ct-map-sec, .footer-dpr { padding-left: 7%; padding-right: 7%; }
+            .ct-main { grid-template-columns: 1fr; gap: 40px; }
+            .ct-info { position: relative; top: auto; }
+        }
+        @media (max-width: 768px) {
+            .brand-logo { height: 36px; max-width: 128px; }
+            header { top: 18px; }
+            header.scrolled { top: 0; }
+            .menu-toggle { display: flex; }
+            nav { position: fixed; top: 72px; left: 18px; right: 18px; background: rgba(5,5,5,0.94); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(18px); padding: 22px; opacity: 0; visibility: hidden; transform: translateY(-12px); transition: 0.35s ease; }
+            nav.active { opacity: 1; visibility: visible; transform: translateY(0); }
+            .nav-menu { flex-direction: column; gap: 18px; }
+            .nav-container { gap: 14px; }
+            .header-controls { gap: 14px; }
+            .vertical-marquee { display: none; }
+            .ct-hero { padding: 150px 7% 50px; }
+            .ct-hero::after { top: 110px; right: -6%; font-size: 7rem; letter-spacing: -7px; }
+            .ct-main { padding: 50px 7% 90px; }
+            .ct-form-wrap { padding: 34px 24px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .form-actions { flex-direction: column; align-items: stretch; }
+            .btn-veja, .btn-email { width: 100%; }
+            .ct-map-sec { padding: 0 7% 90px; }
+            .ct-map { min-height: 320px; }
+            .footer-dpr { padding: 76px 7% 32px; }
+            .footer-container { grid-template-columns: 1fr; gap: 38px; margin-bottom: 48px; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
+        }
+
+
+        /* ===================================================== */
+        /* POLIMENTO DE USABILIDADE MOBILE (somente refinamentos) */
+        /* nao altera layout desktop, conteudo nem o visual base   */
+        /* ===================================================== */
+        @media (max-width: 768px) {
+            /* impede o iOS de inflar o texto sozinho ao girar a tela */
+            html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+            /* remove o flash cinza ao tocar em links/botoes */
+            a, button, .menu-toggle, .search-trigger, .lang-switch,
+            .btn-veja, .btn-email, .info-card, .ct-social a, .footer-top-link {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* trava qualquer vazamento horizontal residual */
+            html, body { max-width: 100%; overflow-x: hidden; }
+
+            /* evita o zoom automatico do iOS ao focar busca e campos do formulario */
+            .search-input,
+            .form-field input,
+            .form-field select,
+            .form-field textarea { font-size: 16px; }
+
+            /* area de toque confortavel nos itens do menu e idioma */
+            .nav-menu a { min-height: 44px; display: flex; align-items: center; }
+            .lang-switch { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="siteHeader">
+        <a href="index.html" class="brand-mark"><img src="logo.png" alt="DPR" class="brand-logo"></a>
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            <nav id="mainNav">
+                <ul class="nav-menu">
+                    <li><a href="index.html" data-pt="INÍCIO" data-en="HOME">INÍCIO</a></li>
+                    <li><a href="empreendimentos.html" data-pt="EMPREENDIMENTOS" data-en="DEVELOPMENTS">EMPREENDIMENTOS</a></li>
+                    <li><a href="index.html#servicosModernos" data-pt="SERVIÇOS" data-en="SERVICES">SERVIÇOS</a></li>
+                    <li><a href="contato.html" class="active" data-pt="CONTATO" data-en="CONTACT">CONTATO</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <span class="lang-switch" id="langBtn">EN</span>
+                <div class="search-wrapper" id="searchWrapper">
+                    <input type="text" class="search-input" placeholder="SEARCH..." id="searchInput">
+                    <div class="search-trigger" id="searchBtn" aria-label="Buscar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><line x1="15.7" y1="15.7" x2="20.5" y2="20.5"></line></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="ct-hero">
+        <div class="ct-hero-inner">
+            <span class="ct-kicker" data-pt="FALE COM A DPR" data-en="GET IN TOUCH">FALE COM A DPR</span>
+            <h1 data-pt="Vamos<br><span>conversar</span>" data-en="Let's<br><span>talk</span>">Vamos<br><span>conversar</span></h1>
+            <p data-pt="Tem interesse em um dos nossos empreendimentos ou quer tirar dúvidas? Preencha o formulário ou fale direto com a nossa equipe. Vamos realizar o seu sonho juntos."
+               data-en="Interested in one of our developments or have questions? Fill out the form or talk directly to our team. Let's make your dream come true together.">
+               Tem interesse em um dos nossos empreendimentos ou quer tirar dúvidas? Preencha o formulário ou fale direto com a nossa equipe. Vamos realizar o seu sonho juntos.
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <section class="ct-main">
+        <!-- INFO -->
+        <aside class="ct-info">
+            <a class="info-card" href="https://wa.me/5511948029430" target="_blank" rel="noopener">
+                <span class="info-ico"><svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-9 8.5 8.5 8.5 0 0 1-3.9-.9L3 21l1.9-5A8.5 8.5 0 1 1 21 11.5z"></path></svg></span>
+                <span><span class="lbl">WhatsApp</span><span class="val">+55 11 94802-9430</span></span>
+            </a>
+            <a class="info-card" href="tel:+5511948029430">
+                <span class="info-ico"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3 19.5 19.5 0 0 1-6-6 19.8 19.8 0 0 1-3-8.6A2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.5 2.1L8.1 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7a2 2 0 0 1 1.7 2z"></path></svg></span>
+                <span><span class="lbl" data-pt="Telefone" data-en="Phone">Telefone</span><span class="val">+55 11 94802-9430</span></span>
+            </a>
+            <a class="info-card" href="mailto:mktdprconstrutora@gmail.com">
+                <span class="info-ico"><svg viewBox="0 0 24 24"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"></rect><path d="M3 6l9 7 9-7"></path></svg></span>
+                <span><span class="lbl">E-mail</span><span class="val">mktdprconstrutora@gmail.com</span></span>
+            </a>
+            <div class="info-card" style="cursor: default;">
+                <span class="info-ico"><svg viewBox="0 0 24 24"><path d="M21 10c0 6-9 12-9 12s-9-6-9-12a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></span>
+                <span><span class="lbl" data-pt="Atendimento" data-en="Coverage">Atendimento</span><span class="val" data-pt="Caucaia &amp; Itatinga - SP" data-en="Caucaia &amp; Itatinga - SP">Caucaia &amp; Itatinga - SP</span></span>
+            </div>
+            <div class="ct-social">
+                <a href="https://www.instagram.com/" target="_blank" rel="noopener" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M12 2.2c3.2 0 3.6 0 4.9.1 1.2.1 1.8.3 2.2.4.6.2 1 .5 1.4.9.4.4.7.8.9 1.4.1.4.3 1 .4 2.2.1 1.3.1 1.7.1 4.8s0 3.6-.1 4.9c-.1 1.2-.3 1.8-.4 2.2-.2.6-.5 1-.9 1.4-.4.4-.8.7-1.4.9-.4.1-1 .3-2.2.4-1.3.1-1.7.1-4.9.1s-3.6 0-4.9-.1c-1.2-.1-1.8-.3-2.2-.4-.6-.2-1-.5-1.4-.9-.4-.4-.7-.8-.9-1.4-.1-.4-.3-1-.4-2.2C2.2 15.6 2.2 15.2 2.2 12s0-3.6.1-4.9c.1-1.2.3-1.8.4-2.2.2-.6.5-1 .9-1.4.4-.4.8-.7 1.4-.9.4-.1 1-.3 2.2-.4C8.4 2.2 8.8 2.2 12 2.2zm0 1.8c-3.1 0-3.5 0-4.7.1-1.1.1-1.7.2-2.1.4-.5.2-.9.4-1.3.8-.4.4-.6.8-.8 1.3-.2.4-.3 1-.4 2.1C2.6 10 2.6 10.4 2.6 12s0 2 .1 3.2c.1 1.1.2 1.7.4 2.1.2.5.4.9.8 1.3.4.4.8.6 1.3.8.4.2 1 .3 2.1.4 1.2.1 1.6.1 4.7.1s3.5 0 4.7-.1c1.1-.1 1.7-.2 2.1-.4.5-.2.9-.4 1.3-.8.4-.4.6-.8.8-1.3.2-.4.3-1 .4-2.1.1-1.2.1-1.6.1-3.2s0-2-.1-3.2c-.1-1.1-.2-1.7-.4-2.1-.2-.5-.4-.9-.8-1.3-.4-.4-.8-.6-1.3-.8-.4-.2-1-.3-2.1-.4-1.2-.1-1.6-.1-4.7-.1zm0 3.1a4.9 4.9 0 1 1 0 9.8 4.9 4.9 0 0 1 0-9.8zm0 1.8a3.1 3.1 0 1 0 0 6.2 3.1 3.1 0 0 0 0-6.2zm5.1-.3a1.1 1.1 0 1 1-2.3 0 1.1 1.1 0 0 1 2.3 0z"></path></svg></a>
+                <a href="https://www.facebook.com/" target="_blank" rel="noopener" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M14 9h2.5V6H14c-2 0-3.5 1.5-3.5 3.5V11H8v3h2.5v7h3v-7H16l.5-3h-3V9.8c0-.5.4-.8 1-.8z"></path></svg></a>
+                <a href="https://tiktok.com/" target="_blank" rel="noopener" aria-label="TikTok"><svg viewBox="0 0 24 24"><path d="M16.5 2c.3 2.2 1.6 3.7 3.8 3.9v2.6c-1.3.1-2.5-.3-3.8-1v6.1c0 4-3 6.7-6.7 5.9-3-.6-4.6-3.6-3.7-6.6.7-2.3 3-3.8 5.4-3.5v2.7c-.5-.2-1-.2-1.6-.1-1.2.3-1.9 1.4-1.6 2.6.3 1.2 1.5 1.9 2.7 1.5 1-.3 1.5-1.1 1.5-2.3V2h3.7z"></path></svg></a>
+            </div>
+        </aside>
+
+        <!-- FORM -->
+        <div class="ct-form-wrap">
+            <h2 data-pt="Envie sua <span>mensagem</span>" data-en="Send your <span>message</span>">Envie sua <span>mensagem</span></h2>
+            <p class="ct-form-sub" data-pt="Respondemos o mais rápido possível. Campos com * são obrigatórios." data-en="We reply as soon as possible. Fields with * are required.">Respondemos o mais rápido possível. Campos com * são obrigatórios.</p>
+
+            <form id="contactForm" novalidate>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="nome" data-pt="Nome completo <span class='req'>*</span>" data-en="Full name <span class='req'>*</span>">Nome completo <span class="req">*</span></label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: João da Silva" required>
+                    </div>
+                    <div class="form-field">
+                        <label for="telefone" data-pt="Telefone / WhatsApp <span class='req'>*</span>" data-en="Phone / WhatsApp <span class='req'>*</span>">Telefone / WhatsApp <span class="req">*</span></label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999" required>
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="email" data-pt="E-mail" data-en="Email">E-mail</label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com">
+                </div>
+
+                <div class="form-field">
+                    <label for="interesse" data-pt="Empreendimento de interesse" data-en="Development of interest">Empreendimento de interesse</label>
+                    <select id="interesse" name="interesse">
+                        <option value="" data-pt="Selecione uma opção" data-en="Select an option">Selecione uma opção</option>
+                        <option>Villagio Caucaia II</option>
+                        <option>Villagio Caucaia I</option>
+                        <option>Lotes em Itatinga</option>
+                        <option>Morada das Roseiras</option>
+                        <option data-pt="Outro / Não sei ainda" data-en="Other / Not sure yet">Outro / Não sei ainda</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="mensagem" data-pt="Mensagem <span class='req'>*</span>" data-en="Message <span class='req'>*</span>">Mensagem <span class="req">*</span></label>
+                    <textarea id="mensagem" name="mensagem" placeholder="Conte pra gente como podemos ajudar..." required></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-veja">
+                        <span data-pt="Enviar pelo WhatsApp" data-en="Send via WhatsApp">Enviar pelo WhatsApp</span>
+                        <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
+                    </button>
+                    <a href="#" id="sendEmail" class="btn-email" data-pt="Enviar por e-mail" data-en="Send by email">Enviar por e-mail</a>
+                </div>
+                <p class="form-note" id="formNote" data-pt="Ao enviar, abriremos o WhatsApp (ou seu e-mail) já com a mensagem preenchida para você confirmar o envio." data-en="On submit, WhatsApp (or your email) will open with the message ready for you to confirm.">Ao enviar, abriremos o WhatsApp (ou seu e-mail) já com a mensagem preenchida para você confirmar o envio.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- MAP -->
+    <section class="ct-map-sec">
+        <div class="ct-map">
+            <iframe src="https://www.google.com/maps?q=Caucaia%20do%20Alto%2C%20Cotia%20-%20SP&output=embed" loading="lazy" title="Localização DPR"></iframe>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="vertical-marquee">
+        <div class="marquee-inner">
+            <span>CONTATO • DPR • REALIZAMOS SONHOS • </span>
+            <span>CONTATO • DPR • REALIZAMOS SONHOS • </span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-dpr">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>DPR</h2>
+                <p data-pt="Na DPR, não vendemos apenas imóveis – realizamos sonhos e construímos futuros com você."
+                   data-en="At DPR, we don't just sell properties – we make dreams come true and build futures with you.">
+                   Na DPR, não vendemos apenas imóveis – realizamos sonhos e construímos futuros com você.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4 data-pt="Links" data-en="Links">Links</h4>
+                <ul>
+                    <li><a href="index.html" data-pt="Início" data-en="Home">Início</a></li>
+                    <li><a href="empreendimentos.html" data-pt="Empreendimentos" data-en="Developments">Empreendimentos</a></li>
+                    <li><a href="index.html#servicosModernos" data-pt="Serviços" data-en="Services">Serviços</a></li>
+                    <li><a href="contato.html" data-pt="Contato" data-en="Contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-pt="Contato" data-en="Contact">Contato</h4>
+                <p>mktdprconstrutora@gmail.com</p>
+                <p>+55 11 94802-9430</p>
+                <p data-pt="Caucaia &amp; Itatinga - SP" data-en="Caucaia &amp; Itatinga - SP">Caucaia &amp; Itatinga - SP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-pt="© 2025 DPR Construtora. Todos os direitos reservados." data-en="© 2025 DPR Construtora. All rights reserved.">© 2025 DPR Construtora. Todos os direitos reservados.</p>
+            <a href="#" class="footer-top-link" data-pt="Voltar ao topo" data-en="Back to top">Voltar ao topo</a>
+        </div>
+    </footer>
+
+    <script>
+        const WHATSAPP = '5511948029430';
+        const EMAIL = 'mktdprconstrutora@gmail.com';
+
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); mainNav.classList.toggle('active'); });
+        document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => { menuToggle.classList.remove('active'); mainNav.classList.remove('active'); }));
+
+        // Busca
+        const searchBtn = document.getElementById('searchBtn');
+        const searchWrapper = document.getElementById('searchWrapper');
+        const searchInput = document.getElementById('searchInput');
+        searchBtn.addEventListener('click', () => { searchWrapper.classList.toggle('active'); if (searchWrapper.classList.contains('active')) searchInput.focus(); });
+
+        // Idioma
+        const langBtn = document.getElementById('langBtn');
+        let lang = 'pt';
+        langBtn.addEventListener('click', () => {
+            lang = lang === 'pt' ? 'en' : 'pt';
+            langBtn.innerText = lang === 'pt' ? 'EN' : 'PT';
+            document.querySelectorAll('[data-pt]').forEach(el => el.innerHTML = el.getAttribute('data-' + lang));
+        });
+
+        // Header scrolled
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+        // FORM
+        const form = document.getElementById('contactForm');
+        const note = document.getElementById('formNote');
+
+        function getData() {
+            return {
+                nome: document.getElementById('nome'),
+                telefone: document.getElementById('telefone'),
+                email: document.getElementById('email'),
+                interesse: document.getElementById('interesse'),
+                mensagem: document.getElementById('mensagem')
+            };
+        }
+        function validate(d) {
+            let ok = true;
+            [d.nome, d.telefone, d.mensagem].forEach(f => {
+                if (!f.value.trim()) { f.classList.add('field-error'); ok = false; }
+                else f.classList.remove('field-error');
+            });
+            return ok;
+        }
+        function buildText(d) {
+            let t = '*Novo contato pelo site DPR*%0A%0A';
+            t += '*Nome:* ' + encodeURIComponent(d.nome.value) + '%0A';
+            t += '*Telefone:* ' + encodeURIComponent(d.telefone.value) + '%0A';
+            if (d.email.value.trim()) t += '*E-mail:* ' + encodeURIComponent(d.email.value) + '%0A';
+            if (d.interesse.value) t += '*Interesse:* ' + encodeURIComponent(d.interesse.value) + '%0A';
+            t += '*Mensagem:* ' + encodeURIComponent(d.mensagem.value);
+            return t;
+        }
+
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const d = getData();
+            if (!validate(d)) {
+                note.textContent = lang === 'pt' ? 'Por favor, preencha os campos obrigatórios (*).' : 'Please fill in the required fields (*).';
+                note.style.color = '#ff5555';
+                return;
+            }
+            window.open('https://wa.me/' + WHATSAPP + '?text=' + buildText(d), '_blank');
+            note.textContent = lang === 'pt' ? 'Tudo certo! Abrimos o WhatsApp com sua mensagem. É só confirmar o envio.' : 'All set! WhatsApp opened with your message. Just confirm to send.';
+            note.style.color = '#2ecc71';
+        });
+
+        document.getElementById('sendEmail').addEventListener('click', (e) => {
+            e.preventDefault();
+            const d = getData();
+            if (!validate(d)) {
+                note.textContent = lang === 'pt' ? 'Por favor, preencha os campos obrigatórios (*).' : 'Please fill in the required fields (*).';
+                note.style.color = '#ff5555';
+                return;
+            }
+            const subject = encodeURIComponent('Contato pelo site DPR - ' + d.nome.value);
+            let body = 'Nome: ' + d.nome.value + '\n';
+            body += 'Telefone: ' + d.telefone.value + '\n';
+            if (d.email.value.trim()) body += 'E-mail: ' + d.email.value + '\n';
+            if (d.interesse.value) body += 'Interesse: ' + d.interesse.value + '\n';
+            body += 'Mensagem: ' + d.mensagem.value;
+            window.location.href = 'mailto:' + EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+        });
+    </script>
+</body>
+</html>

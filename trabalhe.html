@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DPR | Trabalhe Conosco</title>
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho: #ff0000;
+            --vermelho-fundo: #c40000;
+            --grafite: #505050;
+            --cinza-claro: #a0a0a0;
+            --branco: #ffffff;
+            --preto: #050505;
+            --gelo: #f4f4f4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--preto); color: var(--branco); font-family: 'Archivo', sans-serif; overflow-x: hidden; }
+        img { max-width: 100%; }
+        ::selection { background: var(--vermelho); color: #fff; }
+
+        /* HEADER */
+        header { position: fixed; top: 40px; left: 0; right: 0; padding: 0 100px; z-index: 1000; display: flex; align-items: center; justify-content: space-between; width: 100%; transition: background 0.4s ease, padding 0.4s ease, top 0.4s ease; }
+        header.scrolled { top: 0; padding-top: 18px; padding-bottom: 18px; background: rgba(5,5,5,0.82); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .brand-mark { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.15rem; letter-spacing: 4px; color: var(--branco); text-decoration: none; text-shadow: 0 2px 10px rgba(0,0,0,0.6); transition: 0.4s ease; }
+        .brand-mark span { color: var(--vermelho); }
+        .brand-mark:hover { letter-spacing: 6px; }
+        .nav-container { display: flex; align-items: center; gap: 30px; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+        .nav-menu a { color: var(--branco); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; position: relative; padding: 5px 0 5px 12px; transition: all 0.4s ease; opacity: 0.7; white-space: nowrap; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .nav-menu a.active { opacity: 1; }
+        .nav-menu a.active::before { height: 70%; }
+        .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: 0; background-color: var(--vermelho); transition: all 0.4s ease; transform: translateY(-50%); }
+        .nav-menu a:hover { opacity: 1; letter-spacing: 6px; }
+        .nav-menu a:hover::before { height: 70%; }
+        .menu-toggle { display: none; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.55); backdrop-filter: blur(10px); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+        .menu-toggle span { width: 20px; height: 2px; background: var(--branco); transition: 0.35s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--vermelho); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--vermelho); }
+        .header-controls { display: flex; align-items: center; gap: 20px; }
+        .lang-switch { color: var(--branco); font-size: 0.7rem; font-weight: 900; opacity: 0.5; cursor: pointer; transition: 0.3s; }
+        .lang-switch:hover { opacity: 1; }
+        .search-wrapper { display: flex; align-items: center; position: relative; }
+        .search-input { width: 0; opacity: 0; background: none; border: none; border-bottom: 1px solid var(--vermelho); color: var(--branco); font-family: 'Archivo', sans-serif; font-size: 0.8rem; letter-spacing: 2px; outline: none; transition: all 0.6s cubic-bezier(0.19,1,0.22,1); }
+        .search-wrapper.active .search-input { width: 200px; opacity: 1; margin-right: 15px; padding: 5px; }
+        .search-trigger { cursor: pointer; transition: transform 0.4s ease; }
+        .search-trigger svg { width: 18px; height: 18px; fill: none; stroke: var(--branco); stroke-width: 2.5; opacity: 0.7; }
+        .search-wrapper.active .search-trigger { transform: scale(1.2); }
+        .search-wrapper.active .search-trigger svg { stroke: var(--vermelho); opacity: 1; }
+
+        /* BUTTONS */
+        .btn-veja { display: inline-flex; align-items: center; justify-content: center; gap: 14px; background: linear-gradient(135deg, var(--vermelho-fundo) 0%, var(--vermelho) 100%); color: #fff; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 19px 30px; border: none; position: relative; overflow: hidden; cursor: pointer; box-shadow: 0 12px 30px rgba(255,0,0,0.22); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .btn-veja svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 2.4; fill: none; transition: transform 0.4s ease; }
+        .btn-veja::after { content: ''; position: absolute; top: 0; left: -80%; width: 60%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent); transform: skewX(-20deg); transition: left 0.6s ease; }
+        .btn-veja:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(255,0,0,0.35); }
+        .btn-veja:hover svg { transform: translateX(5px); }
+        .btn-veja:hover::after { left: 130%; }
+
+        /* HERO / INTRO */
+        .ct-hero { position: relative; padding: 200px 10% 60px; overflow: hidden; background: radial-gradient(circle at 16% 30%, rgba(255,0,0,0.16) 0%, transparent 44%), linear-gradient(180deg, #050505 0%, #0a0a0a 60%, #050505 100%); }
+        .ct-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to bottom, transparent, black 30%, black 80%, transparent); pointer-events: none; }
+        .ct-hero::after { content: 'DPR'; position: absolute; right: 4%; top: 70px; font-family: 'Syncopate', sans-serif; font-size: clamp(5rem, 16vw, 16rem); font-weight: 800; letter-spacing: -12px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; }
+        .ct-hero-inner { position: relative; z-index: 2; max-width: 760px; }
+        .ct-kicker { font-size: 0.62rem; letter-spacing: 9px; color: var(--vermelho); text-transform: uppercase; font-weight: 900; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+        .ct-kicker::before { content: ''; width: 40px; height: 1px; background: var(--vermelho); }
+        .ct-hero h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(2.4rem, 7vw, 5rem); line-height: 0.85; text-transform: uppercase; letter-spacing: -5px; margin-bottom: 26px; }
+        .ct-hero h1 span { color: var(--vermelho); }
+        .ct-hero p { color: var(--cinza-claro); font-size: 1.05rem; line-height: 1.8; font-weight: 300; max-width: 540px; border-left: 2px solid var(--vermelho); padding-left: 22px; }
+
+        /* MAIN GRID */
+        .ct-main { position: relative; padding: 70px 10% 120px; display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 60px; align-items: start; background: linear-gradient(180deg, #050505, #080808); }
+
+        /* INFO SIDE */
+        .ct-info { display: flex; flex-direction: column; gap: 16px; position: sticky; top: 110px; }
+        .info-card { display: flex; align-items: center; gap: 20px; border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.02); padding: 22px 24px; text-decoration: none; color: var(--branco); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 16px), calc(100% - 16px) 100%, 0 100%); transition: 0.4s cubic-bezier(0.19,1,0.22,1); }
+        .info-card:hover { border-color: rgba(255,0,0,0.5); background: rgba(255,0,0,0.04); transform: translateX(6px); }
+        .info-ico { width: 46px; height: 46px; flex-shrink: 0; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,0,0,0.4); background: rgba(255,0,0,0.08); }
+        .info-ico svg { width: 20px; height: 20px; stroke: var(--vermelho); fill: none; stroke-width: 2; }
+        .info-card .lbl { display: block; font-size: 0.55rem; letter-spacing: 4px; text-transform: uppercase; color: rgba(255,255,255,0.45); margin-bottom: 5px; }
+        .info-card .val { font-size: 0.95rem; color: var(--branco); font-weight: 600; }
+        .ct-social { display: flex; gap: 12px; margin-top: 8px; }
+        .ct-social a { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.7); transition: 0.35s ease; }
+        .ct-social a:hover { border-color: var(--vermelho); color: var(--vermelho); background: rgba(255,0,0,0.06); transform: translateY(-4px); }
+        .ct-social svg { width: 18px; height: 18px; fill: currentColor; }
+
+        /* FORM */
+        .ct-form-wrap { position: relative; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); padding: 50px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); }
+        .ct-form-wrap h2 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.4rem, 2.6vw, 2rem); text-transform: uppercase; letter-spacing: -1px; margin-bottom: 8px; }
+        .ct-form-wrap h2 span { color: var(--vermelho); }
+        .ct-form-sub { color: var(--cinza-claro); font-size: 0.9rem; font-weight: 300; margin-bottom: 36px; }
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .form-field { margin-bottom: 22px; }
+        .form-field label { display: block; font-size: 0.55rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 10px; font-weight: 600; }
+        .form-field label .req { color: var(--vermelho); }
+        .form-field input, .form-field select, .form-field textarea { width: 100%; background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.12); color: var(--branco); font-family: 'Archivo', sans-serif; font-size: 0.95rem; padding: 15px 16px; outline: none; transition: 0.35s ease; }
+        .form-field textarea { resize: vertical; min-height: 130px; line-height: 1.6; }
+        .form-field select { cursor: pointer; appearance: none; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ff0000' d='M6 8 0 0h12z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+        .form-field select option { background: #111; color: #fff; }
+        .form-field input:focus, .form-field select:focus, .form-field textarea:focus { border-color: var(--vermelho); background: rgba(255,0,0,0.05); }
+        .form-field input::placeholder, .form-field textarea::placeholder { color: rgba(255,255,255,0.3); }
+        .form-actions { display: flex; flex-wrap: wrap; gap: 14px; align-items: center; margin-top: 6px; }
+        .btn-email { display: inline-flex; align-items: center; gap: 10px; color: var(--cinza-claro); text-decoration: none; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; border: 1px solid rgba(255,255,255,0.16); padding: 19px 24px; transition: 0.35s ease; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+        .btn-email:hover { border-color: var(--vermelho); color: var(--vermelho); }
+        .form-note { font-size: 0.72rem; color: rgba(255,255,255,0.4); margin-top: 18px; line-height: 1.6; }
+        .field-error { outline: 1px solid var(--vermelho); border-color: var(--vermelho) !important; }
+
+        /* MAP */
+        .ct-map-sec { position: relative; padding: 0 10% 120px; background: #080808; }
+        .ct-map { position: relative; min-height: 420px; border: 1px solid rgba(255,255,255,0.1); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); overflow: hidden; }
+        .ct-map iframe { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; filter: grayscale(0.6) invert(0.9) contrast(0.9); }
+
+        /* MARQUEE */
+        .vertical-marquee { position: fixed; right: 0; top: 0; height: 100%; width: 75px; background: rgba(255,255,255,0.01); border-left: 1px solid rgba(255,255,255,0.03); display: flex; align-items: center; overflow: hidden; z-index: 10; }
+        .marquee-inner { display: flex; flex-direction: column; animation: scroll-vertical 25s linear infinite; }
+        .marquee-inner span { writing-mode: vertical-rl; text-transform: uppercase; font-size: 0.72rem; letter-spacing: 5px; padding: 50px 0; color: rgba(255,255,255,0.25); white-space: nowrap; font-weight: 600; }
+        @keyframes scroll-vertical { from { transform: translateY(0); } to { transform: translateY(-50%); } }
+
+        /* FOOTER */
+        .footer-dpr { position: relative; background: radial-gradient(circle at 12% 0%, rgba(255,0,0,0.13) 0%, rgba(255,0,0,0.03) 28%, transparent 52%), linear-gradient(180deg, #050505 0%, #0a0a0a 100%); padding: 110px 10% 42px; border-top: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
+        .footer-dpr::before { content: 'DPR'; position: absolute; right: 6%; top: 22px; font-family: 'Syncopate', sans-serif; font-size: clamp(5rem, 14vw, 13rem); font-weight: 800; letter-spacing: -10px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; }
+        .footer-container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 0.8fr 1fr; gap: 70px; margin-bottom: 70px; }
+        .footer-brand h2 { font-family: 'Syncopate', sans-serif; font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 22px; }
+        .footer-brand p { color: var(--cinza-claro); font-size: 0.92rem; line-height: 1.75; max-width: 360px; font-weight: 300; }
+        .footer-links h4, .footer-contact h4 { font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 22px; color: var(--vermelho); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--cinza-claro); text-decoration: none; font-size: 0.88rem; transition: 0.35s ease; }
+        .footer-links a:hover { color: var(--vermelho); padding-left: 6px; }
+        .footer-contact p { font-size: 0.88rem; color: var(--cinza-claro); margin-bottom: 10px; line-height: 1.5; }
+        .footer-bottom { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+        .footer-bottom p { font-size: 0.68rem; color: rgba(255,255,255,0.42); letter-spacing: 2px; text-transform: uppercase; }
+        .footer-top-link { color: var(--branco); text-decoration: none; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; transition: 0.35s ease; }
+        .footer-top-link:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+        /* RESPONSIVE */
+        @media (max-width: 1100px) {
+            header { padding: 0 5%; }
+            .ct-hero, .ct-main, .ct-map-sec, .footer-dpr { padding-left: 7%; padding-right: 7%; }
+            .ct-main { grid-template-columns: 1fr; gap: 40px; }
+            .ct-info { position: relative; top: auto; }
+        }
+        @media (max-width: 768px) {
+            header { top: 18px; }
+            header.scrolled { top: 0; }
+            .menu-toggle { display: flex; }
+            nav { position: fixed; top: 72px; left: 18px; right: 18px; background: rgba(5,5,5,0.94); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(18px); padding: 22px; opacity: 0; visibility: hidden; transform: translateY(-12px); transition: 0.35s ease; }
+            nav.active { opacity: 1; visibility: visible; transform: translateY(0); }
+            .nav-menu { flex-direction: column; gap: 18px; }
+            .nav-container { gap: 14px; }
+            .header-controls { gap: 14px; }
+            .vertical-marquee { display: none; }
+            .ct-hero { padding: 150px 7% 50px; }
+            .ct-hero::after { top: 110px; right: -6%; font-size: 7rem; letter-spacing: -7px; }
+            .ct-main { padding: 50px 7% 90px; }
+            .ct-form-wrap { padding: 34px 24px; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+            .form-actions { flex-direction: column; align-items: stretch; }
+            .btn-veja, .btn-email { width: 100%; }
+            .ct-map-sec { padding: 0 7% 90px; }
+            .ct-map { min-height: 320px; }
+            .footer-dpr { padding: 76px 7% 32px; }
+            .footer-container { grid-template-columns: 1fr; gap: 38px; margin-bottom: 48px; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
+        }
+
+        /* TRABALHE CONOSCO */
+        .tc-visual { position: sticky; top: 110px; display: flex; flex-direction: column; gap: 26px; }
+        .tc-photo { position: relative; min-height: 380px; overflow: hidden; border: 1px solid rgba(255,255,255,0.1); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 34px), calc(100% - 34px) 100%, 0 100%); }
+        .tc-photo img { width: 100%; height: 100%; position: absolute; inset: 0; object-fit: cover; filter: grayscale(0.25) brightness(0.6) contrast(1.1); transform: scale(1.06); transition: all 1s cubic-bezier(0.19,1,0.22,1); }
+        .tc-photo:hover img { filter: grayscale(0) brightness(0.85); transform: scale(1); }
+        .tc-photo::after { content: ''; position: absolute; inset: 0; background: linear-gradient(to top, rgba(0,0,0,0.85), transparent 60%); }
+        .tc-photo-tag { position: absolute; bottom: 26px; left: 28px; z-index: 2; font-family: 'Syncopate', sans-serif; font-size: 0.72rem; letter-spacing: 3px; color: #fff; background: rgba(255,0,0,0.85); padding: 9px 14px; }
+        .tc-values-mini { list-style: none; display: flex; flex-direction: column; gap: 14px; }
+        .tc-values-mini li { display: flex; align-items: center; gap: 14px; font-size: 0.95rem; color: var(--branco); }
+        .tc-values-mini li::before { content: ''; width: 9px; height: 9px; background: var(--vermelho); transform: rotate(45deg); flex-shrink: 0; }
+
+        /* VALUES BAND */
+        .tc-values { position: relative; padding: 110px 10% 130px; background: radial-gradient(circle at 82% 8%, rgba(255,0,0,0.10) 0%, transparent 40%), linear-gradient(180deg, #080808, #050505); }
+        .tc-values-head { margin-bottom: 56px; }
+        .tc-values-head .sec-label { font-size: 0.6rem; letter-spacing: 8px; color: var(--vermelho); text-transform: uppercase; font-weight: 900; display: block; margin-bottom: 20px; }
+        .tc-values-head h2 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.9rem, 4.6vw, 3.4rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -3px; }
+        .tc-values-head h2 span { color: var(--vermelho); }
+        .hl-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 22px; }
+        .hl-card { border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.02); padding: 40px 30px; min-height: 230px; display: flex; flex-direction: column; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%); transition: 0.5s cubic-bezier(0.19,1,0.22,1); }
+        .hl-card:hover { border-color: rgba(255,0,0,0.5); transform: translateY(-8px); background: rgba(255,0,0,0.04); }
+        .hl-num { font-family: 'Syncopate', sans-serif; font-size: 0.7rem; letter-spacing: 4px; color: var(--vermelho); margin-bottom: auto; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,0.1); width: fit-content; }
+        .hl-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; line-height: 1.2; text-transform: uppercase; letter-spacing: -0.5px; margin: 24px 0 12px; }
+        .hl-card p { color: var(--cinza-claro); font-size: 0.86rem; line-height: 1.6; font-weight: 300; }
+        @media (max-width: 1100px) { .tc-visual { position: relative; top: auto; } .hl-grid { grid-template-columns: 1fr 1fr; } .tc-values { padding: 80px 7% 90px; } }
+        @media (max-width: 768px) { .hl-grid { grid-template-columns: 1fr; } .tc-photo { min-height: 300px; } }
+
+
+        /* ===================================================== */
+        /* POLIMENTO DE USABILIDADE MOBILE (somente refinamentos) */
+        /* nao altera layout desktop, conteudo nem o visual base   */
+        /* ===================================================== */
+        @media (max-width: 768px) {
+            /* impede o iOS de inflar o texto sozinho ao girar a tela */
+            html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+
+            /* remove o flash cinza ao tocar em links/botoes */
+            a, button, .menu-toggle, .search-trigger, .lang-switch, .btn-veja, .btn-email,
+            .info-card, .ct-social a, .hl-card, .tc-photo, .footer-top-link {
+                -webkit-tap-highlight-color: transparent;
+            }
+
+            /* trava qualquer vazamento horizontal residual */
+            html, body { max-width: 100%; overflow-x: hidden; }
+
+            /* evita o zoom automatico do iOS ao focar busca e campos do formulario */
+            .search-input,
+            .form-field input,
+            .form-field select,
+            .form-field textarea { font-size: 16px; }
+
+            /* area de toque confortavel nos itens do menu e idioma */
+            .nav-menu a { min-height: 44px; display: flex; align-items: center; }
+            .lang-switch { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; }
+
+            /* impede selecao acidental de texto ao arrastar pela imagem */
+            .tc-photo { -webkit-user-select: none; user-select: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="siteHeader">
+        <a href="index.html" class="brand-mark">DPR<span>.</span></a>
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            <nav id="mainNav">
+                <ul class="nav-menu">
+                    <li><a href="index.html" data-pt="INÍCIO" data-en="HOME">INÍCIO</a></li>
+                    <li><a href="empreendimentos.html" data-pt="EMPREENDIMENTOS" data-en="DEVELOPMENTS">EMPREENDIMENTOS</a></li>
+                    <li><a href="index.html#servicosModernos" data-pt="SERVIÇOS" data-en="SERVICES">SERVIÇOS</a></li>
+                    <li><a href="contato.html" data-pt="CONTATO" data-en="CONTACT">CONTATO</a></li>
+                    <li><a href="trabalhe-conosco.html" class="active" data-pt="TRABALHE CONOSCO" data-en="CAREERS">TRABALHE CONOSCO</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <span class="lang-switch" id="langBtn">EN</span>
+                <div class="search-wrapper" id="searchWrapper">
+                    <input type="text" class="search-input" placeholder="SEARCH..." id="searchInput">
+                    <div class="search-trigger" id="searchBtn" aria-label="Buscar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><line x1="15.7" y1="15.7" x2="20.5" y2="20.5"></line></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO -->
+    <section class="ct-hero">
+        <div class="ct-hero-inner">
+            <span class="ct-kicker" data-pt="FAÇA PARTE DA DPR" data-en="JOIN DPR">FAÇA PARTE DA DPR</span>
+            <h1 data-pt="Trabalhe<br><span>conosco</span>" data-en="Work<br><span>with us</span>">Trabalhe<br><span>conosco</span></h1>
+            <p data-pt="Na DPR, valorizamos pessoas com atitude, responsabilidade e vontade de crescer. Se você quer fazer parte de uma equipe comprometida com qualidade, inovação e resultados, envie seu currículo e venha construir o futuro com a gente."
+               data-en="At DPR, we value people with attitude, responsibility, and a drive to grow. If you want to be part of a team committed to quality, innovation, and results, send your resume and come build the future with us.">
+               Na DPR, valorizamos pessoas com atitude, responsabilidade e vontade de crescer. Se você quer fazer parte de uma equipe comprometida com qualidade, inovação e resultados, envie seu currículo e venha construir o futuro com a gente.
+            </p>
+        </div>
+    </section>
+
+    <!-- MAIN -->
+    <section class="ct-main">
+        <!-- VISUAL -->
+        <aside class="tc-visual">
+            <div class="tc-photo">
+                <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&q=80&w=900"
+                     onerror="this.onerror=null;this.src='https://images.unsplash.com/photo-1600880292203-757bb62b4baf?auto=format&fit=crop&q=80&w=900';"
+                     alt="Equipe DPR">
+                <span class="tc-photo-tag">#TIMEDPR</span>
+            </div>
+            <ul class="tc-values-mini">
+                <li data-pt="Pessoas com atitude e responsabilidade" data-en="People with attitude and responsibility">Pessoas com atitude e responsabilidade</li>
+                <li data-pt="Vontade de crescer e evoluir" data-en="A drive to grow and evolve">Vontade de crescer e evoluir</li>
+                <li data-pt="Compromisso com qualidade e resultados" data-en="Commitment to quality and results">Compromisso com qualidade e resultados</li>
+            </ul>
+        </aside>
+
+        <!-- FORM -->
+        <div class="ct-form-wrap">
+            <h2 data-pt="Envie seu <span>currículo</span>" data-en="Send your <span>resume</span>">Envie seu <span>currículo</span></h2>
+            <p class="ct-form-sub" data-pt="Preencha seus dados e dê o primeiro passo para fazer parte da DPR. Campos com * são obrigatórios." data-en="Fill in your details and take the first step to join DPR. Fields with * are required.">Preencha seus dados e dê o primeiro passo para fazer parte da DPR. Campos com * são obrigatórios.</p>
+
+            <form id="jobForm" novalidate>
+                <div class="form-row">
+                    <div class="form-field">
+                        <label for="nome" data-pt="Nome" data-en="Name">Nome</label>
+                        <input type="text" id="nome" name="nome" placeholder="Ex: João da Silva">
+                    </div>
+                    <div class="form-field">
+                        <label for="telefone" data-pt="Telefone" data-en="Phone">Telefone</label>
+                        <input type="tel" id="telefone" name="telefone" placeholder="(11) 99999-9999">
+                    </div>
+                </div>
+
+                <div class="form-field">
+                    <label for="email" data-pt="Email <span class='req'>*</span>" data-en="Email <span class='req'>*</span>">Email <span class="req">*</span></label>
+                    <input type="email" id="email" name="email" placeholder="seu@email.com" required>
+                </div>
+
+                <div class="form-field">
+                    <label for="area" data-pt="Qual sua área de interesse? <span class='req'>*</span>" data-en="Your area of interest? <span class='req'>*</span>">Qual sua área de interesse? <span class="req">*</span></label>
+                    <select id="area" name="area" required>
+                        <option value="" data-pt="Selecione uma opção" data-en="Select an option">Selecione uma opção</option>
+                        <option data-pt="Engenharia / Obras" data-en="Engineering / Construction">Engenharia / Obras</option>
+                        <option data-pt="Arquitetura e Projetos" data-en="Architecture & Design">Arquitetura e Projetos</option>
+                        <option data-pt="Vendas e Corretagem" data-en="Sales & Brokerage">Vendas e Corretagem</option>
+                        <option data-pt="Administrativo e Financeiro" data-en="Administrative & Finance">Administrativo e Financeiro</option>
+                        <option data-pt="Marketing" data-en="Marketing">Marketing</option>
+                        <option data-pt="Estágio / Jovem Aprendiz" data-en="Internship / Apprentice">Estágio / Jovem Aprendiz</option>
+                        <option data-pt="Outra" data-en="Other">Outra</option>
+                    </select>
+                </div>
+
+                <div class="form-field">
+                    <label for="mensagem" data-pt="Conte um pouco sobre você" data-en="Tell us a bit about you">Conte um pouco sobre você</label>
+                    <textarea id="mensagem" name="mensagem" placeholder="Experiência, objetivos, disponibilidade..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn-veja">
+                        <span data-pt="Enviar candidatura" data-en="Send application">Enviar candidatura</span>
+                        <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
+                    </button>
+                    <a href="#" id="sendWhats" class="btn-email" data-pt="Enviar pelo WhatsApp" data-en="Send via WhatsApp">Enviar pelo WhatsApp</a>
+                </div>
+                <p class="form-note" id="formNote" data-pt="Ao enviar, abriremos seu e-mail já preenchido. Lembre-se de anexar o seu currículo antes de enviar." data-en="On submit, your email will open pre-filled. Remember to attach your resume before sending.">Ao enviar, abriremos seu e-mail já preenchido. Lembre-se de anexar o seu currículo antes de enviar.</p>
+            </form>
+        </div>
+    </section>
+
+    <!-- VALUES -->
+    <section class="tc-values">
+        <div class="tc-values-head">
+            <span class="sec-label" data-pt="POR QUE A DPR" data-en="WHY DPR">POR QUE A DPR</span>
+            <h2 data-pt="Construa o futuro <span>com a gente</span>" data-en="Build the future <span>with us</span>">Construa o futuro <span>com a gente</span></h2>
+        </div>
+        <div class="hl-grid">
+            <article class="hl-card">
+                <span class="hl-num">01</span>
+                <h3 data-pt="Atitude" data-en="Attitude">Atitude</h3>
+                <p data-pt="Valorizamos quem tem iniciativa e vontade de fazer acontecer." data-en="We value those with initiative and a drive to make things happen.">Valorizamos quem tem iniciativa e vontade de fazer acontecer.</p>
+            </article>
+            <article class="hl-card">
+                <span class="hl-num">02</span>
+                <h3 data-pt="Responsabilidade" data-en="Responsibility">Responsabilidade</h3>
+                <p data-pt="Compromisso com cada entrega e com a confiança dos clientes." data-en="Commitment to every delivery and to our clients' trust.">Compromisso com cada entrega e com a confiança dos clientes.</p>
+            </article>
+            <article class="hl-card">
+                <span class="hl-num">03</span>
+                <h3 data-pt="Crescimento" data-en="Growth">Crescimento</h3>
+                <p data-pt="Espaço para evoluir junto com uma empresa em expansão." data-en="Room to grow alongside an expanding company.">Espaço para evoluir junto com uma empresa em expansão.</p>
+            </article>
+            <article class="hl-card">
+                <span class="hl-num">04</span>
+                <h3 data-pt="Inovação" data-en="Innovation">Inovação</h3>
+                <p data-pt="Equipe comprometida com qualidade, inovação e resultados." data-en="A team committed to quality, innovation, and results.">Equipe comprometida com qualidade, inovação e resultados.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- MARQUEE -->
+    <div class="vertical-marquee">
+        <div class="marquee-inner">
+            <span>TRABALHE CONOSCO • DPR • CONSTRUA O FUTURO • </span>
+            <span>TRABALHE CONOSCO • DPR • CONSTRUA O FUTURO • </span>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="footer-dpr">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>DPR</h2>
+                <p data-pt="Na DPR, não vendemos apenas imóveis – realizamos sonhos e construímos futuros com você."
+                   data-en="At DPR, we don't just sell properties – we make dreams come true and build futures with you.">
+                   Na DPR, não vendemos apenas imóveis – realizamos sonhos e construímos futuros com você.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4 data-pt="Links" data-en="Links">Links</h4>
+                <ul>
+                    <li><a href="index.html" data-pt="Início" data-en="Home">Início</a></li>
+                    <li><a href="empreendimentos.html" data-pt="Empreendimentos" data-en="Developments">Empreendimentos</a></li>
+                    <li><a href="index.html#servicosModernos" data-pt="Serviços" data-en="Services">Serviços</a></li>
+                    <li><a href="contato.html" data-pt="Contato" data-en="Contact">Contato</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-pt="Contato" data-en="Contact">Contato</h4>
+                <p>mktdprconstrutora@gmail.com</p>
+                <p>+55 11 94802-9430</p>
+                <p data-pt="Caucaia &amp; Itatinga - SP" data-en="Caucaia &amp; Itatinga - SP">Caucaia &amp; Itatinga - SP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-pt="© 2025 DPR Construtora. Todos os direitos reservados." data-en="© 2025 DPR Construtora. All rights reserved.">© 2025 DPR Construtora. Todos os direitos reservados.</p>
+            <a href="#" class="footer-top-link" data-pt="Voltar ao topo" data-en="Back to top">Voltar ao topo</a>
+        </div>
+    </footer>
+
+    <script>
+        const WHATSAPP = '5511948029430';
+        const EMAIL = 'mktdprconstrutora@gmail.com';
+
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); mainNav.classList.toggle('active'); });
+        document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => { menuToggle.classList.remove('active'); mainNav.classList.remove('active'); }));
+
+        // Busca
+        const searchBtn = document.getElementById('searchBtn');
+        const searchWrapper = document.getElementById('searchWrapper');
+        const searchInput = document.getElementById('searchInput');
+        searchBtn.addEventListener('click', () => { searchWrapper.classList.toggle('active'); if (searchWrapper.classList.contains('active')) searchInput.focus(); });
+
+        // Idioma
+        const langBtn = document.getElementById('langBtn');
+        let lang = 'pt';
+        langBtn.addEventListener('click', () => {
+            lang = lang === 'pt' ? 'en' : 'pt';
+            langBtn.innerText = lang === 'pt' ? 'EN' : 'PT';
+            document.querySelectorAll('[data-pt]').forEach(el => el.innerHTML = el.getAttribute('data-' + lang));
+        });
+
+        // Header scrolled
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+        // FORM
+        const form = document.getElementById('jobForm');
+        const note = document.getElementById('formNote');
+
+        function getData() {
+            return {
+                nome: document.getElementById('nome'),
+                telefone: document.getElementById('telefone'),
+                email: document.getElementById('email'),
+                area: document.getElementById('area'),
+                mensagem: document.getElementById('mensagem')
+            };
+        }
+        function validate(d) {
+            let ok = true;
+            [d.email, d.area].forEach(f => {
+                if (!f.value.trim()) { f.classList.add('field-error'); ok = false; }
+                else f.classList.remove('field-error');
+            });
+            return ok;
+        }
+        function invalidMsg() {
+            note.textContent = lang === 'pt' ? 'Por favor, preencha os campos obrigatórios (*).' : 'Please fill in the required fields (*).';
+            note.style.color = '#ff5555';
+        }
+
+        // PRINCIPAL: e-mail (para anexar curriculo)
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const d = getData();
+            if (!validate(d)) { invalidMsg(); return; }
+            const subject = encodeURIComponent('Trabalhe Conosco - ' + (d.area.value || 'Candidatura') + (d.nome.value ? ' - ' + d.nome.value : ''));
+            let body = '';
+            if (d.nome.value.trim()) body += 'Nome: ' + d.nome.value + '\n';
+            if (d.telefone.value.trim()) body += 'Telefone: ' + d.telefone.value + '\n';
+            body += 'E-mail: ' + d.email.value + '\n';
+            body += 'Área de interesse: ' + d.area.value + '\n';
+            if (d.mensagem.value.trim()) body += 'Sobre: ' + d.mensagem.value + '\n';
+            body += '\n(Lembre-se de anexar o seu currículo a este e-mail.)';
+            window.location.href = 'mailto:' + EMAIL + '?subject=' + subject + '&body=' + encodeURIComponent(body);
+            note.textContent = lang === 'pt' ? 'Tudo certo! Abrimos seu e-mail. Anexe o currículo e confirme o envio.' : 'All set! Your email opened. Attach your resume and confirm.';
+            note.style.color = '#2ecc71';
+        });
+
+        // SECUNDARIO: WhatsApp
+        document.getElementById('sendWhats').addEventListener('click', (e) => {
+            e.preventDefault();
+            const d = getData();
+            if (!validate(d)) { invalidMsg(); return; }
+            let t = '*Trabalhe Conosco - DPR*%0A%0A';
+            if (d.nome.value.trim()) t += '*Nome:* ' + encodeURIComponent(d.nome.value) + '%0A';
+            if (d.telefone.value.trim()) t += '*Telefone:* ' + encodeURIComponent(d.telefone.value) + '%0A';
+            t += '*E-mail:* ' + encodeURIComponent(d.email.value) + '%0A';
+            t += '*Área de interesse:* ' + encodeURIComponent(d.area.value) + '%0A';
+            if (d.mensagem.value.trim()) t += '*Sobre:* ' + encodeURIComponent(d.mensagem.value);
+            window.open('https://wa.me/' + WHATSAPP + '?text=' + t, '_blank');
+            note.textContent = lang === 'pt' ? 'Abrimos o WhatsApp com seus dados. Você pode enviar o currículo por lá também.' : 'WhatsApp opened with your details. You can send your resume there too.';
+            note.style.color = '#2ecc71';
+        });
+    </script>
+</body>
+</html>
