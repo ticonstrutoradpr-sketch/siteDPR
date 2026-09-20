@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DPR | Engenharia de Precisão Assimétrica</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;600;900&display=swap" rel="stylesheet">
-    <!-- (20/09) destaque do Villagio Caucaia II na home: a planta que sobe em 3D -->
-    <link rel="stylesheet" href="caucaia2-destaque.css">
+    <!-- (20/09) abertura da home: Villagio Caucaia II, a planta que vira 3D -->
+    <link rel="stylesheet" href="hero-caucaia2.css">
     <style>
         :root {
             --vermelho: #ff0000; 
@@ -2374,69 +2374,55 @@
 
     <div class="red-line-decorator"></div>
 
-    <section class="hero">
-        <div class="video-bg">
-            <video id="heroVideo" autoplay muted playsinline>
-                <source src="video.mp4" type="video/mp4">
-            </video>
-        </div>
-        <div class="hero-content">
-            <p class="sub-info" data-pt="CONSTRUTORA & INCORPORADORA" data-en="CONSTRUCTION & DEVELOPMENT">CONSTRUTORA & INCORPORADORA</p>
-            <h1 id="heroTitle">DESIGN<br><span class="vermelho" data-pt="PRECISO." data-en="PRECISION.">PRECISO.</span></h1>
-        </div>
-    </section>
-
-    <!-- (20/09) Destaque do Villagio Caucaia II: texto de venda + a planta que sobe em 3D na rolagem.
-         As imagens sao as do proprio Caucaia II ja usadas no site; a da base e provisoria ate a
-         implantacao limpa dos lotes chegar (vira mapa interativo). -->
-    <section class="cc2-destaque" id="caucaia2" aria-labelledby="cc2Titulo">
-        <div class="cc2-copy">
-            <span class="cc2-label" data-pt="EM VENDAS" data-en="NOW SELLING">EM VENDAS</span>
-            <h2 id="cc2Titulo" data-pt="Villagio<br><span class='vermelho'>Caucaia II</span>" data-en="Villagio<br><span class='vermelho'>Caucaia II</span>">Villagio<br><span class="vermelho">Caucaia II</span></h2>
-            <p data-pt="Lotes em condomínio com lazer completo e centro comercial integrado, em Caucaia, SP. Um lugar para construir a casa da família com segurança, conforto e valorização."
-               data-en="Lots in a gated community with full leisure and an integrated commercial center, in Caucaia, SP. A place to build the family home with safety, comfort and appreciation.">
-               Lotes em condomínio com lazer completo e centro comercial integrado, em Caucaia, SP. Um lugar para construir a casa da família com segurança, conforto e valorização.
-            </p>
-            <ul class="cc2-fatos">
-                <li>
-                    <strong data-pt="Lazer completo" data-en="Full leisure">Lazer completo</strong>
-                    <span data-pt="Piscina com borda infinita, lareira e espaços de convivência" data-en="Infinity-edge pool, fireplace and gathering spaces">Piscina com borda infinita, lareira e espaços de convivência</span>
-                </li>
-                <li>
-                    <strong data-pt="Centro comercial integrado" data-en="Integrated commercial center">Centro comercial integrado</strong>
-                    <span data-pt="Conveniência a poucos passos de casa" data-en="Convenience a few steps from home">Conveniência a poucos passos de casa</span>
-                </li>
-                <li>
-                    <strong data-pt="Caucaia, SP" data-en="Caucaia, SP">Caucaia, SP</strong>
-                    <span data-pt="Região tranquila e em valorização" data-en="A quiet region on the rise">Região tranquila e em valorização</span>
-                </li>
-            </ul>
-            <div class="cc2-acoes">
-                <a class="cc2-btn cc2-btn--primario" href="https://wa.me/5511933085258?text=Ol%C3%A1%21%20Tenho%20interesse%20nos%20lotes%20do%20Villagio%20Caucaia%20II." target="_blank" rel="noopener" data-pt="Quero meu lote" data-en="I want my lot">Quero meu lote</a>
-                <a class="cc2-btn" href="caucaia2.html" data-pt="Conhecer o empreendimento" data-en="See the development">Conhecer o empreendimento</a>
-            </div>
-        </div>
-        <div class="cc2-palco">
-            <div class="cc2-cena" id="cc2Cena" aria-hidden="true">
-                <div class="cc2-planta">
-                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/enscape_2024-06-30-21-55-41_enscape-cena-7-AR03WX9NWRTxv5V2.png" alt="" loading="lazy">
-                    <div class="cc2-grade"></div>
+    <!-- (20/09) Abertura da home: Villagio Caucaia II, a planta que vira 3D. Cada quadro tem a imagem 3D
+         embaixo e, por cima, a mesma imagem tratada como planta tecnica (duas copias em cinza, uma
+         deslocada 2px, em "difference": so as bordas ficam claras). Uma linha vermelha varre a tela e
+         recorta a planta, revelando o 3D; a imagem sai de um angulo de cima e se endireita. O JS so
+         troca o quadro ativo a cada alguns segundos. O video de abertura antigo saiu da home; o arquivo fica. -->
+    <section class="hero hero-cc2" id="heroCc2" aria-label="Villagio Caucaia II">
+        <div class="cc2h-palco" aria-hidden="true">
+            <figure class="cc2h-quadro is-ativa">
+                <img class="cc2h-3d" src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="">
+                <div class="cc2h-planta">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="">
                 </div>
-                <figure class="cc2-card cc2-card--a">
-                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162238-Y4LvP0pWRGSB4eLv.png" alt="" loading="lazy">
-                    <figcaption data-pt="Piscina" data-en="Pool">Piscina</figcaption>
-                </figure>
-                <figure class="cc2-card cc2-card--b">
-                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="" loading="lazy">
-                    <figcaption data-pt="Área comercial" data-en="Commercial area">Área comercial</figcaption>
-                </figure>
-                <figure class="cc2-card cc2-card--c">
-                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162315-dJobPKNQ4NUW0vyg.png" alt="" loading="lazy">
-                    <figcaption data-pt="Lareira" data-en="Fireplace">Lareira</figcaption>
-                </figure>
-            </div>
-            <p class="cc2-nota" data-pt="Imagens ilustrativas do projeto. Em breve, a planta interativa dos lotes." data-en="Illustrative project images. Interactive lot map coming soon.">Imagens ilustrativas do projeto. Em breve, a planta interativa dos lotes.</p>
+                <div class="cc2h-grade"></div>
+                <div class="cc2h-varredura"></div>
+                <div class="cc2h-carimbo"><span>Villagio Caucaia II</span><span data-pt="Implantação · Área comercial" data-en="Site plan · Commercial area">Implantação · Área comercial</span><span>DPR Construtora</span></div>
+            </figure>
+            <figure class="cc2h-quadro">
+                <img class="cc2h-3d" src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162238-Y4LvP0pWRGSB4eLv.png" alt="">
+                <div class="cc2h-planta">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162238-Y4LvP0pWRGSB4eLv.png" alt="">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162238-Y4LvP0pWRGSB4eLv.png" alt="">
+                </div>
+                <div class="cc2h-grade"></div>
+                <div class="cc2h-varredura"></div>
+                <div class="cc2h-carimbo"><span>Villagio Caucaia II</span><span data-pt="Projeto · Piscina com borda infinita" data-en="Project · Infinity-edge pool">Projeto · Piscina com borda infinita</span><span>DPR Construtora</span></div>
+            </figure>
+            <figure class="cc2h-quadro">
+                <img class="cc2h-3d" src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/enscape_2024-06-30-21-55-41_enscape-cena-7-AR03WX9NWRTxv5V2.png" alt="">
+                <div class="cc2h-planta">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/enscape_2024-06-30-21-55-41_enscape-cena-7-AR03WX9NWRTxv5V2.png" alt="">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/enscape_2024-06-30-21-55-41_enscape-cena-7-AR03WX9NWRTxv5V2.png" alt="">
+                </div>
+                <div class="cc2h-grade"></div>
+                <div class="cc2h-varredura"></div>
+                <div class="cc2h-carimbo"><span>Villagio Caucaia II</span><span data-pt="Projeto · Convivência" data-en="Project · Gathering spaces">Projeto · Convivência</span><span>DPR Construtora</span></div>
+            </figure>
+            <div class="cc2h-sombra"></div>
         </div>
+        <div class="hero-content cc2h-conteudo">
+            <p class="sub-info" data-pt="EM VENDAS · CAUCAIA, SP" data-en="NOW SELLING · CAUCAIA, SP">EM VENDAS · CAUCAIA, SP</p>
+            <h1 id="heroTitle">VILLAGIO<br><span class="vermelho">CAUCAIA II</span></h1>
+            <p class="cc2h-texto" data-pt="Lotes em condomínio com lazer completo e centro comercial integrado. Um lugar para construir a casa da família com segurança, conforto e valorização." data-en="Lots in a gated community with full leisure and an integrated commercial center. A place to build the family home with safety, comfort and appreciation.">Lotes em condomínio com lazer completo e centro comercial integrado. Um lugar para construir a casa da família com segurança, conforto e valorização.</p>
+            <div class="cc2h-acoes">
+                <a class="cc2h-btn cc2h-btn--primario" href="https://wa.me/5511933085258?text=Ol%C3%A1%21%20Tenho%20interesse%20nos%20lotes%20do%20Villagio%20Caucaia%20II." target="_blank" rel="noopener" data-pt="Quero meu lote" data-en="I want my lot">Quero meu lote</a>
+                <a class="cc2h-btn" href="caucaia2.html" data-pt="Conhecer o empreendimento" data-en="See the development">Conhecer o empreendimento</a>
+            </div>
+        </div>
+        <div class="cc2h-pontos" aria-hidden="true"><span class="is-ativa"></span><span></span><span></span></div>
     </section>
 
     <section class="section-conceito">
@@ -2633,16 +2619,18 @@
             });
         });
 
+        // (20/09) o video de abertura saiu da home (abertura do Caucaia II no lugar); a guarda evita
+        // quebrar o resto deste script se o elemento nao existir.
         const video = document.getElementById('heroVideo');
-        video.addEventListener('timeupdate', function() {
+        if (video) video.addEventListener('timeupdate', function() {
             if (this.currentTime >= (this.duration - 3)) { this.currentTime = 0; this.play(); }
         });
 
         const langBtn = document.getElementById('langBtn');
         let currentLang = 'pt';
         const translations = {
-            pt: { title: 'DESIGN<br><span class=\"vermelho\">PRECISO.</span>', btn: 'EN' },
-            en: { title: 'PRECISION<br><span class=\"vermelho\">DESIGN.</span>', btn: 'PT' }
+            pt: { title: 'VILLAGIO<br><span class=\"vermelho\">CAUCAIA II</span>', btn: 'EN' },
+            en: { title: 'VILLAGIO<br><span class=\"vermelho\">CAUCAIA II</span>', btn: 'PT' }
         };
 
         langBtn.addEventListener('click', () => {
@@ -2736,7 +2724,7 @@
         animateHorizontalSection();
 
     </script>
-<!-- (20/09) rolagem -> progresso da cena 3D do destaque do Caucaia II -->
-<script src="caucaia2-destaque.js"></script>
+<!-- (20/09) troca os quadros da abertura do Caucaia II (planta que vira 3D) -->
+<script src="hero-caucaia2.js"></script>
 </body>
 </html>
