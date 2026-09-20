@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DPR | Engenharia de Precisão Assimétrica</title>
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;600;900&display=swap" rel="stylesheet">
+    <!-- (20/09) destaque do Villagio Caucaia II na home: a planta que sobe em 3D -->
+    <link rel="stylesheet" href="caucaia2-destaque.css">
     <style>
         :root {
             --vermelho: #ff0000; 
@@ -2384,6 +2386,59 @@
         </div>
     </section>
 
+    <!-- (20/09) Destaque do Villagio Caucaia II: texto de venda + a planta que sobe em 3D na rolagem.
+         As imagens sao as do proprio Caucaia II ja usadas no site; a da base e provisoria ate a
+         implantacao limpa dos lotes chegar (vira mapa interativo). -->
+    <section class="cc2-destaque" id="caucaia2" aria-labelledby="cc2Titulo">
+        <div class="cc2-copy">
+            <span class="cc2-label" data-pt="EM VENDAS" data-en="NOW SELLING">EM VENDAS</span>
+            <h2 id="cc2Titulo" data-pt="Villagio<br><span class='vermelho'>Caucaia II</span>" data-en="Villagio<br><span class='vermelho'>Caucaia II</span>">Villagio<br><span class="vermelho">Caucaia II</span></h2>
+            <p data-pt="Lotes em condomínio com lazer completo e centro comercial integrado, em Caucaia, SP. Um lugar para construir a casa da família com segurança, conforto e valorização."
+               data-en="Lots in a gated community with full leisure and an integrated commercial center, in Caucaia, SP. A place to build the family home with safety, comfort and appreciation.">
+               Lotes em condomínio com lazer completo e centro comercial integrado, em Caucaia, SP. Um lugar para construir a casa da família com segurança, conforto e valorização.
+            </p>
+            <ul class="cc2-fatos">
+                <li>
+                    <strong data-pt="Lazer completo" data-en="Full leisure">Lazer completo</strong>
+                    <span data-pt="Piscina com borda infinita, lareira e espaços de convivência" data-en="Infinity-edge pool, fireplace and gathering spaces">Piscina com borda infinita, lareira e espaços de convivência</span>
+                </li>
+                <li>
+                    <strong data-pt="Centro comercial integrado" data-en="Integrated commercial center">Centro comercial integrado</strong>
+                    <span data-pt="Conveniência a poucos passos de casa" data-en="Convenience a few steps from home">Conveniência a poucos passos de casa</span>
+                </li>
+                <li>
+                    <strong data-pt="Caucaia, SP" data-en="Caucaia, SP">Caucaia, SP</strong>
+                    <span data-pt="Região tranquila e em valorização" data-en="A quiet region on the rise">Região tranquila e em valorização</span>
+                </li>
+            </ul>
+            <div class="cc2-acoes">
+                <a class="cc2-btn cc2-btn--primario" href="https://wa.me/5511933085258?text=Ol%C3%A1%21%20Tenho%20interesse%20nos%20lotes%20do%20Villagio%20Caucaia%20II." target="_blank" rel="noopener" data-pt="Quero meu lote" data-en="I want my lot">Quero meu lote</a>
+                <a class="cc2-btn" href="caucaia2.html" data-pt="Conhecer o empreendimento" data-en="See the development">Conhecer o empreendimento</a>
+            </div>
+        </div>
+        <div class="cc2-palco">
+            <div class="cc2-cena" id="cc2Cena" aria-hidden="true">
+                <div class="cc2-planta">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/enscape_2024-06-30-21-55-41_enscape-cena-7-AR03WX9NWRTxv5V2.png" alt="" loading="lazy">
+                    <div class="cc2-grade"></div>
+                </div>
+                <figure class="cc2-card cc2-card--a">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162238-Y4LvP0pWRGSB4eLv.png" alt="" loading="lazy">
+                    <figcaption data-pt="Piscina" data-en="Pool">Piscina</figcaption>
+                </figure>
+                <figure class="cc2-card cc2-card--b">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="" loading="lazy">
+                    <figcaption data-pt="Área comercial" data-en="Commercial area">Área comercial</figcaption>
+                </figure>
+                <figure class="cc2-card cc2-card--c">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162315-dJobPKNQ4NUW0vyg.png" alt="" loading="lazy">
+                    <figcaption data-pt="Lareira" data-en="Fireplace">Lareira</figcaption>
+                </figure>
+            </div>
+            <p class="cc2-nota" data-pt="Imagens ilustrativas do projeto. Em breve, a planta interativa dos lotes." data-en="Illustrative project images. Interactive lot map coming soon.">Imagens ilustrativas do projeto. Em breve, a planta interativa dos lotes.</p>
+        </div>
+    </section>
+
     <section class="section-conceito">
         <div class="conceito-header">
             <span class="conceito-label" data-pt="SOBRE NÓS" data-en="ABOUT US">SOBRE NÓS</span>
@@ -2436,19 +2491,20 @@
                         </div>
 
                         <div class="projects-grid">
-                            <a class="project-card featured" href="lotes.html" data-number="01">
-                                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/professional_aerial_image-Yg2yQZL1QOs6ynr3.png" alt="Lotes Itatinga" class="project-img">
+                            <!-- (20/09) Caucaia II em primeiro: e o empreendimento em vendas. -->
+                            <a class="project-card featured" href="caucaia2.html" data-number="01">
+                                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="Caucaia II" class="project-img">
                                 <div class="project-overlay">
-                                    <span class="project-category" data-pt="Urbanismo" data-en="Urbanism">Urbanismo</span>
-                                    <h3>Lotes Itatinga</h3>
-                                    <p data-pt="Uma região tranquila e com grande potencial de valorização, ideal para quem busca o primeiro terreno com visão de futuro." 
-                                       data-en="A quiet region with high appreciation potential, ideal for those seeking their first land with a future-focused vision.">
-                                       Uma região tranquila e com grande potencial de valorização, ideal para quem busca o primeiro terreno com visão de futuro.
+                                    <span class="project-category" data-pt="Em vendas" data-en="Now selling">Em vendas</span>
+                                    <h3>Villagio Caucaia II</h3>
+                                    <p data-pt="Área de lazer completa e centro comercial integrado, proporcionando conveniência e diversão."
+                                       data-en="Complete leisure area and integrated commercial center, providing convenience and fun.">
+                                       Área de lazer completa e centro comercial integrado, proporcionando conveniência e diversão.
                                     </p>
                                     <div class="project-meta">
-                                        <span data-pt="Terrenos" data-en="Land lots">Terrenos</span>
-                                        <span data-pt="Valorização" data-en="Appreciation">Valorização</span>
-                                        <span data-pt="Planejamento urbano" data-en="Urban planning">Planejamento urbano</span>
+                                        <span data-pt="Lotes" data-en="Lots">Lotes</span>
+                                        <span data-pt="Lazer" data-en="Leisure">Lazer</span>
+                                        <span data-pt="Conveniência" data-en="Convenience">Conveniência</span>
                                     </div>
                                 </div>
                             </a>
@@ -2469,18 +2525,19 @@
                                 </div>
                             </a>
 
-                            <a class="project-card" href="caucaia2.html" data-number="03">
-                                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="Caucaia II" class="project-img">
+                            <a class="project-card" href="lotes.html" data-number="03">
+                                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/professional_aerial_image-Yg2yQZL1QOs6ynr3.png" alt="Lotes Itatinga" class="project-img">
                                 <div class="project-overlay">
-                                    <span class="project-category" data-pt="Comercial / Lazer" data-en="Commercial / Leisure">Comercial / Lazer</span>
-                                    <h3>Caucaia II</h3>
-                                    <p data-pt="Área de lazer completa e centro comercial integrado, proporcionando conveniência e diversão." 
-                                       data-en="Complete leisure area and integrated commercial center, providing convenience and fun.">
-                                       Área de lazer completa e centro comercial integrado, proporcionando conveniência e diversão.
+                                    <span class="project-category" data-pt="Urbanismo" data-en="Urbanism">Urbanismo</span>
+                                    <h3>Lotes Itatinga</h3>
+                                    <p data-pt="Uma região tranquila e com grande potencial de valorização, ideal para quem busca o primeiro terreno com visão de futuro."
+                                       data-en="A quiet region with high appreciation potential, ideal for those seeking their first land with a future-focused vision.">
+                                       Uma região tranquila e com grande potencial de valorização, ideal para quem busca o primeiro terreno com visão de futuro.
                                     </p>
                                     <div class="project-meta">
-                                        <span data-pt="Lazer" data-en="Leisure">Lazer</span>
-                                        <span data-pt="Conveniência" data-en="Convenience">Conveniência</span>
+                                        <span data-pt="Terrenos" data-en="Land lots">Terrenos</span>
+                                        <span data-pt="Valorização" data-en="Appreciation">Valorização</span>
+                                        <span data-pt="Planejamento urbano" data-en="Urban planning">Planejamento urbano</span>
                                     </div>
                                 </div>
                             </a>
@@ -2679,5 +2736,7 @@
         animateHorizontalSection();
 
     </script>
+<!-- (20/09) rolagem -> progresso da cena 3D do destaque do Caucaia II -->
+<script src="caucaia2-destaque.js"></script>
 </body>
 </html>
