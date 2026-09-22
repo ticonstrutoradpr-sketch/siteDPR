@@ -2330,6 +2330,167 @@
                 height: auto !important;
             }
         }
+
+        /* =====================================================================
+           (22/09) EMPREENDIMENTO EM DESTAQUE — Villagio Caucaia II na home.
+
+           Nada de novo no vocabulario visual: usa as MESMAS pecas que o resto da
+           pagina ja usa — o rotulo vermelho espacado da .conceito-label, o titulo
+           em Syncopate da .conceito-header, o corte de canto do .project-card, o
+           filete vermelho a esquerda da .highlight-box e o botao das paginas de
+           empreendimento (.btn do caucaia2.html). Textos e imagens sao os REAIS da
+           pagina do Villagio Caucaia II, nao inventados.
+           ===================================================================== */
+        .destaque-emp {
+            background-color: var(--preto);
+            padding: 140px 10% 120px;
+            display: grid;
+            grid-template-columns: 1fr 1.05fr;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .destaque-label {
+            font-size: 0.6rem;
+            color: var(--vermelho);
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .destaque-emp h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(2rem, 3.4vw, 3rem);
+            line-height: 1;
+            text-transform: uppercase;
+            letter-spacing: -2px;
+            margin-bottom: 28px;
+        }
+
+        .destaque-texto {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--cinza-claro);
+            font-weight: 300;
+            max-width: 52ch;
+        }
+
+        /* os tres diferenciais, no filete vermelho da .highlight-box */
+        .destaque-lista {
+            list-style: none;
+            margin: 34px 0 0;
+            padding: 0;
+            display: grid;
+            gap: 18px;
+        }
+
+        .destaque-lista li {
+            border-left: 3px solid var(--vermelho);
+            padding-left: 20px;
+        }
+
+        .destaque-lista strong {
+            display: block;
+            font-size: 0.82rem;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .destaque-lista span {
+            font-size: 0.92rem;
+            line-height: 1.6;
+            color: var(--cinza-claro);
+            font-weight: 300;
+        }
+
+        .destaque-acoes { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 40px; }
+
+        .destaque-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--branco);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            font-size: 0.64rem;
+            font-weight: 900;
+            padding: 16px 24px;
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            background: rgba(255, 255, 255, 0.04);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 11px), calc(100% - 11px) 100%, 0 100%);
+            transition: transform 0.35s ease, border-color 0.35s ease;
+        }
+
+        .destaque-btn.principal { background: var(--vermelho); border-color: var(--vermelho); }
+        .destaque-btn:hover { transform: translateY(-4px); border-color: rgba(255, 0, 0, 0.65); }
+        .destaque-btn:focus-visible { outline: 2px solid var(--vermelho); outline-offset: 4px; }
+
+        /* as imagens: uma grande e duas menores, com o corte de canto dos cards */
+        .destaque-imagens {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 18px;
+        }
+
+        .destaque-figura {
+            position: relative;
+            margin: 0;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 26px), calc(100% - 26px) 100%, 0 100%);
+        }
+
+        .destaque-figura.larga { grid-column: span 2; }
+
+        .destaque-figura img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .destaque-figura.larga img { height: 340px; }
+        .destaque-figura:not(.larga) img { height: 180px; }
+        .destaque-figura:hover img { transform: scale(1.05); }
+
+        .destaque-figura figcaption {
+            position: absolute;
+            left: 18px;
+            bottom: 18px;
+            font-size: 0.6rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: var(--branco);
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+        }
+
+        @media (max-width: 1024px) {
+            .destaque-emp {
+                grid-template-columns: 1fr;
+                gap: 50px;
+                padding: 100px 8% 90px;
+            }
+            .destaque-figura.larga img { height: 300px; }
+        }
+
+        @media (max-width: 560px) {
+            .destaque-emp { padding: 80px 6% 70px; }
+            .destaque-imagens { grid-template-columns: 1fr; }
+            .destaque-figura.larga { grid-column: span 1; }
+            .destaque-figura img,
+            .destaque-figura.larga img { height: 220px; }
+            .destaque-acoes .destaque-btn { flex: 1 1 100%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .destaque-figura img,
+            .destaque-btn { transition: none; }
+        }
     </style>
 </head>
 <body>
@@ -2419,6 +2580,56 @@
                     <span class="stat-tight-desc" data-pt="Anos atuando" data-en="Years active">Anos atuando</span>
                 </div>
             </div>
+        </div>
+    </section>
+
+    <!-- (22/09, pedido da dona) EMPREENDIMENTO EM DESTAQUE: o Villagio Caucaia II entra na home,
+         entre os números e a lista de empreendimentos. Textos e imagens são os REAIS da página
+         caucaia2.html (nada inventado), e o desenho reusa as peças que a home já tem. -->
+    <section class="destaque-emp" id="destaque-caucaia2">
+        <div class="destaque-copy">
+            <span class="destaque-label" data-pt="EMPREENDIMENTO EM DESTAQUE" data-en="FEATURED DEVELOPMENT">EMPREENDIMENTO EM DESTAQUE</span>
+            <h2 data-pt="Villagio<br><span class='vermelho'>Caucaia II</span>" data-en="Villagio<br><span class='vermelho'>Caucaia II</span>">Villagio<br><span class="vermelho">Caucaia II</span></h2>
+            <p class="destaque-texto"
+               data-pt="Um lugar pensado para oferecer qualidade de vida e bem-estar para toda a família: área de lazer completa, centro comercial integrado e espaços de convivência, numa região tranquila e de fácil acesso ao centro da cidade."
+               data-en="A place designed to offer quality of life and well-being for the whole family: complete leisure area, integrated commercial center and living spaces, in a quiet region with easy access to downtown.">
+               Um lugar pensado para oferecer qualidade de vida e bem-estar para toda a família: área de lazer completa, centro comercial integrado e espaços de convivência, numa região tranquila e de fácil acesso ao centro da cidade.
+            </p>
+
+            <ul class="destaque-lista">
+                <li>
+                    <strong data-pt="Piscina com borda infinita" data-en="Infinity pool">Piscina com borda infinita</strong>
+                    <span data-pt="Um espaço de lazer elegante, ideal para relaxar com a família." data-en="An elegant leisure space, ideal to relax with the family.">Um espaço de lazer elegante, ideal para relaxar com a família.</span>
+                </li>
+                <li>
+                    <strong data-pt="Lareira" data-en="Fireplace">Lareira</strong>
+                    <span data-pt="Ambiente de convivência acolhedor, perfeito para encontros ao ar livre." data-en="A welcoming living area, perfect for outdoor gatherings.">Ambiente de convivência acolhedor, perfeito para encontros ao ar livre.</span>
+                </li>
+                <li>
+                    <strong data-pt="Área comercial" data-en="Commercial area">Área comercial</strong>
+                    <span data-pt="Comércio integrado, que traz conveniência e valorização ao empreendimento." data-en="Integrated commerce, bringing convenience and value to the development.">Comércio integrado, que traz conveniência e valorização ao empreendimento.</span>
+                </li>
+            </ul>
+
+            <div class="destaque-acoes">
+                <a class="destaque-btn principal" href="caucaia2.html" data-pt="Conhecer o empreendimento" data-en="See the development">Conhecer o empreendimento</a>
+                <a class="destaque-btn" href="contato.html" data-pt="Falar com a DPR" data-en="Talk to DPR">Falar com a DPR</a>
+            </div>
+        </div>
+
+        <div class="destaque-imagens">
+            <figure class="destaque-figura larga">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="Fachada do Villagio Caucaia II" loading="lazy">
+                <figcaption data-pt="Fachada" data-en="Facade">Fachada</figcaption>
+            </figure>
+            <figure class="destaque-figura">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162238-Y4LvP0pWRGSB4eLv.png" alt="Piscina com borda infinita" loading="lazy">
+                <figcaption data-pt="Piscina" data-en="Pool">Piscina</figcaption>
+            </figure>
+            <figure class="destaque-figura">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-162315-dJobPKNQ4NUW0vyg.png" alt="Lareira e área de convivência" loading="lazy">
+                <figcaption data-pt="Lareira" data-en="Fireplace">Lareira</figcaption>
+            </figure>
         </div>
     </section>
 
