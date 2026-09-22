@@ -2491,6 +2491,124 @@
             .destaque-figura img,
             .destaque-btn { transition: none; }
         }
+
+        /* =====================================================================
+           (22/09) POP-UP DE ABERTURA — Villagio Caucaia II.
+
+           Abre uma vez por visita (sessionStorage), pouco depois de a home
+           carregar. TEM saida por todo lado: o X, o "agora nao", a tecla Esc e o
+           clique fora. Enquanto esta aberto, a pagina atras nao rola.
+           Mesmas pecas visuais da secao de destaque: rotulo vermelho espacado,
+           titulo em Syncopate, canto cortado e o botao vermelho.
+           ===================================================================== */
+        .pop-caucaia {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 24px;
+            background: rgba(5, 5, 5, 0.88);
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.4s ease, visibility 0.4s ease;
+        }
+
+        .pop-caucaia.aberto { opacity: 1; visibility: visible; }
+
+        .pop-caucaia-caixa {
+            position: relative;
+            width: min(880px, 100%);
+            max-height: 88vh;
+            overflow: auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: var(--preto);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%);
+            transform: translateY(18px);
+            transition: transform 0.5s cubic-bezier(0.19, 1, 0.22, 1);
+        }
+
+        .pop-caucaia.aberto .pop-caucaia-caixa { transform: translateY(0); }
+
+        .pop-caucaia-foto { margin: 0; min-height: 100%; }
+
+        .pop-caucaia-foto img {
+            width: 100%;
+            height: 100%;
+            min-height: 320px;
+            object-fit: cover;
+            display: block;
+        }
+
+        .pop-caucaia-texto { padding: 44px 40px 40px; }
+
+        .pop-caucaia-label {
+            font-size: 0.58rem;
+            color: var(--vermelho);
+            letter-spacing: 7px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 16px;
+        }
+
+        .pop-caucaia-texto h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: 1.7rem;
+            line-height: 1.05;
+            text-transform: uppercase;
+            letter-spacing: -1px;
+            margin-bottom: 18px;
+        }
+
+        .pop-caucaia-texto p {
+            font-size: 0.95rem;
+            line-height: 1.75;
+            color: var(--cinza-claro);
+            font-weight: 300;
+            border-left: 2px solid var(--vermelho);
+            padding-left: 18px;
+        }
+
+        .pop-caucaia-acoes { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+
+        .pop-caucaia-fechar {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 40px;
+            height: 40px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.4rem;
+            line-height: 1;
+            color: var(--branco);
+            background: rgba(0, 0, 0, 0.45);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            cursor: pointer;
+            transition: border-color 0.3s ease, background 0.3s ease;
+        }
+
+        .pop-caucaia-fechar:hover { border-color: var(--vermelho); background: rgba(255, 0, 0, 0.18); }
+        .pop-caucaia-fechar:focus-visible,
+        .pop-caucaia .destaque-btn:focus-visible { outline: 2px solid var(--vermelho); outline-offset: 3px; }
+
+        @media (max-width: 760px) {
+            .pop-caucaia { padding: 16px; }
+            .pop-caucaia-caixa { grid-template-columns: 1fr; }
+            .pop-caucaia-foto img { min-height: 190px; max-height: 210px; }
+            .pop-caucaia-texto { padding: 30px 24px 28px; }
+            .pop-caucaia-texto h2 { font-size: 1.35rem; }
+            .pop-caucaia-acoes .destaque-btn { flex: 1 1 100%; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .pop-caucaia,
+            .pop-caucaia-caixa { transition: none; }
+        }
     </style>
 </head>
 <body>
@@ -2771,6 +2889,32 @@
         </div>
     </footer>
 
+    <!-- (22/09, pedido da dona) POP-UP DE ABERTURA do Villagio Caucaia II. Abre uma vez por visita,
+         logo depois de a home carregar. Nasce fechado (sem a classe `aberto`); quem abre é o script
+         no fim da página. Tem saída por todo lado: o X, o "agora não", a tecla Esc e o clique fora. -->
+    <div class="pop-caucaia" id="popCaucaia" role="dialog" aria-modal="true" aria-labelledby="popCaucaiaTitulo" aria-hidden="true">
+        <div class="pop-caucaia-caixa">
+            <button type="button" class="pop-caucaia-fechar" data-pop-fechar aria-label="Fechar">&times;</button>
+
+            <figure class="pop-caucaia-foto">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="Fachada do Villagio Caucaia II">
+            </figure>
+
+            <div class="pop-caucaia-texto">
+                <span class="pop-caucaia-label" data-pt="EMPREENDIMENTO EM DESTAQUE" data-en="FEATURED DEVELOPMENT">EMPREENDIMENTO EM DESTAQUE</span>
+                <h2 id="popCaucaiaTitulo" data-pt="Villagio<br><span class='vermelho'>Caucaia II</span>" data-en="Villagio<br><span class='vermelho'>Caucaia II</span>">Villagio<br><span class="vermelho">Caucaia II</span></h2>
+                <p data-pt="Área de lazer completa, centro comercial integrado e espaços de convivência, numa região tranquila e de fácil acesso ao centro da cidade."
+                   data-en="Complete leisure area, integrated commercial center and living spaces, in a quiet region with easy access to downtown.">
+                   Área de lazer completa, centro comercial integrado e espaços de convivência, numa região tranquila e de fácil acesso ao centro da cidade.
+                </p>
+                <div class="pop-caucaia-acoes">
+                    <a class="destaque-btn principal" href="caucaia2.html" data-pt="Conhecer o empreendimento" data-en="See the development">Conhecer o empreendimento</a>
+                    <button type="button" class="destaque-btn" data-pop-fechar data-pt="Agora não" data-en="Not now">Agora não</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         const menuToggle = document.getElementById('menuToggle');
         const mainNav = document.getElementById('mainNav');
@@ -2888,6 +3032,47 @@
         window.addEventListener('scroll', animateHorizontalSection, { passive: true });
         window.addEventListener('resize', animateHorizontalSection);
         animateHorizontalSection();
+
+        /* (22/09, pedido da dona) POP-UP DE ABERTURA do Villagio Caucaia II.
+           Uma vez por visita: a marca fica no sessionStorage, some ao fechar o navegador.
+           Sai pelo X, pelo "agora nao", pelo Esc e pelo clique fora. Trava a rolagem
+           enquanto esta aberto e devolve como estava ao fechar. Se o storage estiver
+           bloqueado (aba anonima), abre do mesmo jeito — a visita nao fica sem o aviso. */
+        (function () {
+            var pop = document.getElementById('popCaucaia');
+            if (!pop) return;
+            var CHAVE = 'dpr_pop_caucaia2';
+            var jaViu = false;
+            try { jaViu = sessionStorage.getItem(CHAVE) === '1'; } catch (e) { jaViu = false; }
+            if (jaViu) return;
+
+            var rolagemAntes = '';
+            function abrir() {
+                rolagemAntes = document.body.style.overflow;
+                document.body.style.overflow = 'hidden';
+                pop.classList.add('aberto');
+                pop.setAttribute('aria-hidden', 'false');
+                var alvo = pop.querySelector('.pop-caucaia-fechar');
+                if (alvo) { try { alvo.focus({ preventScroll: true }); } catch (e) {} }
+                try { sessionStorage.setItem(CHAVE, '1'); } catch (e) {}
+            }
+            function fechar() {
+                pop.classList.remove('aberto');
+                pop.setAttribute('aria-hidden', 'true');
+                document.body.style.overflow = rolagemAntes;
+            }
+
+            pop.addEventListener('click', function (ev) {
+                // clique fora da caixa, no X ou no "agora nao"
+                if (ev.target === pop || ev.target.closest('[data-pop-fechar]')) fechar();
+            });
+            document.addEventListener('keydown', function (ev) {
+                if (ev.key === 'Escape' && pop.classList.contains('aberto')) fechar();
+            });
+
+            // pequena espera para a home pintar antes (e o video comecar), sem susto
+            setTimeout(abrir, 900);
+        })();
 
     </script>
 </body>
