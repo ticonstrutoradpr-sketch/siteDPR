@@ -2572,7 +2572,42 @@
             padding-left: 18px;
         }
 
-        .pop-caucaia-acoes { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 30px; }
+        /* (01/10) O SELO DO MINHA CASA, MINHA VIDA.
+
+           A PLAQUETA BRANCA NAO E ENFEITE. O logo tem fundo transparente, mas as
+           palavras dentro dele sao PRETAS, e a caixa do pop-up e preta: solto,
+           some metade do logo. Alem disso, logo de programa oficial se aplica
+           sobre fundo claro.
+
+           O logo entra com 150px no HTML e e exibido menor pelo CSS: assim ele
+           fica nitido em tela de alta resolucao, que e a maioria. */
+        .pop-caucaia-mcmv {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            margin-top: 26px;
+            padding-top: 22px;
+            border-top: 1px solid rgba(255, 255, 255, 0.12);
+        }
+
+        .pop-mcmv-placa {
+            flex: 0 0 auto;
+            display: grid;
+            place-items: center;
+            width: 74px;
+            height: 74px;
+            padding: 7px;
+            background: #FFFFFF;
+            border-radius: 4px;
+        }
+
+        .pop-mcmv-placa img { display: block; width: 100%; height: auto; }
+
+        .pop-mcmv-dizer { display: flex; flex-direction: column; gap: 4px; }
+        .pop-mcmv-dizer strong { font-size: 0.86rem; letter-spacing: 0.5px; }
+        .pop-mcmv-dizer span { font-size: 0.74rem; line-height: 1.5; opacity: 0.7; }
+
+        .pop-caucaia-acoes { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 26px; }
 
         .pop-caucaia-fechar {
             position: absolute;
@@ -2901,14 +2936,36 @@
             </figure>
 
             <div class="pop-caucaia-texto">
-                <span class="pop-caucaia-label" data-pt="EMPREENDIMENTO EM DESTAQUE" data-en="FEATURED DEVELOPMENT">EMPREENDIMENTO EM DESTAQUE</span>
+                <span class="pop-caucaia-label" data-pt="LANÇAMENTO" data-en="NOW LAUNCHING">LANÇAMENTO</span>
                 <h2 id="popCaucaiaTitulo" data-pt="Villagio<br><span class='vermelho'>Caucaia II</span>" data-en="Villagio<br><span class='vermelho'>Caucaia II</span>">Villagio<br><span class="vermelho">Caucaia II</span></h2>
                 <p data-pt="Área de lazer completa, centro comercial integrado e espaços de convivência, numa região tranquila e de fácil acesso ao centro da cidade."
                    data-en="Complete leisure area, integrated commercial center and living spaces, in a quiet region with easy access to downtown.">
                    Área de lazer completa, centro comercial integrado e espaços de convivência, numa região tranquila e de fácil acesso ao centro da cidade.
                 </p>
+
+                <!-- (01/10, pedido da dona) MINHA CASA, MINHA VIDA.
+                     O logo vem numa PLAQUETA BRANCA de proposito: ele tem fundo
+                     transparente, mas as palavras "Minha Casa Minha Vida" dentro dele
+                     sao pretas, e a caixa do pop-up e preta. Solto, sumiria metade do
+                     logo. Logo de programa oficial se aplica sobre fundo claro de
+                     qualquer forma.
+                     A faixa 2 esta escrita no PDF que a propria DPR produziu; nao e
+                     suposicao minha. -->
+                <div class="pop-caucaia-mcmv">
+                    <span class="pop-mcmv-placa">
+                        <img src="logo-minha-casa-minha-vida.webp" alt="Minha Casa, Minha Vida" width="150" height="150" loading="lazy" decoding="async">
+                    </span>
+                    <span class="pop-mcmv-dizer">
+                        <strong data-pt="Minha Casa, Minha Vida" data-en="Minha Casa, Minha Vida">Minha Casa, Minha Vida</strong>
+                        <span data-pt="Faixa 2 — com possibilidade de subsídio do Governo Federal" data-en="Tier 2 — eligible for Federal Government subsidy">Faixa 2 — com possibilidade de subsídio do Governo Federal</span>
+                    </span>
+                </div>
+
                 <div class="pop-caucaia-acoes">
                     <a class="destaque-btn principal" href="caucaia2.html" data-pt="Conhecer o empreendimento" data-en="See the development">Conhecer o empreendimento</a>
+                    <!-- abre em aba nova: o PDF tem 3,9 MB e tirar a pessoa da pagina
+                         para um download pesado perde a visita -->
+                    <a class="destaque-btn" href="villagio-caucaia-ii-minha-casa-minha-vida.pdf" target="_blank" rel="noopener" data-pt="Condições do financiamento" data-en="Financing conditions">Condições do financiamento</a>
                     <button type="button" class="destaque-btn" data-pop-fechar data-pt="Agora não" data-en="Not now">Agora não</button>
                 </div>
             </div>

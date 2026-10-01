@@ -398,7 +398,7 @@
             border: 1px solid rgba(255,255,255,0.12);
         }
         .v-status .dot { width: 7px; height: 7px; border-radius: 50%; background: #2ecc71; box-shadow: 0 0 8px #2ecc71; }
-        .v-status.dot-soon .dot { background: var(--vermelho); box-shadow: 0 0 8px var(--vermelho); }
+        .v-status.dot-lancamento .dot { background: var(--vermelho); box-shadow: 0 0 8px var(--vermelho); }
 
         .emp-body { position: relative; }
         .emp-index {
@@ -1153,7 +1153,12 @@
             <article class="emp-row" id="emp-01" data-category="comercial residencial">
                 <div class="emp-visual">
                     <span class="v-tag" data-pt="Comercial + Residencial" data-en="Commercial + Residential">Comercial + Residencial</span>
-                    <span class="v-status dot-soon"><span class="dot"></span><span data-pt="EM BREVE" data-en="COMING SOON">EM BREVE</span></span>
+                    <!-- (01/10, pedido da dona) O Villagio Caucaia II deixou de ser "em
+                         breve" e passou a ser LANCAMENTO. A classe foi renomeada junto:
+                         uma classe chamada "soon" mostrando "LANCAMENTO" mente para quem
+                         ler o codigo depois. A cor nao muda -- continua o vermelho da
+                         marca, que ja era a cor deste selo. -->
+                    <span class="v-status dot-lancamento"><span class="dot"></span><span data-pt="LANÇAMENTO" data-en="NOW LAUNCHING">LANÇAMENTO</span></span>
                     <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="Villagio Caucaia II">
                 </div>
                 <div class="emp-body">
