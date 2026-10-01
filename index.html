@@ -2603,7 +2603,10 @@
 
         .pop-mcmv-placa img { display: block; width: 100%; height: auto; }
 
-        .pop-mcmv-dizer { display: flex; flex-direction: column; gap: 4px; }
+        /* min-width: 0 porque sem isso um filho de flex NAO encolhe abaixo do
+           tamanho do proprio texto, e a frase do subsidio estoura a caixa em
+           tela estreita em vez de quebrar linha */
+        .pop-mcmv-dizer { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
         .pop-mcmv-dizer strong { font-size: 0.86rem; letter-spacing: 0.5px; }
         .pop-mcmv-dizer span { font-size: 0.74rem; line-height: 1.5; opacity: 0.7; }
 
@@ -2634,10 +2637,34 @@
         @media (max-width: 760px) {
             .pop-caucaia { padding: 16px; }
             .pop-caucaia-caixa { grid-template-columns: 1fr; }
-            .pop-caucaia-foto img { min-height: 190px; max-height: 210px; }
-            .pop-caucaia-texto { padding: 30px 24px 28px; }
+            .pop-caucaia-texto { padding: 28px 22px 26px; }
             .pop-caucaia-texto h2 { font-size: 1.35rem; }
-            .pop-caucaia-acoes .destaque-btn { flex: 1 1 100%; }
+
+            /* (01/10) A FOTO CEDE ALTURA. No celular a caixa vira uma coluna so, e
+               o conteudo cresceu: entrou o selo do Minha Casa, Minha Vida e um
+               terceiro botao. Era 190-210px; com o conteudo de hoje isso empurrava
+               tudo para alem dos 88vh da caixa e a pessoa tinha de rolar o pop-up
+               para achar os botoes. Rolar para encontrar o que fazer e onde se
+               perde a visita. */
+            .pop-caucaia-foto img { min-height: 148px; max-height: 168px; }
+
+            /* o selo encolhe junto, mas NAO empilha: lado a lado ele ocupa duas
+               linhas de altura; empilhado ocuparia quatro */
+            .pop-caucaia-mcmv { gap: 13px; margin-top: 20px; padding-top: 18px; }
+            .pop-mcmv-placa { width: 58px; height: 58px; padding: 5px; }
+            .pop-mcmv-dizer strong { font-size: 0.8rem; }
+            .pop-mcmv-dizer span { font-size: 0.7rem; }
+
+            /* o espacamento das letras cai de 3px para 2px: com 3px,
+               "CONDICOES DO FINANCIAMENTO" nao cabe numa linha em tela de 320px
+               e o botao vira dois andares com o canto cortado no meio */
+            .pop-caucaia-acoes { gap: 9px; margin-top: 20px; }
+            .pop-caucaia-acoes .destaque-btn {
+                flex: 1 1 100%;
+                letter-spacing: 2px;
+                padding: 15px 14px;
+                text-align: center;
+            }
         }
 
         @media (prefers-reduced-motion: reduce) {
