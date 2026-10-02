@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPR | Engenharia de Precisão Assimétrica</title>
+    <title>DPR Construtora | Minha Casa Minha Vida em Cotia e Caucaia do Alto</title>
+    <!-- busca e compartilhamento -->
+    <meta name="description" content="Casas e lotes pelo Minha Casa Minha Vida em Caucaia do Alto, Cotia e Itatinga. Empreendimentos nas Faixas 1 e 2, com possibilidade de subsídio do Governo Federal.">
+    <link rel="canonical" href="https://www.construtoradpr.com.br/">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="DPR Construtora">
+    <meta property="og:url" content="https://www.construtoradpr.com.br/">
+    <meta property="og:title" content="DPR Construtora | Minha Casa Minha Vida em Cotia e Caucaia do Alto">
+    <meta property="og:description" content="Casas e lotes pelo Minha Casa Minha Vida em Caucaia do Alto, Cotia e Itatinga. Empreendimentos nas Faixas 1 e 2, com possibilidade de subsídio do Governo Federal.">
+    <meta property="og:image" content="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- fim -->
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -2671,6 +2683,310 @@
             .pop-caucaia,
             .pop-caucaia-caixa { transition: none; }
         }
+
+/* ===== CLAREAMENTO (02/10) ===== */
+/* Ela: "tente deixar o site mais claro, esta tudo muito escuro".
+
+   Nao da para so trocar a variavel --preto: 776 das cores deste site estao
+   escritas a mao e so 384 usam variavel. Trocar a variavel clarearia um
+   terco e deixaria o resto preto.
+
+   Entao as secoes que PODEM clarear levam a classe "aclarar", e o que
+   precisa continuar escuro fica intocado: o heroi (video atras), as sombras
+   sobre foto dentro dos cartoes (sem elas o texto branco some na imagem), o
+   rodape e o pop-up. */
+
+.aclarar {
+  background: #f2f2f4 !important;
+  color: #15161a !important;
+}
+
+/* TODO texto dentro da secao clara escurece. A regra larga e proposital:
+   listar elemento por elemento deixa escapar os sem classe -- foi assim
+   que um <span> de cinza claro (160,160,160) ficou a 2,34:1 sobre o fundo
+   claro, pego pelo verificador de contraste. */
+.aclarar * { color: #15161a !important; }
+
+/* o cinza de apoio continua cinza, mas agora escuro o bastante para ler */
+.aclarar p,
+.aclarar .conceito-text p,
+.aclarar .highlight-box p,
+.aclarar .destaque-texto p,
+.aclarar .destaque-lista span,
+.aclarar li span,
+.aclarar .emp-desc { color: #4a4b52 !important; }
+
+/* o vermelho da marca nao muda: e a identidade */
+.aclarar .vermelho,
+.aclarar [class*="vermelho"],
+.aclarar .conceito-label,
+.aclarar .section-label,
+.aclarar .destaque-label,
+.aclarar .projects-label,
+.aclarar [class*="label"] { color: var(--vermelho) !important; }
+
+/* o que esta POR CIMA DE FOTO continua branco: ali quem da legibilidade e
+   a sombra sobre a imagem, e escurecer o texto o apagaria */
+.aclarar figure figcaption,
+.aclarar .destaque-galeria span,
+.aclarar .destaque-galeria figcaption,
+.aclarar [class*="overlay"],
+.aclarar [class*="overlay"] *,
+.aclarar .v-status,
+.aclarar .v-status * { color: #ffffff !important; }
+
+/* o botao cheio e vermelho: o texto nele continua branco */
+.aclarar .destaque-btn.principal,
+.aclarar .destaque-btn.principal * { color: #ffffff !important; }
+
+/* caixas de destaque dentro do claro ganham fundo branco e filete */
+.aclarar .highlight-box {
+  background: #ffffff !important;
+  border: 1px solid #e2e2e8 !important;
+}
+
+/* SOBRE FOTO NADA MUDA: a sombra escura dentro dos cartoes e o que deixa o
+   texto branco legivel por cima da imagem */
+.aclarar .project-overlay,
+.aclarar .service-side-overlay,
+.aclarar .project-card::after,
+.aclarar .projects-slide .project-overlay { background: initial; }
+
+.aclarar .project-overlay *,
+.aclarar .service-side-overlay * { color: #ffffff !important; }
+
+/* o fundo preso da rolagem horizontal tambem clareia, senao a secao
+   marcada continuaria preta por baixo */
+.aclarar .horizontal-sticky,
+.aclarar .services-side-sticky,
+.aclarar .horizontal-slide,
+.aclarar .services-transition-slide {
+  background: #f2f2f4 !important;
+}
+
+/* o filete vermelho que separava do preto fica fraco demais sobre claro */
+.aclarar .red-line-decorator { opacity: 0.9; }
+
+/* O BOTAO DE CONTORNO. Ele era texto branco com borda branca, para fundo
+   preto -- sobre claro ele sumia por completo. O botao cheio, vermelho,
+   continua como estava. */
+.aclarar .destaque-btn:not(.principal),
+.aclarar .btn-dpr:not(.primary) {
+  color: #15161a !important;
+  border-color: #c9c9d2 !important;
+  background: transparent !important;
+}
+
+.aclarar .destaque-btn:not(.principal):hover,
+.aclarar .btn-dpr:not(.primary):hover {
+  color: var(--vermelho) !important;
+  border-color: var(--vermelho) !important;
+}
+
+/* o filete que marca cada item da lista de atributos */
+.aclarar .destaque-lista li { border-color: var(--vermelho) !important; }
+
+/* ---- as fotos reais e o que vem na casa ----
+
+   A secao "Construimos para quem vai morar" era so titulo e texto, com
+   muito espaco vazio. Quem procura Minha Casa Minha Vida quer VER a cozinha
+   e saber se tem portaria. A secao e uma grade de duas colunas, entao estas
+   pecas atravessam as duas. */
+
+/* O TITULO DESTA SECAO E GRUDADO NA ROLAGEM (position: sticky, top 150px).
+   Isso funcionava quando a secao tinha so duas colunas lado a lado. Com os
+   blocos novos atravessando as duas, ele ficava PARADO POR CIMA DAS FOTOS --
+   cobria 100% delas na rolagem de 1500px, medido na pagina renderizada.
+   Grudado so faz sentido ao lado de uma coluna de texto longa; aqui ele
+   volta a rolar junto. */
+.aclarar .conceito-header { position: static !important; top: auto !important; }
+
+.aclarar .conceito-header h2 { margin-bottom: 22px; }
+
+/* o filete vermelho sob o titulo, no lugar do espaco vazio que sobrava */
+.aclarar .conceito-header::after {
+  content: "";
+  display: block;
+  width: 56px;
+  height: 4px;
+  background: var(--vermelho);
+}
+
+/* AS FOTOS, EM RITMO. Quatro retangulos iguais pareciam catalogo; duas
+   grandes em cima e uma estreita com uma larga embaixo dao composicao. */
+.casa-mostra {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 64px;
+}
+
+.casa-foto { position: relative; margin: 0; overflow: hidden; background: #e6e6ee; }
+
+.casa-foto:nth-child(1) { grid-column: span 3; }
+.casa-foto:nth-child(2) { grid-column: span 3; }
+.casa-foto:nth-child(3) { grid-column: span 2; }
+.casa-foto:nth-child(4) { grid-column: span 4; }
+
+.casa-foto:nth-child(1) img,
+.casa-foto:nth-child(2) img { aspect-ratio: 3 / 2; }
+.casa-foto:nth-child(3) img { aspect-ratio: 4 / 3; }
+.casa-foto:nth-child(4) img { aspect-ratio: 21 / 9; }
+
+.casa-foto img {
+  display: block;
+  width: 100%;
+  object-fit: cover;
+  transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.casa-foto:hover img { transform: scale(1.04); }
+
+/* a legenda sobe de dentro da foto, com um veu so na base */
+.casa-foto::after {
+  content: "";
+  position: absolute;
+  inset: auto 0 0 0;
+  height: 45%;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.72), transparent);
+  pointer-events: none;
+}
+
+.casa-foto figcaption {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: 14px 16px;
+  color: #fff;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+/* A COLUNA DA ESQUERDA TINHA SO O TITULO, e sobrava um vazio enorme
+   embaixo dele, porque a coluna da direita e bem mais alta. Era isso que
+   deixava a secao com cara de basica -- nao a falta de enfeite.
+
+   Os quatro itens do "o que vem na casa" passam a morar nesse vazio: titulo
+   e filete em cima, atributos embaixo, texto longo do lado. */
+/* a secao usa 100px de intervalo, e isso vale tambem ENTRE AS LINHAS: era
+   o que abria um buraco entre o filete e a lista. Entre colunas 100px esta
+   certo; entre linhas, nao. */
+.aclarar.section-conceito { column-gap: 100px; row-gap: 30px; }
+
+.aclarar .conceito-header { grid-column: 1; grid-row: 1; }
+.aclarar .conceito-text { grid-column: 2; grid-row: 1 / span 2; }
+
+.casa-itens {
+  grid-column: 1;
+  grid-row: 2;
+  align-self: start;
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+  margin: 26px 0 0;
+  padding: 0;
+}
+
+.casa-mostra { grid-row: 3; }
+
+.casa-itens li { position: relative; padding-left: 16px; }
+
+.casa-itens li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 3px;
+  width: 3px;
+  height: 19px;
+  background: var(--vermelho);
+}
+
+.casa-itens strong {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 0.95rem;
+  font-weight: 900;
+  letter-spacing: -0.01em;
+  color: #15161a !important;
+}
+
+.casa-itens span {
+  display: block;
+  font-size: 0.82rem;
+  line-height: 1.55;
+  color: #55565e !important;
+}
+
+/* a frase de abertura ganha corpo: ela e a promessa da secao */
+.aclarar .conceito-text > p:first-child {
+  font-size: 1.25rem !important;
+  line-height: 1.65 !important;
+  color: #26272e !important;
+}
+
+@media (max-width: 900px) {
+  /* em uma coluna so, a colocacao por linha e coluna perde o sentido: tudo
+     volta a empilhar na ordem do HTML */
+  .aclarar .conceito-header,
+  .aclarar .conceito-text,
+  .casa-itens,
+  .casa-mostra { grid-column: auto !important; grid-row: auto !important; }
+  .casa-itens { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 8px; }
+  .casa-mostra { grid-template-columns: repeat(2, minmax(0, 1fr)); margin-top: 36px; }
+  .casa-foto:nth-child(1),
+  .casa-foto:nth-child(2),
+  .casa-foto:nth-child(3),
+  .casa-foto:nth-child(4) { grid-column: span 1; }
+  .casa-foto img { aspect-ratio: 4 / 3 !important; }
+  .aclarar .conceito-text > p:first-child { font-size: 1.08rem !important; }
+}
+
+@media (max-width: 560px) {
+  .casa-itens { grid-template-columns: 1fr; gap: 22px; }
+  .casa-mostra { gap: 10px; }
+}
+
+/* O CABECALHO. Ele e fixo, transparente e com texto branco. Com o conteudo
+   abaixo agora claro, ele passava por cima de fundo claro e os links
+   simplesmente SUMIAM -- erro que so apareceu olhando a pagina renderizada.
+
+   Solucao: assim que sai do heroi, ele ganha uma placa clara e o texto
+   escurece. Sobre o heroi continua exatamente como era. */
+header { transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease; }
+
+header.sobre-claro {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #e4e4ea;
+  padding-top: 14px;
+  padding-bottom: 14px;
+}
+
+header.sobre-claro .nav-menu a,
+header.sobre-claro .lang-switch,
+header.sobre-claro .search-input { color: #15161a !important; }
+
+header.sobre-claro .nav-menu a:hover { color: var(--vermelho) !important; }
+
+header.sobre-claro .search-trigger svg { stroke: #15161a !important; }
+header.sobre-claro .menu-toggle span { background: #15161a !important; }
+header.sobre-claro .search-input::placeholder { color: #8a8a92 !important; }
+/* ===== fim do clareamento ===== */
+
+
+
+
+
+
+
+
+
     </style>
 </head>
 <body>
@@ -2721,27 +3037,69 @@
         </div>
         <div class="hero-content">
             <p class="sub-info" data-pt="CONSTRUTORA & INCORPORADORA" data-en="CONSTRUCTION & DEVELOPMENT">CONSTRUTORA & INCORPORADORA</p>
-            <h1 id="heroTitle">DESIGN<br><span class="vermelho" data-pt="PRECISO." data-en="PRECISION.">PRECISO.</span></h1>
+            <h1 id="heroTitle">CASA<br><span class="vermelho" data-pt="PRÓPRIA." data-en="OF YOUR OWN.">PRÓPRIA.</span></h1>
         </div>
     </section>
 
-    <section class="section-conceito">
+    <section class="section-conceito aclarar">
         <div class="conceito-header">
             <span class="conceito-label" data-pt="SOBRE NÓS" data-en="ABOUT US">SOBRE NÓS</span>
-            <h2 data-pt="Arquitetura contemporânea" data-en="Contemporary architecture">Arquitetura contemporânea</h2>
+            <h2 data-pt="Construímos para quem vai morar" data-en="We build for the people who will live there">Construímos para quem vai morar</h2>
         </div>
         <div class="conceito-text">
-            <p data-pt="Nossa arquitetura contemporânea e conceituada reflete um compromisso com inovação, qualidade e design atual. Cada projeto é pensado para unir estética moderna e funcionalidade, criando espaços exclusivos que atendem às necessidades e desejos dos nossos clientes." 
-               data-en="Our conceptualized contemporary architecture reflects a commitment to innovation, quality, and current design. Each project is designed to unite modern aesthetics and functionality, creating exclusive spaces that meet our clients' needs and desires.">
-                Nossa arquitetura contemporânea e conceituada reflete um compromisso com inovação, qualidade e design atual. Cada projeto é pensado para unir estética moderna e funcionalidade, criando espaços exclusivos que atendem às necessidades e desejos dos nossos clientes.
+            <p data-pt="A DPR constrói casas pelo Minha Casa Minha Vida em Caucaia do Alto, Cotia e região. Projetamos para a vida de quem vai morar: planta que cabe a família, área de lazer para as crianças e acabamento que não vira despesa depois da mudança." 
+               data-en="DPR builds homes through the Minha Casa Minha Vida programme in Caucaia do Alto, Cotia and the surrounding region.">
+                A DPR constrói casas pelo Minha Casa Minha Vida em Caucaia do Alto, Cotia e região. Projetamos para a vida de quem vai morar: planta que cabe a família, área de lazer para as crianças e acabamento que não vira despesa depois da mudança.
             </p>
             <div class="highlight-box">
-                <p data-pt="Valorizamos a atenção em cada detalhe, desde os acabamentos até a escolha dos materiais, para oferecer ambientes que proporcionam conforto, harmonia e identidade. Com foco em soluções inteligentes e sustentáveis, entregamos residências que são verdadeiros refúgios de bem-estar, ideais para quem busca um estilo de vida moderno e confortável."
-                   data-en="We value attention to every detail, from finishes to the choice of materials, to offer environments that provide comfort, harmony, and identity. With a focus on intelligent and sustainable solutions, we deliver residences that are true havens of well-being, ideal for those seeking a modern and comfortable lifestyle.">
-                   Valorizamos a atenção em cada detalhe, desde os acabamentos até a escolha dos materiais, para oferecer ambientes que proporcionam conforto, harmonia e identidade. Com foco em soluções inteligentes e sustentáveis, entregamos residências que são verdadeiros refúgios de bem-estar, ideais para quem busca um estilo de vida moderno e confortável.
+                <p data-pt="Cuidamos do acabamento e da escolha dos materiais pelo motivo mais simples: é o que você usa todo dia, e o que decide se vai sobrar ou faltar dinheiro em manutenção. Entregamos casas prontas para morar, com portaria, área de lazer e espaço para as crianças brincarem."
+                   data-en="We look after the finishes and the choice of materials for the simplest of reasons: they are what you use every day, and what decides whether upkeep will cost you. We hand over homes that are ready to live in, with a gatehouse, leisure areas and space for children to play.">
+                   Cuidamos do acabamento e da escolha dos materiais pelo motivo mais simples: é o que você usa todo dia, e o que decide se vai sobrar ou faltar dinheiro em manutenção. Entregamos casas prontas para morar, com portaria, área de lazer e espaço para as crianças brincarem.
                 </p>
             </div>
         </div>
+
+        <!-- (02/10) A secao era so titulo e texto, e sobrava espaco vazio.
+             Entraram as fotos REAIS das casas entregues e o que vem junto com
+             elas. Num site de Minha Casa Minha Vida, quem decide quer ver a
+             cozinha e saber se tem portaria -- nao ler sobre conceito. -->
+        <div class="casa-mostra">
+            <figure class="casa-foto">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D800%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/whatsapp-image-2025-01-20-at-15.14.26-A0xj960nlDuBgxBM.jpeg" alt="Cozinha de uma casa entregue pela DPR" loading="lazy" decoding="async">
+                <figcaption data-pt="Cozinha" data-en="Kitchen">Cozinha</figcaption>
+            </figure>
+            <figure class="casa-foto">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D800%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-16-104824-dOqDpJ932NTlBkRw.png" alt="Quarto infantil de uma casa da DPR" loading="lazy" decoding="async">
+                <figcaption data-pt="Quarto" data-en="Bedroom">Quarto</figcaption>
+            </figure>
+            <figure class="casa-foto">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D800%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-16-105341-mxBXbe5BEXFK4k1b.png" alt="Playground do condomínio" loading="lazy" decoding="async">
+                <figcaption data-pt="Playground" data-en="Playground">Playground</figcaption>
+            </figure>
+            <figure class="casa-foto">
+                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D800%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/professional_image-mk3JGoeEwMU5oB97.png" alt="Portaria 24 horas do condomínio" loading="lazy" decoding="async">
+                <figcaption data-pt="Portaria" data-en="Gatehouse">Portaria</figcaption>
+            </figure>
+        </div>
+
+        <ul class="casa-itens">
+            <li>
+                <strong data-pt="2 dormitórios" data-en="2 bedrooms">2 dormitórios</strong>
+                <span data-pt="Planta pensada para caber a família" data-en="A floor plan made to fit a family">Planta pensada para caber a família</span>
+            </li>
+            <li>
+                <strong data-pt="Portaria 24 horas" data-en="24-hour gatehouse">Portaria 24 horas</strong>
+                <span data-pt="Entrada controlada, dia e noite" data-en="Controlled entrance, day and night">Entrada controlada, dia e noite</span>
+            </li>
+            <li>
+                <strong data-pt="Área de lazer" data-en="Leisure area">Área de lazer</strong>
+                <span data-pt="Playground, quadra e espaço de convivência" data-en="Playground, sports court and a place to gather">Playground, quadra e espaço de convivência</span>
+            </li>
+            <li>
+                <strong data-pt="Faixas 1 e 2" data-en="Tiers 1 and 2">Faixas 1 e 2</strong>
+                <span data-pt="Minha Casa Minha Vida, com possibilidade de subsídio" data-en="Minha Casa Minha Vida, eligible for subsidy">Minha Casa Minha Vida, com possibilidade de subsídio</span>
+            </li>
+        </ul>
     </section>
 
     <section class="agency-compact-stats">
@@ -2766,7 +3124,7 @@
     <!-- (22/09, pedido da dona) EMPREENDIMENTO EM DESTAQUE: o Villagio Caucaia II entra na home,
          entre os números e a lista de empreendimentos. Textos e imagens são os REAIS da página
          caucaia2.html (nada inventado), e o desenho reusa as peças que a home já tem. -->
-    <section class="destaque-emp" id="destaque-caucaia2">
+    <section class="destaque-emp aclarar" id="destaque-caucaia2">
         <div class="destaque-copy">
             <span class="destaque-label" data-pt="EMPREENDIMENTO EM DESTAQUE" data-en="FEATURED DEVELOPMENT">EMPREENDIMENTO EM DESTAQUE</span>
             <h2 data-pt="Villagio<br><span class='vermelho'>Caucaia II</span>" data-en="Villagio<br><span class='vermelho'>Caucaia II</span>">Villagio<br><span class="vermelho">Caucaia II</span></h2>
@@ -2779,7 +3137,7 @@
             <ul class="destaque-lista">
                 <li>
                     <strong data-pt="Piscina com borda infinita" data-en="Infinity pool">Piscina com borda infinita</strong>
-                    <span data-pt="Um espaço de lazer elegante, ideal para relaxar com a família." data-en="An elegant leisure space, ideal to relax with the family.">Um espaço de lazer elegante, ideal para relaxar com a família.</span>
+                    <span data-pt="Uma área de lazer para a família inteira usar." data-en="A leisure area for the whole family to use.">Uma área de lazer para a família inteira usar.</span>
                 </li>
                 <li>
                     <strong data-pt="Lareira" data-en="Fireplace">Lareira</strong>
@@ -2813,7 +3171,7 @@
         </div>
     </section>
 
-    <section class="section-horizontal-transition" id="empreendimentos">
+    <section class="section-horizontal-transition aclarar" id="empreendimentos">
         <div class="horizontal-sticky">
             <div class="horizontal-track" id="horizontalTrack">
 
@@ -2889,7 +3247,7 @@
 
                         <div class="services-side-grid">
                             <article class="service-side-card">
-                                <img src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&q=80&w=1200" alt="Acompanhamento de obra online">
+                                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/professional_aerial_image-1-AVLaQvap8Lh82r0E.png" alt="Vista aérea de um empreendimento da DPR">
                                 <div class="service-side-overlay">
                                     <span class="service-side-number">01</span>
                                     <h3 data-pt="Acompanhamento de Obra Online" data-en="Online Construction Monitoring">Acompanhamento de Obra Online</h3>
@@ -2898,7 +3256,7 @@
                             </article>
 
                             <article class="service-side-card">
-                                <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&q=80&w=1200" alt="Consultoria técnica personalizada">
+                                <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/enhanced_image_3-YanJQo4j4Likx9Kg.png" alt="Entrada do Villagio Caucaia I">
                                 <div class="service-side-overlay">
                                     <span class="service-side-number">02</span>
                                     <h3 data-pt="Consultoria Técnica Personalizada" data-en="Personalized Technical Consulting">Consultoria Técnica Personalizada</h3>
@@ -2924,7 +3282,7 @@
     <footer class="footer-dpr" id="contato">
         <div class="footer-container">
             <div class="footer-brand">
-                <p>Engenharia, construção e design com precisão, visão contemporânea e atenção absoluta aos detalhes.</p>
+                <p>Construtora e incorporadora em Cotia e região, com empreendimentos no Minha Casa Minha Vida.</p>
             </div>
 
             <div class="footer-links">
@@ -3023,8 +3381,8 @@
         const langBtn = document.getElementById('langBtn');
         let currentLang = 'pt';
         const translations = {
-            pt: { title: 'DESIGN<br><span class=\"vermelho\">PRECISO.</span>', btn: 'EN' },
-            en: { title: 'PRECISION<br><span class=\"vermelho\">DESIGN.</span>', btn: 'PT' }
+            pt: { title: 'CASA<br><span class=\"vermelho\">PRÓPRIA.</span>', btn: 'EN' },
+            en: { title: 'A HOME<br><span class=\"vermelho\">OF YOUR OWN.</span>', btn: 'PT' }
         };
 
         langBtn.addEventListener('click', () => {
@@ -3159,5 +3517,30 @@
         })();
 
     </script>
+
+<script>
+/* placa do cabecalho sobre fundo claro */
+(function () {
+    var cab = document.querySelector('header');
+    var heroi = document.querySelector('.hero');
+    if (!cab || !heroi) return;
+    function conferir() {
+        // 90px antes do fim do heroi: a placa entra ANTES de o texto branco
+        // encostar no fundo claro, e nao depois
+        cab.classList.toggle('sobre-claro', window.scrollY > heroi.offsetHeight - 90);
+    }
+    conferir();
+    window.addEventListener('scroll', conferir, { passive: true });
+    window.addEventListener('resize', conferir, { passive: true });
+})();
+</script>
+
+
+
+
+
+
+
+
 </body>
 </html>

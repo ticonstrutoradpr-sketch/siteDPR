@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPR | Villagio Caucaia II</title>
+    <title>Villagio Caucaia II | Minha Casa Minha Vida Faixa 2 — DPR Construtora</title>
+    <!-- busca e compartilhamento -->
+    <meta name="description" content="Lançamento em Caucaia do Alto, Cotia. Área de lazer completa, centro comercial integrado e Minha Casa Minha Vida Faixa 2, com possibilidade de subsídio do Governo Federal.">
+    <link rel="canonical" href="https://www.construtoradpr.com.br/caucaia2.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="DPR Construtora">
+    <meta property="og:url" content="https://www.construtoradpr.com.br/caucaia2.html">
+    <meta property="og:title" content="Villagio Caucaia II | Minha Casa Minha Vida Faixa 2 — DPR Construtora">
+    <meta property="og:description" content="Lançamento em Caucaia do Alto, Cotia. Área de lazer completa, centro comercial integrado e Minha Casa Minha Vida Faixa 2, com possibilidade de subsídio do Governo Federal.">
+    <meta property="og:image" content="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- fim -->
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -571,6 +583,153 @@
             .feature-card,
             .gallery-item { -webkit-user-select: none; user-select: none; }
         }
+
+/* ===== CLAREAMENTO (02/10) ===== */
+/* Ela: "as outras paginas ainda estao muito pretas".
+
+   Nao da para so trocar a variavel --preto: a maioria das cores deste site
+   esta escrita a mao. Entao as secoes que PODEM clarear levam a classe
+   "aclarar", e o que precisa continuar escuro fica intocado: o heroi (foto
+   ou video atras), as sombras sobre foto dentro dos cartoes, o rodape e a
+   faixa final de chamada.
+
+   O !important vence as regras antigas sem reescrever cada uma. */
+
+.aclarar {
+  background: #f2f2f4 !important;
+  color: #15161a !important;
+}
+
+/* todo texto dentro da secao clara escurece... */
+.aclarar * { color: #15161a !important; }
+
+/* ...MENOS o vermelho da marca, que e identidade */
+.aclarar .vermelho,
+.aclarar [class*="vermelho"],
+.aclarar .section-label,
+.aclarar .kicker,
+.aclarar .ct-kicker,
+.aclarar .sec-kicker,
+.aclarar .emp-index,
+.aclarar .pillar-card [class*="number"],
+.aclarar [class*="label"] { color: var(--vermelho) !important; }
+
+/* ...e MENOS o que esta por cima de foto: ali a sombra escura e o que
+   torna o texto branco legivel, e inverter deixaria ilegivel */
+.aclarar [class*="overlay"],
+.aclarar [class*="overlay"] *,
+.aclarar .gallery-item span,
+.aclarar .emp-media,
+.aclarar .emp-media *,
+.aclarar figure figcaption,
+.aclarar .v-status,
+.aclarar .v-status * { color: #ffffff !important; }
+
+/* o cinza de apoio continua cinza, escuro o bastante para ler no claro */
+.aclarar p,
+.aclarar .sec-desc,
+.aclarar .pillar-card p,
+.aclarar .emp-desc,
+.aclarar li span { color: #4a4b52 !important; }
+
+/* caixas e cartoes ganham fundo branco e filete, em vez do preto de antes */
+.aclarar .pillar-card,
+.aclarar .card,
+.aclarar .info-card,
+.aclarar .ct-form,
+.aclarar .tc-value,
+.aclarar .emp-body,
+.aclarar .highlight-box {
+  background: #ffffff !important;
+  border-color: #e2e2e8 !important;
+}
+
+/* CAMPOS DE FORMULARIO. Eles tinham fundo branco a 3%, borda branca a 12%
+   e TEXTO BRANCO -- desenhados para o preto. Sobre claro o campo inteiro
+   sumia: dava para clicar, mas nao para ver onde, nem ler o que se digitava.
+   E o pior tipo de defeito, porque a pessoa desiste de preencher. */
+.aclarar .ct-form-wrap,
+.aclarar form,
+.aclarar fieldset {
+  background: #ffffff !important;
+  border-color: #e2e2e8 !important;
+}
+
+.aclarar input,
+.aclarar select,
+.aclarar textarea {
+  background: #ffffff !important;
+  border: 1px solid #c4c4ce !important;
+  color: #15161a !important;
+}
+
+.aclarar input::placeholder,
+.aclarar textarea::placeholder { color: #8b8b95 !important; opacity: 1 !important; }
+
+.aclarar input:focus,
+.aclarar select:focus,
+.aclarar textarea:focus {
+  border-color: var(--vermelho) !important;
+  background: #fffafa !important;
+}
+
+.aclarar select option { background: #ffffff !important; color: #15161a !important; }
+
+/* o rotulo de cada campo precisa ler sobre o branco */
+.aclarar label,
+.aclarar .form-field > span { color: #3a3b42 !important; }
+
+/* o botao de contorno era branco sobre preto: sobre claro ele sumia */
+.aclarar .btn-dpr:not(.primary),
+.aclarar .destaque-btn:not(.principal),
+.aclarar .btn-veja {
+  color: #15161a !important;
+  border-color: #c9c9d2 !important;
+  background: transparent !important;
+}
+
+.aclarar .btn-dpr:not(.primary):hover,
+.aclarar .destaque-btn:not(.principal):hover,
+.aclarar .btn-veja:hover { color: var(--vermelho) !important; border-color: var(--vermelho) !important; }
+
+/* o botao cheio continua vermelho com texto branco */
+.aclarar .btn-dpr.primary,
+.aclarar .btn-dpr.primary *,
+.aclarar .destaque-btn.principal { color: #ffffff !important; }
+
+/* icones desenhados seguem a cor do texto */
+.aclarar svg { stroke: currentColor; }
+.aclarar [class*="overlay"] svg { stroke: #ffffff; }
+
+/* filetes e separadores que eram claros sobre preto */
+.aclarar hr,
+.aclarar [class*="divider"],
+.aclarar [class*="linha"] { border-color: #dcdce4 !important; background-color: #dcdce4 !important; }
+
+/* O CABECALHO e fixo, transparente e com texto branco. Com o conteudo
+   claro embaixo, os links sumiam. Ele ganha uma placa clara ao sair do
+   heroi; sobre o heroi continua como era. */
+header { transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease; }
+
+header.sobre-claro {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #e4e4ea;
+}
+
+header.sobre-claro .nav-menu a,
+header.sobre-claro .lang-switch,
+header.sobre-claro .search-input { color: #15161a !important; }
+header.sobre-claro .nav-menu a:hover { color: var(--vermelho) !important; }
+header.sobre-claro .search-trigger svg { stroke: #15161a !important; }
+header.sobre-claro .menu-toggle span { background: #15161a !important; }
+header.sobre-claro .search-input::placeholder { color: #8a8a92 !important; }
+/* ===== fim do clareamento ===== */
+
+
+
+
     </style>
 </head>
 <body>
@@ -615,7 +774,7 @@
             </div>
         </section>
 
-        <section class="section dark" id="diferenciais">
+        <section class="section dark aclarar" id="diferenciais">
             <div class="section-title">
                 <span class="kicker">Diferenciais</span>
                 <h2>Áreas pensadas para viver melhor</h2>
@@ -628,7 +787,7 @@
                     <div class="feature-overlay">
                         <span>01</span>
                         <h3>Piscina com borda infinita</h3>
-                        <p>Um espaço de lazer elegante, ideal para relaxar e aproveitar momentos especiais com a família.</p>
+                        <p>Uma área de lazer para a família inteira usar, logo ali onde você mora.</p>
                     </div>
                 </article>
                 <article class="feature-card">
@@ -636,7 +795,7 @@
                     <div class="feature-overlay">
                         <span>02</span>
                         <h3>Lareira</h3>
-                        <p>Ambiente de convivência sofisticado, acolhedor e perfeito para encontros ao ar livre.</p>
+                        <p>Espaço de convivência ao ar livre, para encontro de família e aniversário das crianças.</p>
                     </div>
                 </article>
                 <article class="feature-card">
@@ -657,7 +816,7 @@
             </div>
         </section>
 
-        <section class="section dark" id="perspectivas">
+        <section class="section dark aclarar" id="perspectivas">
             <div class="section-title">
                 <span class="kicker">Perspectivas</span>
                 <h2>Visualize cada detalhe do projeto</h2>
@@ -730,5 +889,24 @@
             });
         });
     </script>
+
+<script>
+/* placa do cabecalho sobre fundo claro */
+(function () {
+    var cab = document.querySelector('header');
+    var primeiro = document.querySelector('.hero, .concept-hero, .ct-hero, .emp-hero');
+    if (!cab || !primeiro) return;
+    function conferir() {
+        cab.classList.toggle('sobre-claro', window.scrollY > primeiro.offsetHeight - 90);
+    }
+    conferir();
+    window.addEventListener('scroll', conferir, { passive: true });
+    window.addEventListener('resize', conferir, { passive: true });
+})();
+</script>
+
+
+
+
 </body>
 </html>

@@ -3,7 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DPR | Conceitos</title>
+    <title>Como construímos | DPR Construtora</title>
+    <!-- busca e compartilhamento -->
+    <meta name="description" content="Como a DPR projeta e constrói: plantas pensadas para a vida real, materiais que duram e acompanhamento em cada etapa da obra.">
+    <link rel="canonical" href="https://www.construtoradpr.com.br/conceito.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="DPR Construtora">
+    <meta property="og:url" content="https://www.construtoradpr.com.br/conceito.html">
+    <meta property="og:title" content="Como construímos | DPR Construtora">
+    <meta property="og:description" content="Como a DPR projeta e constrói: plantas pensadas para a vida real, materiais que duram e acompanhamento em cada etapa da obra.">
+    <meta property="og:image" content="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- fim -->
     <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;400;600;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -456,7 +468,7 @@
             padding: 140px 10%;
             background:
                 linear-gradient(90deg, rgba(5,5,5,0.92) 0%, rgba(5,5,5,0.58) 52%, rgba(5,5,5,0.88) 100%),
-                url('https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1800') center/cover fixed;
+                url('https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png') center/cover fixed;
             overflow: hidden;
         }
         .experience-inner {
@@ -803,6 +815,153 @@
             .art-card, .pillar-card,
             .material-card { -webkit-user-select: none; user-select: none; }
         }
+
+/* ===== CLAREAMENTO (02/10) ===== */
+/* Ela: "as outras paginas ainda estao muito pretas".
+
+   Nao da para so trocar a variavel --preto: a maioria das cores deste site
+   esta escrita a mao. Entao as secoes que PODEM clarear levam a classe
+   "aclarar", e o que precisa continuar escuro fica intocado: o heroi (foto
+   ou video atras), as sombras sobre foto dentro dos cartoes, o rodape e a
+   faixa final de chamada.
+
+   O !important vence as regras antigas sem reescrever cada uma. */
+
+.aclarar {
+  background: #f2f2f4 !important;
+  color: #15161a !important;
+}
+
+/* todo texto dentro da secao clara escurece... */
+.aclarar * { color: #15161a !important; }
+
+/* ...MENOS o vermelho da marca, que e identidade */
+.aclarar .vermelho,
+.aclarar [class*="vermelho"],
+.aclarar .section-label,
+.aclarar .kicker,
+.aclarar .ct-kicker,
+.aclarar .sec-kicker,
+.aclarar .emp-index,
+.aclarar .pillar-card [class*="number"],
+.aclarar [class*="label"] { color: var(--vermelho) !important; }
+
+/* ...e MENOS o que esta por cima de foto: ali a sombra escura e o que
+   torna o texto branco legivel, e inverter deixaria ilegivel */
+.aclarar [class*="overlay"],
+.aclarar [class*="overlay"] *,
+.aclarar .gallery-item span,
+.aclarar .emp-media,
+.aclarar .emp-media *,
+.aclarar figure figcaption,
+.aclarar .v-status,
+.aclarar .v-status * { color: #ffffff !important; }
+
+/* o cinza de apoio continua cinza, escuro o bastante para ler no claro */
+.aclarar p,
+.aclarar .sec-desc,
+.aclarar .pillar-card p,
+.aclarar .emp-desc,
+.aclarar li span { color: #4a4b52 !important; }
+
+/* caixas e cartoes ganham fundo branco e filete, em vez do preto de antes */
+.aclarar .pillar-card,
+.aclarar .card,
+.aclarar .info-card,
+.aclarar .ct-form,
+.aclarar .tc-value,
+.aclarar .emp-body,
+.aclarar .highlight-box {
+  background: #ffffff !important;
+  border-color: #e2e2e8 !important;
+}
+
+/* CAMPOS DE FORMULARIO. Eles tinham fundo branco a 3%, borda branca a 12%
+   e TEXTO BRANCO -- desenhados para o preto. Sobre claro o campo inteiro
+   sumia: dava para clicar, mas nao para ver onde, nem ler o que se digitava.
+   E o pior tipo de defeito, porque a pessoa desiste de preencher. */
+.aclarar .ct-form-wrap,
+.aclarar form,
+.aclarar fieldset {
+  background: #ffffff !important;
+  border-color: #e2e2e8 !important;
+}
+
+.aclarar input,
+.aclarar select,
+.aclarar textarea {
+  background: #ffffff !important;
+  border: 1px solid #c4c4ce !important;
+  color: #15161a !important;
+}
+
+.aclarar input::placeholder,
+.aclarar textarea::placeholder { color: #8b8b95 !important; opacity: 1 !important; }
+
+.aclarar input:focus,
+.aclarar select:focus,
+.aclarar textarea:focus {
+  border-color: var(--vermelho) !important;
+  background: #fffafa !important;
+}
+
+.aclarar select option { background: #ffffff !important; color: #15161a !important; }
+
+/* o rotulo de cada campo precisa ler sobre o branco */
+.aclarar label,
+.aclarar .form-field > span { color: #3a3b42 !important; }
+
+/* o botao de contorno era branco sobre preto: sobre claro ele sumia */
+.aclarar .btn-dpr:not(.primary),
+.aclarar .destaque-btn:not(.principal),
+.aclarar .btn-veja {
+  color: #15161a !important;
+  border-color: #c9c9d2 !important;
+  background: transparent !important;
+}
+
+.aclarar .btn-dpr:not(.primary):hover,
+.aclarar .destaque-btn:not(.principal):hover,
+.aclarar .btn-veja:hover { color: var(--vermelho) !important; border-color: var(--vermelho) !important; }
+
+/* o botao cheio continua vermelho com texto branco */
+.aclarar .btn-dpr.primary,
+.aclarar .btn-dpr.primary *,
+.aclarar .destaque-btn.principal { color: #ffffff !important; }
+
+/* icones desenhados seguem a cor do texto */
+.aclarar svg { stroke: currentColor; }
+.aclarar [class*="overlay"] svg { stroke: #ffffff; }
+
+/* filetes e separadores que eram claros sobre preto */
+.aclarar hr,
+.aclarar [class*="divider"],
+.aclarar [class*="linha"] { border-color: #dcdce4 !important; background-color: #dcdce4 !important; }
+
+/* O CABECALHO e fixo, transparente e com texto branco. Com o conteudo
+   claro embaixo, os links sumiam. Ele ganha uma placa clara ao sair do
+   heroi; sobre o heroi continua como era. */
+header { transition: background 0.3s ease, padding 0.3s ease, border-color 0.3s ease; }
+
+header.sobre-claro {
+  background: rgba(255, 255, 255, 0.97);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid #e4e4ea;
+}
+
+header.sobre-claro .nav-menu a,
+header.sobre-claro .lang-switch,
+header.sobre-claro .search-input { color: #15161a !important; }
+header.sobre-claro .nav-menu a:hover { color: var(--vermelho) !important; }
+header.sobre-claro .search-trigger svg { stroke: #15161a !important; }
+header.sobre-claro .menu-toggle span { background: #15161a !important; }
+header.sobre-claro .search-input::placeholder { color: #8a8a92 !important; }
+/* ===== fim do clareamento ===== */
+
+
+
+
     </style>
 </head>
 <body>
@@ -844,11 +1003,11 @@
     <main>
         <section class="concept-hero">
             <div class="hero-copy reveal-up">
-                <span class="kicker" data-pt="DPR ESSÊNCIA" data-en="DPR ESSENCE">DPR ESSÊNCIA</span>
-                <h1 data-pt="Conceito<br><span>que habita.</span>" data-en="Concept<br><span>made to live.</span>">Conceito<br><span>que habita.</span></h1>
-                <p data-pt="Criamos espaços que unem arquitetura contemporânea, engenharia precisa e uma leitura sensível da vida real. Cada decisão nasce para transformar forma, função e emoção em uma experiência de moradia sofisticada, fluida e atemporal."
-                   data-en="We create spaces that unite contemporary architecture, precise engineering, and a sensitive reading of real life. Every decision is designed to transform form, function, and emotion into a sophisticated, fluid, and timeless living experience.">
-                   Criamos espaços que unem arquitetura contemporânea, engenharia precisa e uma leitura sensível da vida real. Cada decisão nasce para transformar forma, função e emoção em uma experiência de moradia sofisticada, fluida e atemporal.
+                <span class="kicker" data-pt="COMO CONSTRUÍMOS" data-en="HOW WE BUILD">COMO CONSTRUÍMOS</span>
+                <h1 data-pt="Como a gente<br><span>constrói.</span>" data-en="How we<br><span>build.</span>">Como a gente<br><span>constrói.</span></h1>
+                <p data-pt="Projetamos casas para o Minha Casa Minha Vida pensando na vida de quem vai morar nelas: planta que cabe a família, área de lazer para as crianças e acabamento que não vira despesa depois da mudança."
+                   data-en="We design homes for the Minha Casa Minha Vida programme around the lives of the people who will live in them: floor plans that fit a family, play areas for the children, and finishes that do not become an expense after moving in.">
+                   Projetamos casas para o Minha Casa Minha Vida pensando na vida de quem vai morar nelas: planta que cabe a família, área de lazer para as crianças e acabamento que não vira despesa depois da mudança.
                 </p>
                 <div class="hero-actions">
                     <a href="empreendimento.html" class="btn-dpr primary">
@@ -856,7 +1015,7 @@
                         <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
                     </a>
                     <a href="#manifesto" class="btn-dpr">
-                        <span data-pt="Conhecer visão" data-en="Discover vision">Conhecer visão</span>
+                        <span data-pt="Como trabalhamos" data-en="How we work">Como trabalhamos</span>
                         <svg viewBox="0 0 24 24"><line x1="12" y1="5" x2="12" y2="19"></line><polyline points="19 12 12 19 5 12"></polyline></svg>
                     </a>
                 </div>
@@ -864,16 +1023,16 @@
 
             <div class="hero-art reveal-up">
                 <div class="art-card large">
-                    <img src="https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&q=80&w=1100" alt="Arquitetura residencial contemporânea">
-                    <span class="art-caption" data-pt="Arquitetura viva" data-en="Living architecture">Arquitetura viva</span>
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1920%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png" alt="Fachada do Villagio Caucaia II">
+                    <span class="art-caption" data-pt="Fachada" data-en="Facade">Fachada</span>
                 </div>
                 <div class="art-card">
-                    <img src="https://images.unsplash.com/photo-1600585154526-990dced4db0d?auto=format&fit=crop&q=80&w=900" alt="Interior elegante e moderno">
-                    <span class="art-caption" data-pt="Interiores sensoriais" data-en="Sensorial interiors">Interiores sensoriais</span>
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/img01-YD0woL9oGohyJ7Zl.png" alt="Sala e cozinha de uma casa da DPR">
+                    <span class="art-caption" data-pt="Sala e cozinha" data-en="Living room and kitchen">Sala e cozinha</span>
                 </div>
                 <div class="art-card">
-                    <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&q=80&w=900" alt="Design de alto padrão">
-                    <span class="art-caption" data-pt="Detalhe e precisão" data-en="Detail and precision">Detalhe e precisão</span>
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/professional_realistic_image-YKblWnB9ybCQPr6G.png" alt="Área de lazer com playground">
+                    <span class="art-caption" data-pt="Área de lazer" data-en="Leisure area">Área de lazer</span>
                 </div>
             </div>
         </section>
@@ -885,20 +1044,20 @@
                     <h2 data-pt="Não construímos apenas metros quadrados." data-en="We do not just build square meters.">Não construímos apenas metros quadrados.</h2>
                 </div>
                 <div class="manifesto-text">
-                    <p data-pt="Construímos a atmosfera de uma vida possível. A casa como refúgio, endereço, símbolo e escolha inteligente. Por isso, cada empreendimento da DPR parte de uma pergunta simples: como esse espaço pode melhorar a rotina de quem vive nele?"
-                       data-en="We build the atmosphere of a possible life. The home as refuge, address, symbol, and intelligent choice. That is why every DPR development starts with a simple question: how can this space improve the routine of those who live in it?">
-                       Construímos a atmosfera de uma vida possível. A casa como refúgio, endereço, símbolo e escolha inteligente. Por isso, cada empreendimento da DPR parte de uma pergunta simples: como esse espaço pode melhorar a rotina de quem vive nele?
+                    <p data-pt="Construímos a casa onde uma vida inteira vai acontecer. Lugar de voltar no fim do dia, endereço para chamar de seu e, para a maioria das famílias, a maior compra da vida. Por isso cada empreendimento da DPR começa pela mesma pergunta: como este lugar melhora o dia de quem mora nele?"
+                       data-en="We build the home where a whole life will happen. A place to come back to at the end of the day, an address to call your own and, for most families, the largest purchase of their lives. That is why every DPR development begins with the same question: how does this place improve the day of the people living in it?">
+                       Construímos a casa onde uma vida inteira vai acontecer. Lugar de voltar no fim do dia, endereço para chamar de seu e, para a maioria das famílias, a maior compra da vida. Por isso cada empreendimento da DPR começa pela mesma pergunta: como este lugar melhora o dia de quem mora nele?
                     </p>
-                    <p data-pt="A resposta aparece nos fluxos, nas fachadas, nos materiais, na iluminação, no silêncio, na segurança e na sensação de pertencimento que cada projeto entrega."
-                       data-en="The answer appears in the flows, facades, materials, lighting, silence, safety, and sense of belonging that every project delivers.">
-                       A resposta aparece nos fluxos, nas fachadas, nos materiais, na iluminação, no silêncio, na segurança e na sensação de pertencimento que cada projeto entrega.
+                    <p data-pt="A resposta está na planta, na fachada, nos materiais, na luz que entra, na segurança da portaria e em sentir que aquele lugar é seu."
+                       data-en="The answer is in the floor plan, the facade, the materials, the light that comes in, the safety of the gatehouse, and in feeling that the place is yours.">
+                       A resposta está na planta, na fachada, nos materiais, na luz que entra, na segurança da portaria e em sentir que aquele lugar é seu.
                     </p>
                     <div class="manifesto-signature">DPR Engenharia</div>
                 </div>
             </div>
         </section>
 
-        <section class="pillars">
+        <section class="pillars aclarar">
             <div class="section-head reveal-up">
                 <div>
                     <span class="section-label" data-pt="NOSSOS PILARES" data-en="OUR PILLARS">NOSSOS PILARES</span>
@@ -961,10 +1120,10 @@
             <div class="experience-inner">
                 <div class="experience-panel reveal-up">
                     <span class="section-label" data-pt="EXPERIÊNCIA DPR" data-en="DPR EXPERIENCE">EXPERIÊNCIA DPR</span>
-                    <h2 class="section-title" data-pt="A sofisticação mora nos detalhes." data-en="Sophistication lives in the details.">A sofisticação mora nos detalhes.</h2>
-                    <p data-pt="Do primeiro traço à entrega final, o conceito DPR orienta escolhas técnicas e estéticas para que cada empreendimento tenha coerência, personalidade e valor percebido."
-                       data-en="From the first sketch to final delivery, the DPR concept guides technical and aesthetic choices so every development has coherence, personality, and perceived value.">
-                       Do primeiro traço à entrega final, o conceito DPR orienta escolhas técnicas e estéticas para que cada empreendimento tenha coerência, personalidade e valor percebido.
+                    <h2 class="section-title" data-pt="O cuidado está nos detalhes." data-en="Care is in the details.">O cuidado está nos detalhes.</h2>
+                    <p data-pt="Do primeiro desenho à entrega das chaves, as escolhas técnicas são tomadas pensando em durabilidade, custo de manutenção e no dia a dia de quem vai morar."
+                       data-en="From the first drawing to the handover of the keys, technical choices are made with durability, upkeep cost and the daily life of the residents in mind.">
+                       Do primeiro desenho à entrega das chaves, as escolhas técnicas são tomadas pensando em durabilidade, custo de manutenção e no dia a dia de quem vai morar.
                     </p>
                 </div>
 
@@ -972,20 +1131,20 @@
                     <div class="experience-item reveal-up">
                         <span>01</span>
                         <div>
-                            <h3 data-pt="Leitura do terreno" data-en="Site reading">Leitura do terreno</h3>
-                            <p data-pt="Entendemos vocação, entorno, insolação, acesso e potencial de valorização antes de desenhar."
-                               data-en="We understand vocation, surroundings, sunlight, access, and appreciation potential before designing.">
-                               Entendemos vocação, entorno, insolação, acesso e potencial de valorização antes de desenhar.
+                            <h3 data-pt="Estudo do terreno" data-en="Site study">Estudo do terreno</h3>
+                            <p data-pt="Estudamos o terreno, o sol, o acesso e a vizinhança antes de desenhar a primeira planta."
+                               data-en="We study the land, the sunlight, the access and the neighbourhood before drawing the first plan.">
+                               Estudamos o terreno, o sol, o acesso e a vizinhança antes de desenhar a primeira planta.
                             </p>
                         </div>
                     </div>
                     <div class="experience-item reveal-up">
                         <span>02</span>
                         <div>
-                            <h3 data-pt="Conceito arquitetônico" data-en="Architectural concept">Conceito arquitetônico</h3>
-                            <p data-pt="Criamos uma narrativa visual clara para fachada, interiores, áreas comuns e experiência do morador."
-                               data-en="We create a clear visual narrative for the facade, interiors, common areas, and resident experience.">
-                               Criamos uma narrativa visual clara para fachada, interiores, áreas comuns e experiência do morador.
+                            <h3 data-pt="Projeto" data-en="Design">Projeto</h3>
+                            <p data-pt="Definimos fachada, áreas comuns, planta e acabamento antes de a obra começar."
+                               data-en="We define the facade, common areas, floor plan and finishes before construction starts.">
+                               Definimos fachada, áreas comuns, planta e acabamento antes de a obra começar.
                             </p>
                         </div>
                     </div>
@@ -993,9 +1152,9 @@
                         <span>03</span>
                         <div>
                             <h3 data-pt="Execução com controle" data-en="Controlled execution">Execução com controle</h3>
-                            <p data-pt="Transformamos estética em obra viável, com qualidade, acompanhamento e precisão em cada etapa."
-                               data-en="We transform aesthetics into viable construction, with quality, monitoring, and precision at every stage.">
-                               Transformamos estética em obra viável, com qualidade, acompanhamento e precisão em cada etapa.
+                            <p data-pt="Transformamos projeto em obra entregue, com acompanhamento em cada etapa."
+                               data-en="We turn the project into a delivered building, with monitoring at every stage.">
+                               Transformamos projeto em obra entregue, com acompanhamento em cada etapa.
                             </p>
                         </div>
                     </div>
@@ -1007,44 +1166,44 @@
             <div class="materials-head reveal-up">
                 <div>
                     <span class="section-label" data-pt="MATERIALIDADE" data-en="MATERIALITY">MATERIALIDADE</span>
-                    <h2 class="section-title" data-pt="Texturas que elevam a percepção." data-en="Textures that elevate perception.">Texturas que elevam a percepção.</h2>
+                    <h2 class="section-title" data-pt="Materiais que duram." data-en="Materials that last.">Materiais que duram.</h2>
                 </div>
-                <p data-pt="A escolha dos materiais comunica solidez, conforto e sofisticação. Priorizamos combinações que envelhecem bem, valorizam o imóvel e criam uma atmosfera contemporânea."
-                   data-en="The choice of materials communicates solidity, comfort, and sophistication. We prioritize combinations that age well, enhance the property, and create a contemporary atmosphere.">
-                   A escolha dos materiais comunica solidez, conforto e sofisticação. Priorizamos combinações que envelhecem bem, valorizam o imóvel e criam uma atmosfera contemporânea.
+                <p data-pt="A escolha dos materiais decide quanto a casa vai dar de trabalho depois. Priorizamos o que envelhece bem, é fácil de limpar e não exige reforma cedo."
+                   data-en="The choice of materials decides how much work the home will give later on. We favour what ages well, is easy to clean, and does not call for early repairs.">
+                   A escolha dos materiais decide quanto a casa vai dar de trabalho depois. Priorizamos o que envelhece bem, é fácil de limpar e não exige reforma cedo.
                 </p>
             </div>
 
             <div class="materials-grid">
                 <article class="material-card reveal-up">
-                    <img src="https://images.unsplash.com/photo-1618220179428-22790b461013?auto=format&fit=crop&q=80&w=1200" alt="Pedra natural e design contemporâneo">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/whatsapp-image-2025-01-20-at-15.14.26-A0xj960nlDuBgxBM.jpeg" alt="Cozinha de uma casa entregue">
                     <div>
                         <span data-pt="Natural" data-en="Natural">Natural</span>
-                        <h3 data-pt="Pedras, luz e permanência" data-en="Stone, light, and permanence">Pedras, luz e permanência</h3>
+                        <h3 data-pt="Piso e revestimento que duram" data-en="Flooring and tiling that last">Piso e revestimento que duram</h3>
                     </div>
                 </article>
                 <article class="material-card reveal-up">
-                    <img src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&q=80&w=1200" alt="Madeira e interiores elegantes">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/whatsapp-image-2025-01-20-at-15.14.27-3-AMq8W6N58jTDoarA.jpeg" alt="Quarto com piso amadeirado">
                     <div>
                         <span data-pt="Sensorial" data-en="Sensorial">Sensorial</span>
-                        <h3 data-pt="Calor visual e conforto" data-en="Visual warmth and comfort">Calor visual e conforto</h3>
+                        <h3 data-pt="Conforto no dia a dia" data-en="Everyday comfort">Conforto no dia a dia</h3>
                     </div>
                 </article>
                 <article class="material-card reveal-up">
-                    <img src="https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&q=80&w=1200" alt="Fachada contemporânea e elegante">
+                    <img src="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-16-110921-Yyv0417rKRFoa7p1.png" alt="Fachada das casas do Villagio Caucaia I">
                     <div>
                         <span data-pt="Urbano" data-en="Urban">Urbano</span>
-                        <h3 data-pt="Linhas limpas e presença" data-en="Clean lines and presence">Linhas limpas e presença</h3>
+                        <h3 data-pt="Fachada simples de manter" data-en="A facade that is simple to maintain">Fachada simples de manter</h3>
                     </div>
                 </article>
             </div>
         </section>
 
-        <section class="concept-cta">
+        <section class="concept-cta aclarar">
             <span class="section-label" data-pt="PRÓXIMO PASSO" data-en="NEXT STEP">PRÓXIMO PASSO</span>
-            <h2 data-pt="Conheça os empreendimentos que carregam esse <span>conceito.</span>" data-en="Discover the developments that carry this <span>concept.</span>">Conheça os empreendimentos que carregam esse <span>conceito.</span></h2>
+            <h2 data-pt="Conheça os empreendimentos <span>disponíveis.</span>" data-en="See the developments <span>available.</span>">Conheça os empreendimentos <span>disponíveis.</span></h2>
             <a href="empreendimento.html" class="btn-dpr primary" style="margin: 0 auto;">
-                <span data-pt="Explorar portfólio" data-en="Explore portfolio">Explorar portfólio</span>
+                <span data-pt="Ver empreendimentos" data-en="View developments">Ver empreendimentos</span>
                 <svg viewBox="0 0 24 24"><line x1="4" y1="12" x2="20" y2="12"></line><polyline points="14 6 20 12 14 18"></polyline></svg>
             </a>
         </section>
@@ -1052,8 +1211,8 @@
 
     <div class="vertical-marquee">
         <div class="marquee-inner">
-            <span data-pt="CONCEITO • ARQUITETURA • PRECISÃO • DESIGN •" data-en="CONCEPT • ARCHITECTURE • PRECISION • DESIGN •">CONCEITO • ARQUITETURA • PRECISÃO • DESIGN • </span>
-            <span data-pt="CONCEITO • ARQUITETURA • PRECISÃO • DESIGN •" data-en="CONCEPT • ARCHITECTURE • PRECISION • DESIGN •">CONCEITO • ARQUITETURA • PRECISÃO • DESIGN • </span>
+            <span data-pt="CASA PRÓPRIA • MINHA CASA MINHA VIDA • COTIA •" data-en="A HOME OF YOUR OWN • MINHA CASA MINHA VIDA • COTIA •">CASA PRÓPRIA • MINHA CASA MINHA VIDA • COTIA • </span>
+            <span data-pt="CASA PRÓPRIA • MINHA CASA MINHA VIDA • COTIA •" data-en="A HOME OF YOUR OWN • MINHA CASA MINHA VIDA • COTIA •">CASA PRÓPRIA • MINHA CASA MINHA VIDA • COTIA • </span>
         </div>
     </div>
 
@@ -1061,9 +1220,9 @@
         <div class="footer-container">
             <div class="footer-brand">
                 <h2>DPR</h2>
-                <p data-pt="Engenharia, construção e design com precisão, visão contemporânea e atenção absoluta aos detalhes."
-                   data-en="Engineering, construction, and design with precision, contemporary vision, and absolute attention to detail.">
-                   Engenharia, construção e design com precisão, visão contemporânea e atenção absoluta aos detalhes.
+                <p data-pt="Construtora e incorporadora em Cotia e região, com empreendimentos no Minha Casa Minha Vida."
+                   data-en="Builder and developer in Cotia and the surrounding region, with developments under the Minha Casa Minha Vida programme.">
+                   Construtora e incorporadora em Cotia e região, com empreendimentos no Minha Casa Minha Vida.
                 </p>
             </div>
             <div class="footer-links">
@@ -1137,5 +1296,24 @@
 
         revealItems.forEach(item => revealObserver.observe(item));
     </script>
+
+<script>
+/* placa do cabecalho sobre fundo claro */
+(function () {
+    var cab = document.querySelector('header');
+    var primeiro = document.querySelector('.hero, .concept-hero, .ct-hero, .emp-hero');
+    if (!cab || !primeiro) return;
+    function conferir() {
+        cab.classList.toggle('sobre-claro', window.scrollY > primeiro.offsetHeight - 90);
+    }
+    conferir();
+    window.addEventListener('scroll', conferir, { passive: true });
+    window.addEventListener('resize', conferir, { passive: true });
+})();
+</script>
+
+
+
+
 </body>
 </html>
