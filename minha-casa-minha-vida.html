@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minha Casa, Minha Vida no Villagio Caucaia II | DPR Construtora</title>
+    <meta name="description" content="Como funciona o subsídio do Minha Casa, Minha Vida no Villagio Caucaia II, Faixa 2: o que é, quem pode ter direito, faixas de renda e como simular o financiamento.">
+    <link rel="canonical" href="https://www.construtoradpr.com.br/minha-casa-minha-vida.html">
+    <meta property="og:type" content="article">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="DPR Construtora">
+    <meta property="og:url" content="https://www.construtoradpr.com.br/minha-casa-minha-vida.html">
+    <meta property="og:title" content="Minha Casa, Minha Vida no Villagio Caucaia II | DPR Construtora">
+    <meta property="og:description" content="O que é o subsídio, quem pode ter direito, as faixas de renda e como descobrir quanto você pode receber.">
+    <meta property="og:image" content="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;400;600;900&display=swap" rel="stylesheet">
+    <style>
+        /* =================================================================
+           A PAGINA DO SUBSIDIO.
+           Ela substitui um PDF de 4 MB. Por isso tres coisas mandam aqui:
+           abrir rapido no celular, ser facil de ler de cima a baixo, e dar
+           para imprimir -- quem vai a Caixa ou ao corretor leva no papel.
+           ================================================================= */
+
+        :root {
+            --vermelho: #ff0000;
+            --vermelho-fundo: #c40000;
+            --preto: #0b0b0e;
+            --tinta: #15161a;
+            --cinza: #55565e;
+            --cinza-claro: #8b8b95;
+            --branco: #ffffff;
+            --gelo: #f2f2f4;
+            --linha: #e2e2e8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+
+        body {
+            background: var(--branco);
+            color: var(--tinta);
+            font-family: 'Archivo', sans-serif;
+            font-size: 1rem;
+            line-height: 1.65;
+            -webkit-font-smoothing: antialiased;
+            overflow-x: hidden;
+        }
+
+        img { max-width: 100%; display: block; }
+        a { color: inherit; }
+
+        .dentro {
+            width: 100%;
+            max-width: 980px;
+            margin-inline: auto;
+            padding-inline: clamp(1.15rem, 5vw, 2.5rem);
+        }
+
+        :focus-visible { outline: 3px solid var(--vermelho); outline-offset: 3px; }
+
+        /* ------------------------- topo ------------------------- */
+
+        .topo {
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            background: rgba(255, 255, 255, 0.97);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid var(--linha);
+        }
+
+        .topo .dentro {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 1rem;
+            padding-block: 0.85rem;
+        }
+
+        .topo img { height: 34px; width: auto; }
+
+        .voltar {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.45rem;
+            font-size: 0.72rem;
+            font-weight: 600;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--cinza);
+            text-decoration: none;
+            transition: color 0.25s ease;
+        }
+
+        .voltar:hover { color: var(--vermelho); }
+
+        /* ------------------------- abertura ------------------------- */
+
+        .abertura {
+            background: var(--preto);
+            color: var(--branco);
+            padding-block: clamp(2.75rem, 9vw, 4.5rem);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .abertura::before {
+            content: "";
+            position: absolute;
+            inset: auto -10% -40% auto;
+            width: min(70vw, 420px);
+            aspect-ratio: 1;
+            border-radius: 50%;
+            background: radial-gradient(circle closest-side, rgba(255, 0, 0, 0.26), transparent 70%);
+        }
+
+        .abertura .dentro { position: relative; }
+
+        .selo-faixa {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            padding: 0.45rem 0.9rem;
+            margin-bottom: 1.4rem;
+            border: 1px solid rgba(255, 255, 255, 0.22);
+            border-radius: 999px;
+            font-size: 0.66rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+        }
+
+        .selo-faixa::before {
+            content: "";
+            width: 0.45rem;
+            height: 0.45rem;
+            border-radius: 50%;
+            background: var(--vermelho);
+            flex: none;
+        }
+
+        .abertura h1 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.5rem, 1rem + 3.4vw, 2.9rem);
+            font-weight: 800;
+            line-height: 1.08;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+        }
+
+        .abertura h1 span { color: var(--vermelho); }
+
+        .abertura .linha-fina {
+            width: 54px;
+            height: 4px;
+            margin: 1.3rem 0 1.3rem;
+            background: var(--vermelho);
+        }
+
+        .abertura p {
+            max-width: 56ch;
+            font-size: clamp(0.98rem, 0.95rem + 0.25vw, 1.1rem);
+            font-weight: 300;
+            color: #c3c3cc;
+        }
+
+        .mcmv-selo {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            margin-top: 1.9rem;
+            padding: 0.75rem 1rem;
+            background: var(--branco);
+            border-radius: 6px;
+            width: fit-content;
+            max-width: 100%;
+        }
+
+        .mcmv-selo img { width: 46px; height: 46px; flex: none; }
+
+        .mcmv-selo b {
+            display: block;
+            font-size: 0.86rem;
+            font-weight: 900;
+            color: var(--tinta);
+            line-height: 1.3;
+        }
+
+        .mcmv-selo span {
+            display: block;
+            font-size: 0.76rem;
+            color: var(--cinza);
+            line-height: 1.4;
+        }
+
+        /* ------------------------- o aviso ------------------------- */
+
+        .aviso {
+            background: var(--gelo);
+            padding-block: clamp(1.75rem, 5vw, 2.5rem);
+        }
+
+        .aviso .caixa {
+            display: flex;
+            gap: 1rem;
+            padding: clamp(1.1rem, 3.5vw, 1.6rem);
+            background: var(--branco);
+            border-left: 4px solid var(--vermelho);
+            box-shadow: 0 1rem 2.5rem -1.4rem rgba(11, 11, 14, 0.3);
+        }
+
+        .aviso .marca {
+            flex: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 0.1em;
+            color: var(--vermelho);
+            padding-top: 0.2rem;
+        }
+
+        .aviso p {
+            font-size: clamp(0.98rem, 0.94rem + 0.3vw, 1.12rem);
+            font-weight: 600;
+            letter-spacing: -0.01em;
+        }
+
+        /* ------------------------- as perguntas ------------------------- */
+
+        .conteudo { padding-block: clamp(2.25rem, 7vw, 3.75rem); }
+
+        .bloco {
+            padding-block: clamp(1.6rem, 4.5vw, 2.4rem);
+            border-top: 1px solid var(--linha);
+        }
+
+        .bloco:first-of-type { border-top: 0; padding-top: 0; }
+
+        .bloco-cabeca {
+            display: flex;
+            align-items: baseline;
+            gap: 0.85rem;
+            margin-bottom: 0.9rem;
+        }
+
+        .bloco-num {
+            flex: none;
+            font-family: 'Syncopate', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            color: var(--vermelho);
+        }
+
+        .bloco h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1rem, 0.9rem + 1vw, 1.5rem);
+            font-weight: 700;
+            line-height: 1.2;
+            letter-spacing: -0.03em;
+        }
+
+        .bloco p {
+            max-width: 68ch;
+            margin-left: calc(0.7rem + 0.85rem);
+            color: var(--cinza);
+            font-size: clamp(0.96rem, 0.93rem + 0.22vw, 1.05rem);
+        }
+
+        .bloco p + p { margin-top: 0.85rem; }
+        .bloco p b { color: var(--tinta); font-weight: 600; }
+
+        @media (max-width: 560px) {
+            .bloco p { margin-left: 0; }
+        }
+
+        /* ------------------------- a chamada ------------------------- */
+
+        .chamada {
+            background: var(--gelo);
+            padding-block: clamp(2.25rem, 7vw, 3.5rem);
+        }
+
+        .chamada h2 {
+            font-family: 'Syncopate', sans-serif;
+            font-size: clamp(1.15rem, 0.95rem + 1.3vw, 1.8rem);
+            font-weight: 800;
+            letter-spacing: -0.035em;
+            text-transform: uppercase;
+            margin-bottom: 0.7rem;
+        }
+
+        .chamada h2 span { color: var(--vermelho); }
+
+        .chamada > .dentro > p {
+            max-width: 60ch;
+            color: var(--cinza);
+            margin-bottom: 1.75rem;
+        }
+
+        .canais {
+            display: grid;
+            gap: 0.75rem;
+            grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr));
+            list-style: none;
+        }
+
+        .canais a {
+            display: flex;
+            align-items: center;
+            gap: 0.9rem;
+            height: 100%;
+            padding: 1rem 1.1rem;
+            background: var(--branco);
+            border: 1px solid var(--linha);
+            text-decoration: none;
+            transition: border-color 0.25s ease, transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .canais a:hover {
+            border-color: var(--vermelho);
+            transform: translateY(-2px);
+            box-shadow: 0 0.9rem 2rem -1rem rgba(11, 11, 14, 0.28);
+        }
+
+        .canais .ico {
+            flex: none;
+            display: grid;
+            place-items: center;
+            width: 2.6rem;
+            height: 2.6rem;
+            background: #fff0f0;
+        }
+
+        .canais svg { width: 1.15rem; height: 1.15rem; stroke: var(--vermelho); fill: none; stroke-width: 1.7; }
+
+        .canais .rot {
+            display: block;
+            font-size: 0.62rem;
+            font-weight: 600;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--cinza-claro);
+            margin-bottom: 0.15rem;
+        }
+
+        .canais .val {
+            display: block;
+            font-size: 0.97rem;
+            font-weight: 600;
+            color: var(--tinta);
+            /* quebra preferencialmente no <wbr> depois do @; so parte a
+               palavra se nem assim couber */
+            overflow-wrap: anywhere;
+        }
+
+        .acoes {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.7rem;
+            margin-top: 1.75rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.95rem 1.5rem;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            text-decoration: none;
+            border: 1px solid transparent;
+            transition: background 0.25s ease, color 0.25s ease, border-color 0.25s ease, transform 0.25s ease;
+        }
+
+        .btn-cheio { background: var(--vermelho); color: var(--branco); }
+        .btn-cheio:hover { background: var(--vermelho-fundo); transform: translateY(-2px); }
+
+        .btn-vazio { background: transparent; color: var(--tinta); border-color: #c4c4ce; }
+        .btn-vazio:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+        /* ------------------------- rodapé ------------------------- */
+
+        .rodape {
+            background: var(--preto);
+            color: #9a9aa4;
+            padding-block: clamp(1.75rem, 5vw, 2.5rem);
+            font-size: 0.78rem;
+        }
+
+        .rodape .dentro {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 0.9rem;
+        }
+
+        .rodape a { color: var(--branco); text-decoration: none; }
+        .rodape a:hover { color: var(--vermelho); }
+
+        .nota {
+            margin-top: 1.5rem;
+            padding-top: 1.1rem;
+            border-top: 1px solid var(--linha);
+            font-size: 0.8rem;
+            line-height: 1.6;
+            color: var(--cinza-claro);
+            max-width: 72ch;
+        }
+
+        /* ------------------------- impressão -------------------------
+           Esta pagina substitui um PDF, e muita gente vai levar impresso
+           ao corretor ou ao banco. Entao ela precisa sair bem no papel. */
+        @media print {
+            .topo, .chamada .acoes, .rodape { display: none !important; }
+            body { font-size: 11pt; color: #000; }
+            .abertura { background: #fff !important; color: #000 !important; padding-block: 0 !important; }
+            .abertura p { color: #333 !important; }
+            .abertura::before { display: none; }
+            .selo-faixa { border-color: #000; }
+            .aviso, .chamada { background: #fff !important; }
+            .aviso .caixa { box-shadow: none; }
+            .canais a { border: 1px solid #999; }
+            .bloco { break-inside: avoid; }
+            .dentro { max-width: none; padding-inline: 0; }
+        }
+    </style>
+</head>
+<body>
+
+<header class="topo">
+    <div class="dentro">
+        <a href="index.html" aria-label="DPR Construtora, início"><img src="logo.png" alt="DPR Construtora"></a>
+        <a class="voltar" href="caucaia2.html">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><line x1="20" y1="12" x2="4" y2="12"></line><polyline points="10 18 4 12 10 6"></polyline></svg>
+            Villagio Caucaia II
+        </a>
+    </div>
+</header>
+
+<main>
+
+    <section class="abertura">
+        <div class="dentro">
+            <span class="selo-faixa">Minha Casa, Minha Vida &middot; Faixa 2</span>
+            <h1>Villagio<br><span>Caucaia II</span></h1>
+            <div class="linha-fina"></div>
+            <p>
+                Reunimos aqui, em linguagem simples, o que você precisa saber sobre o
+                subsídio habitacional: o que é, quem pode ter direito e como descobrir
+                quanto você pode receber.
+            </p>
+
+            <div class="mcmv-selo">
+                <img src="logo-minha-casa-minha-vida.webp" alt="Minha Casa, Minha Vida" width="150" height="150">
+                <span>
+                    <b>Minha Casa, Minha Vida</b>
+                    <span>Faixa 2 &mdash; com possibilidade de subsídio do Governo Federal</span>
+                </span>
+            </div>
+        </div>
+    </section>
+
+    <section class="aviso">
+        <div class="dentro">
+            <div class="caixa">
+                <span class="marca">IMPORTANTE</span>
+                <p>
+                    O valor do subsídio <b>não é um empréstimo</b>. Quando concedido,
+                    ele <b>não precisa ser devolvido</b> ao Governo.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <section class="conteudo">
+        <div class="dentro">
+
+            <article class="bloco">
+                <div class="bloco-cabeca">
+                    <span class="bloco-num">01</span>
+                    <h2>O que é o subsídio?</h2>
+                </div>
+                <p>
+                    O subsídio é um benefício concedido pelo Governo Federal que pode
+                    reduzir o valor necessário para financiar o imóvel.
+                </p>
+                <p>
+                    Na prática, ele funciona como um complemento do governo, podendo
+                    tornar o financiamento mais acessível e facilitar a realização do
+                    sonho da casa própria.
+                </p>
+            </article>
+
+            <article class="bloco">
+                <div class="bloco-cabeca">
+                    <span class="bloco-num">02</span>
+                    <h2>Quem pode ter direito?</h2>
+                </div>
+                <p>
+                    O direito ao subsídio depende da <b>renda familiar</b>, da
+                    <b>situação cadastral</b> e da <b>análise do financiamento</b>.
+                </p>
+                <p>
+                    De forma geral, podem se enquadrar famílias que atendam aos
+                    critérios do Minha Casa, Minha Vida e que não possuam outro imóvel
+                    residencial que impeça o enquadramento no programa.
+                </p>
+            </article>
+
+            <article class="bloco">
+                <div class="bloco-cabeca">
+                    <span class="bloco-num">03</span>
+                    <h2>Qual é a faixa de renda?</h2>
+                </div>
+                <p>
+                    O Minha Casa, Minha Vida possui diferentes faixas de renda, e as
+                    condições podem variar de acordo com a renda familiar e as regras
+                    vigentes do programa.
+                </p>
+                <p>
+                    Por isso, o valor e as condições do benefício
+                    <b>não são iguais para todos os clientes</b>.
+                </p>
+            </article>
+
+            <article class="bloco">
+                <div class="bloco-cabeca">
+                    <span class="bloco-num">04</span>
+                    <h2>Quanto posso receber?</h2>
+                </div>
+                <p>
+                    O valor do subsídio é definido de acordo com a renda familiar, a
+                    composição da renda, o valor do imóvel e a análise realizada pela
+                    instituição financeira.
+                </p>
+                <p>
+                    Por isso, <b>não é possível garantir antecipadamente</b> um valor
+                    específico de subsídio. A melhor forma de saber quanto você poderá
+                    receber é realizar uma <b>simulação de financiamento</b>, que
+                    permitirá avaliar as condições disponíveis para o seu perfil.
+                </p>
+            </article>
+
+        </div>
+    </section>
+
+    <section class="chamada">
+        <div class="dentro">
+            <h2>Conte com a <span>DPR</span></h2>
+            <p>
+                Nosso objetivo é tornar cada etapa mais clara para você. Em caso de
+                dúvidas sobre financiamento, subsídio ou os próximos passos, a Central
+                de Relacionamento DPR está à disposição para orientar e acompanhar você.
+            </p>
+
+            <ul class="canais">
+                <li>
+                    <a href="https://wa.me/5511933085258" target="_blank" rel="noopener">
+                        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M21 11.5a8.4 8.4 0 0 1-12.6 7.3L3 20.5l1.8-5.2A8.5 8.5 0 1 1 21 11.5z"></path></svg></span>
+                        <span><span class="rot">WhatsApp</span><span class="val">(11) 93308-5258</span></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="tel:+5511933085258">
+                        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7c.1 1 .3 1.9.6 2.8a2 2 0 0 1-.5 2.1L8.1 9.8a16 16 0 0 0 6 6l1.2-1.1a2 2 0 0 1 2.1-.5c.9.3 1.8.5 2.8.6a2 2 0 0 1 1.8 2z"></path></svg></span>
+                        <span><span class="rot">Telefone</span><span class="val">(11) 93308-5258</span></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:atendimento@dprconstrutora.com.br">
+                        <span class="ico"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="2.5" y="4.5" width="19" height="15" rx="1.5"></rect><path d="M3 6l9 7 9-7"></path></svg></span>
+                        <span><span class="rot">E-mail</span><span class="val">atendimento@<wbr>dprconstrutora.com.br</span></span>
+                    </a>
+                </li>
+            </ul>
+
+            <div class="acoes">
+                <a class="btn btn-cheio" href="https://wa.me/5511933085258?text=Ol%C3%A1!%20Quero%20fazer%20uma%20simula%C3%A7%C3%A3o%20de%20financiamento%20do%20Villagio%20Caucaia%20II." target="_blank" rel="noopener">Quero fazer uma simulação</a>
+                <a class="btn btn-vazio" href="caucaia2.html">Conhecer o empreendimento</a>
+            </div>
+
+            <p class="nota">
+                As informações desta página são explicativas e seguem as regras
+                vigentes do programa Minha Casa, Minha Vida. O enquadramento, o valor
+                do subsídio e as condições de financiamento dependem de análise da
+                instituição financeira e podem mudar conforme as regras do programa.
+            </p>
+        </div>
+    </section>
+
+</main>
+
+<footer class="rodape">
+    <div class="dentro">
+        <span>&copy; 2025 DPR Construtora. Todos os direitos reservados.</span>
+        <a href="index.html">construtoradpr.com.br</a>
+    </div>
+</footer>
+
+</body>
+</html>
