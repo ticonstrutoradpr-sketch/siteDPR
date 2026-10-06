@@ -14,6 +14,12 @@
    sem servidor: um arquivo, incluido por <script src="chat-dpr.js" defer>
    antes do </body> de cada pagina.
 
+   NO FIM, o assistente pede o WhatsApp da pessoa (com DDD) e manda o numero
+   e as dez respostas para /api/lead (api/lead.js, uma funcao na Vercel), que
+   avisa a DPR na hora pelo WhatsApp. Se a funcao nao responder (ou nao
+   estiver configurada), o chat cai no caminho manual: abre o WhatsApp do
+   destino com a mensagem pronta para a pessoa enviar.
+
    O que o arquivo faz, na ordem: injeta o CSS, monta o HTML, liga os
    botoes, conduz o roteiro. Com prefers-reduced-motion nao ha "digitando"
    nem espera entre as mensagens.
@@ -22,7 +28,9 @@
   'use strict';
   if (document.getElementById('dprChat')) return;
 
-  var WHATSAPP = '5511933085258';
+  var WHATSAPP = '5511933085258';          // o WhatsApp da DPR, para a pessoa chamar
+  var DESTINO_LEAD = '5511959943705';      // quem recebe o aviso com o numero e as respostas (pedido dela, 06/10/2026)
+  var API_LEAD = '/api/lead';
   var calmo = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   var ESPERA = calmo ? 0 : 700;   // o tempo do "digitando" antes de cada fala do assistente
 
@@ -130,7 +138,14 @@
   ];
   var FECHO = [
     'Pronto: essas são as dez coisas que todo mundo precisa saber antes de financiar.',
-    'Quer continuar com um consultor da DPR? Ele recebe as suas respostas e fala com você pelo WhatsApp.'
+    'Deixa o seu WhatsApp com DDD que um consultor da DPR te chama por lá, já sabendo das suas respostas.'
+  ];
+  var ENVIADO = [
+    'Recebemos o seu WhatsApp. Um consultor da DPR vai te chamar em breve, já sabendo das suas respostas.',
+    'Se preferir não esperar, pode chamar a gente agora.'
+  ];
+  var NAO_ENVIADO = [
+    'Não consegui enviar automaticamente. Toque no botão abaixo: o WhatsApp abre com o seu número e as suas respostas prontos, é só enviar.'
   ];
 
   /* ---- o CSS, injetado uma vez ---- */
@@ -178,6 +193,14 @@
     '.dprchat-opcao--cheia{background:var(--dpr-vermelho);border-color:var(--dpr-vermelho)}' +
     '.dprchat-opcao--cheia:hover,.dprchat-opcao--cheia:focus-visible{background:#c40000;border-color:#c40000}' +
     '.dprchat-humano{display:block;margin-top:10px;font-size:0.74rem;color:var(--dpr-cinza);text-align:center}.dprchat-humano a{color:#f4f4f4}' +
+    '.dprchat-form{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch}' +
+    '.dprchat-campo{flex:1 1 170px;min-height:44px;padding:10px 14px;background:#0b0b0e;border:1px solid rgba(255,255,255,0.3);color:#f4f4f4;font:inherit;font-size:1rem;letter-spacing:.5px;clip-path:polygon(0 0,100% 0,100% calc(100% - 9px),calc(100% - 9px) 100%,0 100%)}' +
+    '.dprchat-campo::placeholder{color:rgba(255,255,255,0.35)}' +
+    '.dprchat-campo:focus{outline:none;border-color:var(--dpr-vermelho)}' +
+    '.dprchat-campo--erro{border-color:var(--dpr-vermelho)}' +
+    '.dprchat-erro{flex-basis:100%;font-size:0.78rem;line-height:1.4;color:#ff6b6b}.dprchat-erro:empty{display:none}' +
+    '.dprchat-nota{flex-basis:100%;font-size:0.72rem;line-height:1.5;color:var(--dpr-cinza)}' +
+    '.dprchat-sr-only{position:absolute;left:-9999px}' +
     '@keyframes dprchat-surgir{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}' +
     '@keyframes dprchat-pulsar{0%,100%{opacity:.3;transform:translateY(0)}50%{opacity:1;transform:translateY(-3px)}}' +
     '@media (max-width:600px){.dprchat-abrir-rotulo{display:none}.dprchat-janela{position:fixed;inset:0;width:auto;height:auto;bottom:0;clip-path:none;border:0;padding-bottom:env(safe-area-inset-bottom)}.dprchat.aberto .dprchat-abrir{display:none}.dprchat-msg{max-width:92%}}' +
@@ -266,15 +289,41 @@
     if (primeiro && janela.contains(document.activeElement)) primeiro.focus();
   }
 
+  /* ---- o telefone: so digitos, com 55 na frente; vazio se nao for um numero
+     brasileiro valido (DDD de 11 a 99, celular com 9 na frente ou fixo) ---- */
+  function normalizarTelefone(v) {
+    var d = String(v || '').replace(/\D/g, '');
+    if (d.length === 12 || d.length === 13) { if (d.slice(0, 2) !== '55') return ''; d = d.slice(2); }
+    if (d.length !== 10 && d.length !== 11) return '';
+    if (d.charAt(0) === '0' || d.charAt(1) === '0') return '';
+    if (d.length === 11 && d.charAt(2) !== '9') return '';
+    return '55' + d;
+  }
+  function formatarTelefone(tel) {
+    var d = tel.slice(2);
+    return d.length === 11 ? '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7) : '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+  }
+  function mascarar(v) {
+    var d = String(v || '').replace(/\D/g, '').slice(0, 11);
+    if (d.length <= 2) return d.length ? '(' + d : '';
+    if (d.length <= 6) return '(' + d.slice(0, 2) + ') ' + d.slice(2);
+    if (d.length <= 10) return '(' + d.slice(0, 2) + ') ' + d.slice(2, 6) + '-' + d.slice(6);
+    return '(' + d.slice(0, 2) + ') ' + d.slice(2, 7) + '-' + d.slice(7);
+  }
+
   /* ---- o roteiro ---- */
   var respostas = [];
   var indice = -1;
   var comecou = false;
+  var inicioConversa = Date.now();
+  var telefoneCliente = '';
 
   function comecar() {
     mensagens.innerHTML = '';
     respostas = [];
     indice = -1;
+    inicioConversa = Date.now();
+    telefoneCliente = '';
     passo.textContent = '';
     opcoes.innerHTML = '';
     digitando(function () {
@@ -313,19 +362,95 @@
       botoes([{ texto: ultima ? 'Terminar' : 'Próxima pergunta', cheia: true, acao: function () { proxima(); } }]);
     });
   }
-  function textoWhats() {
-    var linhas = ['Olá! Passei pelo assistente do site da DPR e quero falar com um consultor.', '', 'Minhas respostas:'];
-    respostas.forEach(function (r, k) { linhas.push((k + 1) + ') ' + r.resumo + ': ' + r.valor); });
+  function linhasRespostas() {
+    return respostas.map(function (r, k) { return (k + 1) + ') ' + r.resumo + ': ' + r.valor; });
+  }
+  /* a pessoa chama a DPR: abre o WhatsApp da DPR com as respostas dela */
+  function textoWhatsDPR() {
+    var linhas = ['Olá! Passei pelo assistente do site da DPR e quero falar com um consultor.', '', 'Minhas respostas:'].concat(linhasRespostas());
     return 'https://wa.me/' + WHATSAPP + '?text=' + encodeURIComponent(linhas.join('\n'));
+  }
+  /* o caminho manual do aviso: a pessoa envia, para o destino, o proprio numero e as respostas */
+  function textoWhatsLead(tel) {
+    var linhas = ['Novo contato pelo assistente do site da DPR', 'WhatsApp: ' + formatarTelefone(tel), '', 'Respostas:'].concat(linhasRespostas());
+    return 'https://wa.me/' + DESTINO_LEAD + '?text=' + encodeURIComponent(linhas.join('\n'));
+  }
+  /* o caminho automatico: a funcao na Vercel avisa o destino na hora */
+  function enviarLead(tel) {
+    if (typeof window.fetch !== 'function') return Promise.resolve(false);
+    var corpo = {
+      telefone: tel,
+      respostas: respostas.map(function (r) { return { resumo: r.resumo, valor: r.valor }; }),
+      pagina: window.location.href,
+      duracaoSegundos: Math.round((Date.now() - inicioConversa) / 1000)
+    };
+    var controle = typeof window.AbortController === 'function' ? new window.AbortController() : null;
+    var relogio = window.setTimeout(function () { if (controle) controle.abort(); }, 9000);
+    return window.fetch(API_LEAD, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(corpo), signal: controle ? controle.signal : undefined })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (j) { window.clearTimeout(relogio); return !!(j && j.ok); })
+      .catch(function () { window.clearTimeout(relogio); return false; });
+  }
+  function formularioWhats() {
+    opcoes.innerHTML = '';
+    var form = document.createElement('form');
+    form.className = 'dprchat-form';
+    form.noValidate = true;
+    form.innerHTML =
+      '<label class="dprchat-sr-only" for="dprChatTel">Seu WhatsApp com DDD</label>' +
+      '<input id="dprChatTel" class="dprchat-campo" type="tel" inputmode="numeric" autocomplete="tel-national" placeholder="(11) 99999-9999" maxlength="16" aria-describedby="dprChatErro">' +
+      '<button type="submit" class="dprchat-opcao dprchat-opcao--cheia">Enviar</button>' +
+      '<span class="dprchat-erro" id="dprChatErro" role="alert"></span>' +
+      '<span class="dprchat-nota">Ao enviar, você concorda em receber o contato da DPR Construtora pelo WhatsApp.</span>';
+    opcoes.appendChild(form);
+    var campo = form.querySelector('#dprChatTel');
+    var erro = form.querySelector('#dprChatErro');
+    campo.addEventListener('input', function () { campo.value = mascarar(campo.value); erro.textContent = ''; campo.classList.remove('dprchat-campo--erro'); });
+    form.addEventListener('submit', function (ev) {
+      ev.preventDefault();
+      var tel = normalizarTelefone(campo.value);
+      if (!tel) {
+        erro.textContent = 'Digite um WhatsApp válido, com DDD. Exemplo: (11) 99999-9999';
+        campo.classList.add('dprchat-campo--erro');
+        campo.focus();
+        return;
+      }
+      telefoneCliente = tel;
+      eu(formatarTelefone(tel));
+      opcoes.innerHTML = '';
+      passo.textContent = 'Enviando...';
+      var d = document.createElement('div');
+      d.className = 'dprchat-digitando';
+      d.setAttribute('aria-hidden', 'true');
+      d.innerHTML = '<i></i><i></i><i></i>';
+      mensagens.appendChild(d);
+      rolar();
+      enviarLead(tel).then(function (ok) {
+        d.remove();
+        if (ok) {
+          passo.textContent = 'Tudo certo';
+          falar(ENVIADO);
+          botoes([
+            { texto: 'Falar agora no WhatsApp', cheia: true, href: textoWhatsDPR() },
+            { texto: 'Recomeçar', acao: function () { comecar(); } }
+          ]);
+        } else {
+          passo.textContent = 'Quase lá';
+          falar(NAO_ENVIADO);
+          botoes([
+            { texto: 'Enviar pelo WhatsApp', cheia: true, href: textoWhatsLead(tel) },
+            { texto: 'Tentar de novo', acao: function () { formularioWhats(); } }
+          ]);
+        }
+      });
+    });
+    if (janela.contains(document.activeElement)) campo.focus();
   }
   function fechoFinal() {
     passo.textContent = 'Fim das perguntas';
     digitando(function () {
       falar(FECHO);
-      botoes([
-        { texto: 'Falar no WhatsApp', cheia: true, href: textoWhats() },
-        { texto: 'Recomeçar', acao: function () { comecar(); } }
-      ]);
+      formularioWhats();
     });
   }
 
@@ -351,5 +476,5 @@
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !janela.hidden) fecharChat(); });
 
   /* para quem precisar (testes, outras paginas): abre o chat por fora */
-  window.DPR_CHAT = { abrir: abrirChat, fechar: fecharChat, roteiro: ROTEIRO, whatsapp: WHATSAPP };
+  window.DPR_CHAT = { abrir: abrirChat, fechar: fecharChat, roteiro: ROTEIRO, whatsapp: WHATSAPP, destinoLead: DESTINO_LEAD, normalizarTelefone: normalizarTelefone };
 })();
