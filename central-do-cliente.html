@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Central do Cliente | DPR Construtora</title>
+    <!-- busca e compartilhamento -->
+    <meta name="description" content="Central do Cliente da DPR Construtora: parcelas, boletos e evolução da obra em um só lugar. Em breve.">
+    <link rel="canonical" href="https://www.construtoradpr.com.br/central-do-cliente.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="DPR Construtora">
+    <meta property="og:url" content="https://www.construtoradpr.com.br/central-do-cliente.html">
+    <meta property="og:title" content="Central do Cliente | DPR Construtora">
+    <meta property="og:description" content="Parcelas, boletos e evolução da obra em um só lugar. Em breve.">
+    <meta property="og:image" content="https://assets.zyrosite.com/cdn-cgi/image/format%3Dauto%2Cw%3D1200%2Cfit%3Dcrop/YleQ4o2PylfbL5GD/captura-de-tela-2025-07-14-153514-dOqDZPvgawIE5ZZ7.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- fim -->
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;600;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho: #ff0000;
+            --vermelho-fundo: #c40000;
+            --grafite: #505050;
+            --cinza-claro: #a0a0a0;
+            --branco: #ffffff;
+            --preto: #050505;
+            --gelo: #f4f4f4;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--preto); color: var(--branco); font-family: 'Archivo', sans-serif; overflow-x: hidden; }
+        img { max-width: 100%; }
+        ::selection { background: var(--vermelho); color: #fff; }
+
+        /* HEADER (igual as outras paginas) */
+        header { position: fixed; top: 40px; left: 0; right: 0; padding: 0 100px; z-index: 1000; display: flex; align-items: center; justify-content: space-between; width: 100%; transition: background 0.4s ease, padding 0.4s ease, top 0.4s ease; }
+        header.scrolled { top: 0; padding-top: 18px; padding-bottom: 18px; background: rgba(5,5,5,0.82); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .brand-mark { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.15rem; letter-spacing: 4px; color: var(--branco); text-decoration: none; text-shadow: 0 2px 10px rgba(0,0,0,0.6); transition: 0.4s ease; }
+        .brand-mark span { color: var(--vermelho); }
+        .brand-mark:hover { letter-spacing: 6px; }
+        .nav-container { display: flex; align-items: center; gap: 30px; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+        .nav-menu a { color: var(--branco); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; position: relative; padding: 5px 0 5px 12px; transition: all 0.4s ease; opacity: 0.7; white-space: nowrap; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .nav-menu a.active { opacity: 1; }
+        .nav-menu a.active::before { height: 70%; }
+        .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: 0; background-color: var(--vermelho); transition: all 0.4s ease; transform: translateY(-50%); }
+        .nav-menu a:hover { opacity: 1; letter-spacing: 6px; }
+        .nav-menu a:hover::before { height: 70%; }
+        .menu-toggle { display: none; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.55); backdrop-filter: blur(10px); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+        .menu-toggle span { width: 20px; height: 2px; background: var(--branco); transition: 0.35s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--vermelho); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--vermelho); }
+        .header-controls { display: flex; align-items: center; gap: 20px; }
+        .lang-switch { color: var(--branco); font-size: 0.7rem; font-weight: 900; opacity: 0.5; cursor: pointer; transition: 0.3s; }
+        .lang-switch:hover { opacity: 1; }
+        .search-wrapper { display: flex; align-items: center; position: relative; }
+        .search-input { width: 0; opacity: 0; background: none; border: none; border-bottom: 1px solid var(--vermelho); color: var(--branco); font-family: 'Archivo', sans-serif; font-size: 0.8rem; letter-spacing: 2px; outline: none; transition: all 0.6s cubic-bezier(0.19,1,0.22,1); }
+        .search-wrapper.active .search-input { width: 200px; opacity: 1; margin-right: 15px; padding: 5px; }
+        .search-trigger { cursor: pointer; transition: transform 0.4s ease; }
+        .search-trigger svg { width: 18px; height: 18px; fill: none; stroke: var(--branco); stroke-width: 2.5; opacity: 0.7; }
+        .search-wrapper.active .search-trigger { transform: scale(1.2); }
+        .search-wrapper.active .search-trigger svg { stroke: var(--vermelho); opacity: 1; }
+
+        /* BOTOES */
+        .btn-veja { display: inline-flex; align-items: center; justify-content: center; gap: 14px; background: linear-gradient(135deg, var(--vermelho-fundo) 0%, var(--vermelho) 100%); color: #fff; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 19px 30px; border: none; position: relative; overflow: hidden; cursor: pointer; box-shadow: 0 12px 30px rgba(255,0,0,0.22); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); transition: transform 0.4s ease, box-shadow 0.4s ease; }
+        .btn-veja svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 2.4; fill: none; transition: transform 0.4s ease; }
+        .btn-veja::after { content: ''; position: absolute; top: 0; left: -80%; width: 60%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent); transform: skewX(-20deg); transition: left 0.6s ease; }
+        .btn-veja:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(255,0,0,0.35); }
+        .btn-veja:hover svg { transform: translateX(5px); }
+        .btn-veja:hover::after { left: 130%; }
+        .btn-email { display: inline-flex; align-items: center; gap: 10px; color: var(--cinza-claro); text-decoration: none; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; border: 1px solid rgba(255,255,255,0.16); padding: 19px 24px; transition: 0.35s ease; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+        .btn-email:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+        /* ABERTURA */
+        .ct-hero { position: relative; padding: 200px 10% 90px; overflow: hidden; background: radial-gradient(circle at 16% 30%, rgba(255,0,0,0.16) 0%, transparent 44%), linear-gradient(180deg, #050505 0%, #0a0a0a 60%, #050505 100%); }
+        .ct-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to bottom, transparent, black 30%, black 80%, transparent); pointer-events: none; }
+        .ct-hero::after { content: 'DPR'; position: absolute; right: 4%; top: 70px; font-family: 'Syncopate', sans-serif; font-size: clamp(5rem, 16vw, 16rem); font-weight: 800; letter-spacing: -12px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; }
+        .ct-hero-inner { position: relative; z-index: 2; max-width: 860px; }
+        .ct-kicker { font-size: 0.62rem; letter-spacing: 9px; color: var(--vermelho); text-transform: uppercase; font-weight: 900; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+        .ct-kicker::before { content: ''; width: 40px; height: 1px; background: var(--vermelho); }
+        .ct-hero h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(2.2rem, 6.4vw, 4.6rem); line-height: 0.9; text-transform: uppercase; letter-spacing: -4px; margin-bottom: 30px; }
+        .ct-hero h1 span { color: var(--vermelho); }
+        .ct-hero p { color: var(--cinza-claro); font-size: 1.05rem; line-height: 1.8; font-weight: 300; max-width: 560px; border-left: 2px solid var(--vermelho); padding-left: 22px; }
+
+        /* SELO EM BREVE */
+        .cc-selo { display: inline-flex; align-items: center; gap: 12px; margin-bottom: 28px; padding: 11px 18px; border: 1px solid rgba(255,0,0,0.55); background: rgba(255,0,0,0.08); font-family: 'Syncopate', sans-serif; font-size: 0.66rem; letter-spacing: 5px; text-transform: uppercase; color: #fff; }
+        .cc-selo i { width: 8px; height: 8px; background: var(--vermelho); animation: cc-pulsa 1.6s ease-in-out infinite; }
+        @keyframes cc-pulsa { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.35; transform: scale(0.7); } }
+        @media (prefers-reduced-motion: reduce) { .cc-selo i { animation: none; } }
+
+        /* O QUE VEM */
+        .cc-vem { position: relative; padding: 20px 10% 110px; background: linear-gradient(180deg, #050505, #080808); }
+        .cc-vem-head { margin-bottom: 44px; }
+        .cc-vem-head .sec-label { font-size: 0.6rem; letter-spacing: 8px; color: var(--vermelho); text-transform: uppercase; font-weight: 900; display: block; margin-bottom: 20px; }
+        .cc-vem-head h2 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.5rem, 3.6vw, 2.6rem); line-height: 1; text-transform: uppercase; letter-spacing: -2px; }
+        .cc-vem-head h2 span { color: var(--vermelho); }
+        .hl-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+        .hl-card { border: 1px solid rgba(255,255,255,0.09); background: rgba(255,255,255,0.02); padding: 40px 30px; min-height: 230px; display: flex; flex-direction: column; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 22px), calc(100% - 22px) 100%, 0 100%); transition: 0.5s cubic-bezier(0.19,1,0.22,1); }
+        .hl-card:hover { border-color: rgba(255,0,0,0.5); transform: translateY(-8px); background: rgba(255,0,0,0.04); }
+        .hl-num { font-family: 'Syncopate', sans-serif; font-size: 0.7rem; letter-spacing: 4px; color: var(--vermelho); margin-bottom: auto; padding-bottom: 26px; border-bottom: 1px solid rgba(255,255,255,0.1); width: fit-content; }
+        .hl-card h3 { font-family: 'Syncopate', sans-serif; font-size: 1rem; line-height: 1.2; text-transform: uppercase; letter-spacing: -0.5px; margin: 24px 0 12px; }
+        .hl-card p { color: var(--cinza-claro); font-size: 0.86rem; line-height: 1.6; font-weight: 300; }
+
+        /* ENQUANTO ISSO */
+        .cc-chamada { position: relative; padding: 0 10% 130px; background: #080808; }
+        .cc-chamada-box { position: relative; border: 1px solid rgba(255,255,255,0.1); background: linear-gradient(160deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01)); padding: 50px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 40px), calc(100% - 40px) 100%, 0 100%); display: grid; grid-template-columns: 1.2fr 1fr; gap: 40px; align-items: center; }
+        .cc-chamada-box h2 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.3rem, 2.4vw, 1.9rem); text-transform: uppercase; letter-spacing: -1px; margin-bottom: 12px; }
+        .cc-chamada-box h2 span { color: var(--vermelho); }
+        .cc-chamada-box p { color: var(--cinza-claro); font-size: 0.95rem; line-height: 1.7; font-weight: 300; }
+        .cc-acoes { display: flex; flex-wrap: wrap; gap: 14px; justify-content: flex-end; }
+
+        /* RODAPE (igual as outras paginas) */
+        .footer-dpr { position: relative; background: radial-gradient(circle at 12% 0%, rgba(255,0,0,0.13) 0%, rgba(255,0,0,0.03) 28%, transparent 52%), linear-gradient(180deg, #050505 0%, #0a0a0a 100%); padding: 110px 10% 42px; border-top: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
+        .footer-dpr::before { content: 'DPR'; position: absolute; right: 6%; top: 22px; font-family: 'Syncopate', sans-serif; font-size: clamp(5rem, 14vw, 13rem); font-weight: 800; letter-spacing: -10px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; }
+        .footer-container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 0.8fr 1fr; gap: 70px; margin-bottom: 70px; }
+        .footer-brand h2 { font-family: 'Syncopate', sans-serif; font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 22px; }
+        .footer-brand p { color: var(--cinza-claro); font-size: 0.92rem; line-height: 1.75; max-width: 360px; font-weight: 300; }
+        .footer-links h4, .footer-contact h4 { font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 22px; color: var(--vermelho); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--cinza-claro); text-decoration: none; font-size: 0.88rem; transition: 0.35s ease; }
+        .footer-links a:hover { color: var(--vermelho); padding-left: 6px; }
+        .footer-contact p { font-size: 0.88rem; color: var(--cinza-claro); margin-bottom: 10px; line-height: 1.5; }
+        .footer-bottom { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+        .footer-bottom p { font-size: 0.68rem; color: rgba(255,255,255,0.42); letter-spacing: 2px; text-transform: uppercase; }
+        .footer-top-link { color: var(--branco); text-decoration: none; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; transition: 0.35s ease; }
+        .footer-top-link:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+        /* RESPONSIVO */
+        @media (max-width: 1100px) {
+            header { padding: 0 5%; }
+            .ct-hero, .cc-vem, .cc-chamada, .footer-dpr { padding-left: 7%; padding-right: 7%; }
+            .hl-grid { grid-template-columns: 1fr 1fr; }
+            .cc-chamada-box { grid-template-columns: 1fr; }
+            .cc-acoes { justify-content: flex-start; }
+        }
+        @media (max-width: 768px) {
+            header { top: 18px; }
+            header.scrolled { top: 0; }
+            .menu-toggle { display: flex; }
+            nav { position: fixed; top: 72px; left: 18px; right: 18px; background: rgba(5,5,5,0.94); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(18px); padding: 22px; opacity: 0; visibility: hidden; transform: translateY(-12px); transition: 0.35s ease; }
+            nav.active { opacity: 1; visibility: visible; transform: translateY(0); }
+            .nav-menu { flex-direction: column; gap: 18px; }
+            .nav-container { gap: 14px; }
+            .header-controls { gap: 14px; }
+            .ct-hero { padding: 150px 7% 60px; }
+            .ct-hero::after { top: 110px; right: -6%; font-size: 7rem; letter-spacing: -7px; }
+            .ct-hero h1 { letter-spacing: -2px; }
+            .cc-vem { padding: 10px 7% 80px; }
+            .hl-grid { grid-template-columns: 1fr; }
+            .cc-chamada { padding: 0 7% 90px; }
+            .cc-chamada-box { padding: 34px 24px; }
+            .cc-acoes { flex-direction: column; align-items: stretch; }
+            .btn-veja, .btn-email { width: 100%; }
+            .footer-dpr { padding: 76px 7% 32px; }
+            .footer-container { grid-template-columns: 1fr; gap: 38px; margin-bottom: 48px; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
+            html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+            a, button, .menu-toggle, .search-trigger, .lang-switch, .btn-veja, .btn-email, .hl-card, .footer-top-link { -webkit-tap-highlight-color: transparent; }
+            html, body { max-width: 100%; overflow-x: hidden; }
+            .search-input { font-size: 16px; }
+            .nav-menu a { min-height: 44px; display: flex; align-items: center; }
+            .lang-switch { display: inline-flex; align-items: center; min-height: 44px; padding: 0 4px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="siteHeader">
+        <a href="index.html" class="brand-mark">DPR<span>.</span></a>
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            <nav id="mainNav">
+                <ul class="nav-menu">
+                    <li><a href="index.html" data-pt="INÍCIO" data-en="HOME">INÍCIO</a></li>
+                    <li><a href="empreendimento.html" data-pt="EMPREENDIMENTOS" data-en="DEVELOPMENTS">EMPREENDIMENTOS</a></li>
+                    <li><a href="conceito.html" data-pt="CONCEITO" data-en="CONCEPT">CONCEITO</a></li>
+                    <li><a href="contato.html" data-pt="CONTATO" data-en="CONTACT">CONTATO</a></li>
+                    <li><a href="central-do-cliente.html" class="active" data-pt="CENTRAL DO CLIENTE" data-en="CLIENT AREA">CENTRAL DO CLIENTE</a></li>
+                </ul>
+            </nav>
+            <div class="header-controls">
+                <span class="lang-switch" id="langBtn">EN</span>
+                <div class="search-wrapper" id="searchWrapper">
+                    <input type="text" class="search-input" placeholder="SEARCH..." id="searchInput">
+                    <div class="search-trigger" id="searchBtn" aria-label="Buscar">
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="10.8" cy="10.8" r="6.4"></circle><line x1="15.7" y1="15.7" x2="20.5" y2="20.5"></line></svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ABERTURA -->
+    <section class="ct-hero">
+        <div class="ct-hero-inner">
+            <div class="ct-kicker" data-pt="Central do Cliente" data-en="Client area">Central do Cliente</div>
+            <span class="cc-selo"><i></i><span data-pt="Em breve" data-en="Coming soon">Em breve</span></span>
+            <h1 data-pt="Sua casa, <span>do contrato à chave.</span>" data-en="Your home, <span>from contract to keys.</span>">Sua casa, <span>do contrato à chave.</span></h1>
+            <p data-pt="Estamos preparando um espaço só seu: parcelas e boletos, a evolução da sua obra com fotos e um canal direto com a DPR, tudo em um só lugar."
+               data-en="We are preparing a space of your own: installments and payment slips, your construction progress with photos and a direct line to DPR, all in one place.">
+               Estamos preparando um espaço só seu: parcelas e boletos, a evolução da sua obra com fotos e um canal direto com a DPR, tudo em um só lugar.
+            </p>
+        </div>
+    </section>
+
+    <!-- O QUE VEM -->
+    <section class="cc-vem">
+        <div class="cc-vem-head">
+            <span class="sec-label" data-pt="O que você vai encontrar" data-en="What you will find">O que você vai encontrar</span>
+            <h2 data-pt="Tudo da sua casa, <span>na palma da mão.</span>" data-en="Everything about your home, <span>in your hand.</span>">Tudo da sua casa, <span>na palma da mão.</span></h2>
+        </div>
+        <div class="hl-grid">
+            <article class="hl-card">
+                <span class="hl-num">01</span>
+                <h3 data-pt="Parcelas e boletos" data-en="Installments and payment slips">Parcelas e boletos</h3>
+                <p data-pt="Saldo, próximos vencimentos e a segunda via do boleto, sem precisar ligar." data-en="Balance, upcoming due dates and a copy of your payment slip, no phone call needed.">Saldo, próximos vencimentos e a segunda via do boleto, sem precisar ligar.</p>
+            </article>
+            <article class="hl-card">
+                <span class="hl-num">02</span>
+                <h3 data-pt="Evolução da obra" data-en="Construction progress">Evolução da obra</h3>
+                <p data-pt="Etapas concluídas e fotos aprovadas pela equipe da obra, mês a mês." data-en="Completed stages and photos approved by the site team, month by month.">Etapas concluídas e fotos aprovadas pela equipe da obra, mês a mês.</p>
+            </article>
+            <article class="hl-card">
+                <span class="hl-num">03</span>
+                <h3 data-pt="Documentos e atendimento" data-en="Documents and support">Documentos e atendimento</h3>
+                <p data-pt="Contrato, orientações da entrega das chaves e um canal direto com a DPR." data-en="Contract, key handover guidance and a direct line to DPR.">Contrato, orientações da entrega das chaves e um canal direto com a DPR.</p>
+            </article>
+        </div>
+    </section>
+
+    <!-- ENQUANTO ISSO -->
+    <section class="cc-chamada">
+        <div class="cc-chamada-box">
+            <div>
+                <h2 data-pt="Enquanto isso, <span>fale com a DPR.</span>" data-en="Meanwhile, <span>talk to DPR.</span>">Enquanto isso, <span>fale com a DPR.</span></h2>
+                <p data-pt="Dúvidas sobre parcelas, boletos ou a sua obra? Nossa equipe atende pelo WhatsApp e por e-mail." data-en="Questions about installments, payment slips or your construction? Our team is available on WhatsApp and by email.">Dúvidas sobre parcelas, boletos ou a sua obra? Nossa equipe atende pelo WhatsApp e por e-mail.</p>
+            </div>
+            <div class="cc-acoes">
+                <a class="btn-veja" href="https://wa.me/5511933085258?text=Ol%C3%A1%21%20Sou%20cliente%20da%20DPR%20e%20preciso%20de%20ajuda." target="_blank" rel="noopener">
+                    <span data-pt="Falar no WhatsApp" data-en="Chat on WhatsApp">Falar no WhatsApp</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a class="btn-email" href="mailto:atendimento@dprconstrutora.com.br" data-pt="Enviar e-mail" data-en="Send an email">Enviar e-mail</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-dpr">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>DPR</h2>
+                <p data-pt="Na DPR, não vendemos apenas imóveis – realizamos sonhos e construímos futuros com você."
+                   data-en="At DPR, we don't just sell properties – we make dreams come true and build futures with you.">
+                   Na DPR, não vendemos apenas imóveis – realizamos sonhos e construímos futuros com você.
+                </p>
+            </div>
+            <div class="footer-links">
+                <h4 data-pt="Links" data-en="Links">Links</h4>
+                <ul>
+                    <li><a href="index.html" data-pt="Início" data-en="Home">Início</a></li>
+                    <li><a href="empreendimento.html" data-pt="Empreendimentos" data-en="Developments">Empreendimentos</a></li>
+                    <li><a href="conceito.html" data-pt="Conceito" data-en="Concept">Conceito</a></li>
+                    <li><a href="contato.html" data-pt="Contato" data-en="Contact">Contato</a></li>
+                    <li><a href="central-do-cliente.html" data-pt="Central do Cliente" data-en="Client area">Central do Cliente</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4 data-pt="Contato" data-en="Contact">Contato</h4>
+                <p>atendimento@dprconstrutora.com.br</p>
+                <p>+55 11 93308-5258</p>
+                <p data-pt="Caucaia &amp; Itatinga - SP" data-en="Caucaia &amp; Itatinga - SP">Caucaia &amp; Itatinga - SP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p data-pt="© 2025 DPR Construtora. Todos os direitos reservados." data-en="© 2025 DPR Construtora. All rights reserved.">© 2025 DPR Construtora. Todos os direitos reservados.</p>
+            <a href="#" class="footer-top-link" data-pt="Voltar ao topo" data-en="Back to top">Voltar ao topo</a>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); mainNav.classList.toggle('active'); });
+        document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => { menuToggle.classList.remove('active'); mainNav.classList.remove('active'); }));
+
+        // Busca
+        const searchBtn = document.getElementById('searchBtn');
+        const searchWrapper = document.getElementById('searchWrapper');
+        const searchInput = document.getElementById('searchInput');
+        searchBtn.addEventListener('click', () => { searchWrapper.classList.toggle('active'); if (searchWrapper.classList.contains('active')) searchInput.focus(); });
+
+        // Idioma
+        const langBtn = document.getElementById('langBtn');
+        let lang = 'pt';
+        langBtn.addEventListener('click', () => {
+            lang = lang === 'pt' ? 'en' : 'pt';
+            langBtn.innerText = lang === 'pt' ? 'EN' : 'PT';
+            document.querySelectorAll('[data-pt]').forEach(el => el.innerHTML = el.getAttribute('data-' + lang));
+        });
+
+        // Header scrolled
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+    </script>
+
+</body>
+</html>
