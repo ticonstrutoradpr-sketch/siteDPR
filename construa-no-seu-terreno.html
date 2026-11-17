@@ -1,0 +1,761 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Construa no seu terreno | DPR Construtora</title>
+    <!-- busca e compartilhamento -->
+    <meta name="description" content="Já tem o terreno? A DPR constrói a sua casa e viabiliza o financiamento da obra, como no Minha Casa Minha Vida. Faça a análise gratuita.">
+    <link rel="canonical" href="https://www.construtoradpr.com.br/construa-no-seu-terreno.html">
+    <meta property="og:type" content="website">
+    <meta property="og:locale" content="pt_BR">
+    <meta property="og:site_name" content="DPR Construtora">
+    <meta property="og:url" content="https://www.construtoradpr.com.br/construa-no-seu-terreno.html">
+    <meta property="og:title" content="Construa no seu terreno | DPR Construtora">
+    <meta property="og:description" content="Você entra com o terreno, a DPR constrói a casa e viabiliza o financiamento da obra.">
+    <meta property="og:image" content="https://www.construtoradpr.com.br/fotos/terreno/casa.webp">
+    <meta name="twitter:card" content="summary_large_image">
+    <!-- fim -->
+    <link href="https://fonts.googleapis.com/css2?family=Syncopate:wght@700;800&family=Archivo:wght@300;400;600;800;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --vermelho: #ff0000;
+            --vermelho-fundo: #c40000;
+            --grafite: #505050;
+            --cinza-claro: #a0a0a0;
+            --branco: #ffffff;
+            --preto: #050505;
+            --linha: rgba(255,255,255,0.1);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { background: var(--preto); color: var(--branco); font-family: 'Archivo', sans-serif; overflow-x: hidden; }
+        img { max-width: 100%; display: block; }
+        ::selection { background: var(--vermelho); color: #fff; }
+        button, input, select { font-family: inherit; }
+
+        /* HEADER (igual as outras paginas) */
+        header { position: fixed; top: 40px; left: 0; right: 0; padding: 0 100px; z-index: 1000; display: flex; align-items: center; justify-content: space-between; width: 100%; transition: background 0.4s ease, padding 0.4s ease, top 0.4s ease; }
+        header.scrolled { top: 0; padding-top: 18px; padding-bottom: 18px; background: rgba(5,5,5,0.82); backdrop-filter: blur(16px); border-bottom: 1px solid rgba(255,255,255,0.08); }
+        .brand-mark { font-family: 'Syncopate', sans-serif; font-weight: 800; font-size: 1.15rem; letter-spacing: 4px; color: var(--branco); text-decoration: none; text-shadow: 0 2px 10px rgba(0,0,0,0.6); transition: 0.4s ease; }
+        .brand-mark span { color: var(--vermelho); }
+        .brand-mark:hover { letter-spacing: 6px; }
+        .nav-container { display: flex; align-items: center; gap: 30px; }
+        .nav-menu { display: flex; list-style: none; gap: 30px; }
+        .nav-menu a { color: var(--branco); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 4px; font-weight: 600; position: relative; padding: 5px 0 5px 12px; transition: all 0.4s ease; opacity: 0.7; white-space: nowrap; text-shadow: 0 2px 4px rgba(0,0,0,0.5); }
+        .nav-menu a::before { content: ''; position: absolute; left: 0; top: 50%; width: 1px; height: 0; background-color: var(--vermelho); transition: all 0.4s ease; transform: translateY(-50%); }
+        .nav-menu a:hover { opacity: 1; letter-spacing: 6px; }
+        .nav-menu a:hover::before { height: 70%; }
+        .menu-toggle { display: none; width: 42px; height: 42px; border: 1px solid rgba(255,255,255,0.16); background: rgba(0,0,0,0.55); backdrop-filter: blur(10px); cursor: pointer; align-items: center; justify-content: center; flex-direction: column; gap: 6px; }
+        .menu-toggle span { width: 20px; height: 2px; background: var(--branco); transition: 0.35s ease; }
+        .menu-toggle.active span:nth-child(1) { transform: translateY(8px) rotate(45deg); background: var(--vermelho); }
+        .menu-toggle.active span:nth-child(2) { opacity: 0; }
+        .menu-toggle.active span:nth-child(3) { transform: translateY(-8px) rotate(-45deg); background: var(--vermelho); }
+
+        /* BOTOES */
+        .btn-veja { display: inline-flex; align-items: center; justify-content: center; gap: 14px; background: linear-gradient(135deg, var(--vermelho-fundo) 0%, var(--vermelho) 100%); color: #fff; font-family: 'Archivo', sans-serif; font-weight: 800; font-size: 0.7rem; letter-spacing: 3px; text-transform: uppercase; text-decoration: none; padding: 19px 30px; border: none; position: relative; overflow: hidden; cursor: pointer; box-shadow: 0 12px 30px rgba(255,0,0,0.22); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); transition: transform 0.4s ease, box-shadow 0.4s ease, opacity 0.3s ease; }
+        .btn-veja svg { width: 16px; height: 16px; stroke: #fff; stroke-width: 2.4; fill: none; transition: transform 0.4s ease; }
+        .btn-veja::after { content: ''; position: absolute; top: 0; left: -80%; width: 60%; height: 100%; background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent); transform: skewX(-20deg); transition: left 0.6s ease; }
+        .btn-veja:hover { transform: translateY(-4px); box-shadow: 0 18px 40px rgba(255,0,0,0.35); }
+        .btn-veja:hover svg { transform: translateX(5px); }
+        .btn-veja:hover::after { left: 130%; }
+        .btn-veja:disabled { opacity: 0.35; cursor: not-allowed; transform: none; box-shadow: none; }
+        .btn-linha { display: inline-flex; align-items: center; gap: 10px; color: var(--cinza-claro); background: none; text-decoration: none; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; font-weight: 700; border: 1px solid rgba(255,255,255,0.16); padding: 19px 24px; cursor: pointer; transition: 0.35s ease; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+        .btn-linha:hover { border-color: var(--vermelho); color: var(--vermelho); }
+        :focus-visible { outline: 2px solid var(--vermelho); outline-offset: 3px; }
+
+        .sec-label { font-size: 0.6rem; letter-spacing: 8px; color: var(--vermelho); text-transform: uppercase; font-weight: 900; display: flex; align-items: center; gap: 14px; margin-bottom: 22px; }
+        .sec-label::before { content: ''; width: 40px; height: 1px; background: var(--vermelho); }
+        .titulo { font-family: 'Syncopate', sans-serif; font-size: clamp(1.5rem, 3.6vw, 2.6rem); line-height: 1; text-transform: uppercase; letter-spacing: -2px; }
+        .titulo span { color: var(--vermelho); }
+
+        /* ABERTURA: texto + arraste do terreno para a casa */
+        .tr-hero { position: relative; padding: 180px 8% 100px; overflow: hidden; background: radial-gradient(circle at 12% 30%, rgba(255,0,0,0.16) 0%, transparent 44%), linear-gradient(180deg, #050505 0%, #0a0a0a 60%, #050505 100%); display: grid; grid-template-columns: 1fr 1.08fr; gap: 64px; align-items: center; }
+        .tr-hero::before { content: ''; position: absolute; inset: 0; background-image: linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.035) 1px, transparent 1px); background-size: 80px 80px; mask-image: linear-gradient(to bottom, transparent, black 30%, black 80%, transparent); pointer-events: none; }
+        .tr-hero > * { position: relative; z-index: 2; }
+        .tr-hero h1 { font-family: 'Syncopate', sans-serif; font-size: clamp(2rem, 4.6vw, 3.9rem); line-height: 0.95; text-transform: uppercase; letter-spacing: -3px; margin-bottom: 28px; text-wrap: balance; }
+        .tr-hero h1 span { color: var(--vermelho); display: block; }
+        .tr-hero p { color: var(--cinza-claro); font-size: 1.05rem; line-height: 1.8; font-weight: 300; max-width: 520px; border-left: 2px solid var(--vermelho); padding-left: 22px; margin-bottom: 36px; }
+        .tr-hero p strong { color: #fff; font-weight: 600; }
+        .tr-acoes { display: flex; flex-wrap: wrap; gap: 14px; }
+
+        .comparar { position: relative; aspect-ratio: 4 / 3; overflow: hidden; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 34px), calc(100% - 34px) 100%, 0 100%); background: #111; --pos: 50%; user-select: none; touch-action: pan-y; }
+        .comparar img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+        .comparar .depois { clip-path: inset(0 0 0 var(--pos)); }
+        .comparar .antes { filter: saturate(0.9); }
+        .comparar-rotulo { position: absolute; top: 18px; padding: 9px 14px; background: rgba(5,5,5,0.72); backdrop-filter: blur(8px); font-size: 0.58rem; letter-spacing: 4px; text-transform: uppercase; font-weight: 800; pointer-events: none; }
+        .comparar-rotulo.r-antes { left: 18px; }
+        .comparar-rotulo.r-depois { right: 18px; color: #fff; background: rgba(196,0,0,0.85); }
+        .comparar-linha { position: absolute; top: 0; bottom: 0; left: var(--pos); width: 2px; margin-left: -1px; background: #fff; box-shadow: 0 0 18px rgba(0,0,0,0.5); pointer-events: none; }
+        .comparar-alca { position: absolute; top: 50%; left: var(--pos); width: 54px; height: 54px; margin: -27px 0 0 -27px; background: var(--vermelho); display: flex; align-items: center; justify-content: center; gap: 4px; box-shadow: 0 10px 30px rgba(0,0,0,0.45); clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10px), calc(100% - 10px) 100%, 0 100%); pointer-events: none; }
+        .comparar-alca svg { width: 22px; height: 22px; stroke: #fff; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .comparar input[type=range] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: ew-resize; margin: 0; }
+        .comparar:focus-within .comparar-alca { outline: 2px solid #fff; outline-offset: 3px; }
+        .comparar-dica { margin-top: 14px; font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.5); display: flex; align-items: center; gap: 10px; }
+        .comparar-dica::before { content: ''; width: 24px; height: 1px; background: var(--vermelho); }
+
+        /* MCMV: faixa com a foto da obra */
+        .tr-mcmv { position: relative; padding: 110px 8%; background: #080808; display: grid; grid-template-columns: 0.8fr 1.2fr; gap: 70px; align-items: center; }
+        .tr-mcmv-foto { position: relative; aspect-ratio: 4 / 5; overflow: hidden; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 30px), calc(100% - 30px) 100%, 0 100%); }
+        .tr-mcmv-foto img { width: 100%; height: 100%; object-fit: cover; }
+        .tr-mcmv-foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 50%, rgba(5,5,5,0.7)); }
+        .tr-mcmv-selo { position: absolute; left: 22px; bottom: 22px; z-index: 2; font-family: 'Syncopate', sans-serif; font-size: 0.62rem; letter-spacing: 4px; text-transform: uppercase; }
+        .tr-mcmv-texto .titulo { margin-bottom: 26px; }
+        .tr-mcmv-texto > p { color: var(--cinza-claro); font-size: 1rem; line-height: 1.8; font-weight: 300; max-width: 560px; margin-bottom: 34px; }
+        .tr-mcmv-texto > p strong { color: #fff; font-weight: 600; }
+        .tr-pontos { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; max-width: 620px; }
+        .tr-ponto { border: 1px solid var(--linha); background: rgba(255,255,255,0.02); padding: 22px 22px 24px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 14px), calc(100% - 14px) 100%, 0 100%); }
+        .tr-ponto svg { width: 26px; height: 26px; stroke: var(--vermelho); stroke-width: 1.6; fill: none; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 14px; }
+        .tr-ponto h3 { font-size: 0.92rem; font-weight: 800; margin-bottom: 6px; }
+        .tr-ponto p { font-size: 0.84rem; line-height: 1.55; color: var(--cinza-claro); font-weight: 300; }
+
+        /* COMO FUNCIONA: 4 passos em sequencia */
+        .tr-passos { padding: 110px 8%; background: linear-gradient(180deg, #080808, #050505); }
+        .tr-passos .titulo { margin-bottom: 56px; }
+        .passos { list-style: none; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; counter-reset: passo; border-top: 1px solid var(--linha); }
+        .passo { position: relative; padding: 38px 28px 10px 0; counter-increment: passo; }
+        .passo::before { content: '0' counter(passo); display: block; font-family: 'Syncopate', sans-serif; font-size: 0.72rem; letter-spacing: 4px; color: var(--vermelho); margin-bottom: 26px; }
+        .passo::after { content: ''; position: absolute; top: -5px; left: 0; width: 9px; height: 9px; background: var(--vermelho); }
+        .passo svg { width: 40px; height: 40px; stroke: #fff; stroke-width: 1.3; fill: none; stroke-linecap: round; stroke-linejoin: round; margin-bottom: 20px; opacity: 0.9; }
+        .passo h3 { font-family: 'Syncopate', sans-serif; font-size: 0.86rem; text-transform: uppercase; line-height: 1.3; letter-spacing: -0.3px; margin-bottom: 12px; }
+        .passo p { color: var(--cinza-claro); font-size: 0.88rem; line-height: 1.6; font-weight: 300; max-width: 250px; }
+        .tr-recado { margin-top: 64px; display: flex; align-items: center; justify-content: space-between; gap: 30px; flex-wrap: wrap; border: 1px solid rgba(255,0,0,0.4); background: rgba(255,0,0,0.06); padding: 34px 40px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%); }
+        .tr-recado strong { font-family: 'Syncopate', sans-serif; font-size: clamp(1rem, 2vw, 1.4rem); text-transform: uppercase; letter-spacing: -1px; line-height: 1.15; }
+        .tr-recado strong span { color: var(--vermelho); }
+
+        /* FORMULARIO EM 4 ETAPAS */
+        .tr-form { padding: 110px 8% 130px; background: radial-gradient(circle at 85% 10%, rgba(255,0,0,0.12) 0%, transparent 40%), #050505; display: grid; grid-template-columns: 0.75fr 1.25fr; gap: 70px; align-items: start; scroll-margin-top: 60px; }
+        .tr-form-lado .titulo { margin-bottom: 24px; }
+        .tr-form-lado p { color: var(--cinza-claro); font-size: 0.98rem; line-height: 1.75; font-weight: 300; margin-bottom: 30px; }
+        .etapas-lista { list-style: none; display: grid; gap: 4px; }
+        .etapas-lista li { display: flex; align-items: center; gap: 14px; padding: 12px 0; font-size: 0.8rem; letter-spacing: 2px; text-transform: uppercase; font-weight: 700; color: rgba(255,255,255,0.35); border-bottom: 1px solid rgba(255,255,255,0.06); transition: color 0.3s ease; }
+        .etapas-lista li i { font-style: normal; font-family: 'Syncopate', sans-serif; font-size: 0.62rem; width: 30px; height: 30px; display: flex; align-items: center; justify-content: center; border: 1px solid rgba(255,255,255,0.18); transition: 0.3s ease; }
+        .etapas-lista li.feita { color: rgba(255,255,255,0.7); }
+        .etapas-lista li.feita i { background: rgba(255,255,255,0.1); border-color: transparent; }
+        .etapas-lista li.atual { color: #fff; }
+        .etapas-lista li.atual i { background: var(--vermelho); border-color: var(--vermelho); }
+
+        .ficha { border: 1px solid var(--linha); background: linear-gradient(160deg, rgba(255,255,255,0.045), rgba(255,255,255,0.015)); padding: 44px 46px 40px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 36px), calc(100% - 36px) 100%, 0 100%); }
+        .ficha-topo { display: flex; justify-content: space-between; align-items: baseline; gap: 20px; margin-bottom: 14px; }
+        .ficha-topo span { font-size: 0.6rem; letter-spacing: 5px; text-transform: uppercase; color: var(--vermelho); font-weight: 900; }
+        .ficha-topo strong { font-family: 'Syncopate', sans-serif; font-size: 0.66rem; letter-spacing: 3px; color: rgba(255,255,255,0.5); }
+        .progresso { height: 3px; background: rgba(255,255,255,0.08); margin-bottom: 36px; }
+        .progresso span { display: block; height: 100%; width: 25%; background: var(--vermelho); transition: width 0.5s cubic-bezier(0.19,1,0.22,1); }
+        .etapa[hidden] { display: none; }
+        .etapa h3 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.1rem, 2.2vw, 1.5rem); text-transform: uppercase; letter-spacing: -1px; margin-bottom: 30px; }
+        .etapa h3 span { color: var(--vermelho); }
+        .etapa.entra { animation: etapa-entra 0.45s cubic-bezier(0.19,1,0.22,1); }
+        @keyframes etapa-entra { from { opacity: 0; transform: translateX(18px); } to { opacity: 1; transform: none; } }
+
+        .pergunta { border: 0; margin: 0 0 30px; padding: 0; min-width: 0; }
+        .pergunta legend, .pergunta > label.rot { display: block; font-size: 0.98rem; font-weight: 600; line-height: 1.4; margin-bottom: 14px; padding: 0; }
+        .pergunta legend small, .pergunta label.rot small { display: block; font-weight: 300; color: var(--cinza-claro); font-size: 0.82rem; margin-top: 4px; }
+        .opcoes { display: flex; flex-wrap: wrap; gap: 10px; }
+        .opcao { position: relative; }
+        .opcao input { position: absolute; opacity: 0; width: 1px; height: 1px; }
+        .opcao span { display: inline-flex; align-items: center; min-height: 46px; padding: 12px 18px; border: 1px solid rgba(255,255,255,0.18); background: rgba(255,255,255,0.02); font-size: 0.9rem; color: rgba(255,255,255,0.86); cursor: pointer; transition: border-color 0.25s ease, background 0.25s ease, color 0.25s ease; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 8px), calc(100% - 8px) 100%, 0 100%); }
+        .opcao span:hover { border-color: rgba(255,0,0,0.6); }
+        .opcao input:checked + span { border-color: var(--vermelho); background: rgba(255,0,0,0.14); color: #fff; }
+        .opcao input:focus-visible + span { outline: 2px solid var(--vermelho); outline-offset: 3px; }
+        .opcoes.coluna { flex-direction: column; }
+        .opcoes.coluna .opcao span { width: 100%; }
+
+        .campo { width: 100%; min-height: 50px; padding: 13px 16px; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.18); color: #fff; font-size: 1rem; outline: none; border-radius: 0; transition: border-color 0.25s ease; }
+        .campo:focus { border-color: var(--vermelho); }
+        select.campo { appearance: none; background-image: linear-gradient(45deg, transparent 50%, #fff 50%), linear-gradient(135deg, #fff 50%, transparent 50%); background-position: calc(100% - 22px) 50%, calc(100% - 16px) 50%; background-size: 6px 6px; background-repeat: no-repeat; padding-right: 44px; }
+        select.campo option { background: #111; color: #fff; }
+        .campo-outra { margin-top: 10px; }
+        .campo-outra[hidden] { display: none; }
+
+        .faixa-resultado { margin: -6px 0 30px; padding: 20px 22px; border-left: 3px solid var(--vermelho); background: rgba(255,0,0,0.07); }
+        .faixa-resultado[hidden] { display: none; }
+        .faixa-resultado span { display: block; font-size: 0.58rem; letter-spacing: 4px; text-transform: uppercase; color: var(--vermelho); font-weight: 900; margin-bottom: 6px; }
+        .faixa-resultado strong { display: block; font-family: 'Syncopate', sans-serif; font-size: 1.05rem; text-transform: uppercase; letter-spacing: -0.5px; margin-bottom: 6px; }
+        .faixa-resultado p { font-size: 0.84rem; color: var(--cinza-claro); line-height: 1.55; font-weight: 300; }
+
+        .lgpd { display: flex; gap: 14px; align-items: flex-start; cursor: pointer; font-size: 0.86rem; line-height: 1.55; color: rgba(255,255,255,0.8); margin-bottom: 8px; }
+        .lgpd input { flex: 0 0 auto; width: 22px; height: 22px; margin-top: 1px; accent-color: var(--vermelho); cursor: pointer; }
+
+        .ficha-erro { min-height: 22px; font-size: 0.84rem; color: #ff6b6b; margin: 4px 0 14px; }
+        .ficha-nav { display: flex; justify-content: space-between; align-items: center; gap: 14px; padding-top: 26px; border-top: 1px solid rgba(255,255,255,0.08); }
+        .ficha-nav .btn-linha[hidden] { display: none; }
+        .ficha-nav .btn-veja { margin-left: auto; }
+
+        .pronto { text-align: left; }
+        .pronto[hidden] { display: none; }
+        .pronto-marca { width: 64px; height: 64px; background: var(--vermelho); display: flex; align-items: center; justify-content: center; margin-bottom: 28px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 12px), calc(100% - 12px) 100%, 0 100%); }
+        .pronto-marca svg { width: 30px; height: 30px; stroke: #fff; stroke-width: 2.4; fill: none; stroke-linecap: round; stroke-linejoin: round; }
+        .pronto h3 { font-family: 'Syncopate', sans-serif; font-size: clamp(1.1rem, 2.2vw, 1.5rem); text-transform: uppercase; letter-spacing: -1px; margin-bottom: 16px; }
+        .pronto p { color: var(--cinza-claro); line-height: 1.7; font-weight: 300; margin-bottom: 26px; max-width: 520px; }
+        .pronto-acoes { display: flex; flex-wrap: wrap; gap: 14px; }
+
+        /* RODAPE (igual as outras paginas) */
+        .footer-dpr { position: relative; background: radial-gradient(circle at 12% 0%, rgba(255,0,0,0.13) 0%, rgba(255,0,0,0.03) 28%, transparent 52%), linear-gradient(180deg, #050505 0%, #0a0a0a 100%); padding: 110px 10% 42px; border-top: 1px solid rgba(255,255,255,0.08); overflow: hidden; }
+        .footer-dpr::before { content: 'DPR'; position: absolute; right: 6%; top: 22px; font-family: 'Syncopate', sans-serif; font-size: clamp(5rem, 14vw, 13rem); font-weight: 800; letter-spacing: -10px; color: transparent; -webkit-text-stroke: 1px rgba(255,255,255,0.05); pointer-events: none; }
+        .footer-container { position: relative; z-index: 2; display: grid; grid-template-columns: 1.4fr 0.8fr 1fr; gap: 70px; margin-bottom: 70px; }
+        .footer-brand h2 { font-family: 'Syncopate', sans-serif; font-size: 2.1rem; letter-spacing: 5px; margin-bottom: 22px; }
+        .footer-brand p { color: var(--cinza-claro); font-size: 0.92rem; line-height: 1.75; max-width: 360px; font-weight: 300; }
+        .footer-links h4, .footer-contact h4 { font-size: 0.68rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 22px; color: var(--vermelho); }
+        .footer-links ul { list-style: none; }
+        .footer-links li { margin-bottom: 12px; }
+        .footer-links a { color: var(--cinza-claro); text-decoration: none; font-size: 0.88rem; transition: 0.35s ease; }
+        .footer-links a:hover { color: var(--vermelho); padding-left: 6px; }
+        .footer-contact p { font-size: 0.88rem; color: var(--cinza-claro); margin-bottom: 10px; line-height: 1.5; }
+        .footer-bottom { position: relative; z-index: 2; border-top: 1px solid rgba(255,255,255,0.08); padding-top: 24px; display: flex; justify-content: space-between; gap: 20px; align-items: center; }
+        .footer-bottom p { font-size: 0.68rem; color: rgba(255,255,255,0.42); letter-spacing: 2px; text-transform: uppercase; }
+        .footer-top-link { color: var(--branco); text-decoration: none; font-size: 0.65rem; letter-spacing: 3px; text-transform: uppercase; border: 1px solid rgba(255,255,255,0.12); padding: 12px 14px; transition: 0.35s ease; }
+        .footer-top-link:hover { border-color: var(--vermelho); color: var(--vermelho); }
+
+        @media (prefers-reduced-motion: reduce) {
+            .etapa.entra { animation: none; }
+            .progresso span { transition: none; }
+        }
+
+        /* RESPONSIVO */
+        @media (max-width: 1100px) {
+            header { padding: 0 5%; }
+            .tr-hero { grid-template-columns: 1fr; gap: 50px; padding: 170px 7% 80px; }
+            .tr-mcmv { grid-template-columns: 1fr; gap: 44px; padding: 90px 7%; }
+            .tr-mcmv-foto { aspect-ratio: 16 / 9; }
+            .tr-passos { padding: 90px 7%; }
+            .passos { grid-template-columns: 1fr 1fr; row-gap: 20px; }
+            .tr-form { grid-template-columns: 1fr; gap: 40px; padding: 90px 7% 110px; }
+            .footer-dpr { padding-left: 7%; padding-right: 7%; }
+        }
+        @media (max-width: 768px) {
+            header { top: 18px; }
+            header.scrolled { top: 0; }
+            .menu-toggle { display: flex; }
+            nav { position: fixed; top: 72px; left: 18px; right: 18px; background: rgba(5,5,5,0.94); border: 1px solid rgba(255,255,255,0.1); backdrop-filter: blur(18px); padding: 22px; opacity: 0; visibility: hidden; transform: translateY(-12px); transition: 0.35s ease; }
+            nav.active { opacity: 1; visibility: visible; transform: translateY(0); }
+            .nav-menu { flex-direction: column; gap: 18px; }
+            .nav-menu a { min-height: 44px; display: flex; align-items: center; }
+            .tr-hero { padding: 130px 6% 64px; gap: 36px; }
+            .tr-hero h1 { letter-spacing: -1.5px; }
+            .tr-hero p { font-size: 0.98rem; }
+            .tr-acoes { flex-direction: column; align-items: stretch; }
+            .comparar { aspect-ratio: 4 / 3.4; }
+            .comparar-rotulo { top: 12px; font-size: 0.5rem; letter-spacing: 3px; padding: 7px 10px; }
+            .comparar-rotulo.r-antes { left: 12px; }
+            .comparar-rotulo.r-depois { right: 12px; }
+            .tr-mcmv { padding: 72px 6%; }
+            .tr-pontos { grid-template-columns: 1fr; }
+            .tr-passos { padding: 72px 6%; }
+            .passos { grid-template-columns: 1fr; border-top: 0; border-left: 1px solid var(--linha); }
+            .passo { padding: 0 0 34px 28px; }
+            .passo::after { top: 2px; left: -5px; }
+            .passo::before { margin-bottom: 14px; }
+            .passo svg { width: 34px; height: 34px; margin-bottom: 14px; }
+            .tr-recado { padding: 26px 22px; margin-top: 30px; }
+            .tr-recado .btn-veja { width: 100%; }
+            .tr-form { padding: 72px 5% 90px; }
+            .ficha { padding: 30px 20px 26px; clip-path: polygon(0 0, 100% 0, 100% calc(100% - 24px), calc(100% - 24px) 100%, 0 100%); }
+            .opcao span { min-height: 48px; font-size: 0.92rem; }
+            .opcoes:not(.coluna) .opcao { flex: 1 1 auto; }
+            .opcoes:not(.coluna) .opcao span { width: 100%; justify-content: center; }
+            .ficha-nav .btn-veja { flex: 1; }
+            .pronto-acoes { flex-direction: column; align-items: stretch; }
+            .footer-dpr { padding: 76px 7% 32px; }
+            .footer-container { grid-template-columns: 1fr; gap: 38px; margin-bottom: 48px; }
+            .footer-bottom { flex-direction: column; align-items: flex-start; }
+            html { -webkit-text-size-adjust: 100%; text-size-adjust: 100%; }
+            html, body { max-width: 100%; overflow-x: hidden; }
+            .campo { font-size: 16px; }
+            a, button, .opcao span { -webkit-tap-highlight-color: transparent; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- HEADER -->
+    <header id="siteHeader">
+        <a href="index.html" class="brand-mark">DPR<span>.</span></a>
+        <div class="nav-container">
+            <button class="menu-toggle" id="menuToggle" aria-label="Abrir menu"><span></span><span></span><span></span></button>
+            <nav id="mainNav">
+                <ul class="nav-menu">
+                    <li><a href="index.html">INÍCIO</a></li>
+                    <li><a href="empreendimento.html">EMPREENDIMENTOS</a></li>
+                    <li><a href="conceito.html">CONCEITO</a></li>
+                    <li><a href="contato.html">CONTATO</a></li>
+                    <li><a href="central-do-cliente.html">CENTRAL DO CLIENTE</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- ABERTURA -->
+    <section class="tr-hero">
+        <div>
+            <div class="sec-label">Construa no seu terreno</div>
+            <h1>Você já tem o terreno? <span>A DPR constrói a sua casa.</span></h1>
+            <p>Você entra com o <strong>terreno</strong> e o <strong>projeto</strong>, ou só com a ideia do que quer construir. A nossa equipe avalia a viabilidade e apresenta uma proposta para tirar a sua casa do papel, <strong>com o financiamento da obra</strong>.</p>
+            <div class="tr-acoes">
+                <a class="btn-veja" href="#analise">
+                    <span>Fazer a análise gratuita</span>
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+                <a class="btn-linha" href="#como-funciona">Como funciona</a>
+            </div>
+        </div>
+        <div>
+            <div class="comparar" id="comparar">
+                <picture>
+                    <source media="(max-width: 768px)" srcset="fotos/terreno/terreno-cel.webp">
+                    <img class="antes" src="fotos/terreno/terreno.webp" alt="Terreno vazio com grama" width="1600" height="900">
+                </picture>
+                <picture>
+                    <source media="(max-width: 768px)" srcset="fotos/terreno/casa-cel.webp">
+                    <img class="depois" src="fotos/terreno/casa.webp" alt="Casa térrea pronta com jardim" width="1600" height="1067">
+                </picture>
+                <span class="comparar-rotulo r-antes">Seu terreno hoje</span>
+                <span class="comparar-rotulo r-depois">Sua casa amanhã</span>
+                <span class="comparar-linha" aria-hidden="true"></span>
+                <span class="comparar-alca" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span>
+                <input type="range" id="compararControle" min="0" max="100" value="50" aria-label="Arraste para ver o terreno virar casa">
+            </div>
+            <div class="comparar-dica">Arraste e veja o terreno virar casa</div>
+        </div>
+    </section>
+
+    <!-- MCMV -->
+    <section class="tr-mcmv">
+        <div class="tr-mcmv-foto">
+            <img src="fotos/terreno/obra.webp" alt="Paredes de tijolo de uma casa em construção vistas de baixo, com o céu ao fundo" loading="lazy" width="1000" height="1335">
+            <span class="tr-mcmv-selo">Obra DPR</span>
+        </div>
+        <div class="tr-mcmv-texto">
+            <div class="sec-label">Assim como no Minha Casa Minha Vida</div>
+            <h2 class="titulo">Construímos sua casa <span>e viabilizamos o financiamento da obra.</span></h2>
+            <p>Não espere ter todo o dinheiro para começar. Com o terreno em mãos, a DPR cuida do projeto, da obra e de encaixar você na <strong>linha de financiamento certa</strong> para a sua renda.</p>
+            <div class="tr-pontos">
+                <div class="tr-ponto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 21h18M5 21V11l7-5 7 5v10"/><path d="M10 21v-6h4v6"/></svg>
+                    <h3>Construção completa</h3>
+                    <p>Da fundação à entrega das chaves, com a equipe da DPR.</p>
+                </div>
+                <div class="tr-ponto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="6" width="18" height="13" rx="1"/><path d="M3 10h18M7 15h4"/></svg>
+                    <h3>Financiamento da obra</h3>
+                    <p>A análise mostra a linha do MCMV ou do financiamento que combina com você.</p>
+                </div>
+                <div class="tr-ponto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h10l6 6v10H4z"/><path d="M14 4v6h6M8 14h8M8 17h5"/></svg>
+                    <h3>Projeto pronto ou nosso</h3>
+                    <p>Traga o seu projeto ou escolha um dos modelos de casa da DPR.</p>
+                </div>
+                <div class="tr-ponto">
+                    <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5V12l3 2"/></svg>
+                    <h3>Análise sem custo</h3>
+                    <p>Você responde 10 perguntas e a DPR retorna pelo WhatsApp.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- COMO FUNCIONA -->
+    <section class="tr-passos" id="como-funciona">
+        <div class="sec-label">É simples</div>
+        <h2 class="titulo">Do terreno à chave, <span>em quatro passos.</span></h2>
+        <ol class="passos">
+            <li class="passo">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M4 36c8-5 16-5 20-2s12 3 20-2"/><path d="M4 42h40"/><path d="M34 30V14M34 14l-6 4M34 14l6 4M34 20l-5 3M34 20l5 3"/></svg>
+                <h3>Você apresenta seu terreno</h3>
+                <p>Conte onde fica e em que situação está a documentação.</p>
+            </li>
+            <li class="passo">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="6" y="8" width="36" height="30"/><path d="M6 22h18M24 8v30M24 28h18M34 28v10"/></svg>
+                <h3>Envia o projeto ou pede orientação</h3>
+                <p>Tem projeto? Ótimo. Não tem? A DPR ajuda a desenvolver.</p>
+            </li>
+            <li class="passo">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><rect x="10" y="6" width="28" height="36"/><path d="M18 6v4h12V6"/><path d="M16 22l3 3 6-6M16 33l3 3 6-6M29 23h4M29 34h4"/></svg>
+                <h3>Avaliamos terreno, projeto e financiamento</h3>
+                <p>Viabilidade da obra e as condições de crédito para a sua renda.</p>
+            </li>
+            <li class="passo">
+                <svg viewBox="0 0 48 48" aria-hidden="true"><path d="M6 22L24 8l18 14"/><path d="M10 19v21h28V19"/><path d="M20 40V28h8v12"/></svg>
+                <h3>Aprovada a operação, construímos</h3>
+                <p>A obra começa e você acompanha cada etapa até a entrega.</p>
+            </li>
+        </ol>
+        <div class="tr-recado">
+            <strong>Sua casa pode estar <span>mais perto do que você imagina.</span></strong>
+            <a class="btn-veja" href="#analise">
+                <span>Começar a análise</span>
+                <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            </a>
+        </div>
+    </section>
+
+    <!-- FORMULARIO -->
+    <section class="tr-form" id="analise">
+        <div class="tr-form-lado">
+            <div class="sec-label">Análise gratuita</div>
+            <h2 class="titulo">Traga seu terreno <span>para avaliação.</span></h2>
+            <p>São 4 etapas rápidas. No fim, as respostas vão direto para o WhatsApp da DPR e a nossa equipe retorna no horário que você escolher.</p>
+            <ol class="etapas-lista" id="etapasLista">
+                <li class="atual"><i>1</i>O terreno</li>
+                <li><i>2</i>A casa</li>
+                <li><i>3</i>O financiamento</li>
+                <li><i>4</i>Contato</li>
+            </ol>
+        </div>
+
+        <div class="ficha" id="ficha">
+            <form id="formTerreno" novalidate>
+                <div class="ficha-topo"><span id="fichaNome">O terreno</span><strong id="fichaConta">1 / 4</strong></div>
+                <div class="progresso" aria-hidden="true"><span id="progresso"></span></div>
+
+                <!-- Etapa 1: o terreno -->
+                <div class="etapa" data-etapa="1">
+                    <h3>Vamos começar <span>pelo terreno.</span></h3>
+                    <fieldset class="pergunta" data-campo="terreno">
+                        <legend>Você já tem o terreno?</legend>
+                        <div class="opcoes">
+                            <label class="opcao"><input type="radio" name="terreno" value="Sim"><span>Sim</span></label>
+                            <label class="opcao"><input type="radio" name="terreno" value="Estou comprando"><span>Estou comprando</span></label>
+                            <label class="opcao"><input type="radio" name="terreno" value="Ainda não"><span>Ainda não</span></label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="pergunta" data-campo="escritura">
+                        <legend>O terreno está quitado e com escritura no seu nome?</legend>
+                        <div class="opcoes">
+                            <label class="opcao"><input type="radio" name="escritura" value="Sim"><span>Sim</span></label>
+                            <label class="opcao"><input type="radio" name="escritura" value="Quitado, mas sem escritura"><span>Quitado, mas sem escritura</span></label>
+                            <label class="opcao"><input type="radio" name="escritura" value="Ainda pagando"><span>Ainda pagando</span></label>
+                            <label class="opcao"><input type="radio" name="escritura" value="Não sei"><span>Não sei</span></label>
+                        </div>
+                    </fieldset>
+                    <div class="pergunta" data-campo="cidade">
+                        <label class="rot" for="cidade">Em qual cidade fica?</label>
+                        <select class="campo" id="cidade" name="cidade">
+                            <option value="">Escolha a cidade</option>
+                        </select>
+                        <input class="campo campo-outra" type="text" id="cidadeOutra" name="cidadeOutra" placeholder="Qual cidade?" autocomplete="address-level2" hidden>
+                    </div>
+                </div>
+
+                <!-- Etapa 2: a casa -->
+                <div class="etapa" data-etapa="2" hidden>
+                    <h3>Agora, <span>a sua casa.</span></h3>
+                    <fieldset class="pergunta" data-campo="projeto">
+                        <legend>Você já tem projeto?</legend>
+                        <div class="opcoes coluna">
+                            <label class="opcao"><input type="radio" name="projeto" value="Sim"><span>Sim</span></label>
+                            <label class="opcao"><input type="radio" name="projeto" value="Não, quero ver os modelos da DPR"><span>Não, quero ver os modelos da DPR</span></label>
+                            <label class="opcao"><input type="radio" name="projeto" value="Tenho só uma ideia"><span>Tenho só uma ideia</span></label>
+                        </div>
+                    </fieldset>
+                    <fieldset class="pergunta" data-campo="tipo">
+                        <legend>Que tipo de casa você quer?</legend>
+                        <div class="opcoes">
+                            <label class="opcao"><input type="radio" name="tipo" value="2 quartos"><span>2 quartos</span></label>
+                            <label class="opcao"><input type="radio" name="tipo" value="3 quartos"><span>3 quartos</span></label>
+                            <label class="opcao"><input type="radio" name="tipo" value="Sobrado"><span>Sobrado</span></label>
+                            <label class="opcao"><input type="radio" name="tipo" value="Ainda não sei"><span>Ainda não sei</span></label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- Etapa 3: o financiamento -->
+                <div class="etapa" data-etapa="3" hidden>
+                    <h3>Por fim, <span>o financiamento.</span></h3>
+                    <fieldset class="pergunta" data-campo="renda">
+                        <legend>Renda familiar mensal<small>Somando a renda de quem vai financiar.</small></legend>
+                        <div class="opcoes coluna">
+                            <label class="opcao"><input type="radio" name="renda" value="Até R$ 3.200" data-faixa="1"><span>Até R$ 3.200</span></label>
+                            <label class="opcao"><input type="radio" name="renda" value="R$ 3.200 a R$ 5.000" data-faixa="2"><span>R$ 3.200 a R$ 5.000</span></label>
+                            <label class="opcao"><input type="radio" name="renda" value="R$ 5.000 a R$ 9.600" data-faixa="3"><span>R$ 5.000 a R$ 9.600</span></label>
+                            <label class="opcao"><input type="radio" name="renda" value="R$ 9.600 a R$ 13.000" data-faixa="4"><span>R$ 9.600 a R$ 13.000</span></label>
+                            <label class="opcao"><input type="radio" name="renda" value="Acima de R$ 13.000" data-faixa="0"><span>Acima de R$ 13.000</span></label>
+                        </div>
+                    </fieldset>
+                    <div class="faixa-resultado" id="faixaResultado" hidden aria-live="polite">
+                        <span>Sua linha provável</span>
+                        <strong id="faixaNome"></strong>
+                        <p id="faixaTexto"></p>
+                    </div>
+                    <fieldset class="pergunta" data-campo="fgts">
+                        <legend>Tem FGTS para usar?</legend>
+                        <div class="opcoes">
+                            <label class="opcao"><input type="radio" name="fgts" value="Sim"><span>Sim</span></label>
+                            <label class="opcao"><input type="radio" name="fgts" value="Não"><span>Não</span></label>
+                            <label class="opcao"><input type="radio" name="fgts" value="Não sei"><span>Não sei</span></label>
+                        </div>
+                    </fieldset>
+                </div>
+
+                <!-- Etapa 4: contato -->
+                <div class="etapa" data-etapa="4" hidden>
+                    <h3>Para quem <span>a DPR retorna?</span></h3>
+                    <div class="pergunta" data-campo="nome">
+                        <label class="rot" for="nome">Nome</label>
+                        <input class="campo" type="text" id="nome" name="nome" autocomplete="name" placeholder="Seu nome completo">
+                    </div>
+                    <div class="pergunta" data-campo="whatsapp">
+                        <label class="rot" for="whatsapp">WhatsApp</label>
+                        <input class="campo" type="tel" id="whatsapp" name="whatsapp" autocomplete="tel-national" inputmode="numeric" placeholder="(00) 00000-0000">
+                    </div>
+                    <fieldset class="pergunta" data-campo="horario">
+                        <legend>Melhor horário para falarmos</legend>
+                        <div class="opcoes">
+                            <label class="opcao"><input type="radio" name="horario" value="Manhã"><span>Manhã</span></label>
+                            <label class="opcao"><input type="radio" name="horario" value="Tarde"><span>Tarde</span></label>
+                            <label class="opcao"><input type="radio" name="horario" value="Noite"><span>Noite</span></label>
+                        </div>
+                    </fieldset>
+                    <label class="lgpd" data-campo="lgpd">
+                        <input type="checkbox" id="lgpd" name="lgpd">
+                        <span>Autorizo a DPR a entrar em contato e usar meus dados para esta análise, conforme a Lei Geral de Proteção de Dados (LGPD).</span>
+                    </label>
+                </div>
+
+                <p class="ficha-erro" id="fichaErro" role="alert"></p>
+                <div class="ficha-nav">
+                    <button type="button" class="btn-linha" id="btVoltar" hidden>Voltar</button>
+                    <button type="submit" class="btn-veja" id="btAvancar">
+                        <span id="btAvancarTexto">Continuar</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </button>
+                </div>
+            </form>
+
+            <div class="pronto" id="pronto" hidden>
+                <div class="pronto-marca"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12.5l4.5 4.5L19 7.5"/></svg></div>
+                <h3>Quase lá, <span id="prontoNome"></span></h3>
+                <p>Abrimos o seu WhatsApp com as respostas já escritas para a DPR. É só tocar em <strong>enviar</strong>. Se o WhatsApp não abriu, use o botão abaixo.</p>
+                <div class="pronto-acoes">
+                    <a class="btn-veja" id="prontoWhats" href="#" target="_blank" rel="noopener">
+                        <span>Enviar pelo WhatsApp</span>
+                        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    </a>
+                    <button type="button" class="btn-linha" id="prontoEditar">Revisar respostas</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="footer-dpr">
+        <div class="footer-container">
+            <div class="footer-brand">
+                <h2>DPR</h2>
+                <p>Na DPR, não vendemos apenas imóveis – realizamos sonhos e construímos futuros com você.</p>
+            </div>
+            <div class="footer-links">
+                <h4>Links</h4>
+                <ul>
+                    <li><a href="index.html">Início</a></li>
+                    <li><a href="empreendimento.html">Empreendimentos</a></li>
+                    <li><a href="conceito.html">Conceito</a></li>
+                    <li><a href="contato.html">Contato</a></li>
+                    <li><a href="central-do-cliente.html">Central do Cliente</a></li>
+                </ul>
+            </div>
+            <div class="footer-contact">
+                <h4>Contato</h4>
+                <p>atendimento@dprconstrutora.com.br</p>
+                <p>+55 11 93308-5258</p>
+                <p>Caucaia &amp; Itatinga - SP</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>© 2025 DPR Construtora. Todos os direitos reservados.</p>
+            <a href="#" class="footer-top-link">Voltar ao topo</a>
+        </div>
+    </footer>
+
+    <script>
+        // Menu mobile
+        const menuToggle = document.getElementById('menuToggle');
+        const mainNav = document.getElementById('mainNav');
+        menuToggle.addEventListener('click', () => { menuToggle.classList.toggle('active'); mainNav.classList.toggle('active'); });
+        document.querySelectorAll('.nav-menu a').forEach(link => link.addEventListener('click', () => { menuToggle.classList.remove('active'); mainNav.classList.remove('active'); }));
+
+        // Header scrolled
+        const header = document.getElementById('siteHeader');
+        window.addEventListener('scroll', () => header.classList.toggle('scrolled', window.scrollY > 60), { passive: true });
+
+        // ------------------------------------------------------------------
+        // Construa no seu terreno (16/11/2026). O que a DPR muda fica aqui em cima.
+        // ------------------------------------------------------------------
+        const WHATSAPP_DPR = '5511959943705';
+        const CIDADES = ['Fortaleza', 'Caucaia', 'Maracanaú'];
+        // faixas de renda do Minha Casa Minha Vida usadas na resposta (indicação; a análise confirma)
+        const FAIXAS = {
+            '1': { nome: 'Faixa 1 do Minha Casa Minha Vida', texto: 'A linha com mais subsídio do programa. A análise confirma o valor e as condições.' },
+            '2': { nome: 'Faixa 2 do Minha Casa Minha Vida', texto: 'Subsídio e juros reduzidos, conforme a renda e a cidade. A análise confirma.' },
+            '3': { nome: 'Faixa 3 do Minha Casa Minha Vida', texto: 'Juros abaixo do mercado e uso do FGTS. A análise confirma as condições.' },
+            '4': { nome: 'Faixa 4 do Minha Casa Minha Vida', texto: 'A faixa de classe média do programa, com juros menores que os de mercado. A análise confirma.' },
+            '0': { nome: 'Financiamento fora do MCMV', texto: 'Acima das faixas do programa, a obra pode ser financiada por outras linhas de crédito. A DPR mostra as opções na análise.' }
+        };
+
+        // --- arraste da abertura: terreno -> casa
+        (function () {
+            const caixa = document.getElementById('comparar');
+            const controle = document.getElementById('compararControle');
+            const por = (v) => caixa.style.setProperty('--pos', v + '%');
+            controle.addEventListener('input', () => { tocou = true; por(controle.value); });
+            let tocou = false;
+            por(controle.value);
+            // uma pequena demonstracao na entrada, so se a pessoa nao pediu menos movimento
+            if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                const inicio = performance.now();
+                const passo = (t) => {
+                    if (tocou) return;
+                    const k = Math.min(1, (t - inicio) / 2200);
+                    const v = 50 + Math.sin(k * Math.PI * 2) * 22 * (1 - k);
+                    por(v.toFixed(1)); controle.value = v;
+                    if (k < 1) requestAnimationFrame(passo);
+                };
+                setTimeout(() => requestAnimationFrame(passo), 700);
+            }
+        })();
+
+        // --- formulario em 4 etapas
+        (function () {
+            const form = document.getElementById('formTerreno');
+            const etapas = Array.from(form.querySelectorAll('.etapa'));
+            const NOMES = ['O terreno', 'A casa', 'O financiamento', 'Contato'];
+            const lista = Array.from(document.querySelectorAll('#etapasLista li'));
+            const erro = document.getElementById('fichaErro');
+            const btVoltar = document.getElementById('btVoltar');
+            const btTexto = document.getElementById('btAvancarTexto');
+            const cidade = document.getElementById('cidade');
+            const cidadeOutra = document.getElementById('cidadeOutra');
+            const tel = document.getElementById('whatsapp');
+            let atual = 1;
+
+            CIDADES.concat(['Outra']).forEach((c) => { const o = document.createElement('option'); o.value = c; o.textContent = c; cidade.appendChild(o); });
+            cidade.addEventListener('change', () => { cidadeOutra.hidden = cidade.value !== 'Outra'; if (!cidadeOutra.hidden) cidadeOutra.focus(); });
+
+            // mascara do WhatsApp: (11) 91234-5678
+            tel.addEventListener('input', () => {
+                const d = tel.value.replace(/\D/g, '').replace(/^55(?=\d{10,11}$)/, '').slice(0, 11);
+                let v = d;
+                if (d.length > 2) v = '(' + d.slice(0, 2) + ') ' + d.slice(2);
+                if (d.length > 6) v = '(' + d.slice(0, 2) + ') ' + d.slice(2, d.length - 4) + '-' + d.slice(d.length - 4);
+                tel.value = v;
+            });
+
+            // a linha provavel aparece assim que a renda e escolhida
+            form.querySelectorAll('input[name=renda]').forEach((r) => r.addEventListener('change', () => {
+                const f = FAIXAS[r.dataset.faixa];
+                document.getElementById('faixaNome').textContent = f.nome;
+                document.getElementById('faixaTexto').textContent = f.texto;
+                document.getElementById('faixaResultado').hidden = false;
+            }));
+            form.addEventListener('change', () => { erro.textContent = ''; });
+
+            const valor = (nome) => { const x = form.querySelector('input[name="' + nome + '"]:checked'); return x ? x.value : ''; };
+            function respostas() {
+                const r = form.querySelector('input[name=renda]:checked');
+                return {
+                    terreno: valor('terreno'), escritura: valor('escritura'),
+                    cidade: cidade.value === 'Outra' ? cidadeOutra.value.trim() : cidade.value,
+                    projeto: valor('projeto'), tipo: valor('tipo'),
+                    renda: valor('renda'), faixa: r ? FAIXAS[r.dataset.faixa].nome : '', fgts: valor('fgts'),
+                    nome: document.getElementById('nome').value.trim().replace(/\s+/g, ' '),
+                    whatsapp: tel.value, horario: valor('horario'), lgpd: document.getElementById('lgpd').checked
+                };
+            }
+            function falta(n) {
+                const r = respostas();
+                if (n === 1) {
+                    if (!r.terreno) return ['terreno', 'Conte se você já tem o terreno.'];
+                    if (!r.escritura) return ['escritura', 'Conte a situação da escritura do terreno.'];
+                    if (!cidade.value) return ['cidade', 'Escolha a cidade do terreno.'];
+                    if (cidade.value === 'Outra' && r.cidade.length < 2) return ['cidade', 'Escreva a cidade do terreno.'];
+                }
+                if (n === 2) {
+                    if (!r.projeto) return ['projeto', 'Conte se você já tem projeto.'];
+                    if (!r.tipo) return ['tipo', 'Escolha o tipo de casa.'];
+                }
+                if (n === 3) {
+                    if (!r.renda) return ['renda', 'Escolha a renda familiar.'];
+                    if (!r.fgts) return ['fgts', 'Conte se tem FGTS para usar.'];
+                }
+                if (n === 4) {
+                    if (r.nome.length < 3) return ['nome', 'Escreva o seu nome.'];
+                    if (!/^\d{10,11}$/.test(r.whatsapp.replace(/\D/g, ''))) return ['whatsapp', 'Escreva o WhatsApp com DDD, por exemplo (11) 91234-5678.'];
+                    if (!r.horario) return ['horario', 'Escolha o melhor horário para falarmos.'];
+                    if (!r.lgpd) return ['lgpd', 'Para enviar, marque a autorização de contato (LGPD).'];
+                }
+                return null;
+            }
+            function mostrar(n, foco) {
+                atual = n;
+                etapas.forEach((e) => { const sim = Number(e.dataset.etapa) === n; e.hidden = !sim; e.classList.toggle('entra', sim); });
+                lista.forEach((li, i) => { li.classList.toggle('atual', i + 1 === n); li.classList.toggle('feita', i + 1 < n); });
+                document.getElementById('fichaNome').textContent = NOMES[n - 1];
+                document.getElementById('fichaConta').textContent = n + ' / 4';
+                document.getElementById('progresso').style.width = (n * 25) + '%';
+                btVoltar.hidden = n === 1;
+                btTexto.textContent = n === 4 ? 'Enviar pelo WhatsApp' : 'Continuar';
+                erro.textContent = '';
+                if (foco) {
+                    const ficha = document.getElementById('ficha');
+                    if (ficha.getBoundingClientRect().top < 0) ficha.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                    const primeiro = etapas[n - 1].querySelector('input, select');
+                    if (primeiro) primeiro.focus({ preventScroll: true });
+                }
+            }
+            function mensagem(r) {
+                return [
+                    'Olá, DPR! Quero construir no meu terreno e gostaria de uma análise.',
+                    '',
+                    '*O terreno*',
+                    '- Já tem o terreno: ' + r.terreno,
+                    '- Quitado e com escritura: ' + r.escritura,
+                    '- Cidade: ' + r.cidade,
+                    '',
+                    '*A casa*',
+                    '- Projeto: ' + r.projeto,
+                    '- Tipo de casa: ' + r.tipo,
+                    '',
+                    '*O financiamento*',
+                    '- Renda familiar: ' + r.renda + ' (' + r.faixa + ')',
+                    '- FGTS para usar: ' + r.fgts,
+                    '',
+                    '*Contato*',
+                    '- Nome: ' + r.nome,
+                    '- WhatsApp: ' + r.whatsapp,
+                    '- Melhor horário: ' + r.horario,
+                    '',
+                    'Autorizo a DPR a entrar em contato e usar meus dados para esta análise (LGPD).'
+                ].join('\n');
+            }
+            form.addEventListener('submit', (ev) => {
+                ev.preventDefault();
+                const f = falta(atual);
+                if (f) {
+                    // foco primeiro: ao sair do campo anterior o navegador dispara "change", que limpa o aviso
+                    const alvo = form.querySelector('[data-campo="' + f[0] + '"] input, [data-campo="' + f[0] + '"] select');
+                    if (alvo) alvo.focus();
+                    erro.textContent = f[1];
+                    return;
+                }
+                if (atual < 4) { mostrar(atual + 1, true); return; }
+                const r = respostas();
+                const url = 'https://wa.me/' + WHATSAPP_DPR + '?text=' + encodeURIComponent(mensagem(r));
+                document.getElementById('prontoWhats').href = url;
+                document.getElementById('prontoNome').textContent = r.nome.split(' ')[0] + '.';
+                form.hidden = true;
+                document.getElementById('pronto').hidden = false;
+                lista.forEach((li) => { li.classList.remove('atual'); li.classList.add('feita'); });
+                window.open(url, '_blank', 'noopener');
+            });
+            btVoltar.addEventListener('click', () => mostrar(Math.max(1, atual - 1), true));
+            document.getElementById('prontoEditar').addEventListener('click', () => {
+                document.getElementById('pronto').hidden = true;
+                form.hidden = false;
+                mostrar(1, true);
+            });
+            window.DPR_TERRENO = { mostrar, respostas, mensagem, falta, FAIXAS, CIDADES, WHATSAPP_DPR };
+            mostrar(1, false);
+        })();
+    </script>
+
+</body>
+</html>
