@@ -1,0 +1,8 @@
+{
+  "redirects": [
+    { "source": "/:pagina((?!em-construcao).*)\\.html", "destination": "/", "permanent": false }
+  ],
+  "rewrites": [
+    { "source": "/", "destination": "/em-construcao.html" }
+  ]
+}
