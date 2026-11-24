@@ -180,15 +180,50 @@
           <p>Cada empreendimento começa no papel: implantação, áreas comuns e cada cômodo pensados antes da obra.</p>
         </div>
       </div>
-      <div class="portas-foto"><img src="/fotos/obras/projeto-comercial.webp" srcset="/fotos/obras/projeto-comercial-900.webp 900w, /fotos/obras/projeto-comercial.webp 1262w" sizes="100vw" alt="Projeto de centro comercial com fachada em arcos" loading="lazy"></div>
+      <div class="portas-foto"><img src="/fotos/caucaia2/centro-portaria.webp" srcset="/fotos/caucaia2/centro-portaria-900.webp 900w, /fotos/caucaia2/centro-portaria.webp 1589w" sizes="100vw" alt="Projeto do Villaggio Caucaia II: centro comercial com lojas e a portaria do condomínio" loading="lazy"></div>
       <div class="portas-texto">
         <div class="cont">
-          <p>Centro comercial com fachada em arcos.</p>
+          <p>Villaggio Caucaia II.</p>
           <span class="legenda">Projeto · imagem ilustrativa</span>
         </div>
       </div>
     </div>
   </section>
+
+  <!-- o lazer do Villaggio Caucaia II: mosaico com foto ampliada -->
+  <section class="lazer sec" id="caucaia2" aria-labelledby="titulo-lazer">
+    <div class="cont">
+      <div class="sec-cab lazer-cab">
+        <div>
+          <span class="rotulo">Villaggio Caucaia II</span>
+          <h2 id="titulo-lazer" data-palavras>Lazer para a família <em>inteira.</em></h2>
+        </div>
+        <p data-revela>Academia, quadra, espaço pet, brinquedoteca, espaço gourmet e jardins pensados para o dia a dia de quem mora ali.</p>
+      </div>
+      <div class="mosaico">
+        <button class="ladrilho l-grande" type="button" data-foto="centro-comercial"><img src="/fotos/caucaia2/centro-comercial-900.webp" alt="Centro comercial com lojas e deck de madeira" loading="lazy"><span class="ladrilho-leg"><span>Centro comercial</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="quadra" style="--d:1"><img src="/fotos/caucaia2/quadra-900.webp" alt="Quadra poliesportiva coberta por tela com arcos" loading="lazy"><span class="ladrilho-leg"><span>Quadra poliesportiva</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="academia" style="--d:2"><img src="/fotos/caucaia2/academia-900.webp" alt="Academia ao ar livre com aparelhos e jardim" loading="lazy"><span class="ladrilho-leg"><span>Academia ao ar livre</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho l-largo" type="button" data-foto="gourmet"><img src="/fotos/caucaia2/gourmet-900.webp" alt="Espaço gourmet com churrasqueira e mesas de madeira" loading="lazy"><span class="ladrilho-leg"><span>Espaço gourmet</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="brinquedoteca" style="--d:1"><img src="/fotos/caucaia2/brinquedoteca-900.webp" alt="Brinquedoteca com piscina de bolinhas e tapete" loading="lazy"><span class="ladrilho-leg"><span>Brinquedoteca</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="pet"><img src="/fotos/caucaia2/pet-900.webp" alt="Espaço pet com rampas, túnel e gramado" loading="lazy"><span class="ladrilho-leg"><span>Espaço pet</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="escalada" style="--d:1"><img src="/fotos/caucaia2/escalada-900.webp" alt="Parede de escalada em madeira" loading="lazy"><span class="ladrilho-leg"><span>Parede de escalada</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="lounge" style="--d:2"><img src="/fotos/caucaia2/lounge-900.webp" alt="Lounge com sofás em volta de uma lareira" loading="lazy"><span class="ladrilho-leg"><span>Lounge com lareira</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho l-largo" type="button" data-foto="redario"><img src="/fotos/caucaia2/redario-900.webp" alt="Jardim com deck, redes e espaço de meditação" loading="lazy"><span class="ladrilho-leg"><span>Jardim e redário</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="coworking" style="--d:1"><img src="/fotos/caucaia2/coworking-900.webp" alt="Coworking ao ar livre sob pergolado" loading="lazy"><span class="ladrilho-leg"><span>Coworking</span><span class="legenda">Projeto</span></span></button>
+        <button class="ladrilho" type="button" data-foto="jardim" style="--d:2"><img src="/fotos/caucaia2/jardim-900.webp" alt="Jardim florido com bancos e a quadra ao fundo" loading="lazy"><span class="ladrilho-leg"><span>Jardim</span><span class="legenda">Projeto</span></span></button>
+      </div>
+      <p class="lazer-nota legenda">Imagens ilustrativas do projeto</p>
+    </div>
+  </section>
+
+  <!-- foto ampliada -->
+  <div class="ampliada" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+    <button class="amp-fechar" type="button" aria-label="Fechar">&times;</button>
+    <button class="amp-seta amp-ant" type="button" aria-label="Foto anterior">&larr;</button>
+    <figure class="amp-fig"><img alt=""><figcaption><span class="amp-nome"></span><span class="legenda">Projeto · imagem ilustrativa · <span class="amp-num"></span></span></figcaption></figure>
+    <button class="amp-seta amp-prox" type="button" aria-label="Próxima foto">&rarr;</button>
+  </div>
 
   <!-- como a DPR trabalha (aprovado) -->
   <section class="pilares sec" id="pilares" aria-labelledby="titulo-pilares">
@@ -283,6 +318,7 @@
         <a href="#caminho">O caminho</a>
         <a href="#obras">Obras</a>
         <a href="#projetos">Projetos</a>
+        <a href="#caucaia2">Villaggio Caucaia II</a>
         <a href="#terreno">Construa no seu terreno</a>
       </div>
     </div>

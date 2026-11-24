@@ -59,6 +59,68 @@
     alvos.forEach(function (el) { obs.observe(el); });
   }
 
+  /* ---------- mosaico do Caucaia II: revela pelo mosaico inteiro (a cortina esconde cada foto) ---------- */
+  var mosaico = $('.mosaico');
+  if (mosaico) {
+    if (calmo || !('IntersectionObserver' in window)) mosaico.classList.add('visivel');
+    else {
+      var obsM = new IntersectionObserver(function (es) {
+        if (es[0].isIntersecting) { mosaico.classList.add('visivel'); obsM.disconnect(); }
+      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
+      obsM.observe(mosaico);
+    }
+  }
+
+  /* ---------- foto ampliada ---------- */
+  var amp = $('.ampliada'), ladrilhos = $$('.ladrilho');
+  if (amp && ladrilhos.length) {
+    var ampImg = $('.amp-fig img', amp), ampNome = $('.amp-nome', amp), ampNum = $('.amp-num', amp);
+    var idx = 0, voltaFoco = null;
+    var poe = function (i) {
+      idx = (i + ladrilhos.length) % ladrilhos.length;
+      var l = ladrilhos[idx], nome = l.getAttribute('data-foto');
+      ampImg.style.opacity = 0;
+      ampImg.onload = function () { ampImg.style.opacity = 1; };
+      ampImg.src = '/fotos/caucaia2/' + nome + (window.innerWidth < 900 ? '-900' : '') + '.webp';
+      ampImg.alt = $('img', l).alt;
+      ampNome.textContent = $('.ladrilho-leg span', l).textContent;
+      ampNum.textContent = (idx + 1) + ' de ' + ladrilhos.length;
+    };
+    var abre = function (i) {
+      voltaFoco = document.activeElement; poe(i);
+      amp.hidden = false; requestAnimationFrame(function () { amp.classList.add('aberta'); });
+      document.body.style.overflow = 'hidden'; $('.amp-fechar', amp).focus();
+    };
+    var fecha = function () {
+      amp.classList.remove('aberta'); document.body.style.overflow = '';
+      setTimeout(function () { amp.hidden = true; }, 350);
+      if (voltaFoco) voltaFoco.focus();
+    };
+    ladrilhos.forEach(function (l, i) { l.addEventListener('click', function () { abre(i); }); });
+    $('.amp-fechar', amp).addEventListener('click', fecha);
+    $('.amp-ant', amp).addEventListener('click', function () { poe(idx - 1); });
+    $('.amp-prox', amp).addEventListener('click', function () { poe(idx + 1); });
+    amp.addEventListener('click', function (e) { if (e.target === amp) fecha(); });
+    document.addEventListener('keydown', function (e) {
+      if (amp.hidden) return;
+      if (e.key === 'Escape') fecha();
+      else if (e.key === 'ArrowLeft') poe(idx - 1);
+      else if (e.key === 'ArrowRight') poe(idx + 1);
+      else if (e.key === 'Tab') {
+        var f = $$('button', amp), primeiro = f[0], ultimo = f[f.length - 1];
+        if (e.shiftKey && document.activeElement === primeiro) { e.preventDefault(); ultimo.focus(); }
+        else if (!e.shiftKey && document.activeElement === ultimo) { e.preventDefault(); primeiro.focus(); }
+      }
+    });
+    var tx0 = null;
+    amp.addEventListener('touchstart', function (e) { tx0 = e.touches[0].clientX; }, { passive: true });
+    amp.addEventListener('touchend', function (e) {
+      if (tx0 === null) return;
+      var dx = e.changedTouches[0].clientX - tx0; tx0 = null;
+      if (Math.abs(dx) > 50) poe(idx + (dx < 0 ? 1 : -1));
+    });
+  }
+
   /* ---------- abertura: slide de videos ---------- */
   var heroi = $('.heroi');
   if (heroi) {
