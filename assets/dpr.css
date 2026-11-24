@@ -344,20 +344,20 @@ html:not(.js) .pal > span { transform: none; }
 .porta-legenda { position: absolute; right: calc(var(--margem) + 76px); bottom: 24px; z-index: 2; color: rgba(244, 241, 236, .65); opacity: var(--abre, 0); }
 
 /* rodape com o logo grande */
-.rodape { background: var(--papel); padding: clamp(90px, 11vw, 150px) 0 104px; overflow: hidden; }
-.rodape-cta { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 32px 48px; padding-bottom: clamp(56px, 7vw, 96px); border-bottom: 1px solid var(--linha-clara); }
+.rodape { background: var(--papel); padding: clamp(64px, 7vw, 100px) 0 96px; overflow: hidden; }
+.rodape-cta { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 28px 48px; padding-bottom: clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--linha-clara); }
+.rodape-cta h2 { font-size: clamp(30px, 3.2vw, 46px); }
 .rodape-cta > div:first-child { display: grid; gap: 22px; }
 .rodape-cta h2 { max-width: 17ch; }
 .rodape-bts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
-.rodape-base { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 48px; padding: 56px 0; }
+.rodape-base { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; padding: 44px 0 36px; }
 .rodape-col { display: grid; gap: 10px; align-content: start; font-size: 15px; }
 .rodape-col .legenda { color: var(--areia-escura); margin-bottom: 8px; }
 .rodape-col a { text-decoration: none; width: fit-content; background: linear-gradient(var(--areia), var(--areia)) left bottom / 0 1px no-repeat; transition: background-size .5s var(--ease); }
 .rodape-col a:hover { background-size: 100% 1px; }
 .rodape-col span:not(.legenda) { color: var(--taupe); }
 .rodape-col .chamada { color: var(--areia-escura); }
-.rodape-logo { padding: 12px 0 48px; }
-.rodape-logo .marca { --lw: min(100%, 1100px); margin-inline: auto; }
+.rodape-logo .marca { --lw: 200px; margin-bottom: 6px; }
 .rodape-aviso { font-size: 13px; line-height: 1.6; color: var(--taupe); max-width: 80ch; padding-bottom: 28px; }
 .rodape-fim { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 24px; border-top: 1px solid var(--linha-clara); font-size: 13px; color: var(--taupe); }
 
