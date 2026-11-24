@@ -1,11 +1,11 @@
-/* DPR Construtora - animacoes do site novo (sem biblioteca). */
+/* DPR Construtora - animacoes do site novo, caminho "Galeria de arcos" (sem biblioteca). */
 (function () {
   var doc = document.documentElement;
   var calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var mouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
-  var limita = function (v, a, b) { return Math.min(b === undefined ? 1 : b, Math.max(a || 0, v)); };
-  var suave = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+  var limita = function (v) { return Math.min(1, Math.max(0, v)); };
   var largo = function () { return window.innerWidth >= 900; };
 
   /* palavras: cada palavra dentro de uma mascara, para subir */
@@ -20,7 +20,7 @@
             if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
             var w = document.createElement('span'); w.className = 'pal';
             var d = document.createElement('span'); d.textContent = t;
-            d.style.transitionDelay = (i++ * 75) + 'ms';
+            d.style.transitionDelay = (i++ * 60) + 'ms';
             w.appendChild(d); frag.appendChild(w);
           });
           n.parentNode.replaceChild(frag, n);
@@ -29,26 +29,6 @@
     })(el);
   }
   $$('[data-palavras]').forEach(quebraPalavras);
-
-  /* manifesto: palavras que acendem */
-  var manifesto = $('[data-acende]');
-  var acesas = [];
-  if (manifesto) {
-    (function anda(no) {
-      Array.prototype.slice.call(no.childNodes).forEach(function (n) {
-        if (n.nodeType === 3) {
-          var frag = document.createDocumentFragment();
-          n.textContent.split(/(\s+)/).forEach(function (t) {
-            if (!t) return;
-            if (/^\s+$/.test(t)) { frag.appendChild(document.createTextNode(t)); return; }
-            var s = document.createElement('span'); s.className = 'acende'; s.textContent = t;
-            acesas.push(s); frag.appendChild(s);
-          });
-          n.parentNode.replaceChild(frag, n);
-        } else if (n.nodeType === 1) { anda(n); }
-      });
-    })(manifesto);
-  }
 
   /* revelar ao entrar na tela.
      Alguns itens se revelam em grupo, pelo pai: a "cortina" esconde o proprio item com um recorte
@@ -80,37 +60,69 @@
     });
   }
 
-  /* abertura */
-  var ab = $('.abertura'), porta = $('.porta'), textoAb = $('.abertura-texto');
-  var tituloAb = ab && $('h1', ab);
-  if (tituloAb) setTimeout(function () { tituloAb.classList.add('visivel'); }, calmo ? 0 : 950);
+  /* abertura: titulo depois do arco */
+  var tituloAb = $('.abertura h1');
+  if (tituloAb) setTimeout(function () { tituloAb.classList.add('visivel'); }, calmo ? 0 : 700);
 
-  function arrumaPorta() {
-    if (!ab || !porta) return;
-    var palco = porta.parentNode, W = palco.clientWidth, H = palco.clientHeight;
-    var t0, aw, ah, cx, b0;
-    if (largo()) {
-      ah = H * 0.66; aw = ah * 0.72; cx = W * 0.73; b0 = H * 0.12; t0 = H - b0 - ah;
-    } else {
-      var bts = $('.abertura-bts', ab);
-      var fim = bts ? bts.offsetTop + bts.offsetHeight + bts.offsetParent.offsetTop : H * 0.6;
-      t0 = fim + 32; b0 = 22; ah = H - t0 - b0;
-      aw = Math.min(ah * 0.74, W - 2 * 28);
-      if (ah < 150) { aw = Math.min(220, W - 56); t0 = H - 130; b0 = 0; }
-      cx = W / 2;
+  /* galeria em arco: troca a foto com uma cortina de baixo para cima */
+  var galeria = $('.galeria');
+  if (galeria) {
+    var slides = $$('.slide', galeria), atual = 0, relogio = null;
+    var numero = $('.contador b'), legFoto = $('.legenda-foto'), barra = $('.progresso i');
+    var corre = function () { if (!barra) return; barra.classList.remove('corre'); void barra.offsetWidth; barra.classList.add('corre'); };
+    var mostra = function (i) {
+      if (i === atual) return;
+      var velha = slides[atual], nova = slides[i];
+      velha.classList.remove('entrando'); velha.classList.add('saindo');
+      nova.classList.remove('saindo'); nova.classList.add('ativa', 'entrando');
+      setTimeout(function () { velha.classList.remove('ativa', 'saindo'); nova.classList.remove('entrando'); }, 1350);
+      atual = i;
+      if (numero) numero.textContent = (i + 1 < 10 ? '0' : '') + (i + 1);
+      if (legFoto) { legFoto.style.opacity = 0; setTimeout(function () { legFoto.textContent = nova.getAttribute('data-legenda'); legFoto.style.opacity = 1; }, 380); }
+      corre();
+    };
+    var proxima = function () { if (!document.hidden) mostra((atual + 1) % slides.length); };
+    if (!calmo && slides.length > 1) {
+      setTimeout(function () { corre(); relogio = setInterval(proxima, 5200); }, 1600);
+      galeria.addEventListener('click', function () { clearInterval(relogio); proxima(); relogio = setInterval(proxima, 5200); });
     }
-    var s = porta.style;
-    s.setProperty('--t0', t0 + 'px'); s.setProperty('--b0', b0 + 'px');
-    s.setProperty('--l0', (cx - aw / 2) + 'px'); s.setProperty('--r0', (W - cx - aw / 2) + 'px');
-    s.setProperty('--rr', (aw / 2) + 'px');
-    var meioArco = b0 === 0 ? t0 + 65 : t0 + ah / 2;
-    s.setProperty('--dx', (cx - W / 2) + 'px'); s.setProperty('--dy', (meioArco - H / 2) + 'px');
-    porta.classList.add('pronta');
+  }
+
+  /* no pc, o arco acompanha o mouse de leve */
+  var moldura = $('.galeria-moldura');
+  if (moldura && mouse && !calmo) {
+    document.addEventListener('mousemove', function (e) {
+      if (window.scrollY > window.innerHeight) return;
+      moldura.style.setProperty('--mx', ((e.clientX / window.innerWidth) - .5).toFixed(3) * 2);
+      moldura.style.setProperty('--my', ((e.clientY / window.innerHeight) - .5).toFixed(3) * 2);
+    }, { passive: true });
+  }
+
+  /* o caminho: a foto em arco segue o mouse sobre cada etapa */
+  var previa = $('.previa');
+  if (previa && mouse && !calmo) {
+    var fotos = $$('img', previa), px = 0, py = 0, tx = 0, ty = 0, rodaPrevia = false;
+    fotos.forEach(function (f) { f.src = f.getAttribute('data-src'); });
+    var andaPrevia = function () {
+      px += (tx - px) * 0.14; py += (ty - py) * 0.14;
+      previa.style.transform = 'translate3d(' + px.toFixed(1) + 'px,' + py.toFixed(1) + 'px,0)';
+      if (Math.abs(tx - px) + Math.abs(ty - py) > 0.3) requestAnimationFrame(andaPrevia); else rodaPrevia = false;
+    };
+    var alvo = function (e) { tx = e.clientX + 70; ty = e.clientY - 125; };
+    $$('.passo').forEach(function (li) {
+      li.addEventListener('mouseenter', function (e) {
+        alvo(e); if (!previa.classList.contains('ligada')) { px = tx; py = ty; previa.style.transform = 'translate3d(' + px + 'px,' + py + 'px,0)'; }
+        var n = li.getAttribute('data-foto');
+        fotos.forEach(function (f) { f.classList.toggle('ativa', f.getAttribute('data-i') === n); });
+        previa.classList.add('ligada');
+      });
+      li.addEventListener('mousemove', function (e) { alvo(e); if (!rodaPrevia) { rodaPrevia = true; requestAnimationFrame(andaPrevia); } });
+      li.addEventListener('mouseleave', function () { previa.classList.remove('ligada'); });
+    });
   }
 
   /* obras: altura da secao para o trilho andar de lado */
-  var obras = $('.obras'), trilho = $('.obras-trilho');
-  var obrasAnda = 0;
+  var obras = $('.obras'), trilho = $('.obras-trilho'), obrasAnda = 0;
   function arrumaObras() {
     if (!obras || !trilho) return;
     if (largo() && !calmo) {
@@ -119,52 +131,21 @@
     } else { obrasAnda = 0; obras.style.height = ''; trilho.style.transform = ''; }
   }
 
-  var topo = $('.topo'), zap = $('.zap'), lista = $('.etapas-lista'), etapas = $$('.etapa');
-  var faixa = $('.faixa-linha'), terreno = $('.terreno');
+  var topo = $('.topo'), zap = $('.zap'), paralaxe = $$('[data-par]');
   var ultimoY = window.scrollY, pedido = false;
 
   function quadro() {
     pedido = false;
     var H = window.innerHeight, y = window.scrollY, r;
 
-    if (ab && !calmo) {
-      r = ab.getBoundingClientRect();
-      var p = limita(-r.top / Math.max(1, r.height - H));
-      ab.style.setProperty('--p', p.toFixed(4));
-      if (porta) porta.style.setProperty('--e', suave(limita(p / 0.72)).toFixed(4));
-      ab.classList.toggle('passou', p > 0.3);
-    }
-    /* enquanto o logo grande da abertura esta na tela, o do topo fica escondido */
-    if (ab && topo) {
-      var pAb = calmo ? (y < H * 0.5 ? 0 : 1) : limita(-ab.getBoundingClientRect().top / Math.max(1, ab.offsetHeight - H));
-      topo.classList.toggle('no-inicio', pAb < 0.22);
-    }
-
-    var fimAb = ab ? ab.offsetTop + ab.offsetHeight - 90 : 0;
     if (topo && !doc.classList.contains('menu-aberto')) {
-      topo.classList.toggle('solido', y > fimAb);
-      if (y > fimAb + H * 0.4 && y > ultimoY + 4) topo.classList.add('escondido');
-      else if (y < ultimoY - 4 || y <= fimAb) topo.classList.remove('escondido');
+      topo.classList.toggle('solido', y > 20);
+      if (y > H * 0.6 && y > ultimoY + 4) topo.classList.add('escondido');
+      else if (y < ultimoY - 4 || y <= H * 0.6) topo.classList.remove('escondido');
     }
-    if (zap) zap.classList.toggle('visivel', y > H * 0.9);
+    if (zap) zap.classList.toggle('visivel', y > H * 0.8);
     ultimoY = y;
-
     if (calmo) return;
-
-    if (manifesto && acesas.length) {
-      r = manifesto.getBoundingClientRect();
-      var pm = limita((H * 0.86 - r.top) / (H * 0.5 + r.height * 0.5));
-      var n = Math.round(pm * acesas.length * 1.05);
-      acesas.forEach(function (s, i) { s.classList.toggle('acesa', i < n); });
-    }
-
-    if (lista) {
-      r = lista.getBoundingClientRect();
-      var pl = limita((H * 0.62 - r.top) / r.height);
-      lista.style.setProperty('--prog', pl.toFixed(4));
-      var ponto = pl * r.height;
-      etapas.forEach(function (et) { et.classList.toggle('ativa', et.offsetTop + 38 <= ponto + 1); });
-    }
 
     if (obras && obrasAnda > 0) {
       r = obras.getBoundingClientRect();
@@ -172,30 +153,18 @@
       trilho.style.transform = 'translate3d(' + (-po * obrasAnda).toFixed(1) + 'px,0,0)';
     }
 
-    if (faixa) {
-      r = faixa.getBoundingClientRect();
-      if (r.bottom > -100 && r.top < H + 100) {
-        var meio = faixa.scrollWidth / 2;
-        var desl = ((H - r.top) * 0.45) % meio;
-        faixa.style.transform = 'translate3d(' + (-desl).toFixed(1) + 'px,0,0)';
-      }
-    }
-
-    if (terreno) {
-      r = terreno.getBoundingClientRect();
-      if (r.bottom > 0 && r.top < H) {
-        var pt = (r.top + r.height / 2 - H / 2) / H;
-        terreno.style.setProperty('--par', (pt * -9).toFixed(2) + '%');
-      }
-    }
+    paralaxe.forEach(function (el) {
+      r = el.getBoundingClientRect();
+      if (r.bottom < -100 || r.top > H + 100) return;
+      var v = parseFloat(el.getAttribute('data-par')) || 0.08;
+      el.style.setProperty('--par', ((r.top + r.height / 2 - H / 2) * -v).toFixed(1) + 'px');
+    });
   }
   function pede() { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }
-
-  function arruma() { arrumaPorta(); arrumaObras(); quadro(); }
+  function arruma() { arrumaObras(); quadro(); }
   window.addEventListener('scroll', pede, { passive: true });
   window.addEventListener('resize', function () { clearTimeout(arruma.t); arruma.t = setTimeout(arruma, 120); });
   window.addEventListener('load', arruma);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(arruma);
   arruma();
 
   /* menu do celular */
@@ -216,7 +185,7 @@
 
   /* cursor com o arco */
   var cursor = $('.cursor');
-  if (cursor && !calmo && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+  if (cursor && !calmo && mouse) {
     var mx = 0, my = 0, cx = 0, cy = 0, rodando = false;
     var anda = function () {
       cx += (mx - cx) * 0.2; cy += (my - cy) * 0.2;
@@ -225,7 +194,7 @@
     };
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX; my = e.clientY; cursor.classList.add('ligado');
-      cursor.classList.toggle('grande', !!e.target.closest('a, button, .arco-card, .proj'));
+      cursor.classList.toggle('grande', !!e.target.closest('a, button, .arco-card, .proj, .galeria'));
       if (!rodando) { rodando = true; requestAnimationFrame(anda); }
     }, { passive: true });
     document.addEventListener('mouseleave', function () { cursor.classList.remove('ligado'); });
