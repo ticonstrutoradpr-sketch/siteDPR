@@ -67,21 +67,42 @@ p { margin: 0; }
 .topo { position: fixed; inset: 0 0 auto; z-index: 60; display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; pointer-events: none; color: var(--marfim); --cor-letras: var(--marfim); }
 .topo > * { pointer-events: auto; }
 /* menu de vidro marfim: uma pilula areia desliza por tras do item; botao grafite com seta num circulo */
-.topo-marca, .pilula {
+.pilula {
   background: rgba(244, 241, 236, .62); border: 1px solid rgba(255, 255, 255, .55);
   box-shadow: 0 10px 30px rgba(26, 25, 24, .1), inset 0 1px 0 rgba(255, 255, 255, .6);
   -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3);
 }
-.topo-marca { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; --cor-letras: var(--grafite); transition: transform .4s var(--ease); }
-.topo-marca:hover { transform: rotate(-4deg) scale(1.04); }
-.topo-marca .marca { --lw: 44px; }
+/* logo solto, fundo transparente: grafite sobre o claro, marfim quando passa por parte escura */
+.topo-marca { display: block; padding: 10px 4px; --cor-letras: var(--grafite); transition: transform .4s var(--ease); }
+.topo.sobre-escuro .topo-marca { --cor-letras: var(--marfim); }
+.topo-marca { transition: transform .4s var(--ease), opacity .4s, translate .5s var(--ease); }
+.topo.logo-fora .topo-marca { opacity: 0; translate: 0 -12px; pointer-events: none; }
+.topo-marca:hover { transform: translateY(-2px); }
+.topo-marca .marca { --lw: 96px; }
 .pilula { display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 999px; }
-.topo-nav { position: relative; display: flex; gap: 2px; padding: 0 4px; }
+.topo-nav { position: relative; display: flex; gap: 2px; padding: 0 4px; max-width: 560px; overflow: hidden; transition: max-width .7s cubic-bezier(.7, 0, .2, 1), opacity .4s, padding .7s; }
+/* ao descer a pagina a barra se recolhe numa pilula com "Menu"; abre no hover ou no clique */
+.pilula-chip { display: none; align-items: center; gap: 10px; min-height: 48px; padding: 0 18px 0 16px; border: 0; border-radius: 999px; background: none; color: var(--grafite); font: 500 12px/1 var(--titulo); letter-spacing: .16em; text-transform: uppercase; cursor: pointer; }
+.chip-pontos { display: grid; gap: 4px; }
+.chip-pontos i { display: block; width: 16px; height: 1.5px; background: currentColor; transition: transform .4s var(--ease), width .4s var(--ease); }
+.chip-pontos i:nth-child(2) { width: 10px; }
+.pilula-chip:hover .chip-pontos i:nth-child(2) { width: 16px; }
+@media (min-width: 900px) {
+  .topo.compacto .pilula-chip { display: inline-flex; }
+  .topo.compacto .pilula:not(:hover):not(.expandida) .topo-nav { max-width: 0; padding: 0; opacity: 0; }
+  .topo.compacto .pilula:hover .pilula-chip, .topo.compacto .pilula.expandida .pilula-chip { display: none; }
+}
+/* letras que rolam no hover */
+.rola { display: inline-flex; overflow: hidden; height: 1.15em; line-height: 1.15; vertical-align: top; }
+.rola-l { display: inline-flex; flex-direction: column; transition: transform .5s cubic-bezier(.7, 0, .2, 1); transition-delay: calc(var(--i) * 18ms); }
+.rola-l > span { display: block; height: 1.15em; white-space: pre; }
+.rola-l > span:last-child { color: var(--areia-escura); }
+.topo-nav a:hover .rola-l, .topo-nav a:focus-visible .rola-l { transform: translateY(-1.15em); }
 .nav-luz { position: absolute; top: 0; left: 0; height: 100%; width: var(--lw-luz, 0px); transform: translateX(var(--lx-luz, 0px)); border-radius: 999px; background: rgba(188, 156, 116, .26); transition: transform .5s var(--ease), width .5s var(--ease), opacity .3s; opacity: var(--lo-luz, 0); pointer-events: none; }
 .topo-nav a { position: relative; z-index: 1; padding: 15px 16px; border-radius: 999px; font: 500 15px/1 var(--texto); text-decoration: none; color: var(--taupe); transition: color .3s; }
 .topo-nav a:hover, .topo-nav a.atual { color: var(--grafite); }
 .topo-nav a.atual::after { content: ''; position: absolute; left: 50%; bottom: 6px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--areia-escura); }
-.pilula-bt { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 6px 0 22px; border-radius: 999px; background: var(--grafite); color: var(--marfim); font: 500 12px/1 var(--titulo); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; transition: background-color .3s; }
+.pilula-bt { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 6px 0 22px; border-radius: 999px; background: var(--grafite); color: var(--marfim); font: 500 12px/1 var(--titulo); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; transform: translate(var(--imx, 0px), var(--imy, 0px)); transition: background-color .3s, transform .35s var(--ease); white-space: nowrap; }
 .bt-seta { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--areia); color: var(--grafite); font-size: 16px; transition: transform .45s var(--ease); }
 .pilula-bt:hover { background: #2e2a26; }
 .pilula-bt:hover .bt-seta { transform: rotate(-45deg); }
@@ -116,7 +137,7 @@ p { margin: 0; }
 /* letras vazadas: o fundo grafite em multiply escurece o video; o texto branco deixa o video aparecer inteiro.
    --abre (0 a 1, pela rolagem): as letras crescem e o grafite some ate o video ocupar a tela. */
 /* (25/11/2026: ela nao quer "pretao") fundo marfim em "screen": o marfim fica claro por cima do video e o texto preto deixa o video aparecer */
-.vazado { position: absolute; inset: 0; display: grid; place-items: center; background: var(--marfim); mix-blend-mode: screen; opacity: calc((1 - var(--abre, 0)) * .8); }
+.vazado { position: absolute; inset: 0; display: grid; place-items: center; background: var(--marfim); mix-blend-mode: screen; opacity: .8; }
 
 /* lanterna: onde o mouse passa (ou, no celular, onde a luz passeia) o veu claro se abre e o video aparece nitido */
 .js .vazado {
@@ -134,7 +155,7 @@ p { margin: 0; }
 .js .vazado-frase span { animation: vazado-entra 1.6s cubic-bezier(.2, .7, .2, 1) both; }
 .js .vazado-frase span:nth-child(2) { animation-delay: .18s; }
 @keyframes vazado-entra { from { opacity: 0; transform: translateY(18%) scale(.96); letter-spacing: .02em; } to { opacity: 1; transform: none; } }
-.tela-video .video-veu { opacity: var(--abre, 0); }
+.tela-video .video-veu { display: none; }
 .video-texto { position: absolute; left: 0; right: 0; bottom: clamp(70px, 13vh, 130px); display: grid; justify-items: center; gap: 18px; padding: 0 24px; text-align: center; color: var(--marfim); opacity: calc(1 - var(--abre, 0) * 2); }
 .video-texto .rotulo { color: var(--areia-escura); }
 .video-texto .rotulo::before { margin-inline: auto; }
@@ -271,13 +292,11 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
 @media (max-width: 899px) {
   :root { --topo: 68px; }
   .topo { padding: 12px; }
-  .topo-marca { width: 54px; height: 54px; border-radius: 12px; }
-  .topo-marca .marca { --lw: 38px; }
   .topo-nav { display: none; }
   .topo-menu { display: block; }
   .pilula-bt { padding: 0 5px 0 14px; gap: 8px; font-size: 11px; letter-spacing: .08em; }
   .bt-seta { width: 34px; height: 34px; }
-  .topo-marca { border-radius: 16px; }
+  .topo-marca .marca { --lw: 78px; }
   .palco { height: 520vh; }
   .video-texto { bottom: 220px; }
   .vazado-frase { font-size: clamp(48px, 17.5vw, 120px); line-height: .92; }

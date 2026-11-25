@@ -23,7 +23,7 @@
   var suave = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
   var mistura = function (a, b, t) { return a + (b - a) * t; };
   var fase = function (p, a, b) { return limita((p - a) / (b - a)); };
-  var s0, vidAtual = 1;
+  var s0, vidAtual = 1, yAntes = window.scrollY;
 
   /* videos do comeco: passam um atras do outro com troca suave; so baixa o atual e o proximo; para quando some */
   var vids = $$('.tela-video .vid'), filaVideos = ['2-tijolo', '3-casa-subindo', '5-chave', '7-familia', '1-terreno'];
@@ -62,8 +62,9 @@
     var p = calmo ? 1 : limita(-palco.getBoundingClientRect().top / Math.max(1, palco.offsetHeight - H));
     /* fases: letras vazadas se abrem ate o video ocupar a tela 0-.1, video cheio ate .14, dissolve na tela areia .14-.24,
        encolhe .3-.56, vai a esquerda .56-.7, texto .62-.76, conversa .78-.97 */
-    var abre = suave(fase(p, 0, .1));
-    var vid = 1 - suave(fase(p, .14, .24));
+    /* as letras crescem e a camada do video se dissolve direto na tela areia (sem mostrar o video inteiro) */
+    var abre = suave(fase(p, 0, .16));
+    var vid = 1 - suave(fase(p, .03, .16));
     fixo.style.setProperty('--abre', abre.toFixed(4));
     var encolhe = suave(fase(p, .3, .56)), vai = suave(fase(p, .56, .7)), txt = fase(p, .62, .76), chat = fase(p, .78, .97);
     s0 = fixo.style; s0.setProperty('--vid', vid.toFixed(4)); vidAtual = vid;
@@ -93,6 +94,21 @@
     ['obras', 'como-funciona', 'contato'].forEach(function (id) { var el = document.getElementById(id); if (el && el.offsetTop <= y) atual = id; });
     $$('.topo-nav a').forEach(function (a) { a.classList.toggle('atual', a.getAttribute('href') === '#' + atual); });
     if (!navHover) poeLuz($('.topo-nav a.atual'));
+    /* barra recolhida depois do comeco; logo claro quando passa por parte escura */
+    var topoEl = $('.topo');
+    if (topoEl) {
+      var compacto = window.scrollY > H * .9;
+      if (!compacto) { var pl = $('.pilula'); if (pl) pl.classList.remove('expandida'); }
+      topoEl.classList.toggle('compacto', compacto);
+      var meio = 46, escuro = false;
+      $$('.escuro').forEach(function (sec) { var r2 = sec.getBoundingClientRect(); if (r2.top <= meio && r2.bottom >= meio) escuro = true; });
+      topoEl.classList.toggle('sobre-escuro', escuro);
+      /* sem fundo, o logo some ao descer (para nao cobrir titulos) e volta ao subir */
+      var yAgora = window.scrollY;
+      if (!compacto || yAgora < yAntes - 4) topoEl.classList.remove('logo-fora');
+      else if (yAgora > yAntes + 4) topoEl.classList.add('logo-fora');
+      yAntes = yAgora;
+    }
   }
 
   /* pilula areia que desliza por tras do item do menu */
@@ -104,9 +120,39 @@
     nav.style.setProperty('--lo-luz', '1');
   }
   if (nav) {
+    /* letras que rolam: cada letra numa coluna com ela mesma duas vezes */
+    $$('a', nav).forEach(function (a) {
+      var txt = a.textContent; a.setAttribute('aria-label', txt); a.textContent = '';
+      var rola = document.createElement('span'); rola.className = 'rola'; rola.setAttribute('aria-hidden', 'true');
+      txt.split('').forEach(function (ch, i) {
+        var col = document.createElement('span'); col.className = 'rola-l'; col.style.setProperty('--i', i);
+        col.innerHTML = '<span></span><span></span>'; col.children[0].textContent = ch; col.children[1].textContent = ch;
+        rola.appendChild(col);
+      });
+      a.appendChild(rola);
+    });
     $$('a', nav).forEach(function (a) { a.addEventListener('mouseenter', function () { navHover = true; poeLuz(a); }); });
     nav.addEventListener('mouseleave', function () { navHover = false; poeLuz($('.topo-nav a.atual')); });
     if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { poeLuz($('.topo-nav a.atual')); });
+  }
+
+  /* "Menu" da barra recolhida abre a barra; botao magnetico segue o mouse de leve */
+  var chip = $('.pilula-chip'), pilulaEl = $('.pilula');
+  if (chip && pilulaEl) {
+    chip.addEventListener('click', function () { pilulaEl.classList.add('expandida'); setTimeout(function () { poeLuz($('.topo-nav a.atual')); }, 650); });
+    pilulaEl.addEventListener('mouseenter', function () {
+      if (!document.querySelector('.topo.compacto')) return;
+      setTimeout(function () { if (!navHover) poeLuz($('.topo-nav a.atual')); }, 650);
+    });
+  }
+  var cta = $('.pilula-bt');
+  if (cta && !calmo && window.matchMedia('(hover: hover) and (pointer: fine)').matches) {
+    cta.addEventListener('mousemove', function (e) {
+      var r = cta.getBoundingClientRect();
+      cta.style.setProperty('--imx', ((e.clientX - r.left - r.width / 2) * .25).toFixed(1) + 'px');
+      cta.style.setProperty('--imy', ((e.clientY - r.top - r.height / 2) * .35).toFixed(1) + 'px');
+    });
+    cta.addEventListener('mouseleave', function () { cta.style.setProperty('--imx', '0px'); cta.style.setProperty('--imy', '0px'); });
   }
 
   /* lanterna da abertura: segue o mouse; sem mouse, passeia sozinha */
