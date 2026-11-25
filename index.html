@@ -29,33 +29,41 @@
 <!-- Manual de Marca DPR v1.0 (proposta B): paleta grafite/marfim/concreto/taupe/areia, Poppins + Inter,
      botao = Poppins Medium sublinhado, uma mensagem e um botao por tela, simbolo pequeno em marfim no canto. -->
 
-<!-- menu minimalista em linha: logo a esquerda, itens soltos a direita com traco areia, WhatsApp no fim -->
+<!-- topo: logo, WhatsApp discreto e botao Menu. O menu abre uma cortina de faixas marfim que descem uma a uma,
+     os itens sobem de dentro de uma mascara e a foto de uma obra da DPR muda ao passar o mouse em cada item. -->
 <header class="topo">
   <div class="topo-in cont">
     <a class="topo-marca" href="#inicio" aria-label="DPR Construtora, início">
       <span class="marca"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
     </a>
-    <nav class="topo-nav" aria-label="Principal">
-      <a href="#inicio" class="atual">Início</a>
-      <a href="#obras">Obras</a>
-      <a href="#como-funciona">Como funciona</a>
-      <a href="#contato">Contato</a>
-    </nav>
     <a class="topo-tel" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener"><span class="tel-ponto" aria-hidden="true"></span>(11) 93308-5258</a>
-    <button class="topo-menu" type="button" aria-expanded="false" aria-controls="painel" aria-label="Abrir menu"><span></span><span></span></button>
+    <button class="topo-menu" type="button" aria-expanded="false" aria-controls="painel" aria-label="Abrir menu"><span class="menu-txt" aria-hidden="true"><span>Menu</span><span>Fechar</span></span><span class="menu-linhas" aria-hidden="true"><i></i><i></i></span></button>
   </div>
 </header>
 
 <div class="painel" id="painel" aria-hidden="true">
-  <nav aria-label="Menu">
-    <a href="#inicio"><span class="painel-n">01</span>Início</a>
-    <a href="#obras"><span class="painel-n">02</span>Obras</a>
-    <a href="#como-funciona"><span class="painel-n">03</span>Como funciona</a>
-    <a href="#contato"><span class="painel-n">04</span>Contato</a>
-  </nav>
-  <div class="painel-contato">
-    <a href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">WhatsApp (11) 93308-5258</a>
-    <a href="mailto:atendimento@dprconstrutora.com.br">atendimento@dprconstrutora.com.br</a>
+  <div class="painel-faixas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="painel-in cont">
+    <nav class="painel-nav" aria-label="Menu">
+      <a href="#inicio" data-foto="0" class="atual"><span class="painel-n">01</span><span class="painel-masc"><span class="painel-txt">Início</span></span></a>
+      <a href="#obras" data-foto="1"><span class="painel-n">02</span><span class="painel-masc"><span class="painel-txt">Obras</span></span></a>
+      <a href="#como-funciona" data-foto="2"><span class="painel-n">03</span><span class="painel-masc"><span class="painel-txt">Como funciona</span></span></a>
+      <a href="#contato" data-foto="3"><span class="painel-n">04</span><span class="painel-masc"><span class="painel-txt">Contato</span></span></a>
+    </nav>
+    <div class="painel-lado" aria-hidden="true">
+      <div class="painel-foto">
+        <img src="/fotos/caucaia2/centro-portaria-900.webp" alt="" loading="lazy" width="900" height="560" data-leg="Villaggio Caucaia II" class="ativa">
+        <img src="/fotos/emp/moradas-torres-900.webp" alt="" loading="lazy" width="900" height="560" data-leg="Moradas das Roseiras II">
+        <img src="/fotos/obras/casas-projeto-900.webp" alt="" loading="lazy" width="900" height="560" data-leg="Villaggio Caucaia I">
+        <img src="/fotos/obras/terreno-900.webp" alt="" loading="lazy" width="900" height="560" data-leg="Lotes Itatinga">
+      </div>
+      <p class="painel-leg"><span>Obra DPR</span><b>Villaggio Caucaia II</b></p>
+    </div>
+    <div class="painel-base">
+      <p class="painel-frase">Do projeto à entrega.</p>
+      <a href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">WhatsApp (11) 93308-5258</a>
+      <a href="mailto:atendimento@dprconstrutora.com.br">atendimento@dprconstrutora.com.br</a>
+    </div>
   </div>
 </div>
 

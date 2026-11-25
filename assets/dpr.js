@@ -26,7 +26,7 @@
   var s0, vidAtual = 1, yAntes = window.scrollY;
 
   /* videos do comeco: passam um atras do outro com troca suave; so baixa o atual e o proximo; para quando some */
-  var vids = $$('.tela-video .vid'), filaVideos = ['2-tijolo', '7-familia'];
+  var vids = $$('.tela-video .vid'), filaVideos = ['7-familia', '2-tijolo'];
   var vAtual = 0, vIdx = 0, querTocar = !calmo;
   var fonte = function (n) { return '/video/' + n + (window.innerWidth < 900 ? '-cel' : '-pc') + '.mp4'; };
   var capa = function (n) { return '/video/capas/' + n + (window.innerWidth < 900 ? '-cel' : '-pc') + '.webp'; };
@@ -92,7 +92,7 @@
     /* link do menu que corresponde a secao na tela */
     var y = window.scrollY + H * .4, atual = 'inicio';
     ['obras', 'como-funciona', 'contato'].forEach(function (id) { var el = document.getElementById(id); if (el && el.offsetTop <= y) atual = id; });
-    $$('.topo-nav a').forEach(function (a) { a.classList.toggle('atual', a.getAttribute('href') === '#' + atual); });
+    $$('.painel-nav a').forEach(function (a) { a.classList.toggle('atual', a.getAttribute('href') === '#' + atual); });
     /* topo: sem fundo na abertura; depois veu marfim leve, some ao descer e volta ao subir */
     var topoEl = $('.topo');
     if (topoEl && !doc.classList.contains('menu-aberto')) {
@@ -129,10 +129,17 @@
   var cartao = $('.cartao-flutua');
   if (cartao) $('.cartao-fechar', cartao).addEventListener('click', function () { cartao.classList.add('fechado'); document.body.classList.add('sem-cartao'); });
 
-  /* menu do celular */
-  var botao = $('.topo-menu'), painel = $('.painel');
+  /* menu em cortina: abre/fecha; a foto da obra acompanha o item sob o mouse ou o foco */
+  var botao = $('.topo-menu'), painel = $('.painel'), fotos = $$('.painel-foto img'), leg = $('.painel-leg b');
+  function mostraFoto(i) {
+    if (!fotos[i] || fotos[i].classList.contains('ativa')) return;
+    fotos.forEach(function (f, j) { f.classList.toggle('ativa', j === i); });
+    if (leg) leg.textContent = fotos[i].getAttribute('data-leg');
+  }
+  function fotoAtual() { var a = $('.painel-nav a.atual'); mostraFoto(a ? +a.getAttribute('data-foto') : 0); }
   function menu(abrir) {
     if (!botao || !painel) return;
+    if (abrir) fotoAtual();
     painel.classList.toggle('aberto', abrir);
     doc.classList.toggle('menu-aberto', abrir);
     botao.setAttribute('aria-expanded', abrir ? 'true' : 'false');
@@ -142,6 +149,13 @@
   }
   if (botao) botao.addEventListener('click', function () { menu(!painel.classList.contains('aberto')); });
   $$('.painel a').forEach(function (a) { a.addEventListener('click', function () { menu(false); }); });
+  $$('.painel-nav a').forEach(function (a) {
+    var i = +a.getAttribute('data-foto');
+    a.addEventListener('mouseenter', function () { mostraFoto(i); });
+    a.addEventListener('focus', function () { mostraFoto(i); });
+  });
+  var pnav = $('.painel-nav');
+  if (pnav) pnav.addEventListener('mouseleave', fotoAtual);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && painel && painel.classList.contains('aberto')) { menu(false); botao.focus(); } });
 
   /* foto ampliada: galeria de cada obra */
