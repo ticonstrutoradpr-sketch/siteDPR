@@ -23,7 +23,7 @@
   var suave = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
   var mistura = function (a, b, t) { return a + (b - a) * t; };
   var fase = function (p, a, b) { return limita((p - a) / (b - a)); };
-  var s0;
+  var s0, vidAtual = 1;
 
   /* videos do comeco: passam um atras do outro com troca suave; so baixa o atual e o proximo; para quando some */
   var vids = $$('.tela-video .vid'), filaVideos = ['2-tijolo', '3-casa-subindo', '5-chave', '7-familia', '1-terreno'];
@@ -66,7 +66,7 @@
     var vid = 1 - suave(fase(p, .14, .24));
     fixo.style.setProperty('--abre', abre.toFixed(4));
     var encolhe = suave(fase(p, .3, .56)), vai = suave(fase(p, .56, .7)), txt = fase(p, .62, .76), chat = fase(p, .78, .97);
-    s0 = fixo.style; s0.setProperty('--vid', vid.toFixed(4));
+    s0 = fixo.style; s0.setProperty('--vid', vid.toFixed(4)); vidAtual = vid;
     tocaVideo(vid > .02);
     /* tamanho final da tela do celular */
     var th = largo ? Math.min(H * .74, 660) : Math.min(H * (H < 800 ? .44 : .5), 440);
@@ -92,6 +92,39 @@
     var y = window.scrollY + H * .4, atual = 'inicio';
     ['obras', 'como-funciona', 'contato'].forEach(function (id) { var el = document.getElementById(id); if (el && el.offsetTop <= y) atual = id; });
     $$('.topo-nav a').forEach(function (a) { a.classList.toggle('atual', a.getAttribute('href') === '#' + atual); });
+    if (!navHover) poeLuz($('.topo-nav a.atual'));
+  }
+
+  /* pilula areia que desliza por tras do item do menu */
+  var nav = $('.topo-nav'), navHover = false;
+  function poeLuz(a) {
+    if (!nav || !a) return;
+    nav.style.setProperty('--lx-luz', (a.offsetLeft) + 'px');
+    nav.style.setProperty('--lw-luz', a.offsetWidth + 'px');
+    nav.style.setProperty('--lo-luz', '1');
+  }
+  if (nav) {
+    $$('a', nav).forEach(function (a) { a.addEventListener('mouseenter', function () { navHover = true; poeLuz(a); }); });
+    nav.addEventListener('mouseleave', function () { navHover = false; poeLuz($('.topo-nav a.atual')); });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { poeLuz($('.topo-nav a.atual')); });
+  }
+
+  /* lanterna da abertura: segue o mouse; sem mouse, passeia sozinha */
+  var tv = $('.tela-video'), temMouse = window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+  if (tv && !calmo) {
+    if (temMouse) {
+      fixo.addEventListener('mousemove', function (e) { tv.style.setProperty('--mx', e.clientX + 'px'); tv.style.setProperty('--my', e.clientY + 'px'); });
+      fixo.addEventListener('mouseleave', function () { tv.style.removeProperty('--mx'); tv.style.removeProperty('--my'); });
+    } else {
+      (function passeia(t) {
+        if (vidAtual > .02) {
+          var x = 50 + Math.sin(t / 2300) * 28, y = 46 + Math.sin(t / 1700) * 16;
+          tv.style.setProperty('--mx', x.toFixed(2) + '%'); tv.style.setProperty('--my', y.toFixed(2) + '%');
+          tv.style.setProperty('--raio', '180px');
+        }
+        requestAnimationFrame(passeia);
+      })(0);
+    }
   }
   window.addEventListener('scroll', function () { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }, { passive: true });
   window.addEventListener('resize', quadro);

@@ -66,25 +66,43 @@ p { margin: 0; }
 /* topo: logo num quadrado escuro a esquerda e uma pilula escura com o menu e o botao a direita */
 .topo { position: fixed; inset: 0 0 auto; z-index: 60; display: flex; align-items: flex-start; justify-content: space-between; padding: 18px 20px; pointer-events: none; color: var(--marfim); --cor-letras: var(--marfim); }
 .topo > * { pointer-events: auto; }
-.topo-marca { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 14px; background: rgba(26, 25, 24, .92); box-shadow: 0 6px 20px rgba(0, 0, 0, .25); }
-.topo-marca .marca { --lw: 46px; }
-.pilula { display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 16px; background: rgba(26, 25, 24, .92); box-shadow: 0 6px 20px rgba(0, 0, 0, .25); -webkit-backdrop-filter: blur(8px); backdrop-filter: blur(8px); }
-.topo-nav { display: flex; gap: 4px; padding: 0 8px; }
-.topo-nav a { padding: 14px 14px; font: 400 16px/1 var(--texto); text-decoration: none; color: rgba(244, 241, 236, .7); transition: color .25s; }
-.topo-nav a:hover, .topo-nav a.atual { color: var(--marfim); }
-.pilula-bt { display: inline-flex; align-items: center; min-height: 48px; padding: 0 22px; border-radius: 11px; background: var(--areia); color: var(--grafite); font: 500 13px/1 var(--titulo); letter-spacing: .12em; text-transform: uppercase; text-decoration: none; transition: background-color .25s; }
-.pilula-bt:hover { background: #cdb08a; }
-.topo-menu { display: none; width: 48px; height: 48px; padding: 0; border: 0; background: none; color: var(--marfim); cursor: pointer; position: relative; }
+/* menu de vidro marfim: uma pilula areia desliza por tras do item; botao grafite com seta num circulo */
+.topo-marca, .pilula {
+  background: rgba(244, 241, 236, .62); border: 1px solid rgba(255, 255, 255, .55);
+  box-shadow: 0 10px 30px rgba(26, 25, 24, .1), inset 0 1px 0 rgba(255, 255, 255, .6);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3); backdrop-filter: blur(14px) saturate(1.3);
+}
+.topo-marca { display: grid; place-items: center; width: 64px; height: 64px; border-radius: 20px; --cor-letras: var(--grafite); transition: transform .4s var(--ease); }
+.topo-marca:hover { transform: rotate(-4deg) scale(1.04); }
+.topo-marca .marca { --lw: 44px; }
+.pilula { display: flex; align-items: center; gap: 6px; padding: 6px; border-radius: 999px; }
+.topo-nav { position: relative; display: flex; gap: 2px; padding: 0 4px; }
+.nav-luz { position: absolute; top: 0; left: 0; height: 100%; width: var(--lw-luz, 0px); transform: translateX(var(--lx-luz, 0px)); border-radius: 999px; background: rgba(188, 156, 116, .26); transition: transform .5s var(--ease), width .5s var(--ease), opacity .3s; opacity: var(--lo-luz, 0); pointer-events: none; }
+.topo-nav a { position: relative; z-index: 1; padding: 15px 16px; border-radius: 999px; font: 500 15px/1 var(--texto); text-decoration: none; color: var(--taupe); transition: color .3s; }
+.topo-nav a:hover, .topo-nav a.atual { color: var(--grafite); }
+.topo-nav a.atual::after { content: ''; position: absolute; left: 50%; bottom: 6px; width: 4px; height: 4px; margin-left: -2px; border-radius: 50%; background: var(--areia-escura); }
+.pilula-bt { display: inline-flex; align-items: center; gap: 12px; min-height: 48px; padding: 0 6px 0 22px; border-radius: 999px; background: var(--grafite); color: var(--marfim); font: 500 12px/1 var(--titulo); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; transition: background-color .3s; }
+.bt-seta { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 50%; background: var(--areia); color: var(--grafite); font-size: 16px; transition: transform .45s var(--ease); }
+.pilula-bt:hover { background: #2e2a26; }
+.pilula-bt:hover .bt-seta { transform: rotate(-45deg); }
+.topo-menu { display: none; width: 48px; height: 48px; padding: 0; border: 0; border-radius: 50%; background: none; color: var(--grafite); cursor: pointer; position: relative; }
 .topo-menu span { position: absolute; left: 12px; right: 12px; height: 1.5px; background: currentColor; transition: transform .3s, top .3s; }
 .topo-menu span:nth-child(1) { top: 19px; }
 .topo-menu span:nth-child(2) { top: 28px; }
 .menu-aberto .topo-menu span:nth-child(1) { top: 23.5px; transform: rotate(45deg); }
 .menu-aberto .topo-menu span:nth-child(2) { top: 23.5px; transform: rotate(-45deg); }
-.painel { position: fixed; inset: 0; z-index: 55; background: var(--grafite); color: var(--marfim); display: flex; flex-direction: column; justify-content: center; gap: 32px; padding: calc(var(--topo) + 20px) var(--margem) 40px; opacity: 0; visibility: hidden; transition: opacity .3s, visibility 0s .3s; }
-.painel.aberto { opacity: 1; visibility: visible; transition: opacity .3s, visibility 0s 0s; }
+/* menu do celular: marfim, abre em circulo do canto, itens grandes e numerados entram um a um */
+.painel { position: fixed; inset: 0; z-index: 55; background: var(--marfim); color: var(--grafite); display: flex; flex-direction: column; justify-content: center; gap: 36px; padding: calc(var(--topo) + 40px) var(--margem) 40px; clip-path: circle(0 at calc(100% - 40px) 46px); visibility: hidden; transition: clip-path .7s cubic-bezier(.7, 0, .2, 1), visibility 0s .7s; }
+.painel.aberto { clip-path: circle(150% at calc(100% - 40px) 46px); visibility: visible; transition: clip-path .7s cubic-bezier(.7, 0, .2, 1), visibility 0s 0s; }
 .painel nav { display: flex; flex-direction: column; }
-.painel nav a { font: 300 34px/1.2 var(--titulo); text-decoration: none; padding: 12px 0; border-bottom: 1px solid var(--linha-escura); }
-.painel-contato { display: grid; gap: 8px; font-size: 16px; color: rgba(244, 241, 236, .75); }
+.painel nav a { display: flex; align-items: baseline; gap: 16px; font: 300 40px/1.15 var(--titulo); letter-spacing: -.02em; text-decoration: none; padding: 14px 0; border-bottom: 1px solid var(--linha-clara); opacity: 0; transform: translateY(24px); transition: opacity .5s, transform .6s var(--ease); }
+.painel-n { font: 500 12px/1 var(--titulo); letter-spacing: .16em; color: var(--areia-escura); }
+.painel.aberto nav a { opacity: 1; transform: none; }
+.painel.aberto nav a:nth-child(1) { transition-delay: .25s; }
+.painel.aberto nav a:nth-child(2) { transition-delay: .32s; }
+.painel.aberto nav a:nth-child(3) { transition-delay: .39s; }
+.painel.aberto nav a:nth-child(4) { transition-delay: .46s; }
+.painel-contato { display: grid; gap: 8px; font-size: 16px; color: var(--taupe); }
 .painel-contato a { text-decoration: none; }
 
 /* abertura que muda com a rolagem. O JS escreve --p (0 a 1) e o retangulo da tela (--tx, --ty, --tw, --th, --tr).
@@ -100,12 +118,11 @@ p { margin: 0; }
 /* (25/11/2026: ela nao quer "pretao") fundo marfim em "screen": o marfim fica claro por cima do video e o texto preto deixa o video aparecer */
 .vazado { position: absolute; inset: 0; display: grid; place-items: center; background: var(--marfim); mix-blend-mode: screen; opacity: calc((1 - var(--abre, 0)) * .8); }
 
-/* arco que se desenha em volta das letras */
-.arco-desenho { position: absolute; left: 50%; top: 50%; z-index: 2; width: min(92vw, 1180px); transform: translate(-50%, -54%) scale(calc(1 + var(--abre, 0) * .5)); overflow: visible; pointer-events: none; opacity: calc(1 - var(--abre, 0) * 1.6); }
-.arco-desenho path { fill: none; stroke: var(--areia); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-dasharray: 2400; stroke-dashoffset: 2400; }
-.js .arco-desenho path { animation: arco-risca 2.6s cubic-bezier(.6, .05, .2, 1) .5s forwards; }
-html:not(.js) .arco-desenho path { stroke-dashoffset: 0; }
-@keyframes arco-risca { to { stroke-dashoffset: 0; } }
+/* lanterna: onde o mouse passa (ou, no celular, onde a luz passeia) o veu claro se abre e o video aparece nitido */
+.js .vazado {
+  -webkit-mask-image: radial-gradient(circle var(--raio, 280px) at var(--mx, 50%) var(--my, 45%), rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .72) 50%, #000 100%);
+          mask-image: radial-gradient(circle var(--raio, 280px) at var(--mx, 50%) var(--my, 45%), rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .72) 50%, #000 100%);
+}
 
 /* faixa fina que passa embaixo */
 .faixa-fina { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; overflow: hidden; border-top: 1px solid rgba(26, 25, 24, .12); background: rgba(244, 241, 236, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: calc(1 - var(--abre, 0) * 2); }
@@ -123,7 +140,6 @@ html:not(.js) .arco-desenho path { stroke-dashoffset: 0; }
 .video-texto .rotulo::before { margin-inline: auto; }
 .js .video-texto > * { animation: video-sobe 1.4s var(--ease) .6s both; }
 @keyframes video-sobe { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-.video-legenda { position: absolute; left: 24px; bottom: 60px; color: var(--taupe); opacity: calc(1 - var(--abre, 0)); }
 .palco-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 30% 50%, #fbf9f5 0%, var(--marfim) 45%, var(--papel) 100%); }
 .tela {
   position: absolute; left: 0; top: 0; z-index: 2; overflow: hidden;
@@ -259,11 +275,11 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   .topo-marca .marca { --lw: 38px; }
   .topo-nav { display: none; }
   .topo-menu { display: block; }
-  .pilula-bt { padding: 0 14px; font-size: 12px; letter-spacing: .08em; }
+  .pilula-bt { padding: 0 5px 0 14px; gap: 8px; font-size: 11px; letter-spacing: .08em; }
+  .bt-seta { width: 34px; height: 34px; }
+  .topo-marca { border-radius: 16px; }
   .palco { height: 520vh; }
-  .video-legenda { left: 16px; bottom: 54px; }
   .video-texto { bottom: 220px; }
-  .arco-desenho { width: 96vw; transform: translate(-50%, -58%) scale(calc(1 + var(--abre, 0) * .5)); }
   .vazado-frase { font-size: clamp(48px, 17.5vw, 120px); line-height: .92; }
   .palco-dica { display: none; }
   .palco-texto { align-items: flex-end; padding-bottom: 20px; }
@@ -307,6 +323,5 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   .palco { height: auto; }
   .palco-fixo { position: relative; }
   .faixa-fina-trilho { animation: none; }
-  .js .arco-desenho path { animation: none; stroke-dashoffset: 0; }
   .js [data-revela] { opacity: 1; transform: none; transition: none; }
 }
