@@ -98,7 +98,30 @@ p { margin: 0; }
 /* letras vazadas: o fundo grafite em multiply escurece o video; o texto branco deixa o video aparecer inteiro.
    --abre (0 a 1, pela rolagem): as letras crescem e o grafite some ate o video ocupar a tela. */
 /* (25/11/2026: ela nao quer "pretao") fundo marfim em "screen": o marfim fica claro por cima do video e o texto preto deixa o video aparecer */
-.vazado { position: absolute; inset: 0; display: grid; place-items: center; background: var(--marfim); mix-blend-mode: screen; opacity: calc(1 - var(--abre, 0)); }
+.vazado { position: absolute; inset: 0; display: grid; place-items: center; background: var(--marfim); mix-blend-mode: screen; opacity: calc((1 - var(--abre, 0)) * .8); }
+
+/* arco que se desenha em volta das letras */
+.arco-desenho { position: absolute; left: 50%; top: 50%; z-index: 2; width: min(92vw, 1180px); transform: translate(-50%, -54%) scale(calc(1 + var(--abre, 0) * .5)); overflow: visible; pointer-events: none; opacity: calc(1 - var(--abre, 0) * 1.6); }
+.arco-desenho path { fill: none; stroke: var(--areia); stroke-width: 1.6; vector-effect: non-scaling-stroke; stroke-dasharray: 2400; stroke-dashoffset: 2400; }
+.js .arco-desenho path { animation: arco-risca 2.6s cubic-bezier(.6, .05, .2, 1) .5s forwards; }
+html:not(.js) .arco-desenho path { stroke-dashoffset: 0; }
+@keyframes arco-risca { to { stroke-dashoffset: 0; } }
+
+/* selo redondo que gira */
+.selo-giro { position: absolute; right: clamp(24px, 4vw, 72px); top: 64%; z-index: 4; width: 128px; height: 128px; display: grid; place-items: center; text-decoration: none; opacity: calc(1 - var(--abre, 0) * 2); transition: transform .5s var(--ease); }
+.selo-giro:hover { transform: scale(1.06); }
+.selo-giro svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; animation: giro 18s linear infinite; }
+.selo-giro text { font: 500 14px var(--titulo); fill: var(--grafite); }
+.selo-centro { display: grid; place-items: center; width: 70px; height: 70px; border-radius: 50%; background: var(--grafite); --cor-letras: var(--marfim); box-shadow: 0 8px 24px rgba(26, 25, 24, .25); }
+.selo-centro .marca { --lw: 46px; }
+@keyframes giro { to { transform: rotate(360deg); } }
+.js .selo-giro { animation: video-sobe 1.2s var(--ease) 1.4s both; }
+
+/* faixa fina que passa embaixo */
+.faixa-fina { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; overflow: hidden; border-top: 1px solid rgba(26, 25, 24, .12); background: rgba(244, 241, 236, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: calc(1 - var(--abre, 0) * 2); }
+.faixa-fina-trilho { display: flex; width: max-content; animation: faixa 30s linear infinite; }
+.faixa-fina span { padding: 14px .9em 14px 0; white-space: nowrap; font: 500 12px/1 var(--titulo); letter-spacing: .22em; text-transform: uppercase; color: var(--taupe); }
+@keyframes faixa { to { transform: translateX(-50%); } }
 .vazado-frase { display: grid; justify-items: center; margin: 0; color: #000; font: 500 clamp(64px, 14.5vw, 260px)/.86 var(--titulo); letter-spacing: -.055em; text-align: center; transform: scale(calc(1 + var(--abre, 0) * .9)); transform-origin: 50% 52%; }
 .vazado-frase span { display: block; white-space: nowrap; }
 .js .vazado-frase span { animation: vazado-entra 1.6s cubic-bezier(.2, .7, .2, 1) both; }
@@ -110,7 +133,7 @@ p { margin: 0; }
 .video-texto .rotulo::before { margin-inline: auto; }
 .js .video-texto > * { animation: video-sobe 1.4s var(--ease) .6s both; }
 @keyframes video-sobe { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-.video-legenda { position: absolute; left: 24px; bottom: 22px; color: var(--taupe); opacity: calc(1 - var(--abre, 0)); }
+.video-legenda { position: absolute; left: 24px; bottom: 60px; color: var(--taupe); opacity: calc(1 - var(--abre, 0)); }
 .palco-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 30% 50%, #fbf9f5 0%, var(--marfim) 45%, var(--papel) 100%); }
 .tela {
   position: absolute; left: 0; top: 0; z-index: 2; overflow: hidden;
@@ -143,7 +166,7 @@ p { margin: 0; }
 .vantagens svg { width: 32px; height: 32px; fill: none; stroke: var(--areia-escura); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .vantagens b { font: 500 18px/1.2 var(--titulo); }
 .vantagens span { color: var(--taupe); font-size: 16px; line-height: 1.45; }
-.palco-dica { position: absolute; left: 50%; bottom: 26px; z-index: 4; transform: translateX(-50%); color: var(--taupe); opacity: calc(1 - var(--p, 0) * 14); }
+.palco-dica { position: absolute; left: 50%; bottom: 62px; z-index: 4; transform: translateX(-50%); color: var(--taupe); opacity: calc(1 - var(--p, 0) * 14); }
 
 /* cartao flutuante */
 .cartao-flutua { position: fixed; right: 20px; bottom: 20px; z-index: 50; width: min(380px, calc(100vw - 40px)); border-radius: 16px; background: rgba(26, 25, 24, .94); border: 1px solid rgba(188, 156, 116, .55); color: var(--marfim); box-shadow: 0 14px 40px rgba(0, 0, 0, .35); transition: opacity .3s, transform .3s; }
@@ -248,7 +271,13 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   .topo-menu { display: block; }
   .pilula-bt { padding: 0 14px; font-size: 12px; letter-spacing: .08em; }
   .palco { height: 520vh; }
-  .video-legenda { left: 16px; bottom: 16px; }
+  .video-legenda { left: 16px; bottom: 54px; }
+  .selo-giro { width: 104px; height: 104px; right: 18px; top: auto; bottom: 96px; }
+  .selo-centro { width: 56px; height: 56px; }
+  .selo-centro .marca { --lw: 36px; }
+  .selo-giro text { font-size: 15px; }
+  .video-texto { bottom: 220px; }
+  .arco-desenho { width: 96vw; transform: translate(-50%, -58%) scale(calc(1 + var(--abre, 0) * .5)); }
   .vazado-frase { font-size: clamp(48px, 17.5vw, 120px); line-height: .92; }
   .palco-dica { display: none; }
   .palco-texto { align-items: flex-end; padding-bottom: 20px; }
@@ -291,5 +320,7 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   html { scroll-behavior: auto; }
   .palco { height: auto; }
   .palco-fixo { position: relative; }
+  .selo-giro svg, .faixa-fina-trilho { animation: none; }
+  .js .arco-desenho path { animation: none; stroke-dashoffset: 0; }
   .js [data-revela] { opacity: 1; transform: none; transition: none; }
 }
