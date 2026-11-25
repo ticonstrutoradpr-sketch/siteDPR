@@ -430,23 +430,40 @@ html:not(.js) .pal > span { transform: none; }
 .terreno-lista b { font: 500 12px/1 var(--titulo); letter-spacing: .2em; color: var(--areia); }
 .porta-legenda { position: absolute; right: calc(var(--margem) + 76px); bottom: 24px; z-index: 2; color: rgba(244, 241, 236, .65); opacity: var(--abre, 0); }
 
-/* rodape com o logo grande */
-.rodape { background: var(--papel); padding: clamp(64px, 7vw, 100px) 0 96px; overflow: hidden; }
-.rodape-cta { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 28px 48px; padding-bottom: clamp(40px, 5vw, 64px); border-bottom: 1px solid var(--linha-clara); }
-.rodape-cta h2 { font-size: clamp(30px, 3.2vw, 46px); }
-.rodape-cta > div:first-child { display: grid; gap: 22px; }
-.rodape-cta h2 { max-width: 17ch; }
+/* rodape grafite: convite, linha dourada, quatro colunas e o aviso */
+.rodape { position: relative; padding: clamp(72px, 8vw, 112px) 0 100px; overflow: hidden; }
+.rodape::before {
+  content: ''; position: absolute; right: -6vw; bottom: -18vw; width: 46vw; height: 46vw; pointer-events: none;
+  border: 1px solid rgba(188, 156, 116, .14); border-radius: 50%;
+}
+.rodape .cont { position: relative; }
+.rodape-cta { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 28px 64px; padding-bottom: clamp(40px, 5vw, 64px); }
+.rodape-cta > div:first-child { display: grid; gap: 18px; }
+.rodape-cta h2 { font-size: clamp(36px, 4.4vw, 64px); max-width: 14ch; }
+.rodape-sub { color: rgba(244, 241, 236, .66); max-width: 44ch; }
 .rodape-bts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; }
-.rodape-base { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 40px; padding: 44px 0 36px; }
-.rodape-col { display: grid; gap: 10px; align-content: start; font-size: 15px; }
-.rodape-col .legenda { color: var(--areia-escura); margin-bottom: 8px; }
-.rodape-col a { text-decoration: none; width: fit-content; background: linear-gradient(var(--areia), var(--areia)) left bottom / 0 1px no-repeat; transition: background-size .5s var(--ease); }
-.rodape-col a:hover { background-size: 100% 1px; }
-.rodape-col span:not(.legenda) { color: var(--taupe); }
-.rodape-col .chamada { color: var(--areia-escura); }
-.rodape-logo .marca { --lw: 200px; margin-bottom: 6px; }
-.rodape-aviso { font-size: 13px; line-height: 1.6; color: var(--taupe); max-width: 80ch; padding-bottom: 28px; }
-.rodape-fim { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; padding-top: 24px; border-top: 1px solid var(--linha-clara); font-size: 13px; color: var(--taupe); }
+.rodape-bts .link { color: rgba(244, 241, 236, .85); }
+.rodape-linha { height: 1px; background: linear-gradient(90deg, var(--areia), rgba(188, 156, 116, .15)); transform-origin: left; }
+.js .rodape-linha[data-revela] { opacity: 1; transform: scaleX(0); transition: transform 1.8s var(--cortina); }
+.js .rodape-linha[data-revela].visivel { transform: scaleX(1); }
+.rodape-base { display: grid; grid-template-columns: 1.3fr 1.2fr 1fr 1fr; gap: 40px; padding: clamp(40px, 5vw, 64px) 0; }
+.rodape-col { display: grid; gap: 11px; align-content: start; font-size: 15px; }
+.rodape-col .legenda { color: var(--areia); margin-bottom: 6px; }
+.rodape-col a {
+  text-decoration: none; width: fit-content; color: rgba(244, 241, 236, .78);
+  background: linear-gradient(var(--areia), var(--areia)) left bottom / 0 1px no-repeat;
+  transition: background-size .5s var(--ease), color .3s;
+}
+.rodape-col a:hover { color: var(--marfim); background-size: 100% 1px; }
+.rodape-col span:not(.legenda) { color: rgba(244, 241, 236, .55); font-size: 14px; }
+.rodape-col .chamada { color: var(--areia); }
+.rodape-logo .marca { --lw: 150px; margin-bottom: 8px; }
+.rodape-fim { display: grid; grid-template-columns: 1fr auto; align-items: end; gap: 16px 48px; padding-top: 24px; border-top: 1px solid var(--linha-escura); }
+.rodape-aviso { font-size: 12.5px; line-height: 1.6; color: rgba(244, 241, 236, .45); max-width: 78ch; }
+.rodape-direitos { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; font-size: 13px; color: rgba(244, 241, 236, .5); white-space: nowrap; }
+.rodape-topo { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; color: var(--areia); text-decoration: none; font: 500 11px/1 var(--titulo); letter-spacing: .2em; text-transform: uppercase; }
+.rodape-topo span { transition: transform .4s var(--ease); }
+.rodape-topo:hover span { transform: translateY(-4px); }
 
 /* whatsapp flutuante */
 .zap {
@@ -523,6 +540,9 @@ html:not(.js) .pal > span { transform: none; }
   .porta-legenda { right: 96px; }
   .rodape-cta { grid-template-columns: 1fr; }
   .rodape-base { grid-template-columns: 1fr 1fr; }
+  .rodape-logo { grid-column: 1 / -1; }
+  .rodape-fim { grid-template-columns: 1fr; }
+  .rodape-direitos { align-items: flex-start; }
 }
 @media (max-width: 560px) {
   .heroi-bts { width: 100%; }
