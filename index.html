@@ -238,10 +238,10 @@
       { "g": "/fotos/emp/caucaia1-servico.webp", "p": "/fotos/emp/caucaia1-servico-900.webp", "nome": "Área de serviço", "leg": "Imagem ilustrativa" },
       { "g": "/fotos/obras/projeto-playground.webp", "p": "/fotos/obras/projeto-playground-900.webp", "nome": "Área de lazer", "leg": "Imagem ilustrativa" },
       { "g": "/fotos/obras/entregue-cozinha.webp", "p": "/fotos/obras/entregue-cozinha.webp", "nome": "Cozinha", "leg": "Foto real · obra entregue" },
-      { "g": "/fotos/obras/entregue-cozinha-2.webp", "p": "/fotos/obras/entregue-cozinha-2.webp", "nome": "Cozinha e sala", "leg": "Foto real · obra entregue" },
-      { "g": "/fotos/emp/caucaia1-entregue-sala.webp", "p": "/fotos/emp/caucaia1-entregue-sala.webp", "nome": "Sala", "leg": "Foto real · obra entregue" },
+      { "g": "/fotos/obras/entregue-cozinha-2.webp", "p": "/fotos/obras/entregue-cozinha-2.webp", "nome": "Armários da cozinha", "leg": "Foto real · obra entregue" },
+      { "g": "/fotos/emp/caucaia1-entregue-sala.webp", "p": "/fotos/emp/caucaia1-entregue-sala.webp", "nome": "Sala integrada", "leg": "Foto real · obra entregue" },
       { "g": "/fotos/obras/entregue-quarto.webp", "p": "/fotos/obras/entregue-quarto.webp", "nome": "Quarto", "leg": "Foto real · obra entregue" },
-      { "g": "/fotos/emp/caucaia1-entregue-quarto2.webp", "p": "/fotos/emp/caucaia1-entregue-quarto2.webp", "nome": "Quarto", "leg": "Foto real · obra entregue" },
+      { "g": "/fotos/emp/caucaia1-entregue-quarto2.webp", "p": "/fotos/emp/caucaia1-entregue-quarto2.webp", "nome": "Segundo quarto", "leg": "Foto real · obra entregue" },
       { "g": "/fotos/obras/entregue-banheiro.webp", "p": "/fotos/obras/entregue-banheiro.webp", "nome": "Banheiro", "leg": "Foto real · obra entregue" }
     ],
     "moradas1": [
@@ -268,32 +268,34 @@
   }
   </script>
 
-  <!-- obra entregue (aprovado) -->
-  <section class="obras" id="obras" aria-labelledby="titulo-obras">
-    <div class="obras-palco">
-      <div class="obras-trilho">
-        <div class="obras-intro">
-          <span class="rotulo">Obra entregue</span>
+  <!-- obra entregue: tour pela casa (a foto troca conforme a rolagem) -->
+  <section class="tour escuro" id="obras" aria-labelledby="titulo-obras">
+    <div class="tour-palco">
+      <div class="cont tour-in">
+        <div class="tour-texto">
+          <span class="rotulo">Obra entregue · Villaggio Caucaia I</span>
           <h2 id="titulo-obras" data-palavras>A casa pronta, <em>por dentro.</em></h2>
-          <p data-revela>Fotos reais de uma casa entregue pela DPR no Villaggio Caucaia I, do jeito que a família recebe a chave.</p>
-          <span class="obras-dica legenda" aria-hidden="true">Arraste para o lado <i></i></span>
+          <ol class="tour-lista">
+            <li><button type="button" class="tour-item ativo" data-i="0"><span class="tour-n">01</span>Cozinha</button></li>
+            <li><button type="button" class="tour-item" data-i="1"><span class="tour-n">02</span>Armários da cozinha</button></li>
+            <li><button type="button" class="tour-item" data-i="2"><span class="tour-n">03</span>Sala integrada</button></li>
+            <li><button type="button" class="tour-item" data-i="3"><span class="tour-n">04</span>Quarto</button></li>
+            <li><button type="button" class="tour-item" data-i="4"><span class="tour-n">05</span>Segundo quarto</button></li>
+            <li><button type="button" class="tour-item" data-i="5"><span class="tour-n">06</span>Banheiro</button></li>
+          </ol>
+          <p class="tour-nota legenda"><span class="tour-conta">01 / 06</span> · Foto real da casa entregue</p>
         </div>
-        <figure class="arco-card" data-revela>
-          <div class="arco-foto"><img src="/fotos/obras/entregue-cozinha.webp" alt="Cozinha de casa entregue, com pia, janela e piso amadeirado" width="540" height="960" loading="lazy"></div>
-          <figcaption><span>Cozinha</span><span class="legenda">Obra entregue</span></figcaption>
-        </figure>
-        <figure class="arco-card" data-revela style="--d:1">
-          <div class="arco-foto"><img src="/fotos/obras/entregue-quarto.webp" alt="Quarto de casa entregue, com porta de madeira e piso amadeirado" width="540" height="960" loading="lazy"></div>
-          <figcaption><span>Quarto</span><span class="legenda">Obra entregue</span></figcaption>
-        </figure>
-        <figure class="arco-card" data-revela style="--d:2">
-          <div class="arco-foto"><img src="/fotos/obras/entregue-banheiro.webp" alt="Banheiro de casa entregue, com revestimento claro e janela" width="540" height="960" loading="lazy"></div>
-          <figcaption><span>Banheiro</span><span class="legenda">Obra entregue</span></figcaption>
-        </figure>
-        <figure class="arco-card" data-revela style="--d:3">
-          <div class="arco-foto"><img src="/fotos/obras/entregue-cozinha-2.webp" alt="Cozinha com armários e sala de casa entregue" width="540" height="960" loading="lazy"></div>
-          <figcaption><span>Cozinha e sala</span><span class="legenda">Obra entregue</span></figcaption>
-        </figure>
+        <div class="tour-moldura">
+          <div class="tour-fotos">
+            <img class="ativa" src="/fotos/obras/entregue-cozinha.webp" alt="Cozinha da casa entregue, com pia, porta de madeira e piso amadeirado" width="540" height="960" loading="lazy">
+            <img src="/fotos/obras/entregue-cozinha-2.webp" alt="Armários da cozinha da casa entregue, com a sala ao fundo" width="540" height="960" loading="lazy">
+            <img src="/fotos/emp/caucaia1-entregue-sala.webp" alt="Cozinha integrada à sala na casa entregue" width="540" height="960" loading="lazy">
+            <img src="/fotos/obras/entregue-quarto.webp" alt="Quarto da casa entregue, com porta de madeira" width="540" height="960" loading="lazy">
+            <img src="/fotos/emp/caucaia1-entregue-quarto2.webp" alt="Segundo quarto da casa entregue" width="540" height="960" loading="lazy">
+            <img src="/fotos/obras/entregue-banheiro.webp" alt="Banheiro da casa entregue, com revestimento claro e janela" width="540" height="960" loading="lazy">
+          </div>
+          <div class="tour-barra" aria-hidden="true"><i></i></div>
+        </div>
       </div>
     </div>
   </section>

@@ -244,14 +244,30 @@
     requestAnimationFrame(acompanha);
   }
 
-  /* ---------- obras: altura da secao para o trilho andar de lado ---------- */
-  var obras = $('.obras'), trilho = $('.obras-trilho'), obrasAnda = 0;
-  function arrumaObras() {
-    if (!obras || !trilho) return;
-    if (largo() && !calmo) {
-      obrasAnda = Math.max(0, trilho.scrollWidth - window.innerWidth);
-      obras.style.height = (window.innerHeight + obrasAnda) + 'px';
-    } else { obrasAnda = 0; obras.style.height = ''; trilho.style.transform = ''; }
+  /* ---------- obra entregue: tour pela casa ---------- */
+  var tour = $('.tour'), tourFotos = $$('.tour-fotos img'), tourItens = $$('.tour-item');
+  var tourConta = $('.tour-conta'), tourTexto = $('.tour-texto'), tourAtual = -1;
+  function mostraTour(i) {
+    if (!tour || i === tourAtual || !tourFotos[i]) return;
+    var velha = tourFotos[tourAtual];
+    tourFotos.forEach(function (f) { if (f !== velha) f.classList.remove('saindo'); });
+    if (velha) { velha.classList.remove('ativa'); velha.classList.add('saindo'); }
+    tourFotos[i].classList.add('ativa');
+    tourItens.forEach(function (b, k) { b.classList.toggle('ativo', k === i); b.setAttribute('aria-pressed', k === i ? 'true' : 'false'); });
+    if (tourConta) tourConta.textContent = '0' + (i + 1) + ' / 0' + tourFotos.length;
+    if (tourTexto) tourTexto.setAttribute('data-atual', tourItens[i] ? tourItens[i].textContent.replace(/^\d+/, '') : '');
+    tourAtual = i;
+  }
+  if (tour) {
+    mostraTour(0);
+    tourItens.forEach(function (b, k) {
+      b.addEventListener('click', function () {
+        if (calmo) { mostraTour(k); return; }
+        /* rola ate o ponto da secao em que esta foto aparece */
+        var alto = tour.offsetHeight - window.innerHeight;
+        window.scrollTo({ top: tour.offsetTop + alto * (k + 0.5) / tourFotos.length, behavior: 'smooth' });
+      });
+    });
   }
 
   var topo = $('.topo'), zap = $('.zap'), cartas = $$('.carta'), portas = $('.portas'), portaT = $('.porta-terreno');
@@ -291,9 +307,10 @@
       }
     });
 
-    if (obras && obrasAnda > 0) {
-      var po = progresso(obras, H);
-      trilho.style.transform = 'translate3d(' + (-po * obrasAnda).toFixed(1) + 'px,0,0)';
+    if (tour) {
+      var pt = progresso(tour, H);
+      tour.style.setProperty('--tour-p', pt.toFixed(3));
+      mostraTour(Math.min(tourFotos.length - 1, Math.floor(pt * tourFotos.length)));
     }
     if (portas) portas.style.setProperty('--abre', suave(limita(progresso(portas, H) / 0.75)).toFixed(4));
     if (portaT) {
@@ -303,7 +320,7 @@
     }
   }
   function pede() { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }
-  function arruma() { arrumaObras(); quadro(); }
+  function arruma() { quadro(); }
   window.addEventListener('scroll', pede, { passive: true });
   window.addEventListener('resize', function () { clearTimeout(arruma.t); arruma.t = setTimeout(arruma, 120); });
   window.addEventListener('load', arruma);
@@ -336,7 +353,7 @@
     };
     document.addEventListener('mousemove', function (e) {
       mx = e.clientX; my = e.clientY; cursor.classList.add('ligado');
-      cursor.classList.toggle('grande', !!e.target.closest('a, button, .arco-card, .carta'));
+      cursor.classList.toggle('grande', !!e.target.closest('a, button, .tour-moldura, .carta'));
       if (!rodando) { rodando = true; requestAnimationFrame(anda); }
     }, { passive: true });
     document.addEventListener('mouseleave', function () { cursor.classList.remove('ligado'); });
