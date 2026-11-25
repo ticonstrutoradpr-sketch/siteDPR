@@ -30,15 +30,17 @@
      botao = Poppins Medium sublinhado, uma mensagem e um botao por tela, simbolo pequeno em marfim no canto. -->
 
 <header class="topo">
-  <div class="topo-in cont">
-    <a class="topo-marca" href="#inicio" aria-label="DPR Construtora, início">
-      <span class="marca"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
-    </a>
+  <a class="topo-marca" href="#inicio" aria-label="DPR Construtora, início">
+    <span class="marca"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
+  </a>
+  <div class="pilula">
     <nav class="topo-nav" aria-label="Principal">
+      <a href="#inicio" class="atual">Início</a>
       <a href="#obras">Obras</a>
       <a href="#como-funciona">Como funciona</a>
       <a href="#contato">Contato</a>
     </nav>
+    <a class="pilula-bt" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">Fale com a DPR</a>
     <button class="topo-menu" type="button" aria-expanded="false" aria-controls="painel" aria-label="Abrir menu"><span></span><span></span></button>
   </div>
 </header>
@@ -57,21 +59,58 @@
 
 <main>
 
-  <!-- abertura: como na pagina 16 do manual -->
-  <section class="heroi escuro" id="inicio" aria-labelledby="titulo-heroi">
-    <picture class="heroi-foto">
-      <source media="(max-width: 899px)" srcset="/fotos/caucaia2/centro-comercial-900.webp">
-      <img src="/fotos/caucaia2/centro-comercial.webp" alt="Centro comercial do Villaggio Caucaia II, empreendimento da DPR" width="1672" height="941" fetchpriority="high">
-    </picture>
-    <div class="heroi-veu" aria-hidden="true"></div>
-    <div class="cont heroi-texto">
-      <span class="rotulo">Construa no seu terreno</span>
-      <h1 id="titulo-heroi">Sua casa no terreno que já é seu.</h1>
-      <p class="chamada">Projeto, financiamento e obra com uma única empresa.</p>
-      <a class="botao" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20avalia%C3%A7%C3%A3o%20do%20meu%20terreno%20com%20a%20DPR." target="_blank" rel="noopener">Agendar avaliação</a>
+  <!-- abertura que muda com a rolagem: a tela areia encolhe, vira a tela de um celular,
+       o celular vai para a esquerda, entram as vantagens e a tela vira a conversa do WhatsApp -->
+  <section class="palco" id="inicio" aria-labelledby="titulo-heroi">
+    <div class="palco-fixo">
+      <div class="aparelho" aria-hidden="true"><span class="aparelho-botao"></span></div>
+      <div class="tela">
+        <div class="tela-titulo">
+          <h1 id="titulo-heroi">Sua casa no terreno<br>que já é seu.</h1>
+        </div>
+        <div class="tela-chat" aria-hidden="true">
+          <div class="chat-cab"><span class="chat-avatar"><span class="marca"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span></span><b>DPR Construtora</b></div>
+          <p class="msg eu" style="--m:0">Oi, tenho um terreno e quero construir.</p>
+          <p class="msg dpr" style="--m:1">Olá! Aqui é a equipe da DPR. O terreno está quitado e com escritura?</p>
+          <p class="msg eu" style="--m:2">Sim, está.</p>
+          <p class="msg dpr" style="--m:3">Ótimo. Vamos agendar a visita técnica ao seu terreno.</p>
+        </div>
+      </div>
+      <div class="palco-texto">
+        <div class="cont">
+          <div class="palco-bloco">
+            <span class="rotulo">Construa no seu terreno</span>
+            <h2>Do primeiro oi à chave, pelo WhatsApp</h2>
+            <p class="palco-sub">Projeto, financiamento pela Caixa e obra com uma única empresa. Cada etapa explicada antes de começar.</p>
+            <ul class="vantagens">
+              <li style="--v:0">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><path d="M6 27V13l10-8 10 8v14H6z"/><path d="M13 27v-8h6v8"/></svg>
+                <b>Pré-análise</b><span>Sem compromisso, antes de qualquer custo</span>
+              </li>
+              <li style="--v:1">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><rect x="5" y="8" width="22" height="17" rx="2"/><circle cx="16" cy="16.5" r="4.5"/><path d="M11 8l2-3h6l2 3"/></svg>
+                <b>Fotos da obra</b><span>Toda semana, no seu WhatsApp</span>
+              </li>
+              <li style="--v:2">
+                <svg viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="11"/><path d="M16 10v6l4 3"/></svg>
+                <b>Resposta rápida</b><span>Contato respondido no mesmo dia</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <span class="palco-dica legenda" aria-hidden="true">Role para ver</span>
     </div>
-    <span class="legenda heroi-legenda">Villaggio Caucaia II · projeto, imagem ilustrativa</span>
   </section>
+
+  <!-- cartao flutuante (no lugar do "newsletter" da referencia) -->
+  <aside class="cartao-flutua" aria-label="Pré-análise">
+    <a href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20fazer%20minha%20pr%C3%A9-an%C3%A1lise%20com%20a%20DPR." target="_blank" rel="noopener">
+      <b>Pré-análise</b>
+      <span class="legenda">Resposta no mesmo dia · sem compromisso</span>
+    </a>
+    <button class="cartao-fechar" type="button" aria-label="Fechar">&times;</button>
+  </aside>
 
   <!-- frase-guia -->
   <section class="sec manifesto" aria-label="Nosso compromisso">

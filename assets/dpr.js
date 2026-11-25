@@ -17,17 +17,50 @@
     alvos.forEach(function (el) { obs.observe(el); });
   }
 
-  /* topo: transparente sobre a foto da abertura, marfim depois */
-  var topo = $('.topo'), heroi = $('.heroi'), pedido = false;
+  /* abertura que muda com a rolagem */
+  var palco = $('.palco'), fixo = $('.palco-fixo'), pedido = false;
+  var limita = function (v) { return Math.min(1, Math.max(0, v)); };
+  var suave = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
+  var mistura = function (a, b, t) { return a + (b - a) * t; };
+  var fase = function (p, a, b) { return limita((p - a) / (b - a)); };
   function quadro() {
     pedido = false;
-    if (!topo || doc.classList.contains('menu-aberto')) return;
-    var fim = heroi ? heroi.offsetHeight - topo.offsetHeight : 0;
-    topo.classList.toggle('solido', window.scrollY > fim - 4);
+    if (!palco || !fixo) return;
+    var W = fixo.clientWidth, H = fixo.clientHeight, largo = W >= 900;
+    var p = calmo ? 1 : limita(-palco.getBoundingClientRect().top / Math.max(1, palco.offsetHeight - H));
+    var encolhe = suave(fase(p, .18, .5)), vai = suave(fase(p, .5, .66)), txt = fase(p, .56, .72), chat = fase(p, .72, .96);
+    /* tamanho final da tela do celular */
+    var th = largo ? Math.min(H * .74, 660) : Math.min(H * (H < 800 ? .44 : .5), 440);
+    var tw = th * .48;
+    var cx = W / 2, cy = largo ? H / 2 : (H * .06 + 70 + th / 2);
+    var destinoX = largo ? Math.max(W * .26, tw / 2 + 60) : W / 2;
+    var x = mistura(cx, destinoX, vai);
+    var w = mistura(W, tw, encolhe), h = mistura(H, th, encolhe);
+    var yc = mistura(H / 2, cy, encolhe);
+    var s = fixo.style;
+    s.setProperty('--p', p.toFixed(4));
+    s.setProperty('--tw', w.toFixed(1) + 'px'); s.setProperty('--th', h.toFixed(1) + 'px');
+    s.setProperty('--tx', (x - w / 2).toFixed(1) + 'px'); s.setProperty('--ty', (yc - h / 2).toFixed(1) + 'px');
+    s.setProperty('--tr', mistura(0, 30, encolhe).toFixed(1) + 'px');
+    s.setProperty('--fh', mistura(largo ? Math.min(W * .055, 78) : Math.min(W * .1, 42), largo ? 30 : 22, encolhe).toFixed(1) + 'px');
+    s.setProperty('--moldura', fase(p, .3, .48).toFixed(3));
+    s.setProperty('--brilho', (encolhe * (1 - chat * .5)).toFixed(3));
+    s.setProperty('--txt', txt.toFixed(3));
+    s.setProperty('--chat', chat.toFixed(3));
+    /* no celular o cartao flutuante esconde enquanto a abertura esta na tela (ele cobriria o texto) */
+    document.body.classList.toggle('no-palco', palco.getBoundingClientRect().bottom > H * .5);
+    /* link do menu que corresponde a secao na tela */
+    var y = window.scrollY + H * .4, atual = 'inicio';
+    ['obras', 'como-funciona', 'contato'].forEach(function (id) { var el = document.getElementById(id); if (el && el.offsetTop <= y) atual = id; });
+    $$('.topo-nav a').forEach(function (a) { a.classList.toggle('atual', a.getAttribute('href') === '#' + atual); });
   }
   window.addEventListener('scroll', function () { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }, { passive: true });
   window.addEventListener('resize', quadro);
   quadro();
+
+  /* cartao flutuante: fechar mostra o botao redondo do WhatsApp */
+  var cartao = $('.cartao-flutua');
+  if (cartao) $('.cartao-fechar', cartao).addEventListener('click', function () { cartao.classList.add('fechado'); document.body.classList.add('sem-cartao'); });
 
   /* menu do celular */
   var botao = $('.topo-menu'), painel = $('.painel');
@@ -39,7 +72,6 @@
     botao.setAttribute('aria-label', abrir ? 'Fechar menu' : 'Abrir menu');
     painel.setAttribute('aria-hidden', abrir ? 'false' : 'true');
     document.body.style.overflow = abrir ? 'hidden' : '';
-    if (!abrir) quadro();
   }
   if (botao) botao.addEventListener('click', function () { menu(!painel.classList.contains('aberto')); });
   $$('.painel a').forEach(function (a) { a.addEventListener('click', function () { menu(false); }); });
