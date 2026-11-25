@@ -95,13 +95,19 @@ p { margin: 0; }
 .tela-video .vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; transform: scale(calc(1.04 + (1 - var(--vid, 1)) * .1)); }
 .tela-video .vid.ativo { opacity: 1; }
 .video-veu { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26, 25, 24, .45) 0%, rgba(26, 25, 24, .1) 40%, rgba(26, 25, 24, .65) 100%); }
-.video-texto { position: absolute; left: 0; right: 0; bottom: clamp(70px, 14vh, 140px); display: grid; justify-items: center; gap: 18px; padding: 0 24px; text-align: center; color: var(--marfim); }
+/* letras vazadas: o fundo grafite em multiply escurece o video; o texto branco deixa o video aparecer inteiro.
+   --abre (0 a 1, pela rolagem): as letras crescem e o grafite some ate o video ocupar a tela. */
+.vazado { position: absolute; inset: 0; display: grid; place-items: center; background: #0d0c0b; mix-blend-mode: multiply; opacity: calc(1 - var(--abre, 0)); }
+.vazado-frase { display: grid; justify-items: center; margin: 0; color: #fff; font: 500 clamp(64px, 14.5vw, 260px)/.86 var(--titulo); letter-spacing: -.055em; text-align: center; transform: scale(calc(1 + var(--abre, 0) * .9)); transform-origin: 50% 52%; }
+.vazado-frase span { display: block; white-space: nowrap; }
+.js .vazado-frase span { animation: vazado-entra 1.6s cubic-bezier(.2, .7, .2, 1) both; }
+.js .vazado-frase span:nth-child(2) { animation-delay: .18s; }
+@keyframes vazado-entra { from { opacity: 0; transform: translateY(18%) scale(.96); letter-spacing: .02em; } to { opacity: 1; transform: none; } }
+.tela-video .video-veu { opacity: var(--abre, 0); }
+.video-texto { position: absolute; left: 0; right: 0; bottom: clamp(70px, 13vh, 130px); display: grid; justify-items: center; gap: 18px; padding: 0 24px; text-align: center; color: var(--marfim); opacity: calc(1 - var(--abre, 0) * 2); }
 .video-texto .rotulo { color: var(--areia); }
 .video-texto .rotulo::before { margin-inline: auto; }
-.video-frase { font: 300 clamp(44px, 6.4vw, 96px)/1.02 var(--titulo); letter-spacing: -.03em; }
-.video-frase em { font-style: italic; color: var(--areia); }
-.js .video-texto > * { animation: video-sobe 1.4s var(--ease) both; }
-.js .video-texto > :nth-child(2) { animation-delay: .25s; }
+.js .video-texto > * { animation: video-sobe 1.4s var(--ease) .6s both; }
 @keyframes video-sobe { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
 .video-legenda { position: absolute; left: 24px; bottom: 22px; color: rgba(244, 241, 236, .55); }
 .palco-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 30% 50%, #24201c 0%, #0f0e0d 62%); }
@@ -242,6 +248,8 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   .pilula-bt { padding: 0 14px; font-size: 12px; letter-spacing: .08em; }
   .palco { height: 520vh; }
   .video-legenda { left: 16px; bottom: 16px; }
+  .vazado-frase { font-size: clamp(48px, 17.5vw, 120px); line-height: .92; }
+  .palco-dica { display: none; }
   .palco-texto { align-items: flex-end; padding-bottom: 20px; }
   .palco-bloco { width: 100%; gap: 10px; }
   .palco-bloco h2 { font-size: 28px; }

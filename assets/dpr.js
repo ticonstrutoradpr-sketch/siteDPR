@@ -60,8 +60,11 @@
     if (!palco || !fixo) return;
     var W = fixo.clientWidth, H = fixo.clientHeight, largo = W >= 900;
     var p = calmo ? 1 : limita(-palco.getBoundingClientRect().top / Math.max(1, palco.offsetHeight - H));
-    /* fases: video ate .08, dissolve na tela areia .08-.2, encolhe .3-.56, vai a esquerda .56-.7, texto .62-.76, conversa .78-.97 */
-    var vid = 1 - suave(fase(p, .08, .2));
+    /* fases: letras vazadas se abrem ate o video ocupar a tela 0-.1, video cheio ate .14, dissolve na tela areia .14-.24,
+       encolhe .3-.56, vai a esquerda .56-.7, texto .62-.76, conversa .78-.97 */
+    var abre = suave(fase(p, 0, .1));
+    var vid = 1 - suave(fase(p, .14, .24));
+    fixo.style.setProperty('--abre', abre.toFixed(4));
     var encolhe = suave(fase(p, .3, .56)), vai = suave(fase(p, .56, .7)), txt = fase(p, .62, .76), chat = fase(p, .78, .97);
     s0 = fixo.style; s0.setProperty('--vid', vid.toFixed(4));
     tocaVideo(vid > .02);
