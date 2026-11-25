@@ -89,28 +89,29 @@ p { margin: 0; }
 
 /* abertura que muda com a rolagem. O JS escreve --p (0 a 1) e o retangulo da tela (--tx, --ty, --tw, --th, --tr).
    Fases: 0-.22 tela cheia | .22-.5 encolhe ate virar a tela do celular | .5-.68 celular vai a esquerda e entra o texto | .68-1 conversa */
-.palco { position: relative; height: 560vh; background: #0f0e0d; }
+.palco { position: relative; height: 560vh; background: var(--marfim); }
 /* video do comeco: cobre a tela inteira e some (--vid de 1 a 0) revelando a tela areia */
-.tela-video { position: absolute; inset: 0; z-index: 3; opacity: var(--vid, 1); background: var(--grafite); }
+.tela-video { position: absolute; inset: 0; z-index: 3; opacity: var(--vid, 1); background: var(--marfim); }
 .tela-video .vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; transform: scale(calc(1.04 + (1 - var(--vid, 1)) * .1)); }
 .tela-video .vid.ativo { opacity: 1; }
 .video-veu { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26, 25, 24, .45) 0%, rgba(26, 25, 24, .1) 40%, rgba(26, 25, 24, .65) 100%); }
 /* letras vazadas: o fundo grafite em multiply escurece o video; o texto branco deixa o video aparecer inteiro.
    --abre (0 a 1, pela rolagem): as letras crescem e o grafite some ate o video ocupar a tela. */
-.vazado { position: absolute; inset: 0; display: grid; place-items: center; background: #0d0c0b; mix-blend-mode: multiply; opacity: calc(1 - var(--abre, 0)); }
-.vazado-frase { display: grid; justify-items: center; margin: 0; color: #fff; font: 500 clamp(64px, 14.5vw, 260px)/.86 var(--titulo); letter-spacing: -.055em; text-align: center; transform: scale(calc(1 + var(--abre, 0) * .9)); transform-origin: 50% 52%; }
+/* (25/11/2026: ela nao quer "pretao") fundo marfim em "screen": o marfim fica claro por cima do video e o texto preto deixa o video aparecer */
+.vazado { position: absolute; inset: 0; display: grid; place-items: center; background: var(--marfim); mix-blend-mode: screen; opacity: calc(1 - var(--abre, 0)); }
+.vazado-frase { display: grid; justify-items: center; margin: 0; color: #000; font: 500 clamp(64px, 14.5vw, 260px)/.86 var(--titulo); letter-spacing: -.055em; text-align: center; transform: scale(calc(1 + var(--abre, 0) * .9)); transform-origin: 50% 52%; }
 .vazado-frase span { display: block; white-space: nowrap; }
 .js .vazado-frase span { animation: vazado-entra 1.6s cubic-bezier(.2, .7, .2, 1) both; }
 .js .vazado-frase span:nth-child(2) { animation-delay: .18s; }
 @keyframes vazado-entra { from { opacity: 0; transform: translateY(18%) scale(.96); letter-spacing: .02em; } to { opacity: 1; transform: none; } }
 .tela-video .video-veu { opacity: var(--abre, 0); }
 .video-texto { position: absolute; left: 0; right: 0; bottom: clamp(70px, 13vh, 130px); display: grid; justify-items: center; gap: 18px; padding: 0 24px; text-align: center; color: var(--marfim); opacity: calc(1 - var(--abre, 0) * 2); }
-.video-texto .rotulo { color: var(--areia); }
+.video-texto .rotulo { color: var(--areia-escura); }
 .video-texto .rotulo::before { margin-inline: auto; }
 .js .video-texto > * { animation: video-sobe 1.4s var(--ease) .6s both; }
 @keyframes video-sobe { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
-.video-legenda { position: absolute; left: 24px; bottom: 22px; color: rgba(244, 241, 236, .55); }
-.palco-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 30% 50%, #24201c 0%, #0f0e0d 62%); }
+.video-legenda { position: absolute; left: 24px; bottom: 22px; color: var(--taupe); opacity: calc(1 - var(--abre, 0)); }
+.palco-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 30% 50%, #fbf9f5 0%, var(--marfim) 45%, var(--papel) 100%); }
 .tela {
   position: absolute; left: 0; top: 0; z-index: 2; overflow: hidden;
   width: var(--tw, 100vw); height: var(--th, 100vh); transform: translate(var(--tx, 0px), var(--ty, 0px));
@@ -133,16 +134,16 @@ p { margin: 0; }
 .aparelho-botao { position: absolute; right: -3px; top: 22%; width: 3px; height: 54px; border-radius: 2px; background: #3a342e; }
 .palco-texto { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; pointer-events: none; opacity: var(--txt, 0); }
 .palco-texto .cont { display: flex; justify-content: flex-end; }
-.palco-bloco { width: min(560px, 46%); display: grid; gap: 18px; color: var(--marfim); transform: translateY(calc((1 - var(--txt, 0)) * 30px)); }
-.palco-bloco .rotulo { color: var(--areia); }
+.palco-bloco { width: min(560px, 46%); display: grid; gap: 18px; color: var(--grafite); transform: translateY(calc((1 - var(--txt, 0)) * 30px)); }
+.palco-bloco .rotulo { color: var(--areia-escura); }
 .palco-bloco h2 { font-size: clamp(34px, 4vw, 58px); line-height: 1.05; letter-spacing: -.02em; }
-.palco-sub { color: rgba(244, 241, 236, .7); font-size: 18px; max-width: 44ch; }
+.palco-sub { color: var(--taupe); font-size: 18px; max-width: 44ch; }
 .vantagens { list-style: none; margin: 18px 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
 .vantagens li { display: grid; gap: 8px; align-content: start; opacity: clamp(0, calc(var(--txt, 0) * 3 - var(--v) * .6), 1); }
-.vantagens svg { width: 32px; height: 32px; fill: none; stroke: var(--areia); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+.vantagens svg { width: 32px; height: 32px; fill: none; stroke: var(--areia-escura); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .vantagens b { font: 500 18px/1.2 var(--titulo); }
-.vantagens span { color: rgba(244, 241, 236, .6); font-size: 16px; line-height: 1.45; }
-.palco-dica { position: absolute; left: 50%; bottom: 26px; z-index: 4; transform: translateX(-50%); color: rgba(244, 241, 236, .7); opacity: calc(1 - var(--p, 0) * 14); }
+.vantagens span { color: var(--taupe); font-size: 16px; line-height: 1.45; }
+.palco-dica { position: absolute; left: 50%; bottom: 26px; z-index: 4; transform: translateX(-50%); color: var(--taupe); opacity: calc(1 - var(--p, 0) * 14); }
 
 /* cartao flutuante */
 .cartao-flutua { position: fixed; right: 20px; bottom: 20px; z-index: 50; width: min(380px, calc(100vw - 40px)); border-radius: 16px; background: rgba(26, 25, 24, .94); border: 1px solid rgba(188, 156, 116, .55); color: var(--marfim); box-shadow: 0 14px 40px rgba(0, 0, 0, .35); transition: opacity .3s, transform .3s; }
