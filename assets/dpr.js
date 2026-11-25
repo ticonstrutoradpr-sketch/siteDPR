@@ -23,12 +23,48 @@
   var suave = function (t) { return t < .5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2; };
   var mistura = function (a, b, t) { return a + (b - a) * t; };
   var fase = function (p, a, b) { return limita((p - a) / (b - a)); };
+  var s0;
+
+  /* videos do comeco: passam um atras do outro com troca suave; so baixa o atual e o proximo; para quando some */
+  var vids = $$('.tela-video .vid'), filaVideos = ['2-tijolo', '3-casa-subindo', '5-chave', '7-familia', '1-terreno'];
+  var vAtual = 0, vIdx = 0, querTocar = !calmo;
+  var fonte = function (n) { return '/video/' + n + (window.innerWidth < 900 ? '-cel' : '-pc') + '.mp4'; };
+  var capa = function (n) { return '/video/capas/' + n + (window.innerWidth < 900 ? '-cel' : '-pc') + '.webp'; };
+  function preparaProximo() {
+    var prox = vids[1 - vAtual], n = filaVideos[(vIdx + 1) % filaVideos.length];
+    prox.src = fonte(n); prox.poster = capa(n); prox.preload = 'auto'; prox.load();
+  }
+  function trocaVideo() {
+    var velho = vids[vAtual], novo = vids[1 - vAtual];
+    vIdx = (vIdx + 1) % filaVideos.length; vAtual = 1 - vAtual;
+    try { novo.currentTime = 0; } catch (e) {}
+    if (querTocar) { var pr = novo.play(); if (pr && pr.catch) pr.catch(function () {}); }
+    novo.classList.add('ativo'); velho.classList.remove('ativo');
+    setTimeout(function () { velho.pause(); preparaProximo(); }, 1500);
+  }
+  function tocaVideo(sim) {
+    if (!vids.length) return;
+    querTocar = sim && !calmo;
+    var v = vids[vAtual];
+    if (querTocar && v.paused) { var pr = v.play(); if (pr && pr.catch) pr.catch(function () {}); }
+    else if (!querTocar && !v.paused) v.pause();
+  }
+  if (vids.length) {
+    vids[0].src = fonte(filaVideos[0]); vids[0].poster = capa(filaVideos[0]);
+    vids.forEach(function (v) { v.muted = true; v.addEventListener('ended', function () { if (v === vids[vAtual]) trocaVideo(); }); });
+    preparaProximo();
+    if (!calmo) { var pr0 = vids[0].play(); if (pr0 && pr0.catch) pr0.catch(function () {}); }
+  }
   function quadro() {
     pedido = false;
     if (!palco || !fixo) return;
     var W = fixo.clientWidth, H = fixo.clientHeight, largo = W >= 900;
     var p = calmo ? 1 : limita(-palco.getBoundingClientRect().top / Math.max(1, palco.offsetHeight - H));
-    var encolhe = suave(fase(p, .18, .5)), vai = suave(fase(p, .5, .66)), txt = fase(p, .56, .72), chat = fase(p, .72, .96);
+    /* fases: video ate .08, dissolve na tela areia .08-.2, encolhe .3-.56, vai a esquerda .56-.7, texto .62-.76, conversa .78-.97 */
+    var vid = 1 - suave(fase(p, .08, .2));
+    var encolhe = suave(fase(p, .3, .56)), vai = suave(fase(p, .56, .7)), txt = fase(p, .62, .76), chat = fase(p, .78, .97);
+    s0 = fixo.style; s0.setProperty('--vid', vid.toFixed(4));
+    tocaVideo(vid > .02);
     /* tamanho final da tela do celular */
     var th = largo ? Math.min(H * .74, 660) : Math.min(H * (H < 800 ? .44 : .5), 440);
     var tw = th * .48;

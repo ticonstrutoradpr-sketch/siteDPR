@@ -89,7 +89,21 @@ p { margin: 0; }
 
 /* abertura que muda com a rolagem. O JS escreve --p (0 a 1) e o retangulo da tela (--tx, --ty, --tw, --th, --tr).
    Fases: 0-.22 tela cheia | .22-.5 encolhe ate virar a tela do celular | .5-.68 celular vai a esquerda e entra o texto | .68-1 conversa */
-.palco { position: relative; height: 460vh; background: #0f0e0d; }
+.palco { position: relative; height: 560vh; background: #0f0e0d; }
+/* video do comeco: cobre a tela inteira e some (--vid de 1 a 0) revelando a tela areia */
+.tela-video { position: absolute; inset: 0; z-index: 3; opacity: var(--vid, 1); background: var(--grafite); }
+.tela-video .vid { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 1.4s ease; transform: scale(calc(1.04 + (1 - var(--vid, 1)) * .1)); }
+.tela-video .vid.ativo { opacity: 1; }
+.video-veu { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26, 25, 24, .45) 0%, rgba(26, 25, 24, .1) 40%, rgba(26, 25, 24, .65) 100%); }
+.video-texto { position: absolute; left: 0; right: 0; bottom: clamp(70px, 14vh, 140px); display: grid; justify-items: center; gap: 18px; padding: 0 24px; text-align: center; color: var(--marfim); }
+.video-texto .rotulo { color: var(--areia); }
+.video-texto .rotulo::before { margin-inline: auto; }
+.video-frase { font: 300 clamp(44px, 6.4vw, 96px)/1.02 var(--titulo); letter-spacing: -.03em; }
+.video-frase em { font-style: italic; color: var(--areia); }
+.js .video-texto > * { animation: video-sobe 1.4s var(--ease) both; }
+.js .video-texto > :nth-child(2) { animation-delay: .25s; }
+@keyframes video-sobe { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+.video-legenda { position: absolute; left: 24px; bottom: 22px; color: rgba(244, 241, 236, .55); }
 .palco-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: radial-gradient(ellipse at 30% 50%, #24201c 0%, #0f0e0d 62%); }
 .tela {
   position: absolute; left: 0; top: 0; z-index: 2; overflow: hidden;
@@ -122,7 +136,7 @@ p { margin: 0; }
 .vantagens svg { width: 32px; height: 32px; fill: none; stroke: var(--areia); stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
 .vantagens b { font: 500 18px/1.2 var(--titulo); }
 .vantagens span { color: rgba(244, 241, 236, .6); font-size: 16px; line-height: 1.45; }
-.palco-dica { position: absolute; left: 50%; bottom: 26px; z-index: 4; transform: translateX(-50%); color: rgba(26, 25, 24, .65); opacity: calc(1 - var(--p, 0) * 10); }
+.palco-dica { position: absolute; left: 50%; bottom: 26px; z-index: 4; transform: translateX(-50%); color: rgba(244, 241, 236, .7); opacity: calc(1 - var(--p, 0) * 14); }
 
 /* cartao flutuante */
 .cartao-flutua { position: fixed; right: 20px; bottom: 20px; z-index: 50; width: min(380px, calc(100vw - 40px)); border-radius: 16px; background: rgba(26, 25, 24, .94); border: 1px solid rgba(188, 156, 116, .55); color: var(--marfim); box-shadow: 0 14px 40px rgba(0, 0, 0, .35); transition: opacity .3s, transform .3s; }
@@ -226,7 +240,8 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   .topo-nav { display: none; }
   .topo-menu { display: block; }
   .pilula-bt { padding: 0 14px; font-size: 12px; letter-spacing: .08em; }
-  .palco { height: 420vh; }
+  .palco { height: 520vh; }
+  .video-legenda { left: 16px; bottom: 16px; }
   .palco-texto { align-items: flex-end; padding-bottom: 20px; }
   .palco-bloco { width: 100%; gap: 10px; }
   .palco-bloco h2 { font-size: 28px; }

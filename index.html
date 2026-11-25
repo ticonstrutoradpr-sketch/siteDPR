@@ -65,6 +65,17 @@
     <div class="palco-fixo">
       <div class="aparelho" aria-hidden="true"><span class="aparelho-botao"></span></div>
       <div class="tela">
+        <!-- video em tela cheia no comeco; ao rolar se dissolve na tela areia -->
+        <div class="tela-video" aria-hidden="true">
+          <video class="vid ativo" muted playsinline preload="auto"></video>
+          <video class="vid" muted playsinline preload="none"></video>
+          <div class="video-veu"></div>
+          <div class="video-texto">
+            <span class="rotulo">DPR Construtora e Incorporadora</span>
+            <p class="video-frase">Do projeto <em>à entrega.</em></p>
+          </div>
+          <span class="legenda video-legenda">Imagens ilustrativas</span>
+        </div>
         <div class="tela-titulo">
           <h1 id="titulo-heroi">Sua casa no terreno<br>que já é seu.</h1>
         </div>
