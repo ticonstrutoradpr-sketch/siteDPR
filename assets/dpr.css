@@ -360,30 +360,6 @@ html:not(.js) .pal > span { transform: none; }
 .js .emp.aberto .emp-texto > :nth-child(5) { transition-delay: .34s; }
 .js .emp.aberto .emp-texto > :nth-child(6) { transition-delay: .42s; }
 
-/* lazer do Villaggio Caucaia II: mosaico */
-.lazer { background: var(--marfim); }
-.lazer-cab { max-width: none; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 48px; }
-.lazer-cab > div { display: grid; gap: 22px; }
-.mosaico { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: clamp(170px, 16vw, 240px); grid-auto-flow: dense; gap: clamp(10px, 1.2vw, 16px); }
-.ladrilho {
-  position: relative; overflow: hidden; padding: 0; border: 0; background: var(--concreto); cursor: zoom-in; text-align: left;
-  color: var(--marfim);
-}
-.l-grande { grid-column: span 2; grid-row: span 2; }
-.l-largo { grid-column: span 2; }
-.ladrilho img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.3s var(--ease); }
-.ladrilho:hover img { transform: scale(1.06); }
-.ladrilho::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(26, 25, 24, .72) 0%, rgba(26, 25, 24, 0) 48%); transition: opacity .5s; }
-.ladrilho-leg { position: absolute; left: 0; right: 0; bottom: 0; z-index: 1; padding: 16px 18px; display: flex; justify-content: space-between; align-items: baseline; gap: 10px; font: 400 clamp(15px, 1.2vw, 18px)/1.25 var(--titulo); transform: translateY(4px); transition: transform .5s var(--ease); }
-.ladrilho-leg .legenda { font-size: 10px; color: rgba(244, 241, 236, .75); white-space: nowrap; }
-.ladrilho:hover .ladrilho-leg { transform: none; }
-.ladrilho:focus-visible { outline: 2px solid var(--areia); outline-offset: 3px; }
-.js .mosaico .ladrilho { clip-path: inset(100% 0 0 0); transition: clip-path 1.3s var(--cortina) calc(var(--d, 0) * 130ms); }
-.js .mosaico .ladrilho img { transform: scale(1.22); transition: transform 1.8s var(--ease) calc(var(--d, 0) * 130ms); }
-.js .mosaico.visivel .ladrilho { clip-path: inset(0); }
-.js .mosaico.visivel .ladrilho img { transform: scale(1); }
-.js .mosaico.visivel .ladrilho:hover img { transform: scale(1.06); transition-delay: 0s; transition-duration: 1.2s; }
-.lazer-nota { margin-top: 18px; color: var(--taupe); }
 
 /* foto ampliada */
 .ampliada {
@@ -541,13 +517,9 @@ html:not(.js) .pal > span { transform: none; }
   .portas-cab .cont, .portas-texto .cont { flex-direction: column; align-items: flex-start; }
   .portas-cab p { display: none; }
   .porta-foto { --t0: 38%; --l0: 20%; --rr: 30vw; }
-  .lazer-cab { grid-template-columns: 1fr; gap: 22px; }
   .emps-cab { grid-template-columns: 1fr; gap: 22px; }
   .emp { grid-template-columns: 1fr; gap: 28px; }
   .emp-inv .emp-foto { order: 0; }
-  .mosaico { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 42vw; }
-  .ladrilho:not(.l-grande):not(.l-largo) .ladrilho-leg .legenda { display: none; }
-  .ladrilho-leg { padding: 12px 12px; font-size: 14px; }
   .ampliada { grid-template-columns: 1fr 1fr; grid-template-rows: 1fr auto; padding: 64px 12px 20px; gap: 16px 0; }
   .amp-fig { grid-column: 1 / -1; grid-row: 1; }
   .amp-ant { grid-row: 2; }
@@ -580,10 +552,8 @@ html:not(.js) .pal > span { transform: none; }
   .tour-lista { display: block; }
   .carta { position: relative; top: auto; transform: none; }
   .js .manifesto-texto .acende { opacity: 1; }
-  .js .mosaico .ladrilho { clip-path: none; }
   .js .emp .emp-foto { clip-path: none; border-radius: 46% 46% 0 0 / 34% 34% 0 0; }
   .js .emp .emp-foto img { transform: none; }
   .js .emp .emp-texto > * { opacity: 1; transform: none; }
-  .js .mosaico .ladrilho img { transform: none; }
   .cursor { display: none !important; }
 }

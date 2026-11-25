@@ -59,18 +59,6 @@
     alvos.forEach(function (el) { obs.observe(el); });
   }
 
-  /* ---------- mosaico do Caucaia II: revela pelo mosaico inteiro (a cortina esconde cada foto) ---------- */
-  var mosaico = $('.mosaico');
-  if (mosaico) {
-    if (calmo || !('IntersectionObserver' in window)) mosaico.classList.add('visivel');
-    else {
-      var obsM = new IntersectionObserver(function (es) {
-        if (es[0].isIntersecting) { mosaico.classList.add('visivel'); obsM.disconnect(); }
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
-      obsM.observe(mosaico);
-    }
-  }
-
   /* ---------- empreendimentos: a janela em arco se abre ao entrar na tela ---------- */
   var emps = $$('.emp');
   if (calmo || !('IntersectionObserver' in window)) emps.forEach(function (e) { e.classList.add('aberto'); });
@@ -81,14 +69,10 @@
     emps.forEach(function (e) { obsE.observe(e); });
   }
 
-  /* ---------- foto ampliada: serve ao mosaico do Caucaia II e as galerias dos empreendimentos ---------- */
-  var amp = $('.ampliada'), ladrilhos = $$('.ladrilho');
+  /* ---------- foto ampliada: galeria de cada empreendimento ---------- */
+  var amp = $('.ampliada');
   var galerias = {};
   try { galerias = JSON.parse(($('#galerias') || {}).textContent || '{}'); } catch (e) { galerias = {}; }
-  var doMosaico = ladrilhos.map(function (l) {
-    var n = l.getAttribute('data-foto');
-    return { g: '/fotos/caucaia2/' + n + '.webp', p: '/fotos/caucaia2/' + n + '-900.webp', nome: $('.ladrilho-leg span', l).textContent, leg: 'Projeto · imagem ilustrativa', alt: $('img', l).alt };
-  });
   if (amp) {
     var ampImg = $('.amp-fig img', amp), ampNome = $('.amp-nome', amp), ampNum = $('.amp-num', amp), ampLeg = $('.amp-leg', amp);
     var idx = 0, lista = [], voltaFoco = null;
@@ -113,7 +97,6 @@
       setTimeout(function () { amp.hidden = true; }, 350);
       if (voltaFoco) voltaFoco.focus();
     };
-    ladrilhos.forEach(function (l, i) { l.addEventListener('click', function () { abre(doMosaico, i); }); });
     $$('[data-galeria]').forEach(function (b) {
       b.addEventListener('click', function () { var g = galerias[b.getAttribute('data-galeria')]; if (g && g.length) abre(g, 0); });
     });
