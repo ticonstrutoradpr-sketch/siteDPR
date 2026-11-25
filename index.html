@@ -11,40 +11,42 @@
 <meta property="og:locale" content="pt_BR">
 <meta property="og:site_name" content="DPR Construtora">
 <meta property="og:title" content="DPR Construtora | Do projeto à entrega">
-<meta property="og:description" content="Projeto, financiamento pela Caixa e obra com uma única empresa, no terreno da sua família.">
-<meta property="og:image" content="https://www.construtoradpr.com.br/fotos/obras/casas-projeto.webp">
+<meta property="og:description" content="Sua casa no terreno que já é seu. Projeto, financiamento e obra com uma única empresa.">
+<meta property="og:image" content="https://www.construtoradpr.com.br/fotos/caucaia2/centro-comercial.webp">
 <link rel="icon" type="image/png" sizes="32x32" href="/marca/dpr-icone.png">
 <link rel="apple-touch-icon" href="/marca/dpr-icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;1,300&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:ital,wght@0,300;0,400;0,500;1,300&display=swap">
+<link rel="preload" as="image" href="/fotos/caucaia2/centro-comercial-900.webp" media="(max-width: 899px)">
+<link rel="preload" as="image" href="/fotos/caucaia2/centro-comercial.webp" media="(min-width: 900px)">
 <link rel="stylesheet" href="/assets/dpr.css">
 <script>document.documentElement.classList.add('js');</script>
 <script src="/assets/dpr.js" defer></script>
 </head>
 <body>
 
+<!-- Manual de Marca DPR v1.0 (proposta B): paleta grafite/marfim/concreto/taupe/areia, Poppins + Inter,
+     botao = Poppins Medium sublinhado, uma mensagem e um botao por tela, simbolo pequeno em marfim no canto. -->
+
 <header class="topo">
   <div class="topo-in cont">
-    <a class="topo-marca" href="/" aria-label="DPR Construtora, início">
-      <span class="marca anima"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
+    <a class="topo-marca" href="#inicio" aria-label="DPR Construtora, início">
+      <span class="marca"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
     </a>
     <nav class="topo-nav" aria-label="Principal">
-      <a href="#caminho">O caminho</a>
-      <a href="#empreendimentos">Empreendimentos</a>
-      <a href="#terreno">Construa no seu terreno</a>
+      <a href="#obras">Obras</a>
+      <a href="#como-funciona">Como funciona</a>
       <a href="#contato">Contato</a>
     </nav>
-    <a class="bt bt-claro topo-bt" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">Fale com a DPR</a>
     <button class="topo-menu" type="button" aria-expanded="false" aria-controls="painel" aria-label="Abrir menu"><span></span><span></span></button>
   </div>
 </header>
 
 <div class="painel" id="painel" aria-hidden="true">
   <nav aria-label="Menu">
-    <a href="#caminho">O caminho</a>
-    <a href="#empreendimentos">Empreendimentos</a>
-    <a href="#terreno">Construa no seu terreno</a>
+    <a href="#obras">Obras</a>
+    <a href="#como-funciona">Como funciona</a>
     <a href="#contato">Contato</a>
   </nav>
   <div class="painel-contato">
@@ -55,173 +57,107 @@
 
 <main>
 
-  <!-- abertura: 7 videos que trocam por um arco -->
-  <section class="heroi escuro" id="inicio" aria-label="Abertura">
-    <h1 class="so-leitor">DPR Construtora e Incorporadora: do projeto à entrega</h1>
-    <div class="cenas" aria-hidden="true">
-      <div class="cena" data-frase="Tudo começa |no seu terreno." data-pc="/video/1-terreno-pc.mp4" data-cel="/video/1-terreno-cel.mp4" data-capa-pc="/video/capas/1-terreno-pc.webp" data-capa-cel="/video/capas/1-terreno-cel.webp"><video muted playsinline preload="none"></video></div>
-      <div class="cena" data-frase="Do projeto |à entrega." data-pc="/video/2-tijolo-pc.mp4" data-cel="/video/2-tijolo-cel.mp4" data-capa-pc="/video/capas/2-tijolo-pc.webp" data-capa-cel="/video/capas/2-tijolo-cel.webp"><video muted playsinline preload="none"></video></div>
-      <div class="cena" data-frase="Sua casa no terreno |que já é seu." data-pc="/video/3-casa-subindo-pc.mp4" data-cel="/video/3-casa-subindo-cel.mp4" data-capa-pc="/video/capas/3-casa-subindo-pc.webp" data-capa-cel="/video/capas/3-casa-subindo-cel.webp"><video muted playsinline preload="none"></video></div>
-      <div class="cena" data-frase="Engenharia |em cada etapa." data-pc="/video/4-obra-do-alto-pc.mp4" data-cel="/video/4-obra-do-alto-cel.mp4" data-capa-pc="/video/capas/4-obra-do-alto-pc.webp" data-capa-cel="/video/capas/4-obra-do-alto-cel.webp"><video muted playsinline preload="none"></video></div>
-      <div class="cena" data-frase="A chave na mão |da sua família." data-pc="/video/5-chave-pc.mp4" data-cel="/video/5-chave-cel.mp4" data-capa-pc="/video/capas/5-chave-pc.webp" data-capa-cel="/video/capas/5-chave-cel.webp"><video muted playsinline preload="none"></video></div>
-      <div class="cena" data-frase="Casa própria, |sem complicação." data-pc="/video/6-casal-chaves-pc.mp4" data-cel="/video/6-casal-chaves-cel.mp4" data-capa-pc="/video/capas/6-casal-chaves-pc.webp" data-capa-cel="/video/capas/6-casal-chaves-cel.webp"><video muted playsinline preload="none"></video></div>
-      <div class="cena" data-frase="Bem-vindos |à casa nova." data-pc="/video/7-familia-pc.mp4" data-cel="/video/7-familia-cel.mp4" data-capa-pc="/video/capas/7-familia-pc.webp" data-capa-cel="/video/capas/7-familia-cel.webp"><video muted playsinline preload="none"></video></div>
+  <!-- abertura: como na pagina 16 do manual -->
+  <section class="heroi escuro" id="inicio" aria-labelledby="titulo-heroi">
+    <picture class="heroi-foto">
+      <source media="(max-width: 899px)" srcset="/fotos/caucaia2/centro-comercial-900.webp">
+      <img src="/fotos/caucaia2/centro-comercial.webp" alt="Centro comercial do Villaggio Caucaia II, empreendimento da DPR" width="1672" height="941" fetchpriority="high">
+    </picture>
+    <div class="heroi-veu" aria-hidden="true"></div>
+    <div class="cont heroi-texto">
+      <span class="rotulo">Construa no seu terreno</span>
+      <h1 id="titulo-heroi">Sua casa no terreno que já é seu.</h1>
+      <p class="chamada">Projeto, financiamento e obra com uma única empresa.</p>
+      <a class="botao" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20agendar%20uma%20avalia%C3%A7%C3%A3o%20do%20meu%20terreno%20com%20a%20DPR." target="_blank" rel="noopener">Agendar avaliação</a>
     </div>
-    <div class="heroi-veu"></div>
-    <div class="arco-guia" aria-hidden="true"></div>
-
-    <div class="heroi-conteudo">
-      <div class="cont">
-        <span class="rotulo entra" style="--atraso:.3s">DPR Construtora e Incorporadora</span>
-        <p class="frase" aria-hidden="true"></p>
-        <div class="heroi-bts entra" style="--atraso:1.3s">
-          <a class="bt bt-areia" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20fazer%20minha%20pr%C3%A9-an%C3%A1lise%20com%20a%20DPR." target="_blank" rel="noopener">Faça sua pré-análise <span class="seta" aria-hidden="true">&rarr;</span></a>
-          <a class="bt bt-claro" href="#caminho">Como funciona</a>
-        </div>
-      </div>
-    </div>
-
-    <div class="barras">
-      <div class="cont">
-        <div class="barras-lista" role="group" aria-label="Escolher o vídeo">
-          <button class="barra" type="button" aria-label="Vídeo 1: terreno"><span>01 Terreno</span><i></i></button>
-          <button class="barra" type="button" aria-label="Vídeo 2: obra"><span>02 Obra</span><i></i></button>
-          <button class="barra" type="button" aria-label="Vídeo 3: a casa subindo"><span>03 Casa</span><i></i></button>
-          <button class="barra" type="button" aria-label="Vídeo 4: engenharia"><span>04 Engenharia</span><i></i></button>
-          <button class="barra" type="button" aria-label="Vídeo 5: a chave"><span>05 Chave</span><i></i></button>
-          <button class="barra" type="button" aria-label="Vídeo 6: casa própria"><span>06 Casa própria</span><i></i></button>
-          <button class="barra" type="button" aria-label="Vídeo 7: casa nova"><span>07 Casa nova</span><i></i></button>
-        </div>
-        <button class="heroi-pausa" type="button" aria-pressed="false" aria-label="Pausar vídeos">
-          <svg class="ico-pausa" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><rect x="2" y="1" width="3" height="12"/><rect x="9" y="1" width="3" height="12"/></svg>
-          <svg class="ico-toca" viewBox="0 0 14 14" fill="currentColor" aria-hidden="true"><path d="M3 1 L13 7 L3 13 Z"/></svg>
-        </button>
-        <span class="legenda heroi-ilustra">Imagens ilustrativas</span>
-      </div>
-    </div>
+    <span class="legenda heroi-legenda">Villaggio Caucaia II · projeto, imagem ilustrativa</span>
   </section>
 
   <!-- frase-guia -->
-  <section class="manifesto" aria-label="Nosso compromisso">
+  <section class="sec manifesto" aria-label="Nosso compromisso">
     <div class="cont">
-      <span class="rotulo">Nosso compromisso</span>
-      <p class="manifesto-texto" data-acende>A DPR não vende só uma casa: entrega a chave e a tranquilidade de <em>nunca mais pagar aluguel.</em></p>
+      <span class="rotulo">Do projeto à entrega</span>
+      <p class="manifesto-texto" data-revela>A DPR não vende só uma casa: entrega a chave e a tranquilidade de <em>nunca mais pagar aluguel.</em></p>
     </div>
   </section>
 
-  <!-- o caminho: cartoes que se empilham -->
-  <section class="caminho sec" id="caminho" aria-labelledby="titulo-caminho">
+  <!-- como funciona: a jornada em seis etapas do briefing -->
+  <section class="sec etapas" id="como-funciona" aria-labelledby="titulo-etapas">
     <div class="cont">
       <div class="sec-cab">
-        <span class="rotulo">O caminho</span>
-        <h2 id="titulo-caminho" data-palavras>Do terreno <em>à chave.</em></h2>
-        <p data-revela>Quatro etapas, cada uma explicada antes de começar, com valor e prazo por escrito.</p>
+        <span class="rotulo">Como funciona</span>
+        <h2 id="titulo-etapas">Do terreno à chave, em seis etapas</h2>
+        <p class="chamada">Cada etapa explicada antes de começar, com valor e prazo por escrito.</p>
       </div>
-      <div class="pilha">
-        <article class="carta" style="--i:0">
-          <div class="carta-texto"><span class="carta-n">01</span><div><h3>Terreno</h3><p>Visita técnica ao terreno da sua família e conferência da documentação.</p></div></div>
-          <div class="carta-foto"><img src="/fotos/obras/terreno-900.webp" alt="Vista aérea de terreno" loading="lazy"></div>
-        </article>
-        <article class="carta" style="--i:1">
-          <div class="carta-texto"><span class="carta-n">02</span><div><h3>Projeto</h3><p>Escolha do modelo de casa e proposta com valor e prazo por escrito.</p></div></div>
-          <div class="carta-foto"><img src="/fotos/obras/projeto-quarto-900.webp" alt="Projeto de dormitório" loading="lazy"></div>
-        </article>
-        <article class="carta" style="--i:2">
-          <div class="carta-texto"><span class="carta-n">03</span><div><h3>Financiamento</h3><p>A DPR monta a documentação e acompanha a análise da Caixa até o contrato.</p></div></div>
-          <div class="carta-foto"><img src="/fotos/obras/casas-projeto-900.webp" alt="Projeto de casas térreas" loading="lazy"></div>
-        </article>
-        <article class="carta" style="--i:3">
-          <div class="carta-texto"><span class="carta-n">04</span><div><h3>Obra e chave</h3><p>Acompanhamento da obra e entrega da chave com vistoria, manual da casa e garantia.</p></div></div>
-          <div class="carta-foto"><img src="/fotos/obras/entregue-cozinha-2.webp" alt="Cozinha e sala de casa entregue pela DPR" loading="lazy"></div>
-        </article>
-      </div>
+      <ol class="etapas-grade">
+        <li class="etapa" data-revela><span class="etapa-n">01 · Primeiro contato</span><p>Pelo anúncio, pelo site ou por indicação, direto no WhatsApp. Respondemos no mesmo dia.</p></li>
+        <li class="etapa" data-revela style="--d:1"><span class="etapa-n">02 · Triagem</span><p>Três perguntas: você tem terreno? Ele está quitado e com escritura? A renda cabe no financiamento?</p></li>
+        <li class="etapa" data-revela style="--d:2"><span class="etapa-n">03 · Visita e projeto</span><p>Visita técnica ao terreno, escolha do modelo de casa e proposta com valor e prazo por escrito.</p></li>
+        <li class="etapa" data-revela><span class="etapa-n">04 · Documentos e banco</span><p>A DPR monta a pasta, explica cada papel e acompanha a análise da Caixa até o contrato.</p></li>
+        <li class="etapa" data-revela style="--d:1"><span class="etapa-n">05 · Obra</span><p>Fotos semanais pelo WhatsApp, visita da família em datas combinadas e prazo acompanhado.</p></li>
+        <li class="etapa" data-revela style="--d:2"><span class="etapa-n">06 · Entrega e depois</span><p>Entrega da chave com vistoria, manual da casa e garantia.</p></li>
+      </ol>
+      <a class="botao botao-escuro" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20fazer%20minha%20pr%C3%A9-an%C3%A1lise%20com%20a%20DPR." target="_blank" rel="noopener">Faça sua pré-análise</a>
     </div>
   </section>
 
-  <!-- nossos empreendimentos: os 5 do site antigo -->
-  <section class="emps sec" id="empreendimentos" aria-labelledby="titulo-emps">
+  <!-- obras: os 5 empreendimentos do site antigo -->
+  <section class="sec obras" id="obras" aria-labelledby="titulo-obras">
     <div class="cont">
-      <div class="sec-cab emps-cab">
-        <div>
-          <span class="rotulo">Nossos empreendimentos</span>
-          <h2 id="titulo-emps" data-palavras>Casas e lotes em <em>Cotia e região.</em></h2>
-        </div>
-        <p data-revela>Do lançamento em Caucaia do Alto aos condomínios em Itapevi e aos lotes em Itatinga, com empreendimentos nas Faixas 1 e 2 do Minha Casa, Minha Vida.</p>
+      <div class="sec-cab">
+        <span class="rotulo">Nossas obras</span>
+        <h2 id="titulo-obras">Casas e lotes em Cotia e região</h2>
+        <p class="chamada">Caucaia do Alto, Itapevi e Itatinga, nas Faixas 1 e 2 do Minha Casa, Minha Vida.</p>
       </div>
 
-      <div class="emps-lista">
-        <article class="emp" id="emp-caucaia2">
-          <div class="emp-foto"><img src="/fotos/caucaia2/centro-comercial-900.webp" srcset="/fotos/caucaia2/centro-comercial-900.webp 900w, /fotos/caucaia2/centro-comercial.webp 1672w" sizes="(min-width: 900px) 56vw, 100vw" alt="Villaggio Caucaia II: centro comercial com lojas e deck de madeira" loading="lazy"><span class="emp-selo lancamento">Lançamento</span></div>
-          <div class="emp-texto">
-            <span class="emp-n">01</span>
-            <span class="legenda emp-onde">Caucaia do Alto · Cotia · MCMV Faixa 2</span>
+      <div class="obras-lista">
+        <article class="obra" id="emp-caucaia2" data-revela>
+          <div class="obra-foto"><img src="/fotos/caucaia2/centro-portaria-900.webp" alt="Villaggio Caucaia II: centro comercial e portaria do condomínio" loading="lazy" width="900" height="560"></div>
+          <div class="obra-texto">
+            <span class="rotulo">Lançamento · Caucaia do Alto · Faixa 2</span>
             <h3>Villaggio Caucaia II</h3>
-            <p>Lançamento pelo Minha Casa, Minha Vida Faixa 2, com possibilidade de subsídio do Governo Federal. Área de lazer completa e centro comercial integrado, numa região tranquila e de fácil acesso ao centro da cidade.</p>
-            <ul class="emp-tags"><li>Centro comercial</li><li>Lazer completo</li><li>Minha Casa, Minha Vida</li></ul>
-            <div class="emp-bts">
-              <button class="bt bt-escuro" type="button" data-galeria="caucaia2">Ver fotos <span class="seta" aria-hidden="true">&rarr;</span></button>
-              <a class="link" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20Villaggio%20Caucaia%20II." target="_blank" rel="noopener">Quero saber mais</a>
-            </div>
+            <p>Lançamento pelo Minha Casa, Minha Vida Faixa 2, com possibilidade de subsídio do Governo Federal. Área de lazer completa e centro comercial integrado.</p>
+            <button class="botao botao-escuro" type="button" data-galeria="caucaia2">Ver fotos</button>
           </div>
         </article>
 
-        <article class="emp emp-inv" id="emp-caucaia1">
-          <div class="emp-foto"><img src="/fotos/obras/casas-projeto-900.webp" srcset="/fotos/obras/casas-projeto-900.webp 900w, /fotos/obras/casas-projeto.webp 1308w" sizes="(min-width: 900px) 56vw, 100vw" alt="Villaggio Caucaia I: fileira de casas térreas" loading="lazy"><span class="emp-selo">Disponível</span></div>
-          <div class="emp-texto">
-            <span class="emp-n">02</span>
-            <span class="legenda emp-onde">Caucaia do Alto · Cotia</span>
+        <article class="obra" id="emp-caucaia1" data-revela>
+          <div class="obra-foto"><img src="/fotos/obras/casas-projeto-900.webp" alt="Villaggio Caucaia I: fileira de casas térreas" loading="lazy" width="900" height="518"></div>
+          <div class="obra-texto">
+            <span class="rotulo">Obra entregue · Caucaia do Alto</span>
             <h3>Villaggio Caucaia I</h3>
-            <p>Para quem busca conforto, segurança e qualidade de vida. Casas planejadas com arquitetura moderna e funcional, pensadas para o bem-estar de toda a família.</p>
-            <ul class="emp-tags"><li>Moradia</li><li>Segurança</li><li>Casa entregue</li></ul>
-            <div class="emp-bts">
-              <button class="bt bt-escuro" type="button" data-galeria="caucaia1">Ver fotos <span class="seta" aria-hidden="true">&rarr;</span></button>
-              <a class="link" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20Villaggio%20Caucaia%20I." target="_blank" rel="noopener">Quero saber mais</a>
-            </div>
+            <p>Casas planejadas, com arquitetura funcional, pensadas para o bem-estar de toda a família. Veja as fotos reais da casa entregue.</p>
+            <button class="botao botao-escuro" type="button" data-galeria="caucaia1">Ver fotos</button>
           </div>
         </article>
 
-        <article class="emp" id="emp-moradas1">
-          <div class="emp-foto"><img src="/fotos/emp/moradas-portaria-900.webp" srcset="/fotos/emp/moradas-portaria-900.webp 900w, /fotos/emp/moradas-portaria.webp 1200w" sizes="(min-width: 900px) 56vw, 100vw" alt="Moradas das Roseiras I: portaria colorida do condomínio" loading="lazy"><span class="emp-selo">Disponível</span></div>
-          <div class="emp-texto">
-            <span class="emp-n">03</span>
-            <span class="legenda emp-onde">Itapevi · MCMV Faixa 1</span>
+        <article class="obra" id="emp-moradas1" data-revela>
+          <div class="obra-foto"><img src="/fotos/emp/moradas-portaria-900.webp" alt="Moradas das Roseiras I: portaria do condomínio" loading="lazy" width="900" height="463"></div>
+          <div class="obra-texto">
+            <span class="rotulo">Disponível · Itapevi · Faixa 1</span>
             <h3>Moradas das Roseiras I</h3>
-            <p>Projetado para oferecer qualidade de vida, segurança e praticidade. Condomínio fechado com infraestrutura moderna, portaria 24 horas e monitoramento, num ambiente tranquilo e familiar.</p>
-            <ul class="emp-tags"><li>Condomínio fechado</li><li>Portaria 24 h</li><li>Preço acessível</li></ul>
-            <div class="emp-bts">
-              <button class="bt bt-escuro" type="button" data-galeria="moradas1">Ver fotos <span class="seta" aria-hidden="true">&rarr;</span></button>
-              <a class="link" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20Moradas%20das%20Roseiras%20I." target="_blank" rel="noopener">Quero saber mais</a>
-            </div>
+            <p>Condomínio fechado com portaria 24 horas e monitoramento, num ambiente tranquilo e familiar.</p>
+            <button class="botao botao-escuro" type="button" data-galeria="moradas1">Ver fotos</button>
           </div>
         </article>
 
-        <article class="emp emp-inv" id="emp-moradas2">
-          <div class="emp-foto"><img src="/fotos/emp/moradas-torres-900.webp" srcset="/fotos/emp/moradas-torres-900.webp 900w, /fotos/emp/moradas-torres.webp 1200w" sizes="(min-width: 900px) 56vw, 100vw" alt="Moradas das Roseiras II: torres residenciais" loading="lazy"><span class="emp-selo">Disponível</span></div>
-          <div class="emp-texto">
-            <span class="emp-n">04</span>
-            <span class="legenda emp-onde">Itapevi · MCMV Faixa 1</span>
+        <article class="obra" id="emp-moradas2" data-revela>
+          <div class="obra-foto"><img src="/fotos/emp/moradas-torres-900.webp" alt="Moradas das Roseiras II: torres residenciais" loading="lazy" width="900" height="465"></div>
+          <div class="obra-texto">
+            <span class="rotulo">Obra em andamento · Itapevi · Faixa 1</span>
             <h3>Moradas das Roseiras II</h3>
-            <p>Para quem busca tranquilidade, praticidade e segurança numa das regiões que mais crescem na Grande São Paulo, com boa infraestrutura e fácil acesso a vias importantes, transporte público e comércio.</p>
-            <ul class="emp-tags"><li>Valorização</li><li>Lazer no condomínio</li><li>Obra em andamento</li></ul>
-            <div class="emp-bts">
-              <button class="bt bt-escuro" type="button" data-galeria="moradas2">Ver fotos <span class="seta" aria-hidden="true">&rarr;</span></button>
-              <a class="link" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20o%20Moradas%20das%20Roseiras%20II." target="_blank" rel="noopener">Quero saber mais</a>
-            </div>
+            <p>Perto de vias importantes, transporte público e comércio, numa das regiões que mais crescem na Grande São Paulo.</p>
+            <button class="botao botao-escuro" type="button" data-galeria="moradas2">Ver fotos</button>
           </div>
         </article>
 
-        <article class="emp" id="emp-lotes">
-          <div class="emp-foto"><img src="/fotos/obras/terreno-900.webp" srcset="/fotos/obras/terreno-900.webp 900w, /fotos/obras/terreno.webp 1536w" sizes="(min-width: 900px) 56vw, 100vw" alt="Lotes Itatinga: vista aérea da região" loading="lazy"><span class="emp-selo">Disponível</span></div>
-          <div class="emp-texto">
-            <span class="emp-n">05</span>
-            <span class="legenda emp-onde">Itatinga · SP</span>
+        <article class="obra" id="emp-lotes" data-revela>
+          <div class="obra-foto"><img src="/fotos/obras/terreno-900.webp" alt="Lotes Itatinga: vista aérea da região" loading="lazy" width="900" height="600"></div>
+          <div class="obra-texto">
+            <span class="rotulo">Disponível · Itatinga</span>
             <h3>Lotes Itatinga</h3>
-            <p>Lotes em localização tranquila, com fácil acesso ao centro. Uma região com grande potencial de valorização, ideal para quem deseja construir com visão de futuro.</p>
-            <ul class="emp-tags"><li>Terrenos</li><li>Valorização</li><li>Fácil acesso</li></ul>
-            <div class="emp-bts">
-              <button class="bt bt-escuro" type="button" data-galeria="lotes">Ver fotos <span class="seta" aria-hidden="true">&rarr;</span></button>
-              <a class="link" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20quero%20saber%20mais%20sobre%20os%20Lotes%20Itatinga." target="_blank" rel="noopener">Quero saber mais</a>
-            </div>
+            <p>Lotes em localização tranquila, com fácil acesso ao centro, para quem quer construir a casa própria.</p>
+            <button class="botao botao-escuro" type="button" data-galeria="lotes">Ver fotos</button>
           </div>
         </article>
       </div>
@@ -246,17 +182,17 @@
       { "g": "/fotos/caucaia2/jardim.webp", "p": "/fotos/caucaia2/jardim-900.webp", "nome": "Jardim", "leg": "Projeto · imagem ilustrativa" }
     ],
     "caucaia1": [
-      { "g": "/fotos/obras/casas-projeto.webp", "p": "/fotos/obras/casas-projeto-900.webp", "nome": "Villaggio Caucaia I", "leg": "Projeto · imagem ilustrativa" },
-      { "g": "/fotos/emp/caucaia1-rua.webp", "p": "/fotos/emp/caucaia1-rua-900.webp", "nome": "Fachada", "leg": "Imagem ilustrativa" },
-      { "g": "/fotos/emp/caucaia1-casa.webp", "p": "/fotos/emp/caucaia1-casa-900.webp", "nome": "A casa", "leg": "Imagem ilustrativa" },
-      { "g": "/fotos/emp/caucaia1-servico.webp", "p": "/fotos/emp/caucaia1-servico-900.webp", "nome": "Área de serviço", "leg": "Imagem ilustrativa" },
-      { "g": "/fotos/obras/projeto-playground.webp", "p": "/fotos/obras/projeto-playground-900.webp", "nome": "Área de lazer", "leg": "Imagem ilustrativa" },
       { "g": "/fotos/obras/entregue-cozinha.webp", "p": "/fotos/obras/entregue-cozinha.webp", "nome": "Cozinha", "leg": "Foto real · obra entregue" },
       { "g": "/fotos/obras/entregue-cozinha-2.webp", "p": "/fotos/obras/entregue-cozinha-2.webp", "nome": "Armários da cozinha", "leg": "Foto real · obra entregue" },
       { "g": "/fotos/emp/caucaia1-entregue-sala.webp", "p": "/fotos/emp/caucaia1-entregue-sala.webp", "nome": "Sala integrada", "leg": "Foto real · obra entregue" },
       { "g": "/fotos/obras/entregue-quarto.webp", "p": "/fotos/obras/entregue-quarto.webp", "nome": "Quarto", "leg": "Foto real · obra entregue" },
       { "g": "/fotos/emp/caucaia1-entregue-quarto2.webp", "p": "/fotos/emp/caucaia1-entregue-quarto2.webp", "nome": "Segundo quarto", "leg": "Foto real · obra entregue" },
-      { "g": "/fotos/obras/entregue-banheiro.webp", "p": "/fotos/obras/entregue-banheiro.webp", "nome": "Banheiro", "leg": "Foto real · obra entregue" }
+      { "g": "/fotos/obras/entregue-banheiro.webp", "p": "/fotos/obras/entregue-banheiro.webp", "nome": "Banheiro", "leg": "Foto real · obra entregue" },
+      { "g": "/fotos/obras/casas-projeto.webp", "p": "/fotos/obras/casas-projeto-900.webp", "nome": "Villaggio Caucaia I", "leg": "Projeto · imagem ilustrativa" },
+      { "g": "/fotos/emp/caucaia1-rua.webp", "p": "/fotos/emp/caucaia1-rua-900.webp", "nome": "Fachada", "leg": "Imagem ilustrativa" },
+      { "g": "/fotos/emp/caucaia1-casa.webp", "p": "/fotos/emp/caucaia1-casa-900.webp", "nome": "A casa", "leg": "Imagem ilustrativa" },
+      { "g": "/fotos/emp/caucaia1-servico.webp", "p": "/fotos/emp/caucaia1-servico-900.webp", "nome": "Área de serviço", "leg": "Imagem ilustrativa" },
+      { "g": "/fotos/obras/projeto-playground.webp", "p": "/fotos/obras/projeto-playground-900.webp", "nome": "Área de lazer", "leg": "Imagem ilustrativa" }
     ],
     "moradas1": [
       { "g": "/fotos/emp/moradas-portaria.webp", "p": "/fotos/emp/moradas-portaria-900.webp", "nome": "Portaria", "leg": "Projeto · imagem ilustrativa" },
@@ -265,14 +201,14 @@
       { "g": "/fotos/emp/moradas-quadra.webp", "p": "/fotos/emp/moradas-quadra.webp", "nome": "Quadra", "leg": "Projeto · imagem ilustrativa" }
     ],
     "moradas2": [
+      { "g": "/fotos/emp/moradas-obra-1.webp", "p": "/fotos/emp/moradas-obra-1.webp", "nome": "O terreno em obra", "leg": "Foto real · obra" },
+      { "g": "/fotos/emp/moradas-obra-2.webp", "p": "/fotos/emp/moradas-obra-2.webp", "nome": "O terreno em obra", "leg": "Foto real · obra" },
+      { "g": "/fotos/emp/moradas-obra-3.webp", "p": "/fotos/emp/moradas-obra-3.webp", "nome": "Terraplenagem", "leg": "Foto real · obra" },
       { "g": "/fotos/emp/moradas-torres.webp", "p": "/fotos/emp/moradas-torres-900.webp", "nome": "Torres", "leg": "Projeto · imagem ilustrativa" },
       { "g": "/fotos/emp/moradas-quadra.webp", "p": "/fotos/emp/moradas-quadra.webp", "nome": "Quadra", "leg": "Projeto · imagem ilustrativa" },
       { "g": "/fotos/emp/moradas-academia.webp", "p": "/fotos/emp/moradas-academia.webp", "nome": "Academia ao ar livre", "leg": "Projeto · imagem ilustrativa" },
       { "g": "/fotos/emp/moradas-salao.webp", "p": "/fotos/emp/moradas-salao.webp", "nome": "Salão de festas", "leg": "Projeto · imagem ilustrativa" },
-      { "g": "/fotos/emp/moradas-biblioteca.webp", "p": "/fotos/emp/moradas-biblioteca.webp", "nome": "Biblioteca", "leg": "Projeto · imagem ilustrativa" },
-      { "g": "/fotos/emp/moradas-obra-1.webp", "p": "/fotos/emp/moradas-obra-1.webp", "nome": "O terreno em obra", "leg": "Foto real · obra" },
-      { "g": "/fotos/emp/moradas-obra-2.webp", "p": "/fotos/emp/moradas-obra-2.webp", "nome": "O terreno em obra", "leg": "Foto real · obra" },
-      { "g": "/fotos/emp/moradas-obra-3.webp", "p": "/fotos/emp/moradas-obra-3.webp", "nome": "Terraplenagem", "leg": "Foto real · obra" }
+      { "g": "/fotos/emp/moradas-biblioteca.webp", "p": "/fotos/emp/moradas-biblioteca.webp", "nome": "Biblioteca", "leg": "Projeto · imagem ilustrativa" }
     ],
     "lotes": [
       { "g": "/fotos/obras/terreno.webp", "p": "/fotos/obras/terreno-900.webp", "nome": "Vista aérea", "leg": "Imagem ilustrativa" },
@@ -282,38 +218,6 @@
   }
   </script>
 
-  <!-- obra entregue: tour pela casa (a foto troca conforme a rolagem) -->
-  <section class="tour escuro" id="obras" aria-labelledby="titulo-obras">
-    <div class="tour-palco">
-      <div class="cont tour-in">
-        <div class="tour-texto">
-          <span class="rotulo">Obra entregue · Villaggio Caucaia I</span>
-          <h2 id="titulo-obras" data-palavras>A casa pronta, <em>por dentro.</em></h2>
-          <ol class="tour-lista">
-            <li><button type="button" class="tour-item ativo" data-i="0"><span class="tour-n">01</span>Cozinha</button></li>
-            <li><button type="button" class="tour-item" data-i="1"><span class="tour-n">02</span>Armários da cozinha</button></li>
-            <li><button type="button" class="tour-item" data-i="2"><span class="tour-n">03</span>Sala integrada</button></li>
-            <li><button type="button" class="tour-item" data-i="3"><span class="tour-n">04</span>Quarto</button></li>
-            <li><button type="button" class="tour-item" data-i="4"><span class="tour-n">05</span>Segundo quarto</button></li>
-            <li><button type="button" class="tour-item" data-i="5"><span class="tour-n">06</span>Banheiro</button></li>
-          </ol>
-          <p class="tour-nota legenda"><span class="tour-conta">01 / 06</span> · Foto real da casa entregue</p>
-        </div>
-        <div class="tour-moldura">
-          <div class="tour-fotos">
-            <img class="ativa" src="/fotos/obras/entregue-cozinha.webp" alt="Cozinha da casa entregue, com pia, porta de madeira e piso amadeirado" width="540" height="960" loading="lazy">
-            <img src="/fotos/obras/entregue-cozinha-2.webp" alt="Armários da cozinha da casa entregue, com a sala ao fundo" width="540" height="960" loading="lazy">
-            <img src="/fotos/emp/caucaia1-entregue-sala.webp" alt="Cozinha integrada à sala na casa entregue" width="540" height="960" loading="lazy">
-            <img src="/fotos/obras/entregue-quarto.webp" alt="Quarto da casa entregue, com porta de madeira" width="540" height="960" loading="lazy">
-            <img src="/fotos/emp/caucaia1-entregue-quarto2.webp" alt="Segundo quarto da casa entregue" width="540" height="960" loading="lazy">
-            <img src="/fotos/obras/entregue-banheiro.webp" alt="Banheiro da casa entregue, com revestimento claro e janela" width="540" height="960" loading="lazy">
-          </div>
-          <div class="tour-barra" aria-hidden="true"><i></i></div>
-        </div>
-      </div>
-    </div>
-  </section>
-
   <!-- foto ampliada -->
   <div class="ampliada" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
     <button class="amp-fechar" type="button" aria-label="Fechar">&times;</button>
@@ -322,61 +226,40 @@
     <button class="amp-seta amp-prox" type="button" aria-label="Próxima foto">&rarr;</button>
   </div>
 
-  <!-- como a DPR trabalha (aprovado) -->
-  <section class="pilares sec" id="pilares" aria-labelledby="titulo-pilares">
+  <!-- como a DPR trabalha: os quatro pilares, sobre grafite -->
+  <section class="sec pilares escuro" id="pilares" aria-labelledby="titulo-pilares">
     <div class="cont">
       <div class="sec-cab">
         <span class="rotulo">Como a DPR trabalha</span>
-        <h2 id="titulo-pilares" data-palavras>Quatro compromissos <em>em cada obra.</em></h2>
+        <h2 id="titulo-pilares">Quatro compromissos em cada obra</h2>
       </div>
       <div class="pilares-grade">
-        <article class="pilar" data-revela>
-          <svg viewBox="0 0 52 30" aria-hidden="true"><path d="M4 28 A22 22 0 0 1 48 28"/></svg>
-          <h3>Clareza</h3>
-          <p>Cada etapa explicada em linguagem simples, com responsável e prazo.</p>
-        </article>
-        <article class="pilar" data-revela style="--d:1">
-          <svg viewBox="0 0 52 30" aria-hidden="true"><path d="M4 28 A22 22 0 0 1 48 28"/></svg>
-          <h3>Acompanhamento</h3>
-          <p>Um responsável pela sua família, do primeiro contato à entrega da chave.</p>
-        </article>
-        <article class="pilar" data-revela style="--d:2">
-          <svg viewBox="0 0 52 30" aria-hidden="true"><path d="M4 28 A22 22 0 0 1 48 28"/></svg>
-          <h3>Segurança</h3>
-          <p>Engenharia, contrato claro e financiamento oficial pela Caixa.</p>
-        </article>
-        <article class="pilar" data-revela style="--d:3">
-          <svg viewBox="0 0 52 30" aria-hidden="true"><path d="M4 28 A22 22 0 0 1 48 28"/></svg>
-          <h3>Proximidade</h3>
-          <p>Resposta rápida, no WhatsApp, com nome e respeito.</p>
-        </article>
+        <article class="pilar" data-revela><span class="pilar-n">01</span><h3>Clareza</h3><p>Cada etapa explicada em linguagem simples, com responsável e prazo.</p></article>
+        <article class="pilar" data-revela style="--d:1"><span class="pilar-n">02</span><h3>Acompanhamento</h3><p>Um responsável pela sua família, do primeiro contato à entrega da chave.</p></article>
+        <article class="pilar" data-revela style="--d:2"><span class="pilar-n">03</span><h3>Segurança</h3><p>Engenharia, contrato claro e financiamento oficial pela Caixa.</p></article>
+        <article class="pilar" data-revela style="--d:3"><span class="pilar-n">04</span><h3>Proximidade</h3><p>Resposta rápida, no WhatsApp, com nome e respeito.</p></article>
       </div>
     </div>
   </section>
 
-  <!-- voce ja tem o terreno: o arco se abre ate a tela cheia -->
-  <section class="porta-terreno" id="terreno" aria-labelledby="titulo-terreno">
-    <div class="porta-palco">
-      <div class="porta-antes">
-        <div class="cont">
-          <span class="rotulo">Construa no seu terreno</span>
-          <h2 id="titulo-terreno">Você já tem <em>o terreno?</em></h2>
-        </div>
+  <!-- voce ja tem o terreno? -->
+  <section class="sec terreno" id="terreno" aria-labelledby="titulo-terreno">
+    <div class="cont terreno-in">
+      <figure class="terreno-foto" data-revela>
+        <div class="arco-moldura"><img src="/fotos/obras/terreno-900.webp" alt="Vista aérea de terreno com mata e campo" loading="lazy" width="900" height="600"></div>
+        <figcaption class="legenda">Imagem ilustrativa</figcaption>
+      </figure>
+      <div class="terreno-texto" data-revela style="--d:1">
+        <span class="rotulo">Construa no seu terreno</span>
+        <h2 id="titulo-terreno">Você já tem o terreno?</h2>
+        <p class="chamada">A DPR cuida do projeto, do financiamento e da obra.</p>
+        <ul class="terreno-lista">
+          <li>O terreno está quitado e com escritura?</li>
+          <li>A renda da família cabe no financiamento?</li>
+          <li>Onde fica o terreno?</li>
+        </ul>
+        <a class="botao botao-escuro" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20tenho%20um%20terreno%20e%20quero%20construir%20com%20a%20DPR.%20A%20localiza%C3%A7%C3%A3o%20%C3%A9%3A%20" target="_blank" rel="noopener">Envie a localização do seu terreno</a>
       </div>
-      <div class="porta-foto"><img src="/fotos/obras/terreno.webp" srcset="/fotos/obras/terreno-900.webp 900w, /fotos/obras/terreno.webp 1536w" sizes="100vw" alt="Vista aérea de terreno com mata e campo" loading="lazy"></div>
-      <div class="porta-depois">
-        <div class="cont">
-          <span class="rotulo">Construa no seu terreno</span>
-          <p class="porta-depois-titulo">A DPR cuida do projeto, do financiamento <em>e da obra.</em></p>
-          <ul class="terreno-lista">
-            <li><b>01</b> O terreno está quitado e com escritura?</li>
-            <li><b>02</b> A renda da família cabe no financiamento?</li>
-            <li><b>03</b> Onde fica o terreno?</li>
-          </ul>
-          <a class="bt bt-areia" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20tenho%20um%20terreno%20e%20quero%20construir%20com%20a%20DPR.%20A%20localiza%C3%A7%C3%A3o%20%C3%A9%3A%20" target="_blank" rel="noopener">Envie a localização do seu terreno <span class="seta" aria-hidden="true">&rarr;</span></a>
-        </div>
-      </div>
-      <span class="legenda porta-legenda">Imagem ilustrativa</span>
     </div>
   </section>
 
@@ -385,57 +268,36 @@
 <footer class="rodape escuro" id="contato">
   <div class="cont">
     <div class="rodape-cta">
-      <div>
-        <span class="rotulo">Fale com a DPR</span>
-        <h2 data-palavras>Vamos construir <em>a sua casa?</em></h2>
-        <p class="rodape-sub" data-revela>Atendimento pelo WhatsApp, com nome e resposta rápida.</p>
-      </div>
-      <div class="rodape-bts" data-revela>
-        <a class="bt bt-areia" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.86 9.86 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.23 3.7 8.23 8.24 0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
-          WhatsApp (11) 93308-5258
-        </a>
-        <a class="link" href="mailto:atendimento@dprconstrutora.com.br">Enviar e-mail</a>
-      </div>
+      <span class="rotulo">Fale com a DPR</span>
+      <h2>Pode perguntar. Aqui ninguém fica sem resposta.</h2>
+      <a class="botao" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">Fale com a DPR no WhatsApp</a>
     </div>
 
-    <div class="rodape-linha" aria-hidden="true" data-revela></div>
-
     <div class="rodape-base">
-      <div class="rodape-col rodape-logo" data-revela>
+      <div class="rodape-col rodape-marca">
         <span class="marca" role="img" aria-label="DPR Construtora"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
         <p class="chamada">Do projeto à entrega.</p>
-        <span>Caucaia do Alto, Cotia, Itapevi e Itatinga · SP</span>
       </div>
-      <div class="rodape-col" data-revela style="--d:1">
+      <div class="rodape-col">
         <span class="legenda">Contato</span>
         <a href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">WhatsApp (11) 93308-5258</a>
         <a href="tel:+5511933085258">Telefone (11) 93308-5258</a>
         <a href="mailto:atendimento@dprconstrutora.com.br">atendimento@dprconstrutora.com.br</a>
+        <span>Caucaia do Alto, Cotia, Itapevi e Itatinga · SP</span>
       </div>
-      <div class="rodape-col" data-revela style="--d:2">
-        <span class="legenda">Empreendimentos</span>
+      <div class="rodape-col">
+        <span class="legenda">Obras</span>
         <a href="#emp-caucaia2">Villaggio Caucaia II</a>
         <a href="#emp-caucaia1">Villaggio Caucaia I</a>
         <a href="#emp-moradas1">Moradas das Roseiras I</a>
         <a href="#emp-moradas2">Moradas das Roseiras II</a>
         <a href="#emp-lotes">Lotes Itatinga</a>
       </div>
-      <div class="rodape-col" data-revela style="--d:3">
-        <span class="legenda">Navegue</span>
-        <a href="#caminho">O caminho</a>
-        <a href="#obras">A casa por dentro</a>
-        <a href="#pilares">Como trabalhamos</a>
-        <a href="#terreno">Construa no seu terreno</a>
-      </div>
     </div>
 
     <div class="rodape-fim">
-      <p class="rodape-aviso">A aprovação do crédito é feita pela Caixa, conforme as regras do programa Minha Casa, Minha Vida. A DPR orienta, monta a documentação e acompanha todo o processo. Vídeos e imagens marcados como ilustrativos não são de obras da DPR.</p>
-      <div class="rodape-direitos">
-        <span>© 2026 DPR Construtora e Incorporadora</span>
-        <a class="rodape-topo" href="#inicio">Voltar ao topo <span aria-hidden="true">&uarr;</span></a>
-      </div>
+      <p class="rodape-aviso">A aprovação do crédito é feita pela Caixa, conforme as regras do programa Minha Casa, Minha Vida. A DPR orienta, monta a documentação e acompanha todo o processo. Imagens marcadas como projeto ou ilustrativas não são fotos de obra pronta.</p>
+      <span>© 2026 DPR Construtora e Incorporadora · Desenvolvimento, Projetos e Realizações</span>
     </div>
   </div>
 </footer>
@@ -443,7 +305,6 @@
 <a class="zap" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener" aria-label="Fale com a DPR no WhatsApp">
   <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.86 9.86 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.23 3.7 8.23 8.24 0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
 </a>
-<div class="cursor" aria-hidden="true"></div>
 
 </body>
 </html>
