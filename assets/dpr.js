@@ -71,23 +71,40 @@
     }
   }
 
-  /* ---------- foto ampliada ---------- */
+  /* ---------- empreendimentos: a janela em arco se abre ao entrar na tela ---------- */
+  var emps = $$('.emp');
+  if (calmo || !('IntersectionObserver' in window)) emps.forEach(function (e) { e.classList.add('aberto'); });
+  else {
+    var obsE = new IntersectionObserver(function (es) {
+      es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('aberto'); obsE.unobserve(e.target); } });
+    }, { rootMargin: '0px 0px -12% 0px', threshold: 0.15 });
+    emps.forEach(function (e) { obsE.observe(e); });
+  }
+
+  /* ---------- foto ampliada: serve ao mosaico do Caucaia II e as galerias dos empreendimentos ---------- */
   var amp = $('.ampliada'), ladrilhos = $$('.ladrilho');
-  if (amp && ladrilhos.length) {
-    var ampImg = $('.amp-fig img', amp), ampNome = $('.amp-nome', amp), ampNum = $('.amp-num', amp);
-    var idx = 0, voltaFoco = null;
+  var galerias = {};
+  try { galerias = JSON.parse(($('#galerias') || {}).textContent || '{}'); } catch (e) { galerias = {}; }
+  var doMosaico = ladrilhos.map(function (l) {
+    var n = l.getAttribute('data-foto');
+    return { g: '/fotos/caucaia2/' + n + '.webp', p: '/fotos/caucaia2/' + n + '-900.webp', nome: $('.ladrilho-leg span', l).textContent, leg: 'Projeto · imagem ilustrativa', alt: $('img', l).alt };
+  });
+  if (amp) {
+    var ampImg = $('.amp-fig img', amp), ampNome = $('.amp-nome', amp), ampNum = $('.amp-num', amp), ampLeg = $('.amp-leg', amp);
+    var idx = 0, lista = [], voltaFoco = null;
     var poe = function (i) {
-      idx = (i + ladrilhos.length) % ladrilhos.length;
-      var l = ladrilhos[idx], nome = l.getAttribute('data-foto');
+      idx = (i + lista.length) % lista.length;
+      var f = lista[idx];
       ampImg.style.opacity = 0;
       ampImg.onload = function () { ampImg.style.opacity = 1; };
-      ampImg.src = '/fotos/caucaia2/' + nome + (window.innerWidth < 900 ? '-900' : '') + '.webp';
-      ampImg.alt = $('img', l).alt;
-      ampNome.textContent = $('.ladrilho-leg span', l).textContent;
-      ampNum.textContent = (idx + 1) + ' de ' + ladrilhos.length;
+      ampImg.src = window.innerWidth < 900 ? f.p : f.g;
+      ampImg.alt = f.alt || f.nome;
+      ampNome.textContent = f.nome;
+      ampLeg.textContent = f.leg;
+      ampNum.textContent = (idx + 1) + ' de ' + lista.length;
     };
-    var abre = function (i) {
-      voltaFoco = document.activeElement; poe(i);
+    var abre = function (fotos, i) {
+      lista = fotos; voltaFoco = document.activeElement; poe(i);
       amp.hidden = false; requestAnimationFrame(function () { amp.classList.add('aberta'); });
       document.body.style.overflow = 'hidden'; $('.amp-fechar', amp).focus();
     };
@@ -96,7 +113,10 @@
       setTimeout(function () { amp.hidden = true; }, 350);
       if (voltaFoco) voltaFoco.focus();
     };
-    ladrilhos.forEach(function (l, i) { l.addEventListener('click', function () { abre(i); }); });
+    ladrilhos.forEach(function (l, i) { l.addEventListener('click', function () { abre(doMosaico, i); }); });
+    $$('[data-galeria]').forEach(function (b) {
+      b.addEventListener('click', function () { var g = galerias[b.getAttribute('data-galeria')]; if (g && g.length) abre(g, 0); });
+    });
     $('.amp-fechar', amp).addEventListener('click', fecha);
     $('.amp-ant', amp).addEventListener('click', function () { poe(idx - 1); });
     $('.amp-prox', amp).addEventListener('click', function () { poe(idx + 1); });

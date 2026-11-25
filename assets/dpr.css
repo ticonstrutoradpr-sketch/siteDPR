@@ -302,6 +302,51 @@ html:not(.js) .pal > span { transform: none; }
 .portas-texto p { font: 300 clamp(30px, 4vw, 58px)/1.06 var(--titulo); letter-spacing: -.015em; max-width: 14ch; }
 .portas-texto .legenda { color: rgba(244, 241, 236, .75); }
 
+/* nossos empreendimentos */
+.emps { background: var(--marfim); }
+.emps-cab { max-width: none; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 48px; }
+.emps-cab > div { display: grid; gap: 22px; }
+.emps-lista { display: grid; gap: clamp(72px, 9vw, 140px); }
+.emp { display: grid; grid-template-columns: 1.25fr 1fr; gap: clamp(32px, 5vw, 88px); align-items: center; }
+.emp-inv .emp-foto { order: 2; }
+.emp-foto {
+  position: relative; aspect-ratio: 4 / 3; overflow: hidden; background: var(--concreto);
+  border-radius: 46% 46% 0 0 / 34% 34% 0 0;
+}
+.emp-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform 1.6s var(--ease); }
+.emp:hover .emp-foto img { transform: scale(1.04); }
+/* a janela em arco se abre: comeca estreita e alta, termina como foto quase inteira com o topo em arco */
+.js .emp .emp-foto { clip-path: inset(12% 30% 0 30% round 50% 50% 0 0); transition: clip-path 1.6s var(--cortina), border-radius 1.6s var(--cortina); }
+.js .emp .emp-foto img { transform: scale(1.2); transition: transform 2s var(--ease); }
+.js .emp.aberto .emp-foto { clip-path: inset(0 0 0 0 round 0 0 0 0); border-radius: 46% 46% 0 0 / 34% 34% 0 0; }
+.js .emp.aberto .emp-foto img { transform: scale(1); }
+.js .emp.aberto:hover .emp-foto img { transform: scale(1.04); transition-duration: 1.2s; }
+.emp-selo {
+  position: absolute; left: 50%; bottom: 18px; transform: translateX(-50%); z-index: 1;
+  display: inline-flex; align-items: center; gap: 8px; padding: 8px 14px;
+  background: rgba(244, 241, 236, .92); color: var(--grafite);
+  font: 500 10px/1 var(--titulo); letter-spacing: .2em; text-transform: uppercase;
+}
+.emp-selo::before { content: ''; width: 7px; height: 7px; border-radius: 50%; background: #5b8a5a; }
+.emp-selo.lancamento { background: var(--areia); }
+.emp-selo.lancamento::before { background: var(--grafite); animation: pisca 1.6s ease-in-out infinite; }
+@keyframes pisca { 50% { opacity: .25; } }
+.emp-texto { display: grid; gap: 14px; justify-items: start; }
+.emp-n { font: 200 clamp(52px, 5vw, 76px)/.9 var(--titulo); color: var(--areia); letter-spacing: -.03em; }
+.emp-onde { color: var(--areia-escura); }
+.emp h3 { font: 300 clamp(32px, 3.4vw, 50px)/1.05 var(--titulo); letter-spacing: -.015em; }
+.emp-texto p { color: var(--taupe); max-width: 46ch; }
+.emp-tags { list-style: none; margin: 4px 0 6px; padding: 0; display: flex; flex-wrap: wrap; gap: 8px; }
+.emp-tags li { padding: 7px 12px; border: 1px solid var(--linha-clara); font-size: 13px; color: var(--taupe); }
+.emp-bts { display: flex; flex-wrap: wrap; align-items: center; gap: 12px 28px; margin-top: 6px; }
+.js .emp .emp-texto > * { opacity: 0; transform: translateY(24px); transition: opacity .9s var(--ease), transform 1s var(--ease); }
+.js .emp.aberto .emp-texto > * { opacity: 1; transform: none; }
+.js .emp.aberto .emp-texto > :nth-child(2) { transition-delay: .1s; }
+.js .emp.aberto .emp-texto > :nth-child(3) { transition-delay: .18s; }
+.js .emp.aberto .emp-texto > :nth-child(4) { transition-delay: .26s; }
+.js .emp.aberto .emp-texto > :nth-child(5) { transition-delay: .34s; }
+.js .emp.aberto .emp-texto > :nth-child(6) { transition-delay: .42s; }
+
 /* lazer do Villaggio Caucaia II: mosaico */
 .lazer { background: var(--marfim); }
 .lazer-cab { max-width: none; grid-template-columns: 1.2fr 1fr; align-items: end; gap: 48px; }
@@ -465,6 +510,9 @@ html:not(.js) .pal > span { transform: none; }
   .portas-cab p { display: none; }
   .porta-foto { --t0: 38%; --l0: 20%; --rr: 30vw; }
   .lazer-cab { grid-template-columns: 1fr; gap: 22px; }
+  .emps-cab { grid-template-columns: 1fr; gap: 22px; }
+  .emp { grid-template-columns: 1fr; gap: 28px; }
+  .emp-inv .emp-foto { order: 0; }
   .mosaico { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 42vw; }
   .ladrilho:not(.l-grande):not(.l-largo) .ladrilho-leg .legenda { display: none; }
   .ladrilho-leg { padding: 12px 12px; font-size: 14px; }
@@ -498,6 +546,9 @@ html:not(.js) .pal > span { transform: none; }
   .carta { position: relative; top: auto; transform: none; }
   .js .manifesto-texto .acende { opacity: 1; }
   .js .mosaico .ladrilho { clip-path: none; }
+  .js .emp .emp-foto { clip-path: none; border-radius: 46% 46% 0 0 / 34% 34% 0 0; }
+  .js .emp .emp-foto img { transform: none; }
+  .js .emp .emp-texto > * { opacity: 1; transform: none; }
   .js .mosaico .ladrilho img { transform: none; }
   .cursor { display: none !important; }
 }
