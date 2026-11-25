@@ -296,24 +296,6 @@ html:not(.js) .pal > span { transform: none; }
 .tour-barra { position: absolute; left: 0; right: 0; bottom: -18px; height: 2px; background: var(--linha-escura); }
 .tour-barra i { position: absolute; inset: 0; background: var(--areia); transform-origin: left; transform: scaleX(var(--tour-p, 0)); }
 
-/* projetos: a foto se abre como duas portas */
-.portas { position: relative; height: 230vh; background: var(--papel); }
-.portas-palco { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; display: grid; place-items: center; }
-.portas-foto {
-  position: absolute; inset: 0;
-  --vtt: 38%; --vtb: 8%; --vl: 43%;
-  clip-path: inset(calc(var(--vtt) * (1 - var(--abre, 0))) calc(var(--vl) * (1 - var(--abre, 0))) calc(var(--vtb) * (1 - var(--abre, 0))) calc(var(--vl) * (1 - var(--abre, 0))));
-}
-.portas-foto img { width: 100%; height: 100%; object-fit: cover; transform: scale(calc(1.3 - var(--abre, 0) * .3)); }
-.portas-foto::after { content: ''; position: absolute; inset: 0; background: linear-gradient(0deg, rgba(26, 25, 24, .7), rgba(26, 25, 24, .1) 60%); opacity: var(--abre, 0); }
-.portas-cab { position: absolute; left: 0; right: 0; top: calc(var(--topo) + 40px); z-index: 2; opacity: calc(1 - var(--abre, 0) * 2.5); }
-.portas-cab .cont { display: flex; justify-content: space-between; align-items: end; gap: 32px; }
-.portas-cab h2 { max-width: 12ch; }
-.portas-cab p { color: var(--taupe); max-width: 36ch; }
-.portas-texto { position: absolute; left: 0; right: 0; bottom: clamp(40px, 8vh, 80px); z-index: 2; color: var(--marfim); opacity: calc((var(--abre, 0) - .7) * 3.4); transform: translateY(calc((1 - min(1, max(0, (var(--abre, 0) - .7) * 3.4))) * 30px)); }
-.portas-texto .cont { display: flex; justify-content: space-between; align-items: end; gap: 24px; }
-.portas-texto p { font: 300 clamp(30px, 4vw, 58px)/1.06 var(--titulo); letter-spacing: -.015em; max-width: 14ch; }
-.portas-texto .legenda { color: rgba(244, 241, 236, .75); }
 
 /* nossos empreendimentos */
 .emps { background: var(--marfim); }
@@ -513,9 +495,6 @@ html:not(.js) .pal > span { transform: none; }
   .tour-moldura { order: -1; height: min(52svh, 460px); justify-self: center; margin: 16px 16px 26px 0; }
   .tour-nota { font-size: 10px; }
   .tour-texto::after { content: attr(data-atual); font: 300 26px/1.1 var(--titulo); color: var(--marfim); }
-  .portas-foto { --vl: 30%; --vtt: 44%; --vtb: 6%; }
-  .portas-cab .cont, .portas-texto .cont { flex-direction: column; align-items: flex-start; }
-  .portas-cab p { display: none; }
   .porta-foto { --t0: 38%; --l0: 20%; --rr: 30vw; }
   .emps-cab { grid-template-columns: 1fr; gap: 22px; }
   .emp { grid-template-columns: 1fr; gap: 28px; }
@@ -544,8 +523,8 @@ html:not(.js) .pal > span { transform: none; }
 /* quem pede menos movimento: tudo parado e completo */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; animation-delay: 0s !important; transition-duration: .01ms !important; transition-delay: 0s !important; }
-  .portas, .porta-terreno { height: auto; --abre: 1 !important; }
-  .portas-palco, .porta-palco { position: relative; }
+  .porta-terreno { height: auto; --abre: 1 !important; }
+  .porta-palco { position: relative; }
   .porta-depois { pointer-events: auto; }
   .tour { height: auto; }
   .tour-palco { position: relative; height: auto; min-height: 100svh; padding-bottom: 60px; }

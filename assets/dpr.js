@@ -253,7 +253,7 @@
     });
   }
 
-  var topo = $('.topo'), zap = $('.zap'), cartas = $$('.carta'), portas = $('.portas'), portaT = $('.porta-terreno');
+  var topo = $('.topo'), zap = $('.zap'), cartas = $$('.carta'), portaT = $('.porta-terreno');
   var ultimoY = window.scrollY, pedido = false;
   var progresso = function (el, H) { var r = el.getBoundingClientRect(); return limita(-r.top / Math.max(1, r.height - H)); };
 
@@ -295,7 +295,6 @@
       tour.style.setProperty('--tour-p', pt.toFixed(3));
       mostraTour(Math.min(tourFotos.length - 1, Math.floor(pt * tourFotos.length)));
     }
-    if (portas) portas.style.setProperty('--abre', suave(limita(progresso(portas, H) / 0.75)).toFixed(4));
     if (portaT) {
       var a = suave(limita(progresso(portaT, H) / 0.7));
       portaT.style.setProperty('--abre', a.toFixed(4));
