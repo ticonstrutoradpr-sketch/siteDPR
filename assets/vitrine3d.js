@@ -121,7 +121,8 @@ export function inicia(fixo, estado) {
     torce(estado.s);
     var a = Math.floor(estado.s), b = Math.min(N - 1, a + 1), tt = estado.s - a;
     var cf = new THREE.Color(mix(itens[a].fundo, '#FFFFFF', .62)).lerp(new THREE.Color(mix(itens[b].fundo, '#FFFFFF', .62)), tt);
-    var cv2 = new THREE.Color(mix(itens[a].fundo, '#000000', .28)).lerp(new THREE.Color(mix(itens[b].fundo, '#000000', .28)), tt);
+    /* verso so um pouco mais fechado que a frente: a dobra aparece sem mancha escura */
+    var cv2 = new THREE.Color(mix(itens[a].fundo, '#FFFFFF', .36)).lerp(new THREE.Color(mix(itens[b].fundo, '#FFFFFF', .36)), tt);
     frente.material.color.copy(cf); verso.material.color.copy(cv2);
     tira.rotation.y = mx * .22; tira.rotation.x = my * .08;
     r.render(cena, cam);
