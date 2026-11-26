@@ -76,6 +76,9 @@ p { margin: 0; }
 .topo-tel { display: inline-flex; align-items: center; gap: 10px; min-height: 44px; margin-left: auto; font: 500 14px/1 var(--texto); letter-spacing: .02em; color: var(--grafite); text-decoration: none; white-space: nowrap; transition: color .3s, opacity .4s; }
 .topo-tel:hover { color: var(--areia-escura); }
 .menu-aberto .topo-tel { opacity: 0; pointer-events: none; }
+.topo-tel-txt { position: relative; padding: 6px 0; font: 500 12px/1 var(--titulo); letter-spacing: .24em; text-transform: uppercase; }
+.topo-tel-txt::after { content: ''; position: absolute; left: 0; right: 0; bottom: 0; height: 1px; background: var(--areia); transform: scaleX(0); transform-origin: right; transition: transform .55s var(--ease); }
+.topo-tel:hover .topo-tel-txt::after { transform: scaleX(1); transform-origin: left; }
 .tel-ponto { width: 7px; height: 7px; border-radius: 50%; background: var(--areia); box-shadow: 0 0 0 0 rgba(188, 156, 116, .6); animation: tel-pulsa 2.4s ease-out infinite; }
 @keyframes tel-pulsa { to { box-shadow: 0 0 0 8px rgba(188, 156, 116, 0); } }
 .topo-menu { display: inline-flex; align-items: center; gap: 16px; min-height: 48px; padding: 0 0 0 28px; border: 0; border-left: 1px solid var(--linha-clara); background: none; color: var(--grafite); cursor: pointer; font: 500 12px/1 var(--titulo); letter-spacing: .24em; text-transform: uppercase; }
@@ -150,6 +153,41 @@ p { margin: 0; }
   -webkit-mask-image: radial-gradient(circle var(--raio, 280px) at var(--mx, 50%) var(--my, 45%), rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .72) 50%, #000 100%);
           mask-image: radial-gradient(circle var(--raio, 280px) at var(--mx, 50%) var(--my, 45%), rgba(0, 0, 0, .5) 0%, rgba(0, 0, 0, .72) 50%, #000 100%);
 }
+
+/* prancha: a abertura parece uma folha de projeto. Marcas de canto, cotas que se desenham sozinhas em volta da frase
+   e, com mouse, uma mira de desenho tecnico com coordenadas. Tudo some junto com o video ao rolar. */
+.prancha { --fs: clamp(64px, 14.5vw, 260px); position: absolute; inset: 0; z-index: 3; pointer-events: none; color: var(--grafite); opacity: calc(1 - var(--abre, 0) * 2.5); }
+.canto { position: absolute; width: 22px; height: 22px; border: 0 solid rgba(26, 25, 24, .5); }
+.c1 { top: calc(var(--topo) + 14px); left: 28px; border-top-width: 1px; border-left-width: 1px; }
+.c2 { top: calc(var(--topo) + 14px); right: 28px; border-top-width: 1px; border-right-width: 1px; }
+.c3 { bottom: 64px; left: 28px; border-bottom-width: 1px; border-left-width: 1px; }
+.c4 { bottom: 64px; right: 28px; border-bottom-width: 1px; border-right-width: 1px; }
+.cota { position: absolute; left: 50%; width: calc(var(--fs) * 4.7); display: flex; justify-content: space-between; transform: translateX(-50%); font: 500 10px/1 var(--titulo); letter-spacing: .24em; text-transform: uppercase; color: var(--taupe); }
+.cota-cima { top: calc(50% - var(--fs) * .98 - 34px); }
+.cota-baixo { top: calc(50% + var(--fs) * 1.02 + 18px); }
+.cota b { position: relative; padding: 0 10px; font-weight: 500; background: transparent; opacity: 0; transform: translateY(6px); }
+.cota b:first-of-type { padding-left: 0; }
+.cota b:last-of-type { padding-right: 0; }
+.cota-cima b { top: -18px; }
+.cota-baixo b { top: 10px; }
+.cota-linha { position: absolute; left: 0; right: 0; top: 0; height: 1px; background: rgba(26, 25, 24, .45); transform: scaleX(0); }
+.cota-linha::before, .cota-linha::after { content: ''; position: absolute; top: -6px; width: 1px; height: 13px; background: rgba(26, 25, 24, .6); }
+.cota-linha::before { left: 0; }
+.cota-linha::after { right: 0; }
+.cota-cima .cota-linha { background-image: linear-gradient(90deg, transparent calc(50% - 4px), var(--areia) calc(50% - 4px), var(--areia) calc(50% + 4px), transparent calc(50% + 4px)); }
+.js .cota-linha { animation: cota-desenha 1.6s cubic-bezier(.7, 0, .2, 1) 1.1s forwards; }
+.js .cota-baixo .cota-linha { animation-delay: 1.35s; }
+.js .cota b { animation: cota-legenda .8s var(--ease) forwards; }
+.js .cota b:nth-of-type(1) { animation-delay: 2.1s; }
+.js .cota b:nth-of-type(2) { animation-delay: 2.25s; }
+.js .cota b:nth-of-type(3) { animation-delay: 2.4s; }
+@keyframes cota-desenha { to { transform: scaleX(1); } }
+@keyframes cota-legenda { to { opacity: 1; transform: none; } }
+.mira { position: absolute; background: rgba(188, 156, 116, .55); opacity: 0; transition: opacity .4s; }
+.mira-h { left: 0; right: 0; top: var(--my, 50%); height: 1px; }
+.mira-v { top: 0; bottom: 0; left: var(--mx, 50%); width: 1px; }
+.mira-xy { position: absolute; left: var(--mx, 50%); top: var(--my, 50%); margin: 12px 0 0 12px; padding: 5px 8px; font: 500 10px/1 var(--titulo); letter-spacing: .16em; color: var(--areia-escura); background: rgba(244, 241, 236, .85); white-space: nowrap; opacity: 0; transition: opacity .4s; font-variant-numeric: tabular-nums; }
+.com-mira .mira, .com-mira .mira-xy { opacity: 1; }
 
 /* faixa fina que passa embaixo */
 .faixa-fina { position: absolute; left: 0; right: 0; bottom: 0; z-index: 4; overflow: hidden; border-top: 1px solid rgba(26, 25, 24, .12); background: rgba(244, 241, 236, .55); -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px); opacity: calc(1 - var(--abre, 0) * 2); }
@@ -310,6 +348,14 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   .palco { height: 520vh; }
   .video-texto { bottom: 220px; }
   .vazado-frase { font-size: clamp(48px, 17.5vw, 120px); line-height: .92; }
+  .prancha { --fs: clamp(48px, 17.5vw, 120px); }
+  .cota { width: calc(100% - 40px); }
+  .cota-cima { top: calc(50% - var(--fs) * 1.05 - 30px); }
+  .cota-baixo { display: none; }
+  .canto { width: 16px; height: 16px; }
+  .c1, .c3 { left: 14px; }
+  .c2, .c4 { right: 14px; }
+  .c3, .c4 { bottom: 58px; }
   .palco-dica { display: none; }
   .palco-texto { align-items: flex-end; padding-bottom: 20px; }
   .palco-bloco { width: 100%; gap: 10px; }
@@ -352,5 +398,6 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
   .palco { height: auto; }
   .palco-fixo { position: relative; }
   .faixa-fina-trilho { animation: none; }
+  .js .cota-linha, .js .cota b { animation: none; transform: none; opacity: 1; }
   .js [data-revela] { opacity: 1; transform: none; transition: none; }
 }
