@@ -194,7 +194,7 @@ p { margin: 0; }
 .casa[data-modo="contato"] .c-porta-fechada { opacity: 0; }
 .casa[data-modo="contato"] .c-porta-aberta, .casa[data-modo="contato"] .c-dentro, .casa[data-modo="contato"] .c-luz-chao { opacity: 1; }
 /* casa em 3D real (assets/casa3d.js): quando carrega, esconde o SVG de reserva */
-.casa3d { display: block; width: 100%; height: min(62vh, 560px); opacity: 0; transition: opacity .5s; }
+.casa3d { display: block; width: 100%; height: min(62vh, 560px); opacity: 0; transition: opacity .5s; -webkit-mask-image: radial-gradient(ellipse 72% 70% at 50% 52%, #000 72%, transparent 100%); mask-image: radial-gradient(ellipse 72% 70% at 50% 52%, #000 72%, transparent 100%); }
 .painel.aberto .casa3d { opacity: 1; transition: opacity .9s .25s; }
 .painel-lado.tem-3d .casa { display: none; }
 .painel-leg { display: block; overflow: hidden; padding-bottom: .1em; opacity: 0; transition: opacity .4s; }
