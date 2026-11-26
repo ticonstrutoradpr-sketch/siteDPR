@@ -366,11 +366,17 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
 .so-leitor { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
 .vitrine { position: relative; height: calc(var(--n, 5) * 100vh); height: calc(var(--n, 5) * 100svh); }
 .vit-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--vit-fundo); color: var(--vit-tinta); }
-.vit-anel { position: absolute; inset: 0; perspective: 3600px; font: 600 clamp(72px, 11vw, 176px)/1 var(--titulo); letter-spacing: -.01em; text-transform: uppercase; color: var(--vit-anel-cor); transition: opacity .22s, color .5s; pointer-events: none; }
+.vit-anel { position: absolute; inset: 0; perspective: 3600px; font: 500 clamp(72px, 11vw, 176px)/1 var(--titulo); letter-spacing: .01em; text-transform: uppercase; color: var(--vit-anel-cor); transition: opacity .22s, color .5s; pointer-events: none; }
 .vit-anel.some { opacity: 0; }
 .vit-anel-giro { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .vit-anel-giro span { position: absolute; left: 0; top: 0; display: block; white-space: pre; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
-.vit-cartao { position: absolute; left: 50%; top: 50%; width: min(300px, max(220px, 20vw)); height: auto; aspect-ratio: 1; object-fit: cover; transform: translate(-50%, -50%); box-shadow: 0 30px 60px -30px rgba(26, 25, 24, .55); transition: opacity .5s; }
+.vit-cartao { position: absolute; left: 50%; top: 50%; width: min(300px, max(220px, 20vw)); aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px; transform: translate(-50%, -50%); background: color-mix(in srgb, var(--vit-fundo) 90%, #000); outline: 1px solid color-mix(in srgb, var(--vit-tinta) 16%, transparent); outline-offset: -12px; color: var(--vit-tinta); text-align: center; transition: opacity .5s; }
+.vc-num { position: absolute; top: 26px; font: 500 9px/1 var(--titulo); letter-spacing: .3em; opacity: .7; }
+.vc-nome { font: 300 clamp(26px, 2.6vw, 36px)/1.05 var(--titulo); letter-spacing: -.02em; }
+.vc-fio { width: 26px; height: 1px; margin: 6px 0 2px; background: currentColor; opacity: .55; }
+.vc-local, .vc-status { font: 500 9px/1.3 var(--titulo); letter-spacing: .26em; text-transform: uppercase; }
+.vc-status { opacity: .7; }
+.vc-arco { position: absolute; bottom: 22px; width: 36px; aspect-ratio: 947 / 380; background: currentColor; opacity: .8; -webkit-mask: url(/marca/dpr-arco.png) center / 100% 100% no-repeat; mask: url(/marca/dpr-arco.png) center / 100% 100% no-repeat; }
 .vit-fixo.tem-3d .vit-cartao { opacity: 0; }
 .vit-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
 .vit-lado { position: absolute; left: var(--margem); bottom: 40px; z-index: 3; display: grid; gap: 14px; justify-items: start; font: 500 11px/1 var(--titulo); letter-spacing: .18em; font-variant-numeric: tabular-nums; }

@@ -45,6 +45,14 @@
     giro.innerHTML = html;
   }
 
+  /* nome em duas linhas equilibradas */
+  function quebraNome(nome) {
+    var p = nome.split(' '), melhor = [nome], pior = 1e9;
+    for (var k = 1; k < p.length; k++) { var a = p.slice(0, k).join(' '), b = p.slice(k).join(' '), m = Math.max(a.length, b.length); if (m < pior) { pior = m; melhor = [a, b]; } }
+    return melhor;
+  }
+  estado.quebraNome = quebraNome;
+
   var atual = -1;
   function mostra(i) {
     if (i === atual) return;
@@ -55,7 +63,13 @@
       nomeTxt.textContent = it.nome; info.textContent = it.info;
       ver.setAttribute('data-galeria', it.galeria);
       ver.setAttribute('aria-label', 'Ver fotos do ' + it.nome);
-      if (cartao) { cartao.src = it.foto; cartao.alt = it.nome; }
+      if (cartao) {
+        var partes = it.info.split(' · ');
+        cartao.querySelector('.vc-num').textContent = String(i + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
+        cartao.querySelector('.vc-nome').innerHTML = quebraNome(it.nome).join('<br>');
+        cartao.querySelector('.vc-local').textContent = partes.length > 1 ? partes[1] : '';
+        cartao.querySelector('.vc-status').textContent = [partes[0]].concat(partes.slice(2)).join(' · ');
+      }
       if (conta) conta.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
       [].forEach.call(lista.querySelectorAll('button'), function (b, j) { b.classList.toggle('atual', j === i); });
       anel.classList.remove('some');

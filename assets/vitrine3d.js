@@ -23,15 +23,45 @@ export function inicia(fixo, estado) {
   gr.addColorStop(0, '#E6DFD3'); gr.addColorStop(.5, '#F7F3EC'); gr.addColorStop(1, '#E1D8CA');
   g.fillStyle = gr; g.fillRect(0, 0, 256, 4);
   var tex = new THREE.CanvasTexture(papel); tex.colorSpace = THREE.SRGBColorSpace;
-  /* uma foto por cartao, recortada em quadrado */
-  var fotos = itens.map(function (it) {
-    var c = document.createElement('canvas'); c.width = c.height = 768;
-    var t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8;
-    var img = new Image();
-    img.onload = function () { var l = Math.min(img.width, img.height); c.getContext('2d').drawImage(img, (img.width - l) / 2, (img.height - l) / 2, l, l, 0, 0, 768, 768); t.needsUpdate = true; };
-    img.src = it.foto;
-    return t;
-  });
+  /* um cartao tipografico por empreendimento (tom mais escuro do fundo, nome fino, fio, local, situacao e o arco da DPR) */
+  var hex = function (s) { var n = parseInt(s.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
+  var mix = function (a, b, t) { var x = hex(a), y = hex(b); return 'rgb(' + x.map(function (v, i) { return Math.round(v + (y[i] - v) * t); }).join(',') + ')'; };
+  var arco = new Image(); arco.src = '/marca/dpr-arco.png';
+  var letras = new Image(); letras.src = '/marca/dpr-letras.png';
+  var fotos = itens.map(function () { var c = document.createElement('canvas'); c.width = c.height = 1024; var t = new THREE.CanvasTexture(c); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; t.userData = { c: c }; return t; });
+  function desenhaCartoes() {
+    itens.forEach(function (it, i) {
+      var c = fotos[i].userData.c, g = c.getContext('2d'), S = 1024, partes = it.info.split(' · ');
+      g.fillStyle = mix(it.fundo, '#000000', .1); g.fillRect(0, 0, S, S);
+      g.strokeStyle = it.tinta; g.globalAlpha = .16; g.lineWidth = 2; g.strokeRect(40, 40, S - 80, S - 80); g.globalAlpha = 1;
+      g.fillStyle = it.tinta; g.textAlign = 'center'; g.textBaseline = 'alphabetic';
+      g.font = '500 24px Poppins'; g.letterSpacing = '8px'; g.globalAlpha = .7;
+      g.fillText(String(i + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0'), S / 2 + 4, 130); g.globalAlpha = 1;
+      var linhas = estado.quebraNome(it.nome), tam = 128;
+      g.letterSpacing = '-3px';
+      do { g.font = '300 ' + tam + 'px Poppins'; tam -= 4; } while (Math.max.apply(null, linhas.map(function (l) { return g.measureText(l).width; })) > S - 200 && tam > 60);
+      tam += 4;
+      var y = S / 2 - (linhas.length - 1) * tam * .55 + tam * .2;
+      linhas.forEach(function (l, k) { g.fillText(l, S / 2, y + k * tam * 1.08); });
+      var yb = y + (linhas.length - 1) * tam * 1.08 + 70;
+      g.globalAlpha = .55; g.fillRect(S / 2 - 40, yb, 80, 2); g.globalAlpha = 1;
+      g.font = '500 24px Poppins'; g.letterSpacing = '7px';
+      g.fillText((partes[1] || '').toUpperCase(), S / 2 + 3, yb + 64);
+      g.globalAlpha = .7; g.fillText([partes[0]].concat(partes.slice(2)).join(' · ').toUpperCase(), S / 2 + 3, yb + 106); g.globalAlpha = 1;
+      /* logo oficial da DPR no pe do cartao: letras na cor do texto e arco em areia */
+      [[letras, it.tinta], [arco, '#BC9C74']].forEach(function (par) {
+        var im = par[0]; if (!im.complete || !im.naturalWidth) return;
+        var w = 150, hgt = w * 380 / 947, t = document.createElement('canvas'); t.width = w; t.height = hgt;
+        var tg = t.getContext('2d'); tg.drawImage(im, 0, 0, w, hgt); tg.globalCompositeOperation = 'source-in'; tg.fillStyle = par[1]; tg.fillRect(0, 0, w, hgt);
+        g.globalAlpha = .85; g.drawImage(t, S / 2 - w / 2, S - 170); g.globalAlpha = 1;
+      });
+      fotos[i].needsUpdate = true;
+    });
+  }
+  desenhaCartoes();
+  var refaz = function () { desenhaCartoes(); };
+  arco.onload = refaz; letras.onload = refaz;
+  if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('300 100px Poppins'), document.fonts.load('500 24px Poppins')]).then(refaz).catch(function () {});
 
   /* tira: de meia volta acima do primeiro ate meia volta abaixo do ultimo; o centro do cartao i fica em y = -i*L */
   var comp = L * N, segs = N * 70;
@@ -39,9 +69,9 @@ export function inicia(fixo, estado) {
   var pos = geo.attributes.position, base = new Float32Array(pos.array.length);
   for (var i = 0; i < pos.count; i++) { base[i * 3] = pos.getX(i); base[i * 3 + 1] = pos.getY(i) - comp / 2 + L / 2; base[i * 3 + 2] = 0; }
   var frente = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ map: tex, side: THREE.FrontSide }));
-  var verso = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: 0x3f3631, side: THREE.BackSide }));
+  var verso = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: 0x8a7a6a, side: THREE.BackSide }));
   var tira = new THREE.Group(); tira.add(frente, verso); cena.add(tira);
-  var cartoes = fotos.map(function (t) { var m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshLambertMaterial({ map: t })); tira.add(m); return m; });
+  var cartoes = fotos.map(function (t) { var m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: t })); tira.add(m); return m; });
 
   function torce(s) {
     var desl = s * L;
@@ -74,6 +104,10 @@ export function inicia(fixo, estado) {
     if (!estado.visivel) return;
     mx += (estado.mx - mx) * .06; my += (estado.my - my) * .06;
     torce(estado.s);
+    var a = Math.floor(estado.s), b = Math.min(N - 1, a + 1), tt = estado.s - a;
+    var cf = new THREE.Color(mix(itens[a].fundo, '#FFFFFF', .62)).lerp(new THREE.Color(mix(itens[b].fundo, '#FFFFFF', .62)), tt);
+    var cv2 = new THREE.Color(mix(itens[a].fundo, '#000000', .28)).lerp(new THREE.Color(mix(itens[b].fundo, '#000000', .28)), tt);
+    frente.material.color.copy(cf); verso.material.color.copy(cv2);
     tira.rotation.y = mx * .22; tira.rotation.x = my * .08;
     r.render(cena, cam);
   }
