@@ -156,6 +156,11 @@
     a.addEventListener('mouseenter', function () { mostraFrase(a); });
     a.addEventListener('focus', function () { mostraFrase(a); });
   });
+  /* maquete inclina acompanhando o mouse em qualquer ponto do menu */
+  if (casa && painel && temMouse && !calmo) painel.addEventListener('mousemove', function (e) {
+    casa.style.setProperty('--px', ((e.clientX / window.innerWidth) * 2 - 1).toFixed(3));
+    casa.style.setProperty('--py', ((e.clientY / window.innerHeight) * 2 - 1).toFixed(3));
+  });
   var pnav = $('.painel-nav');
   if (pnav) pnav.addEventListener('mouseleave', fraseAtual);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && painel && painel.classList.contains('aberto')) { menu(false); botao.focus(); } });
