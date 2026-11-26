@@ -121,15 +121,6 @@
       })(0);
     }
   }
-  /* mira de desenho tecnico: aparece com o mouse sobre a abertura e mostra as coordenadas */
-  var xy = $('.mira-xy');
-  if (tv && xy && temMouse && !calmo) {
-    fixo.addEventListener('mousemove', function (e) {
-      tv.classList.add('com-mira');
-      xy.textContent = 'X ' + ('000' + Math.round(e.clientX)).slice(-4) + ' · Y ' + ('000' + Math.round(e.clientY)).slice(-4);
-    });
-    fixo.addEventListener('mouseleave', function () { tv.classList.remove('com-mira'); });
-  }
   window.addEventListener('scroll', function () { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }, { passive: true });
   window.addEventListener('resize', quadro);
   quadro();
