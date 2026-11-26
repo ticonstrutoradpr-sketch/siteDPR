@@ -124,10 +124,13 @@ p { margin: 0; }
 .painel-lado { grid-row: 1 / 3; grid-column: 2; align-self: center; display: grid; gap: 16px; }
 .painel-foto { position: relative; height: min(60vh, 560px); overflow: hidden; clip-path: inset(100% 0 0 0); transition: clip-path .5s cubic-bezier(.7, 0, .2, 1); }
 .painel.aberto .painel-foto { clip-path: inset(0); transition: clip-path 1.1s cubic-bezier(.7, 0, .2, 1) .4s; }
-.painel-foto img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 1; clip-path: inset(100% 0 0 0); transform: scale(1.14); transition: clip-path 0s .85s, transform 0s .85s; }
-.painel-foto img.ativa { z-index: 2; clip-path: inset(0); transform: scale(1); transition: clip-path .85s cubic-bezier(.7, 0, .2, 1), transform 1.6s var(--ease); }
-.painel-leg { display: flex; justify-content: space-between; gap: 16px; font: 500 11px/1.4 var(--titulo); letter-spacing: .18em; text-transform: uppercase; color: var(--taupe); opacity: 0; transition: opacity .4s; }
-.painel-leg b { font-weight: 500; color: var(--grafite); }
+/* video da familia com pouca cor dentro do quadro; frase que sobe da mascara a cada item */
+.painel-video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; filter: saturate(.35) contrast(1.08); transform: scale(1.12); transition: transform 1.8s var(--ease); }
+.painel.aberto .painel-video { transform: scale(1); }
+.painel-leg { display: block; overflow: hidden; padding-bottom: .1em; opacity: 0; transition: opacity .4s; }
+.painel-leg-txt { display: block; font: italic 300 clamp(18px, 1.6vw, 24px)/1.3 var(--titulo); color: var(--grafite); }
+.painel-leg-txt.troca { animation: leg-sobe .7s var(--ease); }
+@keyframes leg-sobe { from { transform: translateY(110%); } to { transform: none; } }
 .painel.aberto .painel-leg { opacity: 1; transition: opacity .6s .9s; }
 .painel-base { grid-column: 1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 10px 36px; padding-top: 22px; border-top: 1px solid var(--linha-clara); font-size: 15px; color: var(--taupe); opacity: 0; transition: opacity .3s; }
 .painel.aberto .painel-base { opacity: 1; transition: opacity .6s .8s; }

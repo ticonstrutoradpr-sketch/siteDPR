@@ -129,17 +129,25 @@
   var cartao = $('.cartao-flutua');
   if (cartao) $('.cartao-fechar', cartao).addEventListener('click', function () { cartao.classList.add('fechado'); document.body.classList.add('sem-cartao'); });
 
-  /* menu em cortina: abre/fecha; a foto da obra acompanha o item sob o mouse ou o foco */
-  var botao = $('.topo-menu'), painel = $('.painel'), fotos = $$('.painel-foto img'), leg = $('.painel-leg b');
-  function mostraFoto(i) {
-    if (!fotos[i] || fotos[i].classList.contains('ativa')) return;
-    fotos.forEach(function (f, j) { f.classList.toggle('ativa', j === i); });
-    if (leg) leg.textContent = fotos[i].getAttribute('data-leg');
+  /* menu em cortina: abre/fecha; ao lado, o video da familia toca e a frase troca com o item sob o mouse ou o foco */
+  var botao = $('.topo-menu'), painel = $('.painel'), pvid = $('.painel-video'), leg = $('.painel-leg-txt');
+  function mostraFrase(a) {
+    if (!a || !leg) return;
+    var f = a.getAttribute('data-frase');
+    if (leg.textContent === f) return;
+    leg.textContent = f;
+    leg.classList.remove('troca'); void leg.offsetWidth; leg.classList.add('troca');
   }
-  function fotoAtual() { var a = $('.painel-nav a.atual'); mostraFoto(a ? +a.getAttribute('data-foto') : 0); }
+  function fraseAtual() { mostraFrase($('.painel-nav a.atual') || $('.painel-nav a')); }
   function menu(abrir) {
     if (!botao || !painel) return;
-    if (abrir) fotoAtual();
+    if (abrir) fraseAtual();
+    if (pvid && window.innerWidth >= 900) {
+      if (abrir) {
+        if (!pvid.getAttribute('src')) { pvid.src = '/video/7-familia-pc.mp4'; pvid.poster = '/video/capas/7-familia-pc.webp'; }
+        if (!calmo) { var pr = pvid.play(); if (pr && pr.catch) pr.catch(function () {}); }
+      } else pvid.pause();
+    }
     painel.classList.toggle('aberto', abrir);
     doc.classList.toggle('menu-aberto', abrir);
     botao.setAttribute('aria-expanded', abrir ? 'true' : 'false');
@@ -150,12 +158,11 @@
   if (botao) botao.addEventListener('click', function () { menu(!painel.classList.contains('aberto')); });
   $$('.painel a').forEach(function (a) { a.addEventListener('click', function () { menu(false); }); });
   $$('.painel-nav a').forEach(function (a) {
-    var i = +a.getAttribute('data-foto');
-    a.addEventListener('mouseenter', function () { mostraFoto(i); });
-    a.addEventListener('focus', function () { mostraFoto(i); });
+    a.addEventListener('mouseenter', function () { mostraFrase(a); });
+    a.addEventListener('focus', function () { mostraFrase(a); });
   });
   var pnav = $('.painel-nav');
-  if (pnav) pnav.addEventListener('mouseleave', fotoAtual);
+  if (pnav) pnav.addEventListener('mouseleave', fraseAtual);
   document.addEventListener('keydown', function (e) { if (e.key === 'Escape' && painel && painel.classList.contains('aberto')) { menu(false); botao.focus(); } });
 
   /* foto ampliada: galeria de cada obra */
