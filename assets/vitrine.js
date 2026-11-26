@@ -1,5 +1,5 @@
 /* Vitrine das obras: a secao fica presa na tela e cada tela de rolagem troca o empreendimento.
-   O fundo muda de cor, o nome gira num cilindro de letras gigantes atras do cartao, a fita 3D com as fotos
+   O fundo muda de cor, curvas de nivel tom sobre tom desenham o relevo de cada empreendimento atras do cartao, a fita 3D com as fotos
    (assets/vitrine3d.js) se torce entre um cartao e o outro, e a barra de baixo mostra o nome, a lista e a seta
    que abre as fotos (a mesma galeria do resto do site, pelo atributo data-galeria). */
 (function () {
@@ -23,27 +23,59 @@
   var rgb = function (h) { var n = parseInt(h.slice(1), 16); return [n >> 16, (n >> 8) & 255, n & 255]; };
   var mistura = function (a, b, t) { var x = rgb(a), y = rgb(b); return 'rgb(' + x.map(function (v, i) { return Math.round(v + (y[i] - v) * t); }).join(',') + ')'; };
 
-  /* letreiro em cilindro: cada letra vai numa posicao do anel; o nome se repete ate fechar a volta */
-  var medidor = document.createElement('canvas').getContext('2d');
-  var raio = 0;
-  function montaAnel(nome) {
-    var cs = getComputedStyle(anel), tam = parseFloat(cs.fontSize);
-    medidor.font = cs.fontWeight + ' ' + tam + 'px ' + cs.fontFamily;
-    var alvo = window.innerWidth < 900 ? window.innerWidth * .75 : Math.max(window.innerWidth * 1.05, 620);
-    var txt = nome.toUpperCase() + '  ', larg = function (c) { return medidor.measureText(c).width + tam * .02; };
-    var umaVez = txt.split('').reduce(function (s, c) { return s + larg(c); }, 0);
-    /* o nome se repete um numero inteiro de vezes e o raio se ajusta para fechar a volta exata: sem vao e sem letra encavalada */
-    var rep = Math.max(2, Math.round(2 * Math.PI * alvo / umaVez));
-    raio = rep * umaVez / (2 * Math.PI);
-    var folga = 0, letras = [], fimRep = [];
-    for (var r = 0; r < rep; r++) { letras = letras.concat(txt.split('')); fimRep.push(letras.length - 1); }
-    var ws = letras.map(larg), acc = 0, html = '';
-    letras.forEach(function (c, i) {
-      var a = (acc + ws[i] / 2) / raio; acc += ws[i] + (fimRep.indexOf(i) >= 0 ? folga : 0);
-      html += '<span style="transform:rotateY(' + a.toFixed(4) + 'rad) translateZ(' + raio.toFixed(1) + 'px) translate(-50%,-50%)">' + (c === ' ' ? '&nbsp;' : c) + '</span>';
-    });
-    giro.innerHTML = html;
+  /* fundo: curvas de nivel de um terreno, tom sobre tom. Cada empreendimento tem o seu relevo; na rolagem um relevo
+     se transforma no outro e as linhas respiram devagar. A cada quatro linhas uma fica mais marcada, como nos mapas. */
+  var curvas = document.createElement('canvas'); curvas.className = 'vit-curvas'; curvas.setAttribute('aria-hidden', 'true');
+  anel.appendChild(curvas);
+  var gc = curvas.getContext('2d'), CW = 0, CH = 0, PASSO = 18, NIVEIS = [];
+  for (var nv = -2.1; nv <= 2.11; nv += .3) NIVEIS.push(nv);
+  function medeCurvas() {
+    var dpr = Math.min(2, window.devicePixelRatio || 1);
+    CW = fixo.clientWidth; CH = fixo.clientHeight;
+    curvas.width = Math.round(CW * dpr); curvas.height = Math.round(CH * dpr);
+    gc.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
+  function relevo(x, y, t, sd) {
+    var u = x / 300, w = y / 300;
+    return Math.sin(u * 1.25 + sd * 1.7 + t * .16) * Math.cos(w * 1.05 - sd + t * .11)
+      + .65 * Math.sin((u + w) * 1.7 + sd * 2.3 - t * .09)
+      + .5 * Math.cos(Math.hypot(u - 2.4 - Math.sin(sd) * .8, w - 1.5 - Math.cos(sd) * .5) * 2.2 - t * .2)
+      + .25 * Math.sin(u * 3.1 - w * 2.4 + sd * 4.1);
+  }
+  var grade = null, ultimo = 0;
+  function desenhaCurvas(agora) {
+    if (!CW) medeCurvas();
+    var t = calmo ? 0 : (agora - t0) / 1000, s = estado.s, a = Math.floor(s), b = Math.min(N - 1, a + 1), m = suave(s - a);
+    var sa = a * 1.9 + .7, sb = b * 1.9 + .7, ox = estado.mx * 18, oy = estado.my * 12;
+    var cols = Math.ceil(CW / PASSO) + 1, rows = Math.ceil(CH / PASSO) + 1;
+    if (!grade || grade.length !== cols * rows) grade = new Float32Array(cols * rows);
+    for (var r = 0; r < rows; r++) for (var c = 0; c < cols; c++) {
+      var x = c * PASSO + ox, y = r * PASSO + oy;
+      grade[r * cols + c] = relevo(x, y, t, sa) * (1 - m) + relevo(x, y, t, sb) * m;
+    }
+    gc.clearRect(0, 0, CW, CH);
+    gc.strokeStyle = getComputedStyle(fixo).getPropertyValue('--vit-anel-cor').trim() || '#D3BC9C';
+    NIVEIS.forEach(function (nivel, k) {
+      gc.beginPath();
+      for (var r = 0; r < rows - 1; r++) for (var c = 0; c < cols - 1; c++) {
+        var i = r * cols + c, v0 = grade[i], v1 = grade[i + 1], v2 = grade[i + cols + 1], v3 = grade[i + cols];
+        var caso = (v0 > nivel ? 1 : 0) | (v1 > nivel ? 2 : 0) | (v2 > nivel ? 4 : 0) | (v3 > nivel ? 8 : 0);
+        if (caso === 0 || caso === 15) continue;
+        var x0 = c * PASSO, y0 = r * PASSO, p = [];
+        if ((caso & 1) !== ((caso & 2) >> 1)) p.push(x0 + PASSO * (nivel - v0) / (v1 - v0), y0);
+        if (((caso & 2) >> 1) !== ((caso & 4) >> 2)) p.push(x0 + PASSO, y0 + PASSO * (nivel - v1) / (v2 - v1));
+        if (((caso & 4) >> 2) !== ((caso & 8) >> 3)) p.push(x0 + PASSO * (nivel - v3) / (v2 - v3), y0 + PASSO);
+        if (((caso & 8) >> 3) !== (caso & 1)) p.push(x0, y0 + PASSO * (nivel - v0) / (v3 - v0));
+        if (p.length >= 4) { gc.moveTo(p[0], p[1]); gc.lineTo(p[2], p[3]); }
+        if (p.length === 8) { gc.moveTo(p[4], p[5]); gc.lineTo(p[6], p[7]); }
+      }
+      var forte = k % 3 === 0;
+      gc.globalAlpha = forte ? .9 : .5; gc.lineWidth = forte ? 1.4 : .8;
+      gc.stroke();
+    });
+    gc.globalAlpha = 1;
+  }
+  function montaAnel() {}
 
   /* nome em duas linhas equilibradas */
   function quebraNome(nome) {
@@ -72,11 +104,10 @@
       }
       if (conta) conta.textContent = String(i + 1).padStart(2, '0') + ' / ' + String(N).padStart(2, '0');
       [].forEach.call(lista.querySelectorAll('button'), function (b, j) { b.classList.toggle('atual', j === i); });
-      anel.classList.remove('some');
       nomeTxt.parentNode.classList.remove('troca'); void nomeTxt.offsetWidth; nomeTxt.parentNode.classList.add('troca');
     };
     if (primeiro || calmo) troca();
-    else { anel.classList.add('some'); setTimeout(troca, 220); }
+    else setTimeout(troca, 120);
   }
 
   /* rolagem: cada item ocupa uma tela; o movimento "assenta" em cada cartao */
@@ -99,17 +130,15 @@
     var rr = sec.getBoundingClientRect();
     document.body.classList.toggle('na-vitrine', rr.top <= 4 && rr.bottom >= H - 4);
   }
+  /* curvas a ~14 quadros por segundo (o movimento e lento), so com a secao na tela */
   function gira(agora) {
-    if (estado.visivel && !calmo) giro.style.transform = 'rotateX(-6deg) rotateZ(-2.5deg) translateZ(' + (-raio).toFixed(1) + 'px) rotateY(' + (-(estado.s * 70 + (agora - t0) / 1000 * 5)).toFixed(2) + 'deg)';
+    if ((estado.visivel || !ultimo) && agora - ultimo > 70) { ultimo = agora; desenhaCurvas(agora); }
     requestAnimationFrame(gira);
   }
   window.addEventListener('scroll', function () { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }, { passive: true });
-  window.addEventListener('resize', function () { var i = atual; atual = -1; mostra(i < 0 ? 0 : i); quadro(); });
+  window.addEventListener('resize', function () { medeCurvas(); var i = atual; atual = -1; mostra(i < 0 ? 0 : i); quadro(); });
   fixo.addEventListener('mousemove', function (e) { estado.mx = (e.clientX / window.innerWidth) * 2 - 1; estado.my = (e.clientY / window.innerHeight) * 2 - 1; });
   quadro(); mostra(Math.round(estado.s));
-  giro.style.transform = 'rotateX(-6deg) rotateZ(-2.5deg) translateZ(' + (-raio).toFixed(1) + 'px)';
-  /* a medida das letras so vale com a fonte carregada: remonta o anel quando ela chega */
-  if (document.fonts && document.fonts.load) document.fonts.load('600 100px Poppins').then(function () { var i = atual; atual = -1; mostra(i < 0 ? 0 : i); }).catch(function () {});
   requestAnimationFrame(gira);
 
   /* lista: o botao de pontos abre os nomes; clicar leva ate o empreendimento */

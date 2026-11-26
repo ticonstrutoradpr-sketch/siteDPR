@@ -368,6 +368,7 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
 .vit-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--vit-fundo); color: var(--vit-tinta); }
 .vit-anel { position: absolute; inset: 0; perspective: 3600px; font: 500 clamp(72px, 11vw, 176px)/1 var(--titulo); letter-spacing: .01em; text-transform: uppercase; color: var(--vit-anel-cor); transition: opacity .22s, color .5s; pointer-events: none; }
 .vit-anel.some { opacity: 0; }
+.vit-curvas { position: absolute; inset: 0; width: 100%; height: 100%; }
 .vit-anel-giro { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
 .vit-anel-giro span { position: absolute; left: 0; top: 0; display: block; white-space: pre; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
 .vit-cartao { position: absolute; left: 50%; top: 50%; width: min(300px, max(220px, 20vw)); aspect-ratio: 1; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 10px; padding: 24px; transform: translate(-50%, -50%); background: color-mix(in srgb, var(--vit-fundo) 90%, #000); outline: 1px solid color-mix(in srgb, var(--vit-tinta) 16%, transparent); outline-offset: -12px; color: var(--vit-tinta); text-align: center; transition: opacity .5s; }
