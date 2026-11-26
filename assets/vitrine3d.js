@@ -69,15 +69,18 @@ export function inicia(fixo, estado) {
   var frente = { material: materialFrente }, verso = { material: materialVerso };
   var tira = new THREE.Group(); cena.add(tira);
   var pedacos = [];
-  for (var k = -1; k < N; k++) {
-    var topo = k < 0 ? L / 2 : -k * L - .5 - VAO, fundo = k >= N - 1 ? -(N - 1) * L - L / 2 : -(k + 1) * L + .5 + VAO;
-    if (k < 0) topo = L / 2; if (k < 0) fundo = .5 + VAO;
-    var comp = topo - fundo, gp = new THREE.PlaneGeometry(1, comp, 8, 90), pp = gp.attributes.position, bs = new Float32Array(pp.array.length);
-    for (var i = 0; i < pp.count; i++) { bs[i * 3] = pp.getX(i); bs[i * 3 + 1] = pp.getY(i) + (topo + fundo) / 2; }
-    /* os vertices mudam a cada quadro: sem o corte automatico por area, senao o pedaco some fora do lugar original */
-    var mf = new THREE.Mesh(gp, materialFrente), mv = new THREE.Mesh(gp, materialVerso);
-    mf.frustumCulled = false; mv.frustumCulled = false; tira.add(mf, mv);
-    pedacos.push({ geo: gp, pos: pp, base: bs });
+  /* duas metades por cartao (acima e abaixo); cada metade e presa ao seu cartao e termina de lado (um quarto de volta)
+     no meio do caminho ate o cartao vizinho: no meio da troca o encontro vira uma dobra fina, nunca um painel chapado */
+  var meiaComp = L / 2 - .5 - VAO;
+  for (var k = 0; k < N; k++) {
+    [1, -1].forEach(function (lado) {
+      var gp = new THREE.PlaneGeometry(1, meiaComp, 8, 60), pp = gp.attributes.position, bs = new Float32Array(pp.array.length);
+      for (var i = 0; i < pp.count; i++) { bs[i * 3] = pp.getX(i); bs[i * 3 + 1] = lado * (.5 + VAO + meiaComp / 2) + pp.getY(i); }
+      /* os vertices mudam a cada quadro: sem o corte automatico por area, senao o pedaco some fora do lugar original */
+      var mf = new THREE.Mesh(gp, materialFrente), mv = new THREE.Mesh(gp, materialVerso);
+      mf.frustumCulled = false; mv.frustumCulled = false; tira.add(mf, mv);
+      pedacos.push({ geo: gp, pos: pp, base: bs, centro: -k * L });
+    });
   }
   var cartoes = fotos.map(function (t) { var m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: t })); tira.add(m); return m; });
 
@@ -85,12 +88,11 @@ export function inicia(fixo, estado) {
     var desl = s * L;
     pedacos.forEach(function (p) {
       for (var i = 0; i < p.pos.count; i++) {
-        var x0 = p.base[i * 3], y0 = p.base[i * 3 + 1];
-        var j = Math.round(-y0 / L), d = y0 + j * L, lado = d > 0 ? 1 : -1;
-        var t = Math.max(0, (Math.abs(d) - .5 - VAO) / (L / 2 - .5 - VAO));
-        var a = lado * Math.PI * suave(t);
-        var perto = 2.4 * t * t;
-        pos3.set(x0 * Math.cos(a) + Math.sin(a) * .22 * lado, y0 + desl - lado * t * t * .35, x0 * Math.sin(a) + perto);
+        var x0 = p.base[i * 3], d = p.base[i * 3 + 1], lado = d > 0 ? 1 : -1;
+        var t = Math.max(0, Math.min(1, (Math.abs(d) - .5 - VAO) / meiaComp));
+        var a = lado * Math.PI / 2 * suave(t);
+        var perto = 1.7 * Math.sin(t * Math.PI / 2) * t;
+        pos3.set(x0 * Math.cos(a) + Math.sin(a) * .25 * lado, p.centro + d + desl, x0 * Math.sin(a) + perto);
         p.pos.setXYZ(i, pos3.x, pos3.y, pos3.z);
       }
       p.pos.needsUpdate = true; p.geo.computeVertexNormals();
