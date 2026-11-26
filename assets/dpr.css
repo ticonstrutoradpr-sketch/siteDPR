@@ -361,6 +361,50 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
 .js [data-revela].visivel { opacity: 1; transform: none; }
 
 /* tablet e celular */
+/* vitrine das obras (assets/vitrine.js): secao presa, fundo por empreendimento, letreiro em cilindro 3D,
+   fita 3D com as fotos (assets/vitrine3d.js) e barra com lista, nome e seta que abre as fotos */
+.so-leitor { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+.vitrine { position: relative; height: calc(var(--n, 5) * 100vh); height: calc(var(--n, 5) * 100svh); }
+.vit-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--vit-fundo); color: var(--vit-tinta); }
+.vit-anel { position: absolute; inset: 0; perspective: 3600px; font: 600 clamp(72px, 11vw, 176px)/1 var(--titulo); letter-spacing: -.01em; text-transform: uppercase; color: var(--vit-anel-cor); transition: opacity .22s, color .5s; pointer-events: none; }
+.vit-anel.some { opacity: 0; }
+.vit-anel-giro { position: absolute; left: 50%; top: 50%; transform-style: preserve-3d; }
+.vit-anel-giro span { position: absolute; left: 0; top: 0; display: block; white-space: pre; -webkit-backface-visibility: hidden; backface-visibility: hidden; }
+.vit-cartao { position: absolute; left: 50%; top: 50%; width: min(300px, max(220px, 20vw)); height: auto; aspect-ratio: 1; object-fit: cover; transform: translate(-50%, -50%); box-shadow: 0 30px 60px -30px rgba(26, 25, 24, .55); transition: opacity .5s; }
+.vit-fixo.tem-3d .vit-cartao { opacity: 0; }
+.vit-canvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; }
+.vit-lado { position: absolute; left: var(--margem); bottom: 40px; z-index: 3; display: grid; gap: 14px; justify-items: start; font: 500 11px/1 var(--titulo); letter-spacing: .18em; font-variant-numeric: tabular-nums; }
+.vit-progresso { position: relative; display: block; width: 10px; height: 80px; }
+.vit-progresso::before { content: ''; position: absolute; inset: 0; background: currentColor; opacity: .22; }
+.vit-progresso span { position: absolute; left: 0; top: 0; width: 10px; height: 10px; background: currentColor; }
+.vit-barra { position: absolute; left: 50%; bottom: 40px; z-index: 3; transform: translateX(-50%); width: min(540px, calc(100% - 32px)); height: 80px; display: grid; grid-template-columns: 40px minmax(0, 1fr) 40px; align-items: center; gap: 16px; padding: 0 20px; border-radius: 10px; background: rgba(26, 25, 24, .14); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); }
+.vit-lista-bt { width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 1px solid color-mix(in srgb, currentColor 30%, transparent); border-radius: 4px; background: none; color: inherit; cursor: pointer; transition: background-color .3s; }
+.vit-lista-bt:hover { background: color-mix(in srgb, currentColor 12%, transparent); }
+.vit-lista-bt span { width: 18px; height: 18px; background: radial-gradient(circle, currentColor 1.5px, transparent 2px) 0 0 / 6px 6px; }
+.vit-nome { margin: 0; display: grid; gap: 5px; text-align: center; overflow: hidden; }
+.vit-nome-txt { font: 600 14px/1.2 var(--titulo); letter-spacing: .08em; text-transform: uppercase; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vit-info { font: 500 10px/1.2 var(--titulo); letter-spacing: .16em; text-transform: uppercase; opacity: .75; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.vit-nome.troca > * { animation: vit-sobe .6s var(--ease) both; }
+.vit-nome.troca .vit-info { animation-delay: .08s; }
+@keyframes vit-sobe { from { transform: translateY(120%); opacity: 0; } to { transform: none; opacity: 1; } }
+.vit-ver { width: 40px; height: 40px; display: grid; place-items: center; padding: 0; border: 0; border-radius: 50%; background: var(--vit-tinta); color: var(--vit-fundo); cursor: pointer; transition: transform .3s var(--ease); }
+.vit-ver svg { width: 18px; height: 18px; }
+.vit-ver:hover { transform: scale(1.08); }
+.vit-lista { position: absolute; left: 50%; bottom: 132px; z-index: 4; transform: translateX(-50%); width: min(540px, calc(100% - 32px)); margin: 0; padding: 8px; list-style: none; border-radius: 10px; background: rgba(244, 241, 236, .95); color: var(--grafite); -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px); box-shadow: 0 24px 60px -30px rgba(26, 25, 24, .5); }
+.vit-lista button { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; min-height: 48px; padding: 10px 14px; border: 0; border-radius: 6px; background: none; color: inherit; font: 500 15px/1.2 var(--titulo); text-align: left; cursor: pointer; }
+.vit-lista button small { font: 500 10px/1.2 var(--titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--taupe); text-align: right; }
+.vit-lista button:hover, .vit-lista button.atual { background: rgba(188, 156, 116, .18); }
+body.na-vitrine .cartao-flutua, body.na-vitrine .zap { opacity: 0 !important; pointer-events: none !important; }
+@media (max-width: 899px) {
+  .vit-anel { font-size: clamp(52px, 17vw, 96px); }
+  .vit-lado { display: none; }
+  .vit-barra { bottom: 20px; height: 72px; padding: 0 14px; gap: 12px; }
+  .vit-lista { bottom: 104px; }
+  .vit-lista button { flex-direction: column; align-items: flex-start; gap: 4px; }
+  .vit-lista button small { text-align: left; }
+  .vit-cartao { width: min(50vw, 230px); }
+}
+
 @media (max-width: 1000px) {
   .etapas-grade { grid-template-columns: repeat(2, 1fr); }
   .pilares-grade { grid-template-columns: repeat(2, 1fr); }

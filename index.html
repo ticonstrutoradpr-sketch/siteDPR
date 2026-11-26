@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="/marca/dpr-icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:ital,wght@0,300;0,400;0,500;1,300&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap">
 <link rel="preload" as="image" href="/fotos/caucaia2/centro-comercial-900.webp" media="(max-width: 899px)">
 <link rel="preload" as="image" href="/fotos/caucaia2/centro-comercial.webp" media="(min-width: 900px)">
 <link rel="stylesheet" href="/assets/dpr.css">
@@ -25,6 +25,7 @@
 <!-- three.js para a casa 3D do menu (assets/casa3d.js, carregada so ao abrir o menu no computador) -->
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script src="/assets/dpr.js" defer></script>
+<script type="module" src="/assets/vitrine.js"></script>
 </head>
 <body>
 
@@ -180,6 +181,36 @@
   </aside>
 
   <!-- frase-guia -->
+  <!-- obras em vitrine: a secao fica presa na tela e cada rolagem troca o empreendimento (assets/vitrine.js);
+       nome gigante girando num cilindro, fita 3D com as fotos (assets/vitrine3d.js) e barra com lista, nome e fotos -->
+  <section class="vitrine" id="obras" aria-labelledby="titulo-obras" style="--n: 5">
+    <h2 id="titulo-obras" class="so-leitor">Nossas obras: casas e lotes em Cotia e região</h2>
+    <div class="vit-fixo" style="--vit-fundo: #BC9C74; --vit-anel-cor: #2E2620; --vit-tinta: #F4F1EC">
+      <div class="vit-anel" aria-hidden="true"><div class="vit-anel-giro"></div></div>
+      <img class="vit-cartao" src="/fotos/caucaia2/centro-portaria-900.webp" alt="Villaggio Caucaia II" width="300" height="300">
+      <div class="vit-lado" aria-hidden="true"><span class="vit-conta">01 / 05</span><span class="vit-progresso"><span></span></span></div>
+      <div class="vit-barra">
+        <button class="vit-lista-bt" type="button" aria-label="Ver todos os empreendimentos" aria-expanded="false" aria-controls="vit-lista"><span aria-hidden="true"></span></button>
+        <p class="vit-nome"><span class="vit-nome-txt">Villaggio Caucaia II</span><small class="vit-info">Lançamento · Caucaia do Alto · Faixa 2</small></p>
+        <button class="vit-ver" type="button" data-galeria="caucaia2" aria-label="Ver fotos do Villaggio Caucaia II"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h13M13 6l6 6-6 6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+      </div>
+      <ol class="vit-lista" id="vit-lista" hidden>
+        <li><button type="button">Villaggio Caucaia II<small>Lançamento · Caucaia do Alto · Faixa 2</small></button></li>
+        <li><button type="button">Villaggio Caucaia I<small>Obra entregue · Caucaia do Alto</small></button></li>
+        <li><button type="button">Moradas das Roseiras I<small>Disponível · Itapevi · Faixa 1</small></button></li>
+        <li><button type="button">Moradas das Roseiras II<small>Obra em andamento · Itapevi · Faixa 1</small></button></li>
+        <li><button type="button">Lotes Itatinga<small>Disponível · Itatinga</small></button></li>
+      </ol>
+    </div>
+    <ul class="vit-dados so-leitor">
+      <li data-nome="Villaggio Caucaia II" data-info="Lançamento · Caucaia do Alto · Faixa 2" data-galeria="caucaia2" data-foto="/fotos/caucaia2/centro-portaria-900.webp" data-fundo="#BC9C74" data-anel="#2E2620" data-tinta="#F4F1EC"><h3>Villaggio Caucaia II</h3><p>Lançamento · Caucaia do Alto · Faixa 2. Lançamento pelo Minha Casa, Minha Vida Faixa 2, com possibilidade de subsídio do Governo Federal. Área de lazer completa e centro comercial integrado.</p></li>
+      <li data-nome="Villaggio Caucaia I" data-info="Obra entregue · Caucaia do Alto" data-galeria="caucaia1" data-foto="/fotos/obras/casas-projeto-900.webp" data-fundo="#D8D2C8" data-anel="#8A6A43" data-tinta="#1A1918"><h3>Villaggio Caucaia I</h3><p>Obra entregue · Caucaia do Alto. Casas planejadas, com arquitetura funcional, pensadas para o bem-estar de toda a família.</p></li>
+      <li data-nome="Moradas das Roseiras I" data-info="Disponível · Itapevi · Faixa 1" data-galeria="moradas1" data-foto="/fotos/emp/moradas-portaria-900.webp" data-fundo="#5A4E47" data-anel="#D8D2C8" data-tinta="#F4F1EC"><h3>Moradas das Roseiras I</h3><p>Disponível · Itapevi · Faixa 1. Condomínio fechado com portaria 24 horas e monitoramento, num ambiente tranquilo e familiar.</p></li>
+      <li data-nome="Moradas das Roseiras II" data-info="Obra em andamento · Itapevi · Faixa 1" data-galeria="moradas2" data-foto="/fotos/emp/moradas-torres-900.webp" data-fundo="#A8998A" data-anel="#F4F1EC" data-tinta="#1A1918"><h3>Moradas das Roseiras II</h3><p>Obra em andamento · Itapevi · Faixa 1. Perto de vias importantes, transporte público e comércio, numa das regiões que mais crescem na Grande São Paulo.</p></li>
+      <li data-nome="Lotes Itatinga" data-info="Disponível · Itatinga" data-galeria="lotes" data-foto="/fotos/obras/terreno-900.webp" data-fundo="#8A6A43" data-anel="#EAD9BF" data-tinta="#F4F1EC"><h3>Lotes Itatinga</h3><p>Disponível · Itatinga. Lotes em localização tranquila, com fácil acesso ao centro, para quem quer construir a casa própria.</p></li>
+    </ul>
+  </section>
+
   <section class="sec manifesto" aria-label="Nosso compromisso">
     <div class="cont">
       <span class="rotulo">Do projeto à entrega</span>
@@ -207,68 +238,6 @@
     </div>
   </section>
 
-  <!-- obras: os 5 empreendimentos do site antigo -->
-  <section class="sec obras" id="obras" aria-labelledby="titulo-obras">
-    <div class="cont">
-      <div class="sec-cab">
-        <span class="rotulo">Nossas obras</span>
-        <h2 id="titulo-obras">Casas e lotes em Cotia e região</h2>
-        <p class="chamada">Caucaia do Alto, Itapevi e Itatinga, nas Faixas 1 e 2 do Minha Casa, Minha Vida.</p>
-      </div>
-
-      <div class="obras-lista">
-        <article class="obra" id="emp-caucaia2" data-revela>
-          <div class="obra-foto"><img src="/fotos/caucaia2/centro-portaria-900.webp" alt="Villaggio Caucaia II: centro comercial e portaria do condomínio" loading="lazy" width="900" height="560"></div>
-          <div class="obra-texto">
-            <span class="rotulo">Lançamento · Caucaia do Alto · Faixa 2</span>
-            <h3>Villaggio Caucaia II</h3>
-            <p>Lançamento pelo Minha Casa, Minha Vida Faixa 2, com possibilidade de subsídio do Governo Federal. Área de lazer completa e centro comercial integrado.</p>
-            <button class="botao botao-escuro" type="button" data-galeria="caucaia2">Ver fotos</button>
-          </div>
-        </article>
-
-        <article class="obra" id="emp-caucaia1" data-revela>
-          <div class="obra-foto"><img src="/fotos/obras/casas-projeto-900.webp" alt="Villaggio Caucaia I: fileira de casas térreas" loading="lazy" width="900" height="518"></div>
-          <div class="obra-texto">
-            <span class="rotulo">Obra entregue · Caucaia do Alto</span>
-            <h3>Villaggio Caucaia I</h3>
-            <p>Casas planejadas, com arquitetura funcional, pensadas para o bem-estar de toda a família. Veja as fotos reais da casa entregue.</p>
-            <button class="botao botao-escuro" type="button" data-galeria="caucaia1">Ver fotos</button>
-          </div>
-        </article>
-
-        <article class="obra" id="emp-moradas1" data-revela>
-          <div class="obra-foto"><img src="/fotos/emp/moradas-portaria-900.webp" alt="Moradas das Roseiras I: portaria do condomínio" loading="lazy" width="900" height="463"></div>
-          <div class="obra-texto">
-            <span class="rotulo">Disponível · Itapevi · Faixa 1</span>
-            <h3>Moradas das Roseiras I</h3>
-            <p>Condomínio fechado com portaria 24 horas e monitoramento, num ambiente tranquilo e familiar.</p>
-            <button class="botao botao-escuro" type="button" data-galeria="moradas1">Ver fotos</button>
-          </div>
-        </article>
-
-        <article class="obra" id="emp-moradas2" data-revela>
-          <div class="obra-foto"><img src="/fotos/emp/moradas-torres-900.webp" alt="Moradas das Roseiras II: torres residenciais" loading="lazy" width="900" height="465"></div>
-          <div class="obra-texto">
-            <span class="rotulo">Obra em andamento · Itapevi · Faixa 1</span>
-            <h3>Moradas das Roseiras II</h3>
-            <p>Perto de vias importantes, transporte público e comércio, numa das regiões que mais crescem na Grande São Paulo.</p>
-            <button class="botao botao-escuro" type="button" data-galeria="moradas2">Ver fotos</button>
-          </div>
-        </article>
-
-        <article class="obra" id="emp-lotes" data-revela>
-          <div class="obra-foto"><img src="/fotos/obras/terreno-900.webp" alt="Lotes Itatinga: vista aérea da região" loading="lazy" width="900" height="600"></div>
-          <div class="obra-texto">
-            <span class="rotulo">Disponível · Itatinga</span>
-            <h3>Lotes Itatinga</h3>
-            <p>Lotes em localização tranquila, com fácil acesso ao centro, para quem quer construir a casa própria.</p>
-            <button class="botao botao-escuro" type="button" data-galeria="lotes">Ver fotos</button>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
 
   <!-- fotos de cada empreendimento para a foto ampliada: g = grande, p = pequena (celular) -->
   <script type="application/json" id="galerias">
