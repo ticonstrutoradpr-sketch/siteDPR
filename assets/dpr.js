@@ -130,7 +130,7 @@
   if (cartao) $('.cartao-fechar', cartao).addEventListener('click', function () { cartao.classList.add('fechado'); document.body.classList.add('sem-cartao'); });
 
   /* menu em cortina: abre/fecha; ao lado, o video da familia toca e a frase troca com o item sob o mouse ou o foco */
-  var botao = $('.topo-menu'), painel = $('.painel'), casa = $('.casa'), leg = $('.painel-leg-txt');
+  var botao = $('.topo-menu'), painel = $('.painel'), casa = $('.casa'), leg = $('.painel-leg-txt'), casa3d = false;
   function mostraFrase(a) {
     if (!a || !leg) return;
     var f = a.getAttribute('data-frase');
@@ -142,6 +142,8 @@
   function fraseAtual() { mostraFrase($('.painel-nav a.atual') || $('.painel-nav a')); }
   function menu(abrir) {
     if (!botao || !painel) return;
+    /* casa em 3D real: so no computador, carregada na primeira abertura; o SVG fica de reserva */
+    if (abrir && !casa3d && casa && window.innerWidth >= 900 && !calmo) { casa3d = true; import('/assets/casa3d.js').then(function (m) { m.inicia({ painel: painel, lado: $('.painel-lado'), svg: casa }); }).catch(function () {}); }
     if (abrir) { fraseAtual(); painel.classList.add('desenhando'); setTimeout(function () { painel.classList.remove('desenhando'); }, 2600); }
     painel.classList.toggle('aberto', abrir);
     doc.classList.toggle('menu-aberto', abrir);

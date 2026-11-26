@@ -106,7 +106,7 @@ p { margin: 0; }
 .painel-faixas i:nth-child(3) { transition-delay: .12s; }
 .painel-faixas i:nth-child(4) { transition-delay: .18s; }
 .painel-faixas i:nth-child(5) { transition-delay: .24s; }
-.painel-in { position: relative; height: 100%; display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1fr); grid-template-rows: 1fr auto; column-gap: 6vw; padding: calc(var(--topo) + 3vh) 0 4vh; }
+.painel-in { position: relative; height: 100%; display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); grid-template-rows: 1fr auto; column-gap: 4vw; padding: calc(var(--topo) + 3vh) 0 4vh; }
 .painel-nav { display: flex; flex-direction: column; justify-content: center; align-items: flex-start; }
 .painel-nav a { position: relative; display: flex; align-items: flex-start; gap: 18px; padding: 4px 0; text-decoration: none; color: var(--grafite); transition: opacity .45s, transform .7s var(--ease); }
 .painel-n { padding-top: 1.4em; font: 500 11px/1 var(--titulo); letter-spacing: .18em; color: var(--areia-escura); opacity: 0; transition: opacity .5s; }
@@ -193,6 +193,10 @@ p { margin: 0; }
 /* Contato: a porta abre e a luz de dentro se espalha no caminho */
 .casa[data-modo="contato"] .c-porta-fechada { opacity: 0; }
 .casa[data-modo="contato"] .c-porta-aberta, .casa[data-modo="contato"] .c-dentro, .casa[data-modo="contato"] .c-luz-chao { opacity: 1; }
+/* casa em 3D real (assets/casa3d.js): quando carrega, esconde o SVG de reserva */
+.casa3d { display: block; width: 100%; height: min(62vh, 560px); opacity: 0; transition: opacity .5s; }
+.painel.aberto .casa3d { opacity: 1; transition: opacity .9s .25s; }
+.painel-lado.tem-3d .casa { display: none; }
 .painel-leg { display: block; overflow: hidden; padding-bottom: .1em; opacity: 0; transition: opacity .4s; }
 .painel-leg-txt { display: block; font: italic 300 clamp(18px, 1.6vw, 24px)/1.3 var(--titulo); color: var(--grafite); }
 .painel-leg-txt.troca { animation: leg-sobe .7s var(--ease); }
