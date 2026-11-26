@@ -10,6 +10,14 @@
   var marca = sec.querySelector('.vit-progresso span'), conta = sec.querySelector('.vit-conta');
   var listaBt = sec.querySelector('.vit-lista-bt'), lista = sec.querySelector('.vit-lista'), cartao = sec.querySelector('.vit-cartao');
   var calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var pilares = calmo ? null : document.querySelector('.entra-lado');
+  var trilho = document.querySelector('.lat-trilho'), barraPil = document.querySelector('.lat-progresso span');
+  /* altura da secao lateral = uma tela + o quanto o trilho precisa andar */
+  function medeLateral() { var sl = document.querySelector('.lateral'); if (sl && trilho) sl.style.height = (window.innerHeight + Math.max(0, trilho.scrollWidth - window.innerWidth)) + 'px'; }
+  medeLateral();
+  window.addEventListener('resize', medeLateral);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(medeLateral);
+  if (calmo) { var pl = document.querySelector('.entra-lado'); if (pl) pl.classList.remove('entra-lado'); }
   var itens = [].map.call(sec.querySelectorAll('.vit-dados li'), function (li) {
     return { nome: li.getAttribute('data-nome'), info: li.getAttribute('data-info'), galeria: li.getAttribute('data-galeria'), foto: li.getAttribute('data-foto'),
       fundo: li.getAttribute('data-fundo'), anel: li.getAttribute('data-anel'), tinta: li.getAttribute('data-tinta') };
@@ -114,7 +122,8 @@
   var pedido = false, t0 = performance.now();
   function quadro() {
     pedido = false;
-    var H = window.innerHeight, total = sec.offsetHeight - H;
+    /* a ultima tela da secao e da entrada dos pilares: a troca de empreendimentos usa as outras */
+    var H = window.innerHeight, total = sec.offsetHeight - 2 * H;
     var bruto = limita((window.scrollY - sec.offsetTop) / Math.max(1, total), 0, 1) * (N - 1);
     var i0 = Math.floor(bruto), f = bruto - i0;
     if (i0 >= N - 1) { i0 = N - 1; f = 0; }
@@ -129,6 +138,25 @@
     /* com a vitrine ocupando a tela, o cartao flutuante e o botao do WhatsApp saem do caminho da barra */
     var rr = sec.getBoundingClientRect();
     document.body.classList.toggle('na-vitrine', rr.top <= 4 && rr.bottom >= H - 4);
+    /* pilares: na ultima tela presa, deslizam da direita para a esquerda e ficam parados no alto ate cobrir tudo */
+    if (pilares) {
+      var p = limita((window.scrollY - (sec.offsetTop + total)) / H, 0, 1);
+      /* como uma pagina deslizando: a vitrine sai pela esquerda e a secao entra pela direita. A secao nao sai do lugar
+         (no celular isso alargaria a pagina): um recorte avanca da direita e o conteudo anda junto, colado na borda */
+      var e = suave(p), dentro = pilares.firstElementChild;
+      fixo.style.transform = p <= 0 ? '' : 'translate3d(' + (-e * 100).toFixed(2) + '%, 0, 0)';
+      if (p >= 1) { pilares.style.transform = ''; pilares.style.clipPath = ''; dentro.style.transform = ''; }
+      else {
+        pilares.style.transform = 'translate3d(0, ' + (-(1 - p) * H).toFixed(1) + 'px, 0)';
+        pilares.style.clipPath = 'inset(0 0 0 ' + ((1 - e) * 100).toFixed(2) + '%)';
+        dentro.style.transform = 'translate3d(' + ((1 - e) * 100).toFixed(2) + '%, 0, 0)';
+      }
+      /* depois de assentar, a rolagem para baixo vira rolagem para o lado no trilho */
+      var corre = Math.max(0, trilho.scrollWidth - window.innerWidth);
+      var q = limita((window.scrollY - pilares.offsetTop) / Math.max(1, pilares.offsetHeight - H), 0, 1);
+      trilho.style.transform = 'translate3d(' + (-q * corre).toFixed(1) + 'px, 0, 0)';
+      if (barraPil) barraPil.style.transform = 'scaleX(' + q.toFixed(4) + ')';
+    }
   }
   /* curvas a ~14 quadros por segundo (o movimento e lento), so com a secao na tela */
   function gira(agora) {
@@ -147,7 +175,7 @@
   [].forEach.call(lista.querySelectorAll('button'), function (b, j) {
     b.addEventListener('click', function () {
       abreLista(false);
-      var H = window.innerHeight, total = sec.offsetHeight - H;
+      var H = window.innerHeight, total = sec.offsetHeight - 2 * H;
       window.scrollTo({ top: sec.offsetTop + total * j / Math.max(1, N - 1) + 2, behavior: calmo ? 'auto' : 'smooth' });
     });
   });
