@@ -63,28 +63,41 @@ export function inicia(fixo, estado) {
   arco.onload = refaz; letras.onload = refaz;
   if (document.fonts && document.fonts.load) Promise.all([document.fonts.load('300 100px Poppins'), document.fonts.load('500 24px Poppins')]).then(refaz).catch(function () {});
 
-  /* tira: de meia volta acima do primeiro ate meia volta abaixo do ultimo; o centro do cartao i fica em y = -i*L */
-  var comp = L * N, segs = N * 70;
-  var geo = new THREE.PlaneGeometry(1, comp, 6, segs);
-  var pos = geo.attributes.position, base = new Float32Array(pos.array.length);
-  for (var i = 0; i < pos.count; i++) { base[i * 3] = pos.getX(i); base[i * 3 + 1] = pos.getY(i) - comp / 2 + L / 2; base[i * 3 + 2] = 0; }
-  var frente = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ map: tex, side: THREE.FrontSide }));
-  var verso = new THREE.Mesh(geo, new THREE.MeshLambertMaterial({ color: 0x8a7a6a, side: THREE.BackSide }));
-  var tira = new THREE.Group(); tira.add(frente, verso); cena.add(tira);
+  /* fita em pedacos soltos entre os cartoes (com um vao fino junto de cada cartao, como folhas separadas).
+     Ao se afastar do cartao, cada pedaco torce meia volta e se curva vindo na direcao de quem olha, como papel enrolando. */
+  var VAO = .07, materialFrente = new THREE.MeshLambertMaterial({ map: tex, side: THREE.FrontSide }), materialVerso = new THREE.MeshLambertMaterial({ color: 0x8a7a6a, side: THREE.BackSide });
+  var frente = { material: materialFrente }, verso = { material: materialVerso };
+  var tira = new THREE.Group(); cena.add(tira);
+  var pedacos = [];
+  for (var k = -1; k < N; k++) {
+    var topo = k < 0 ? L / 2 : -k * L - .5 - VAO, fundo = k >= N - 1 ? -(N - 1) * L - L / 2 : -(k + 1) * L + .5 + VAO;
+    if (k < 0) topo = L / 2; if (k < 0) fundo = .5 + VAO;
+    var comp = topo - fundo, gp = new THREE.PlaneGeometry(1, comp, 8, 90), pp = gp.attributes.position, bs = new Float32Array(pp.array.length);
+    for (var i = 0; i < pp.count; i++) { bs[i * 3] = pp.getX(i); bs[i * 3 + 1] = pp.getY(i) + (topo + fundo) / 2; }
+    /* os vertices mudam a cada quadro: sem o corte automatico por area, senao o pedaco some fora do lugar original */
+    var mf = new THREE.Mesh(gp, materialFrente), mv = new THREE.Mesh(gp, materialVerso);
+    mf.frustumCulled = false; mv.frustumCulled = false; tira.add(mf, mv);
+    pedacos.push({ geo: gp, pos: pp, base: bs });
+  }
   var cartoes = fotos.map(function (t) { var m = new THREE.Mesh(new THREE.PlaneGeometry(1, 1), new THREE.MeshBasicMaterial({ map: t })); tira.add(m); return m; });
 
   function torce(s) {
     var desl = s * L;
-    for (var i = 0; i < pos.count; i++) {
-      var x0 = base[i * 3], y0 = base[i * 3 + 1];
-      var j = Math.round(-y0 / L), d = y0 + j * L, a = 0;
-      if (Math.abs(d) > .5) { var t = (Math.abs(d) - .5) / (L / 2 - .5); a = (d > 0 ? 1 : -1) * Math.PI * suave(t); }
-      var curva = Math.sin(a) * .18;
-      pos.setXYZ(i, x0 * Math.cos(a) + curva, y0 + desl, x0 * Math.sin(a));
-    }
-    pos.needsUpdate = true; geo.computeVertexNormals();
-    cartoes.forEach(function (m, i) { m.position.set(0, -i * L + desl, .004); });
+    pedacos.forEach(function (p) {
+      for (var i = 0; i < p.pos.count; i++) {
+        var x0 = p.base[i * 3], y0 = p.base[i * 3 + 1];
+        var j = Math.round(-y0 / L), d = y0 + j * L, lado = d > 0 ? 1 : -1;
+        var t = Math.max(0, (Math.abs(d) - .5 - VAO) / (L / 2 - .5 - VAO));
+        var a = lado * Math.PI * suave(t);
+        var perto = 2.4 * t * t;
+        pos3.set(x0 * Math.cos(a) + Math.sin(a) * .22 * lado, y0 + desl - lado * t * t * .35, x0 * Math.sin(a) + perto);
+        p.pos.setXYZ(i, pos3.x, pos3.y, pos3.z);
+      }
+      p.pos.needsUpdate = true; p.geo.computeVertexNormals();
+    });
+    cartoes.forEach(function (m, i) { m.position.set(0, -i * L + desl, 0); });
   }
+  var pos3 = new THREE.Vector3();
 
   var lado = 1;
   function tamanho() {
