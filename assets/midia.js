@@ -93,26 +93,50 @@
   if (document.fonts && document.fonts.load) document.fonts.load('200 100px Poppins').then(function () { medeLetras(); quadro(); }).catch(function () {});
   quadro();
 
-  /* video grande, com som */
-  var modal = sec.querySelector('.mid-modal'), mv = modal.querySelector('video'), volta = null;
+  /* video grande, com som: cresce do lugar onde estava ate o centro e, ao fechar, volta para la */
+  var modal = sec.querySelector('.mid-modal'), grande = modal.querySelector('.mid-grande-tela'), mv = grande.querySelector('video');
+  var titulo = modal.querySelector('#mid-modal-titulo'), codigo = modal.querySelector('.mid-grande-cod'), volta = null, anim = null;
+  var CURVA = 'cubic-bezier(.7, 0, .2, 1)';
+  function caminho(origem) {
+    var a = origem.getBoundingClientRect(), b = grande.getBoundingClientRect();
+    return 'translate(' + (a.left - b.left) + 'px, ' + (a.top - b.top) + 'px) scale(' + (a.width / b.width) + ', ' + (a.height / b.height) + ')';
+  }
   function abre(card) {
+    if (!modal.hidden) return;
     volta = card;
-    mv.src = card.querySelector('video').getAttribute('data-src');
-    modal.hidden = false; requestAnimationFrame(function () { modal.classList.add('aberto'); });
-    document.body.style.overflow = 'hidden';
-    var pr = mv.play(); if (pr && pr.catch) pr.catch(function () {});
-    modal.querySelector('.mid-fechar').focus();
+    var pequeno = card.querySelector('video'), legenda = card.querySelectorAll('figcaption span');
+    titulo.textContent = (legenda[0] ? legenda[0].textContent : '').replace(/^DPR na m[ií]dia ·\s*/i, '');
+    codigo.textContent = legenda[1] ? legenda[1].textContent : '';
+    mv.src = pequeno.getAttribute('data-src');
+    try { mv.currentTime = pequeno.currentTime || 0; } catch (e) {}
+    mv.muted = false; mv.controls = false;
+    modal.hidden = false; document.body.style.overflow = 'hidden'; sec.classList.add('mid-aberto');
+    var de = caminho(pequeno);
+    card.style.visibility = 'hidden';
+    if (anim) anim.cancel();
+    anim = grande.animate([{ transform: de, borderRadius: '0px' }, { transform: 'none', borderRadius: '4px' }], { duration: calmo ? 1 : 850, easing: CURVA });
+    anim.onfinish = function () { mv.controls = true; };
+    requestAnimationFrame(function () { modal.classList.add('aberto'); });
+    var pr = mv.play(); if (pr && pr.catch) pr.catch(function () { mv.muted = true; mv.play(); });
+    modal.querySelector('.mid-fechar').focus({ preventScroll: true });
   }
   function fecha() {
-    modal.classList.remove('aberto'); mv.pause(); document.body.style.overflow = '';
-    setTimeout(function () { modal.hidden = true; mv.removeAttribute('src'); mv.load(); }, 300);
-    if (volta) volta.focus();
+    if (modal.hidden || !volta) return;
+    var card = volta, pequeno = card.querySelector('video');
+    mv.controls = false; modal.classList.remove('aberto'); sec.classList.remove('mid-aberto');
+    try { pequeno.currentTime = mv.currentTime; } catch (e) {}
+    if (anim) anim.cancel();
+    anim = grande.animate([{ transform: 'none' }, { transform: caminho(pequeno) }], { duration: calmo ? 1 : 700, easing: CURVA, fill: 'forwards' });
+    anim.onfinish = function () {
+      card.style.visibility = ''; modal.hidden = true; mv.pause(); mv.removeAttribute('src'); mv.load(); anim.cancel(); anim = null;
+      document.body.style.overflow = ''; card.focus({ preventScroll: true });
+    };
   }
   cards.forEach(function (card) {
     card.addEventListener('click', function () { abre(card); });
     card.addEventListener('keydown', function (ev) { if (ev.key === 'Enter' || ev.key === ' ') { ev.preventDefault(); abre(card); } });
   });
   modal.querySelector('.mid-fechar').addEventListener('click', fecha);
-  modal.addEventListener('click', function (ev) { if (ev.target === modal) fecha(); });
+  modal.querySelector('.mid-veu').addEventListener('click', fecha);
   document.addEventListener('keydown', function (ev) { if (ev.key === 'Escape' && !modal.hidden) fecha(); });
 })();
