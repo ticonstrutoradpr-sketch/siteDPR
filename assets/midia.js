@@ -62,13 +62,22 @@
     /* videos: em fila, entram pela direita e andam de lado com a rolagem ate o ultimo ficar no centro */
     var cw = cards.length ? cards[0].offsetWidth : 400, vao = cel ? W * .08 : Math.max(48, W * .05), passoV = cw + vao;
     var andar = suave(fase(p, .4, .97)), inicio = W / 2 + cw / 2 + 40, total = inicio + (cards.length - 1) * passoV;
+    /* fundo em paralaxe: os pontinhos andam mais devagar que os videos, dando a sensacao de atravessar o espaco */
+    pilula.style.backgroundPosition = 'calc(50% - ' + (andar * total * .18).toFixed(1) + 'px) 50%';
     cards.forEach(function (card, k) {
       var x = inicio + k * passoV - andar * total, y = (k % 2 ? 1 : -1) * H * (cel ? .03 : .05);
-      var dentro = Math.abs(x) < W / 2 + cw / 2, op = fase(p, .38, .44) * (dentro ? 1 : 0);
+      /* profundidade: o do centro e o foco; os que passaram vao para o fundo (longe, virados, desfocados e apagados);
+         os que chegam entram quase no primeiro plano, virados para o centro */
+      var d = x / (W * .5), foco = 1 - Math.min(1, Math.abs(d)), z, ry, borrao = 0, luz = 1;
+      if (d < 0) { var foi = Math.min(2.2, -d); z = -foi * (cel ? 520 : 780); ry = foi * 24; borrao = foi * 2.6; luz = 1 - foi * .22; }
+      else { z = -d * 140; ry = -d * 10; }
+      var dentro = x < W / 2 + cw / 2 && x > -W * 1.6, op = fase(p, .38, .44) * (dentro ? 1 : 0) * (d < 0 ? 1 - Math.min(1, -d / 2.4) : 1);
       card.style.opacity = op.toFixed(3);
+      card.style.zIndex = String(Math.round(100 - Math.abs(d) * 20));
+      card.style.filter = borrao > .05 ? 'blur(' + borrao.toFixed(2) + 'px) brightness(' + luz.toFixed(3) + ')' : '';
       /* revelacao: o video abre como cortina enquanto entra pela direita */
       card.style.setProperty('--rv', limita((W / 2 + cw / 2 - x) / (cw * .9), 0, 1).toFixed(3));
-      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px, 0) rotate(0deg)';
+      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg) scale(' + (1 + foco * .1).toFixed(3) + ')';
       card.style.pointerEvents = op > .4 ? 'auto' : 'none';
       var v = card.querySelector('video');
       if (op > .03) {
