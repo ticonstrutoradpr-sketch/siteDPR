@@ -19,7 +19,7 @@
   LETRAS.forEach(function (l, i) {
     for (var k = 0; k < NC; k++) {
       var s = document.createElement('span');
-      s.className = 'mid-l'; s.textContent = l; s.setAttribute('aria-hidden', 'true');
+      s.className = 'mid-l' + (k === meio ? ' centro' : ''); s.textContent = l; s.setAttribute('aria-hidden', 'true');
       palco.appendChild(s);
       copias.push({ el: s, i: i, j: k - meio, gira: (acaso() - .5) * 7, sobe: (acaso() - .5) });
     }
@@ -28,7 +28,7 @@
 
   /* largura de cada letra (em em) para a fileira ter o espacamento da propria letra */
   var larg = LETRAS.map(function () { return .45; });
-  function medeLetras() { var g = document.createElement('canvas').getContext('2d'); g.font = '100px Anton'; larg = LETRAS.map(function (l) { return Math.max(.3, g.measureText(l).width / 100); }); }
+  function medeLetras() { var g = document.createElement('canvas').getContext('2d'); g.font = '200 100px Poppins'; larg = LETRAS.map(function (l) { return Math.max(.3, g.measureText(l).width / 100); }); }
   medeLetras();
   var POS = [[-.24, -.15, 8], [.25, .12, -7], [-.2, .14, 5], [.22, -.16, -6], [-.26, .06, 7], [.18, .16, -5], [0, -.04, 3]];
   var pedido = false;
@@ -53,7 +53,7 @@
       var curva = (1 - c) * e, z = Math.min(700, x * x * .0011) * curva, ry = limita(-x * .03, -35, 35) * curva;
       var op = q.j === 0 ? 1 : Math.min(1, e * 1.6);
       q.el.style.opacity = op;
-      q.el.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg) rotate(' + (q.gira * c).toFixed(2) + 'deg)';
+      q.el.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg)';
     }
     document.body.classList.toggle('na-midia', p > 0 && p < 1);
     /* videos: cada um vem do fundo ate perto da tela e some */
@@ -73,7 +73,7 @@
   }
   window.addEventListener('scroll', function () { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }, { passive: true });
   window.addEventListener('resize', quadro);
-  if (document.fonts && document.fonts.load) document.fonts.load('400 100px Anton').then(function () { medeLetras(); quadro(); }).catch(function () {});
+  if (document.fonts && document.fonts.load) document.fonts.load('200 100px Poppins').then(function () { medeLetras(); quadro(); }).catch(function () {});
   quadro();
 
   /* video grande, com som */
