@@ -48,21 +48,25 @@
     var fs0 = H0 * .158, fs1 = H * (cel ? .17 : .205), fs = fs0 + (fs1 - fs0) * c, passo = fs * (.92 + .12 * c);
     palco.style.fontSize = fs + 'px';
     var deriva = c * (p - .2) * fs * 3;
+    /* depois da grade as letras somem e ficam so os videos */
+    var some = suave(fase(p, .36, .46));
     for (var n = 0; n < copias.length; n++) {
       var q = copias[n], esp = fs * larg[q.i] * e * (.42 + .95 * c), x = q.j * esp + (q.i % 2 ? deriva : -deriva), y = (q.i - (LETRAS.length - 1) / 2) * passo + q.sobe * fs * .08 * c;
       var curva = (1 - c) * e, z = Math.min(700, x * x * .0011) * curva, ry = limita(-x * .03, -35, 35) * curva;
-      var op = q.j === 0 ? 1 : Math.min(1, e * 1.6);
+      var op = (q.j === 0 ? 1 : Math.min(1, e * 1.6)) * (1 - some);
       q.el.style.opacity = op;
+      q.el.style.visibility = some > .99 ? 'hidden' : '';
       q.el.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg)';
     }
     document.body.classList.toggle('na-midia', p > 0 && p < 1);
-    /* videos: cada um vem do fundo ate perto da tela e some */
+    /* videos: em fila, entram pela direita e andam de lado com a rolagem ate o ultimo ficar no centro */
+    var cw = cards.length ? cards[0].offsetWidth : 400, vao = cel ? W * .08 : Math.max(48, W * .05), passoV = cw + vao;
+    var andar = suave(fase(p, .4, .97)), inicio = W / 2 + cw / 2 + 40, total = inicio + (cards.length - 1) * passoV;
     cards.forEach(function (card, k) {
-      var ini = .3 + k * .085, t = fase(p, ini, ini + .26), pos = POS[k % POS.length];
-      var op = fase(t, 0, .12) * (1 - fase(t, .84, 1));
-      var z = -1100 + t * (cel ? 1300 : 1500), x = pos[0] * W * (cel ? .45 : 1), y = pos[1] * H;
+      var x = inicio + k * passoV - andar * total, y = (k % 2 ? 1 : -1) * H * (cel ? .03 : .05);
+      var dentro = Math.abs(x) < W / 2 + cw / 2, op = fase(p, .38, .44) * (dentro ? 1 : 0);
       card.style.opacity = op.toFixed(3);
-      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + (pos[2] * (1 - t)).toFixed(2) + 'deg)';
+      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px, 0) rotate(' + ((k % 2 ? 1 : -1) * .6).toFixed(2) + 'deg)';
       card.style.pointerEvents = op > .4 ? 'auto' : 'none';
       var v = card.querySelector('video');
       if (op > .03) {

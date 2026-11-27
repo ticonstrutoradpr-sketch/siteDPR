@@ -476,10 +476,6 @@ body.na-vitrine .cartao-flutua, body.na-vitrine .zap, body.na-midia .cartao-flut
   .vit-lista button { flex-direction: column; align-items: flex-start; gap: 4px; }
   .vit-lista button small { text-align: left; }
   .vit-cartao { width: min(50vw, 230px); }
-  .mid-card { width: 62vw; padding: 6px 6px 0; }
-  .mid-card figcaption { font-size: 7.5px; letter-spacing: .12em; padding: 8px 1px 9px; }
-  .mid-card figcaption span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .mid-card figcaption span:last-child { display: none; }
   .mid-fixo { background-size: 82px 64px; }
 }
 
@@ -517,6 +513,11 @@ body.na-vitrine .cartao-flutua, body.na-vitrine .zap, body.na-midia .cartao-flut
   .pilar:nth-child(3) { padding-left: 0; border-left: 0; }
 }
 @media (max-width: 899px) {
+  /* na midia no celular (aqui no fim, para vencer a regra base) */
+  .mid-card { width: 62vw; padding: 6px 6px 0; }
+  .mid-card figcaption { font-size: 9px; letter-spacing: .12em; padding: 8px 1px 9px; }
+  .mid-card figcaption span:first-child { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .mid-card figcaption span:last-child { display: none; }
   :root { --topo: 68px; }
   .topo-menu { margin-left: auto; padding-left: 0; border-left: 0; }
   .painel-in { grid-template-columns: 1fr; grid-template-rows: 1fr auto; }
