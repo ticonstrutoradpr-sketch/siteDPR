@@ -66,7 +66,9 @@
       var x = inicio + k * passoV - andar * total, y = (k % 2 ? 1 : -1) * H * (cel ? .03 : .05);
       var dentro = Math.abs(x) < W / 2 + cw / 2, op = fase(p, .38, .44) * (dentro ? 1 : 0);
       card.style.opacity = op.toFixed(3);
-      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px, 0) rotate(' + ((k % 2 ? 1 : -1) * .6).toFixed(2) + 'deg)';
+      /* revelacao: o video abre como cortina enquanto entra pela direita */
+      card.style.setProperty('--rv', limita((W / 2 + cw / 2 - x) / (cw * .9), 0, 1).toFixed(3));
+      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px, 0) rotate(0deg)';
       card.style.pointerEvents = op > .4 ? 'auto' : 'none';
       var v = card.querySelector('video');
       if (op > .03) {
