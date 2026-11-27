@@ -257,8 +257,44 @@ p { margin: 0; }
 .msg { max-width: 82%; padding: 9px 12px; border-radius: 10px; font-size: 15px; line-height: 1.4; color: var(--grafite); opacity: clamp(0, calc((var(--chat, 0) * 5) - var(--m) * 1.1), 1); transform: translateY(calc((1 - clamp(0, calc((var(--chat, 0) * 5) - var(--m) * 1.1), 1)) * 12px)); }
 .msg.eu { align-self: flex-end; background: #d9f2c7; }
 .msg.dpr { align-self: flex-start; background: #fff; }
-.aparelho { position: absolute; left: 0; top: 0; z-index: 1; width: calc(var(--tw, 100vw) + 28px); height: calc(var(--th, 100vh) + 28px); transform: translate(calc(var(--tx, 0px) - 14px), calc(var(--ty, 0px) - 14px)); border-radius: calc(var(--tr, 0px) + 12px); background: linear-gradient(145deg, #3a342e, #1d1a17); box-shadow: inset 0 0 0 1px rgba(244, 241, 236, .08), 0 40px 80px rgba(0, 0, 0, .55); opacity: var(--moldura, 0); }
-.aparelho-botao { position: absolute; right: -3px; top: 22%; width: 3px; height: 54px; border-radius: 2px; background: #3a342e; }
+/* corpo do celular: titanio escovado com reflexos, borda preta fina em volta da tela, botoes laterais */
+.aparelho { position: absolute; left: 0; top: 0; z-index: 1; width: calc(var(--tw, 100vw) + 22px); height: calc(var(--th, 100vh) + 22px); transform: translate(calc(var(--tx, 0px) - 11px), calc(var(--ty, 0px) - 11px)); border-radius: calc(var(--tr, 0px) + 10px);
+  background: linear-gradient(115deg, #8d857b 0%, #4a443e 9%, #2a2622 22%, #6f675e 34%, #2b2723 47%, #1f1c19 62%, #5e574f 78%, #2a2622 90%, #7c746a 100%);
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), inset 0 0 0 2px rgba(0, 0, 0, .55), inset 0 0 0 8px #0c0b0a, 0 50px 90px -20px rgba(26, 25, 24, .55), 0 18px 30px -12px rgba(26, 25, 24, .45);
+  opacity: var(--moldura, 0); }
+/* luz da tela acesa: espalha em volta e no chao, como um celular de verdade */
+.aparelho-luz { position: absolute; inset: -14%; z-index: -1; border-radius: 40%; background: radial-gradient(ellipse at 50% 46%, rgba(255, 244, 222, .75) 0%, rgba(236, 229, 220, .35) 38%, rgba(236, 229, 220, 0) 70%); filter: blur(28px); opacity: calc(var(--chat, 0) * .9); }
+.aparelho-luz::after { content: ''; position: absolute; left: 18%; right: 18%; bottom: 2%; height: 14%; border-radius: 50%; background: radial-gradient(ellipse, rgba(255, 240, 210, .7), transparent 70%); filter: blur(14px); }
+.aparelho-botao, .aparelho-vol, .aparelho-acao { position: absolute; width: 4px; border-radius: 2px; background: linear-gradient(90deg, #2a2622, #8d857b 45%, #3a342e); }
+.aparelho-botao { right: -3px; top: 24%; height: 13%; }
+.aparelho-acao { left: -3px; top: 15%; height: 4%; }
+.aparelho-vol { left: -3px; height: 8%; }
+.aparelho-vol.v1 { top: 22%; }
+.aparelho-vol.v2 { top: 32%; }
+/* vidro: ilha, barra de status, reflexo diagonal e a barra de baixo; so quando a tela ja e o celular */
+.tela-vidro { position: absolute; inset: 0; z-index: 5; pointer-events: none; opacity: var(--moldura, 0); }
+.tela-vidro::before { content: ''; position: absolute; inset: 0; background: linear-gradient(118deg, rgba(255, 255, 255, .26) 0%, rgba(255, 255, 255, .08) 26%, rgba(255, 255, 255, 0) 27%, rgba(255, 255, 255, 0) 70%, rgba(255, 255, 255, .06) 100%); }
+.ilha { position: absolute; left: 50%; top: 2.2%; width: 31%; height: 3.6%; transform: translateX(-50%); border-radius: 999px; background: #050505; box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .05); }
+.ilha::after { content: ''; position: absolute; right: 12%; top: 50%; width: 9%; aspect-ratio: 1; transform: translateY(-50%); border-radius: 50%; background: radial-gradient(circle at 35% 35%, #2c3a52, #0a0d14 60%); }
+.status { position: absolute; left: 7%; right: 7%; top: 2.3%; height: 3.4%; display: flex; align-items: center; justify-content: space-between; color: var(--marfim); }
+.status b { font: 600 13px/1 var(--texto); letter-spacing: -.01em; padding-left: 4%; }
+.status-icones { display: flex; align-items: center; gap: 5px; }
+.status-icones svg { height: 10px; width: auto; fill: currentColor; }
+.bateria { position: relative; display: block; width: 22px; height: 11px; border: 1px solid rgba(244, 241, 236, .55); border-radius: 3px; padding: 1px; }
+.bateria::after { content: ''; position: absolute; right: -3px; top: 3px; width: 1.5px; height: 4px; border-radius: 0 1px 1px 0; background: rgba(244, 241, 236, .55); }
+.bateria span { display: block; width: 78%; height: 100%; border-radius: 1.5px; background: currentColor; }
+.home-barra { position: absolute; left: 50%; bottom: 1.2%; width: 36%; height: 4px; transform: translateX(-50%); border-radius: 999px; background: rgba(26, 25, 24, .75); }
+/* WhatsApp mais fiel: voltar, "online", horario e vistos, campo de mensagem */
+.chat-volta { width: 18px; height: 18px; flex: none; margin-right: -4px; }
+.chat-quem { display: grid; gap: 3px; }
+.chat-quem small { font: 400 11px/1 var(--texto); opacity: .7; }
+.msg { position: relative; box-shadow: 0 1px .5px rgba(26, 25, 24, .13); }
+.msg-hora { display: inline-flex; align-items: center; gap: 3px; float: right; margin: 6px -2px -4px 10px; font-size: 10.5px; line-height: 1; color: rgba(26, 25, 24, .5); }
+.msg-hora svg { width: 15px; height: 9px; color: #53bdeb; }
+.chat-campo { display: flex; align-items: center; gap: 8px; margin-top: auto; margin-bottom: 10px; }
+.chat-campo span { flex: 1; padding: 10px 14px; border-radius: 999px; background: #fff; font-size: 14px; color: rgba(26, 25, 24, .45); box-shadow: 0 1px .5px rgba(26, 25, 24, .13); }
+.chat-campo i { display: grid; place-items: center; width: 38px; height: 38px; flex: none; border-radius: 50%; background: var(--grafite); color: var(--marfim); }
+.chat-campo svg { width: 18px; height: 18px; }
 .palco-texto { position: absolute; inset: 0; z-index: 3; display: flex; align-items: center; pointer-events: none; opacity: var(--txt, 0); }
 .palco-texto .cont { display: flex; justify-content: flex-end; }
 .palco-bloco { width: min(560px, 46%); display: grid; gap: 18px; color: var(--grafite); transform: translateY(calc((1 - var(--txt, 0)) * 30px)); }
@@ -470,7 +506,21 @@ body.na-vitrine .cartao-flutua, body.na-vitrine .zap { opacity: 0 !important; po
   .vantagens { display: flex; justify-content: space-between; }
   .vantagens li { gap: 6px; }
   .tela-chat { gap: 7px; padding: 0 9px 12px; }
-  .chat-cab { margin: 0 -9px 4px; padding: 22px 10px 9px; font-size: 13px; gap: 8px; }
+  .chat-cab { margin: 0 -9px 4px; padding: 26px 10px 9px; font-size: 13px; gap: 8px; }
+  .status b { font-size: 9px; }
+  .status-icones { gap: 3px; }
+  .status-icones svg { height: 6px; }
+  .bateria { width: 14px; height: 7px; border-radius: 2px; }
+  .bateria::after { top: 1.5px; height: 3px; }
+  .home-barra { height: 3px; }
+  .chat-quem small { font-size: 9px; }
+  .chat-volta { width: 13px; height: 13px; }
+  .msg-hora { font-size: 8px; margin-top: 3px; }
+  .msg-hora svg { width: 11px; height: 7px; }
+  .chat-campo { margin-bottom: 6px; gap: 5px; }
+  .chat-campo span { padding: 6px 9px; font-size: 10px; }
+  .chat-campo i { width: 24px; height: 24px; }
+  .chat-campo svg { width: 12px; height: 12px; }
   .chat-avatar { width: 26px; height: 26px; }
   .chat-avatar .marca { --lw: 18px; }
   .msg { font-size: 12px; padding: 6px 9px; border-radius: 8px; }
