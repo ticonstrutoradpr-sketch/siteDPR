@@ -17,7 +17,7 @@
 <link rel="apple-touch-icon" href="/marca/dpr-icone-180.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap">
 <link rel="preload" as="image" href="/fotos/caucaia2/centro-comercial-900.webp" media="(max-width: 899px)">
 <link rel="preload" as="image" href="/fotos/caucaia2/centro-comercial.webp" media="(min-width: 900px)">
 <link rel="stylesheet" href="/assets/dpr.css">
@@ -26,6 +26,7 @@
 <script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
 <script src="/assets/dpr.js" defer></script>
 <script type="module" src="/assets/vitrine.js"></script>
+<script src="/assets/midia.js" defer></script>
 </head>
 <body>
 
@@ -118,6 +119,7 @@
        o celular vai para a esquerda, entram as vantagens e a tela vira a conversa do WhatsApp -->
   <section class="palco" id="inicio" aria-labelledby="titulo-heroi">
     <div class="palco-fixo">
+      <span class="palco-penumbra" aria-hidden="true"></span>
       <div class="aparelho" aria-hidden="true"><span class="aparelho-luz"></span><span class="aparelho-botao"></span><span class="aparelho-vol v1"></span><span class="aparelho-vol v2"></span><span class="aparelho-acao"></span></div>
       <div class="tela">
         <!-- video em tela cheia no comeco; ao rolar se dissolve na tela areia -->
@@ -323,6 +325,28 @@
   </div>
 
   <!-- voce ja tem o terreno? -->
+  <!-- na midia: MIDIA numa pilula sobre a grade; ao rolar a pilula abre, as letras se multiplicam em fileiras 3D
+       e os videos chegam do fundo (assets/midia.js). Videos provisorios: os da abertura, ate chegarem as materias. -->
+  <section class="midia" id="na-midia" aria-labelledby="titulo-midia">
+    <h2 id="titulo-midia" class="so-leitor">Na mídia</h2>
+    <div class="mid-fixo">
+      <span class="mid-rotulo" aria-hidden="true">Na mídia</span>
+      <span class="mid-anel" aria-hidden="true"></span>
+      <div class="mid-pilula">
+        <div class="mid-letras" data-palavra="MÍDIA">
+          <figure class="mid-card" tabindex="0" role="button" aria-label="Assistir: O terreno"><video muted loop playsinline preload="none" poster="/video/capas/1-terreno-pc.webp" data-src="/video/1-terreno-pc.mp4"></video><figcaption><span>DPR na mídia · O terreno</span><span>#TRN4-0001/07</span></figcaption></figure>
+          <figure class="mid-card" tabindex="0" role="button" aria-label="Assistir: Primeiro tijolo"><video muted loop playsinline preload="none" poster="/video/capas/2-tijolo-pc.webp" data-src="/video/2-tijolo-pc.mp4"></video><figcaption><span>DPR na mídia · Primeiro tijolo</span><span>#TJL2-0002/07</span></figcaption></figure>
+          <figure class="mid-card" tabindex="0" role="button" aria-label="Assistir: A casa subindo"><video muted loop playsinline preload="none" poster="/video/capas/3-casa-subindo-pc.webp" data-src="/video/3-casa-subindo-pc.mp4"></video><figcaption><span>DPR na mídia · A casa subindo</span><span>#CSB7-0003/07</span></figcaption></figure>
+          <figure class="mid-card" tabindex="0" role="button" aria-label="Assistir: A obra vista do alto"><video muted loop playsinline preload="none" poster="/video/capas/4-obra-do-alto-pc.webp" data-src="/video/4-obra-do-alto-pc.mp4"></video><figcaption><span>DPR na mídia · A obra vista do alto</span><span>#OBA3-0004/07</span></figcaption></figure>
+          <figure class="mid-card" tabindex="0" role="button" aria-label="Assistir: A chave"><video muted loop playsinline preload="none" poster="/video/capas/5-chave-pc.webp" data-src="/video/5-chave-pc.mp4"></video><figcaption><span>DPR na mídia · A chave</span><span>#CHV9-0005/07</span></figcaption></figure>
+          <figure class="mid-card" tabindex="0" role="button" aria-label="Assistir: Entrega das chaves"><video muted loop playsinline preload="none" poster="/video/capas/6-casal-chaves-pc.webp" data-src="/video/6-casal-chaves-pc.mp4"></video><figcaption><span>DPR na mídia · Entrega das chaves</span><span>#ENT5-0006/07</span></figcaption></figure>
+          <figure class="mid-card" tabindex="0" role="button" aria-label="Assistir: Família em casa"><video muted loop playsinline preload="none" poster="/video/capas/7-familia-pc.webp" data-src="/video/7-familia-pc.mp4"></video><figcaption><span>DPR na mídia · Família em casa</span><span>#FAM8-0007/07</span></figcaption></figure>
+        </div>
+      </div>
+    </div>
+    <div class="mid-modal" hidden role="dialog" aria-modal="true" aria-label="Vídeo"><video controls playsinline></video><button class="mid-fechar" type="button" aria-label="Fechar o vídeo">×</button></div>
+  </section>
+
   <section class="sec terreno" id="terreno" aria-labelledby="titulo-terreno">
     <div class="cont terreno-in">
       <figure class="terreno-foto" data-revela>

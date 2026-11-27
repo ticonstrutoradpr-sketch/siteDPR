@@ -263,7 +263,10 @@ p { margin: 0; }
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, .22), inset 0 0 0 2px rgba(0, 0, 0, .55), inset 0 0 0 8px #0c0b0a, 0 50px 90px -20px rgba(26, 25, 24, .55), 0 18px 30px -12px rgba(26, 25, 24, .45);
   opacity: var(--moldura, 0); }
 /* luz da tela acesa: espalha em volta e no chao, como um celular de verdade */
-.aparelho-luz { position: absolute; inset: -14%; z-index: -1; border-radius: 40%; background: radial-gradient(ellipse at 50% 46%, rgba(255, 244, 222, .75) 0%, rgba(236, 229, 220, .35) 38%, rgba(236, 229, 220, 0) 70%); filter: blur(28px); opacity: calc(var(--chat, 0) * .9); }
+.aparelho-luz { position: absolute; inset: -26% -40%; z-index: -1; border-radius: 50%; background: radial-gradient(ellipse at 50% 48%, rgba(255, 250, 238, 1) 0%, rgba(255, 238, 205, .8) 26%, rgba(244, 226, 196, .35) 48%, rgba(244, 226, 196, 0) 70%); filter: blur(30px); opacity: var(--moldura, 0); }
+/* penumbra: o fundo escurece de leve em volta, para a luz da tela aparecer como num celular de verdade */
+.palco-penumbra { position: absolute; inset: 0; z-index: 0; pointer-events: none; opacity: calc(var(--moldura, 0) * .9);
+  background: radial-gradient(ellipse calc(var(--tw, 300px) * 2.2) calc(var(--th, 600px) * 1.15) at calc(var(--tx, 0px) + var(--tw, 300px) / 2) calc(var(--ty, 0px) + var(--th, 600px) / 2), rgba(90, 78, 71, 0) 0%, rgba(90, 78, 71, 0) 45%, rgba(74, 63, 56, .34) 100%); }
 .aparelho-luz::after { content: ''; position: absolute; left: 18%; right: 18%; bottom: 2%; height: 14%; border-radius: 50%; background: radial-gradient(ellipse, rgba(255, 240, 210, .7), transparent 70%); filter: blur(14px); }
 .aparelho-botao, .aparelho-vol, .aparelho-acao { position: absolute; width: 4px; border-radius: 2px; background: linear-gradient(90deg, #2a2622, #8d857b 45%, #3a342e); }
 .aparelho-botao { right: -3px; top: 24%; height: 13%; }
@@ -464,7 +467,7 @@ body.sem-cartao .zap { opacity: 1; pointer-events: auto; }
 .vit-lista button { width: 100%; display: flex; justify-content: space-between; align-items: baseline; gap: 16px; min-height: 48px; padding: 10px 14px; border: 0; border-radius: 6px; background: none; color: inherit; font: 500 15px/1.2 var(--titulo); text-align: left; cursor: pointer; }
 .vit-lista button small { font: 500 10px/1.2 var(--titulo); letter-spacing: .14em; text-transform: uppercase; color: var(--taupe); text-align: right; }
 .vit-lista button:hover, .vit-lista button.atual { background: rgba(188, 156, 116, .18); }
-body.na-vitrine .cartao-flutua, body.na-vitrine .zap { opacity: 0 !important; pointer-events: none !important; }
+body.na-vitrine .cartao-flutua, body.na-vitrine .zap, body.na-midia .cartao-flutua, body.na-midia .zap { opacity: 0 !important; pointer-events: none !important; }
 @media (max-width: 899px) {
   .vit-anel { font-size: clamp(52px, 17vw, 96px); }
   .vit-lado { display: none; }
@@ -473,7 +476,36 @@ body.na-vitrine .cartao-flutua, body.na-vitrine .zap { opacity: 0 !important; po
   .vit-lista button { flex-direction: column; align-items: flex-start; gap: 4px; }
   .vit-lista button small { text-align: left; }
   .vit-cartao { width: min(50vw, 230px); }
+  .mid-card { width: 62vw; }
+  .mid-card figcaption { font-size: 8px; letter-spacing: .1em; }
+  .mid-fixo { background-size: 82px 64px; }
+  .mid-l { text-shadow: 1px 1px 0 var(--mid-sombra), 2px 2px 0 var(--mid-sombra), 3px 3px 0 var(--mid-sombra), 4px 4px 0 var(--mid-sombra); }
 }
+
+/* na midia (assets/midia.js): pilula com MIDIA sobre a grade; ao rolar abre, letras em fileiras 3D e videos chegando do fundo */
+.midia { position: relative; height: 900vh; height: 900svh; --mid-fundo: var(--areia); --mid-dentro: #4a3f38; --mid-letra: var(--areia); --mid-sombra: #2c2420; }
+.mid-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; overflow: hidden; background: var(--mid-fundo); background-image: linear-gradient(rgba(26, 25, 24, .55) 1px, transparent 1px), linear-gradient(90deg, rgba(26, 25, 24, .55) 1px, transparent 1px); background-size: 165px 96px; background-position: center; }
+.mid-rotulo { position: absolute; left: var(--margem); top: calc(var(--topo) + 18px); z-index: 4; font: 500 12px/1 var(--titulo); letter-spacing: .24em; text-transform: uppercase; color: var(--grafite); }
+.mid-anel { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); border: 1px solid rgba(26, 25, 24, .7); pointer-events: none; }
+.mid-pilula { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); overflow: hidden; background-color: var(--mid-dentro); background-image: radial-gradient(rgba(188, 156, 116, .45) 1px, transparent 1.3px); background-size: 26px 26px; background-position: center; }
+.mid-letras { position: absolute; left: 50%; top: 50%; width: 0; height: 0; perspective: 1000px; transform-style: preserve-3d; font-family: 'Anton', 'Poppins', Impact, sans-serif; line-height: .86; }
+.mid-l { position: absolute; left: 0; top: 0; color: var(--mid-letra); white-space: nowrap; will-change: transform; text-shadow: 1px 1px 0 var(--mid-sombra), 2px 2px 0 var(--mid-sombra), 3px 3px 0 var(--mid-sombra), 4px 4px 0 var(--mid-sombra), 5px 5px 0 var(--mid-sombra), 6px 6px 0 var(--mid-sombra); }
+.mid-card { position: absolute; left: 0; top: 0; width: min(600px, 44vw); margin: 0; opacity: 0; cursor: pointer; will-change: transform, opacity; font-size: 16px; }
+.mid-card video { display: block; width: 100%; aspect-ratio: 16 / 9; object-fit: cover; background: #1d1a17; box-shadow: 0 30px 60px -20px rgba(0, 0, 0, .55); }
+.mid-card figcaption { display: flex; justify-content: space-between; gap: 16px; padding-top: 8px; font: 500 10px/1.2 ui-monospace, 'SFMono-Regular', Menlo, Consolas, monospace; letter-spacing: .18em; text-transform: uppercase; color: var(--mid-letra); }
+.mid-card:focus-visible { outline: 2px solid var(--marfim); outline-offset: 6px; }
+.mid-modal { position: fixed; inset: 0; z-index: 120; display: grid; place-items: center; padding: 24px; background: rgba(26, 25, 24, .92); opacity: 0; transition: opacity .3s; }
+.mid-modal.aberto { opacity: 1; }
+.mid-modal video { width: min(1100px, 100%); max-height: 84vh; background: #000; }
+.mid-fechar { position: absolute; top: 16px; right: 16px; width: 48px; height: 48px; border-radius: 50%; border: 1px solid rgba(244, 241, 236, .4); background: rgba(0, 0, 0, .4); color: var(--marfim); font-size: 26px; line-height: 1; cursor: pointer; }
+/* reduzir movimento: a pilula parada e os videos em lista */
+.mid-calmo { height: auto; }
+.mid-calmo .mid-fixo { position: relative; height: auto; padding: 120px var(--margem) 80px; display: grid; gap: 40px; justify-items: center; }
+.mid-calmo .mid-anel { display: none; }
+.mid-calmo .mid-pilula { position: relative; left: auto; top: auto; transform: none; width: min(100%, 1100px); height: auto; border-radius: 24px; padding: 40px; }
+.mid-calmo .mid-letras { position: relative; left: auto; top: auto; width: auto; height: auto; display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 28px; perspective: none; }
+.mid-calmo .mid-l { display: none; }
+.mid-calmo .mid-card { position: relative; width: auto; opacity: 1; transform: none; }
 
 @media (max-width: 1000px) {
   .etapas-grade { grid-template-columns: repeat(2, 1fr); }
