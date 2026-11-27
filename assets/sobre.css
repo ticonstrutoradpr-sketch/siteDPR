@@ -1,0 +1,132 @@
+/* Pagina Sobre a DPR: abertura com o arco da marca nascendo, manifesto que se preenche com a rolagem, pergunta com
+   palavra que gira, pilares em paineis que se abrem, metodo numa linha que se desenha, materiais e onde estamos.
+   Paleta e tipografia do Manual de Marca (dpr.css). */
+
+.sb { overflow-x: clip; }
+.sb-rot { display: inline-flex; align-items: center; gap: 14px; font: 500 12px/1 var(--titulo); letter-spacing: .24em; text-transform: uppercase; color: var(--areia-escura); }
+.sb-rot::before { content: ''; width: 34px; height: 1px; background: var(--areia); }
+
+/* 1. abertura */
+.sb-abre { position: relative; min-height: 100vh; min-height: 100svh; display: grid; align-items: end; padding: calc(var(--topo) + 60px) 0 clamp(60px, 10vh, 110px); overflow: hidden; background: radial-gradient(ellipse at 70% 40%, #fbf9f5 0%, var(--marfim) 55%, var(--papel) 100%); }
+.sb-sol { position: absolute; right: -8vw; top: 50%; width: min(118vw, 1500px); aspect-ratio: 947 / 380; transform: translateY(calc(-58% + var(--sy, 0px) * .25)); pointer-events: none; }
+.sb-sol span { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(188, 156, 116, .75), rgba(188, 156, 116, .18)); -webkit-mask: url(/marca/dpr-arco.png) center / 100% 100% no-repeat; mask: url(/marca/dpr-arco.png) center / 100% 100% no-repeat; clip-path: inset(100% 0 0 0); animation: sb-nasce 2.2s cubic-bezier(.7, 0, .2, 1) .3s forwards; }
+@keyframes sb-nasce { to { clip-path: inset(0 0 0 0); } }
+.sb-abre .cont { position: relative; display: grid; gap: 34px; }
+.sb-abre h1 { max-width: 15ch; font-weight: 200; font-size: clamp(46px, 7.4vw, 118px); line-height: 1.02; letter-spacing: -.035em; color: var(--grafite); }
+.sb-abre h1 .m { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .08em; margin-bottom: -.08em; }
+.sb-abre h1 .m > span { display: inline-block; transform: translateY(105%); animation: sb-sobe 1.1s var(--ease) forwards; animation-delay: calc(.5s + var(--i) * .07s); }
+.sb-abre h1 em { font-style: italic; font-weight: 200; color: var(--areia-escura); }
+@keyframes sb-sobe { to { transform: none; } }
+.sb-abre-pe { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 20px; padding-top: 26px; border-top: 1px solid var(--linha-clara); opacity: 0; animation: sb-surge 1s ease 1.6s forwards; }
+.sb-abre-pe p { max-width: 46ch; color: var(--taupe); }
+.sb-desce { display: inline-flex; align-items: center; gap: 12px; font: 500 11px/1 var(--titulo); letter-spacing: .24em; text-transform: uppercase; color: var(--grafite); }
+.sb-desce i { position: relative; width: 1px; height: 46px; background: var(--linha-clara); overflow: hidden; }
+.sb-desce i::after { content: ''; position: absolute; left: 0; top: -40%; width: 1px; height: 40%; background: var(--areia-escura); animation: sb-gota 2s ease-in-out infinite; }
+@keyframes sb-gota { to { top: 100%; } }
+@keyframes sb-surge { to { opacity: 1; } }
+
+/* 2. manifesto: as palavras se preenchem com a rolagem */
+.sb-manifesto { position: relative; height: 260vh; height: 260svh; }
+.sb-manifesto-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; align-content: center; gap: 40px; }
+.sb-manifesto-txt { max-width: 22ch; font: 300 clamp(34px, 5vw, 76px)/1.12 var(--titulo); letter-spacing: -.025em; }
+.sb-manifesto-txt span { color: rgba(26, 25, 24, .14); transition: color .5s ease; }
+.sb-manifesto-txt span.acesa { color: var(--grafite); }
+.sb-manifesto-txt span.dourada.acesa { color: var(--areia-escura); }
+.sb-manifesto-sub { max-width: 52ch; color: var(--taupe); opacity: var(--fim, 0); transform: translateY(calc((1 - var(--fim, 0)) * 16px)); }
+
+/* 3. a pergunta, com a palavra que gira */
+.sb-pergunta { padding: clamp(90px, 16vh, 180px) 0; background: var(--papel); text-align: center; }
+.sb-pergunta q { display: block; max-width: 20ch; margin: 22px auto 0; font: italic 200 clamp(32px, 4.6vw, 66px)/1.14 var(--titulo); letter-spacing: -.02em; quotes: none; }
+.sb-resposta { margin-top: 46px; font: 300 clamp(20px, 2vw, 28px)/1.3 var(--titulo); color: var(--taupe); }
+.sb-gira { position: relative; display: grid; justify-items: center; overflow: hidden; height: 1.4em; margin-top: 10px; font-size: 1.5em; font-weight: 200; color: var(--grafite); }
+.sb-gira > span { grid-area: 1 / 1; transform: translateY(110%); opacity: 0; transition: transform .8s var(--ease), opacity .5s; white-space: nowrap; border-bottom: 1px solid var(--areia); }
+.sb-gira > span.vez { transform: none; opacity: 1; }
+.sb-gira > span.foi { transform: translateY(-110%); opacity: 0; }
+.sb-pergunta p.sb-fecho { max-width: 50ch; margin: 34px auto 0; color: var(--taupe); }
+
+/* 4. pilares: paineis de foto que se abrem */
+.sb-pilares { padding: clamp(90px, 14vh, 160px) 0; }
+.sb-cab { display: grid; gap: 18px; max-width: 760px; margin-bottom: 56px; }
+.sb-cab h2 { font-weight: 200; font-size: clamp(36px, 4.6vw, 64px); line-height: 1.06; letter-spacing: -.03em; }
+.sb-cab p { color: var(--taupe); max-width: 56ch; }
+.sb-paineis { display: flex; gap: 10px; height: clamp(440px, 70vh, 640px); }
+.sb-painel { position: relative; flex: 1; min-width: 0; overflow: hidden; cursor: pointer; transition: flex 1s var(--ease); border: 0; padding: 0; background: var(--grafite); text-align: left; color: var(--marfim); font: inherit; }
+.sb-painel.ativo { flex: 3.2; }
+.sb-painel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transform: scale(1.08); transition: transform 1.6s var(--ease), filter 1s; filter: saturate(.75) brightness(.78); }
+.sb-painel.ativo img { transform: scale(1); filter: saturate(.9) brightness(.86); }
+.sb-painel::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, rgba(26, 25, 24, 0) 35%, rgba(26, 25, 24, .62) 100%); }
+.sb-painel-t { position: absolute; left: 26px; right: 26px; bottom: 26px; z-index: 1; display: grid; gap: 12px; }
+.sb-painel h3 { font-weight: 300; font-size: clamp(22px, 2vw, 30px); line-height: 1.1; white-space: nowrap; }
+.sb-painel p { max-width: 38ch; font-size: 16px; color: rgba(244, 241, 236, .86); opacity: 0; transform: translateY(14px); transition: opacity .5s, transform .8s var(--ease); }
+.sb-painel.ativo p { opacity: 1; transform: none; transition-delay: .35s; }
+.sb-painel-fio { width: 34px; height: 1px; background: var(--areia); transform-origin: left; transform: scaleX(.4); transition: transform .8s var(--ease); }
+.sb-painel.ativo .sb-painel-fio { transform: scaleX(1); }
+.sb-painel:focus-visible { outline: 2px solid var(--areia); outline-offset: 3px; }
+
+/* 5. metodo: uma linha que se desenha e acende as etapas */
+.sb-metodo { position: relative; height: 240vh; height: 240svh; background: var(--papel); }
+.sb-metodo-fixo { position: sticky; top: 0; height: 100vh; height: 100svh; display: grid; align-content: center; gap: 60px; }
+.sb-linha { position: relative; height: 2px; }
+.sb-linha::before { content: ''; position: absolute; inset: 0; background: var(--linha-clara); }
+.sb-linha span { position: absolute; left: 0; top: 0; height: 100%; width: 100%; background: var(--areia); transform-origin: left; transform: scaleX(var(--lp, 0)); }
+.sb-etapas { display: grid; grid-template-columns: repeat(3, 1fr); gap: 40px; margin-top: -40px; }
+.sb-etapa { position: relative; display: grid; gap: 14px; padding-top: 30px; opacity: .3; transition: opacity .6s ease; }
+.sb-etapa::before { content: ''; position: absolute; left: 0; top: -9px; width: 14px; height: 14px; border-radius: 50%; border: 1px solid var(--areia); background: var(--papel); transition: background-color .5s, transform .6s var(--ease); }
+.sb-etapa.acesa { opacity: 1; }
+.sb-etapa.acesa::before { background: var(--areia); transform: scale(1.25); }
+.sb-etapa h3 { font-weight: 300; font-size: clamp(24px, 2.4vw, 34px); letter-spacing: -.01em; }
+.sb-etapa p { color: var(--taupe); max-width: 34ch; }
+
+/* 6. materiais */
+.sb-materiais { padding: clamp(90px, 14vh, 160px) 0; }
+.sb-mat-grade { display: grid; grid-template-columns: 1.15fr 1fr 1fr; gap: 24px; align-items: end; }
+.sb-mat { margin: 0; display: grid; gap: 16px; }
+.sb-mat:nth-child(2) { transform: translateY(-48px); }
+.sb-mat-foto { overflow: hidden; aspect-ratio: 4 / 5; }
+.sb-mat:first-child .sb-mat-foto { aspect-ratio: 4 / 5.6; }
+.sb-mat img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.4s var(--ease); }
+.sb-mat:hover img { transform: scale(1.06); }
+.sb-mat figcaption { display: grid; gap: 4px; }
+.sb-mat b { font: 500 12px/1 var(--titulo); letter-spacing: .22em; text-transform: uppercase; color: var(--areia-escura); }
+.sb-mat span { font: 300 20px/1.3 var(--titulo); }
+
+/* 7. onde estamos: nomes em contorno passando devagar */
+.sb-onde { padding: 40px 0 clamp(80px, 12vh, 140px); overflow: hidden; }
+.sb-onde .cont { margin-bottom: 30px; }
+.sb-faixa { display: flex; width: max-content; animation: faixa 50s linear infinite; }
+.sb-faixa span { padding-right: .6em; white-space: nowrap; font: 200 clamp(60px, 9vw, 150px)/1.1 var(--titulo); letter-spacing: -.03em; color: transparent; -webkit-text-stroke: 1px var(--areia-escura); }
+.sb-faixa span b { font-weight: 200; color: var(--areia); -webkit-text-stroke: 0; }
+
+/* 8. chamada final */
+.sb-fim { position: relative; padding: clamp(100px, 18vh, 200px) 0; text-align: center; background: var(--papel); overflow: hidden; }
+.sb-fim::before { content: ''; position: absolute; left: 50%; bottom: -30%; width: min(900px, 120vw); aspect-ratio: 947 / 380; transform: translateX(-50%); background: rgba(188, 156, 116, .22); -webkit-mask: url(/marca/dpr-arco.png) center / 100% 100% no-repeat; mask: url(/marca/dpr-arco.png) center / 100% 100% no-repeat; }
+.sb-fim h2 { position: relative; font-weight: 200; font-size: clamp(40px, 6vw, 92px); letter-spacing: -.035em; line-height: 1.04; }
+.sb-fim-acoes { position: relative; display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 40px; margin-top: 34px; }
+
+@media (max-width: 899px) {
+  .sb-abre { align-items: center; }
+  .sb-sol { right: -40vw; width: 170vw; top: 38%; }
+  .sb-manifesto { height: 220vh; }
+  .sb-paineis { flex-direction: column; height: auto; }
+  .sb-painel { flex: none; height: 120px; transition: height 1s var(--ease); }
+  .sb-painel.ativo { flex: none; height: 360px; }
+  .sb-painel h3 { white-space: normal; }
+  .sb-metodo { height: auto; }
+  .sb-metodo-fixo { position: relative; height: auto; padding: 90px 0; }
+  .sb-linha { display: none; }
+  .sb-etapas { grid-template-columns: 1fr; margin-top: 0; gap: 34px; }
+  .sb-etapa { opacity: 1; border-left: 1px solid var(--areia); padding: 0 0 0 22px; }
+  .sb-etapa::before { left: -7px; top: 4px; }
+  .sb-mat-grade { grid-template-columns: 1fr; gap: 40px; }
+  .sb-mat:nth-child(2) { transform: none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .sb-sol span, .sb-abre h1 .m > span, .sb-abre-pe { animation: none; clip-path: none; transform: none; opacity: 1; }
+  .sb-manifesto, .sb-metodo { height: auto; }
+  .sb-manifesto-fixo, .sb-metodo-fixo { position: relative; height: auto; padding: 90px 0; }
+  .sb-manifesto-txt span { color: var(--grafite); }
+  .sb-manifesto-sub { opacity: 1; transform: none; }
+  .sb-etapa { opacity: 1; }
+  .sb-linha span { transform: none; }
+  .sb-faixa { animation: none; }
+}

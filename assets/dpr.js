@@ -134,7 +134,7 @@
   function mostraFrase(a) {
     if (!a || !leg) return;
     var f = a.getAttribute('data-frase');
-    if (casa) casa.setAttribute('data-modo', a.getAttribute('href').slice(1));
+    if (casa) casa.setAttribute('data-modo', a.getAttribute('href').split('#').pop());
     if (leg.textContent === f) return;
     leg.textContent = f;
     leg.classList.remove('troca'); void leg.offsetWidth; leg.classList.add('troca');

@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sobre a DPR | Do projeto à entrega</title>
+<meta name="description" content="Conheça a DPR Construtora e Incorporadora: arquitetura autoral, engenharia precisa e cuidado em cada detalhe, do primeiro desenho à entrega da chave em Cotia e região.">
+<link rel="canonical" href="https://www.construtoradpr.com.br/sobre.html">
+<meta name="theme-color" content="#1A1918">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="pt_BR">
+<meta property="og:site_name" content="DPR Construtora">
+<meta property="og:title" content="DPR Construtora | Do projeto à entrega">
+<meta property="og:description" content="Sua casa no terreno que já é seu. Projeto, financiamento e obra com uma única empresa.">
+<meta property="og:image" content="https://www.construtoradpr.com.br/fotos/caucaia2/centro-comercial.webp">
+<link rel="icon" type="image/png" sizes="32x32" href="/marca/dpr-icone.png">
+<link rel="apple-touch-icon" href="/marca/dpr-icone-180.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Poppins:ital,wght@0,200;0,300;0,400;0,500;0,600;1,300&display=swap">
+<link rel="stylesheet" href="/assets/dpr.css">
+<link rel="stylesheet" href="/assets/sobre.css">
+<script src="/assets/sobre.js" defer></script>
+<script>document.documentElement.classList.add('js');</script>
+<!-- three.js para a casa 3D do menu (assets/casa3d.js, carregada so ao abrir o menu no computador) -->
+<script type="importmap">{"imports":{"three":"https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js","three/addons/":"https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/"}}</script>
+<script src="/assets/dpr.js" defer></script>
+</head>
+<body class="sem-cartao">
+
+<!-- Manual de Marca DPR v1.0 (proposta B): paleta grafite/marfim/concreto/taupe/areia, Poppins + Inter,
+     botao = Poppins Medium sublinhado, uma mensagem e um botao por tela, simbolo pequeno em marfim no canto. -->
+
+<!-- topo: logo, WhatsApp discreto e botao Menu. O menu abre uma cortina de faixas marfim que descem uma a uma,
+     os itens sobem de dentro de uma mascara e a foto de uma obra da DPR muda ao passar o mouse em cada item. -->
+<header class="topo">
+  <div class="topo-in cont">
+    <a class="topo-marca" href="/" aria-label="DPR Construtora, início">
+      <span class="marca"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
+    </a>
+    <a class="topo-tel" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener"><span class="tel-ponto" aria-hidden="true"></span><span class="topo-tel-txt">Fale com a gente</span></a>
+    <button class="topo-menu" type="button" aria-expanded="false" aria-controls="painel" aria-label="Abrir menu"><span class="menu-txt" aria-hidden="true"><span>Menu</span><span>Fechar</span></span><span class="menu-linhas" aria-hidden="true"><i></i><i></i></span></button>
+  </div>
+</header>
+
+<div class="painel" id="painel" aria-hidden="true">
+  <div class="painel-faixas" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></div>
+  <div class="painel-in cont">
+    <nav class="painel-nav" aria-label="Menu">
+      <a href="/#inicio" data-frase="Sua casa no terreno que já é seu."><span class="painel-masc"><span class="painel-txt">Início</span></span></a>
+      <a href="/sobre.html" data-frase="Do projeto à entrega, com cuidado nos detalhes." class="atual"><span class="painel-masc"><span class="painel-txt">Sobre</span></span></a>
+      <a href="/#obras" data-frase="Villaggio Caucaia, Moradas das Roseiras e Lotes Itatinga."><span class="painel-masc"><span class="painel-txt">Obras</span></span></a>
+      <a href="/#como-funciona" data-frase="Do primeiro oi à chave, pelo WhatsApp."><span class="painel-masc"><span class="painel-txt">Como funciona</span></span></a>
+      <a href="/#contato" data-frase="Resposta no mesmo dia, sem compromisso."><span class="painel-masc"><span class="painel-txt">Contato</span></span></a>
+    </nav>
+    <div class="painel-lado" aria-hidden="true">
+      <svg class="casa" viewBox="0 70 480 380" data-modo="inicio">
+        <defs>
+          <radialGradient id="c-ceu" cx="50%" cy="45%" r="60%"><stop offset="0" stop-color="#F3E3C8" stop-opacity=".9"/><stop offset="1" stop-color="#F4F1EC" stop-opacity="0"/></radialGradient>
+          <filter id="c-desfoca" x="-30%" y="-30%" width="160%" height="160%"><feGaussianBlur stdDeviation="4"/></filter>
+          <filter id="c-desfoca-forte" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8"/></filter>
+          <clipPath id="c-alvenaria"><path clip-rule="evenodd" d="M127.1 275 L265.6 355 L265.6 275 L196.4 175 L127.1 195 Z M369.6 295 L265.6 355 L265.6 275 L369.6 215 Z M142.7 254 L170.4 270 L170.4 240 L142.7 224 Z M222.3 300 L250.1 316 L250.1 286 L222.3 270 Z M354 274 L326.3 290 L326.3 260 L354 244 Z M308.9 300 L281.2 316 L281.2 286 L308.9 270 Z M184.2 308 L208.5 322 L208.5 270 L184.2 256 Z M189.4 219 L203.3 227 L203.3 213 L189.4 205 Z"/></clipPath>
+          <clipPath id="c-sobe"><rect class="c-sobe" x="0" y="60" width="480" height="400"/></clipPath>
+        </defs>
+        <rect class="c-ceu" x="0" y="70" width="480" height="380" fill="url(#c-ceu)"/>
+        <g class="cena">
+          <g class="c-chao">
+            <polygon class="c-lote-frente" points="5.8,295 239.7,430 239.7,442 5.8,307"/>
+            <polygon class="c-lote-lado" points="473.5,295 239.7,430 239.7,442 473.5,307"/>
+            <polygon class="c-lote" points="239.7,160 473.5,295 239.7,430 5.8,295"/>
+            <polygon class="c-caminho" points="177.3,316 194.6,326 127.1,365 109.8,355"/>
+            <polygon class="c-sombra" points="374.8,292 402.5,332 295.1,394 265.6,355 127.1,275 121.9,290 257,368"/>
+            <polygon class="c-luz-chao" points="173.8,313.8 198.1,327.8 156.5,381.8 80.3,337.8"/>
+          </g>
+          <g class="c-arv c-arv-tras"><line class="a-tronco" x1="189.4" y1="215" x2="189.4" y2="197"/><polygon class="a-clara" points="189.4,127.6 159.6,197 189.4,206.6"/><polygon class="a-escura" points="189.4,127.6 189.4,206.6 219.3,197"/><polygon class="a-clara" points="189.4,103 168.5,154.7 189.4,161.4"/><polygon class="a-escura" points="189.4,103 189.4,161.4 210.3,154.7"/></g>
+          <g class="c-arv c-arv-tras c-arv-2"><line class="a-tronco" x1="279.5" y1="211" x2="279.5" y2="193"/><polygon class="a-clara" points="279.5,142.4 257.6,193 279.5,200"/><polygon class="a-escura" points="279.5,142.4 279.5,200 301.4,193"/><polygon class="a-clara" points="279.5,123 264.2,161.5 279.5,166.4"/><polygon class="a-escura" points="279.5,123 279.5,166.4 294.8,161.5"/></g>
+          <g class="c-casa">
+            <g class="c-paredes" clip-path="url(#c-sobe)">
+              <polygon class="c-parede-lado" points="369.6,295 265.6,355 265.6,275 369.6,215"/>
+              <polygon class="c-parede-frente" points="127.1,275 265.6,355 265.6,275 196.4,175 127.1,195"/>
+              <g class="c-tijolos" clip-path="url(#c-alvenaria)"><line x1="127.1" y1="268" x2="265.6" y2="348"/><line x1="369.6" y1="288" x2="265.6" y2="348"/><line x1="139.2" y1="282" x2="139.2" y2="275"/><line x1="151.3" y1="289" x2="151.3" y2="282"/><line x1="163.5" y1="296" x2="163.5" y2="289"/><line x1="175.6" y1="303" x2="175.6" y2="296"/><line x1="187.7" y1="310" x2="187.7" y2="303"/><line x1="199.8" y1="317" x2="199.8" y2="310"/><line x1="211.9" y1="324" x2="211.9" y2="317"/><line x1="224.1" y1="331" x2="224.1" y2="324"/><line x1="236.2" y1="338" x2="236.2" y2="331"/><line x1="248.3" y1="345" x2="248.3" y2="338"/><line x1="260.4" y1="352" x2="260.4" y2="345"/><line x1="357.4" y1="302" x2="357.4" y2="295"/><line x1="345.3" y1="309" x2="345.3" y2="302"/><line x1="333.2" y1="316" x2="333.2" y2="309"/><line x1="321.1" y1="323" x2="321.1" y2="316"/><line x1="308.9" y1="330" x2="308.9" y2="323"/><line x1="296.8" y1="337" x2="296.8" y2="330"/><line x1="284.7" y1="344" x2="284.7" y2="337"/><line x1="272.6" y1="351" x2="272.6" y2="344"/><line x1="127.1" y1="261" x2="265.6" y2="341"/><line x1="369.6" y1="281" x2="265.6" y2="341"/><line x1="133.1" y1="271.5" x2="133.1" y2="264.5"/><line x1="145.3" y1="278.5" x2="145.3" y2="271.5"/><line x1="157.4" y1="285.5" x2="157.4" y2="278.5"/><line x1="169.5" y1="292.5" x2="169.5" y2="285.5"/><line x1="181.6" y1="299.5" x2="181.6" y2="292.5"/><line x1="193.8" y1="306.5" x2="193.8" y2="299.5"/><line x1="205.9" y1="313.5" x2="205.9" y2="306.5"/><line x1="218" y1="320.5" x2="218" y2="313.5"/><line x1="230.1" y1="327.5" x2="230.1" y2="320.5"/><line x1="242.3" y1="334.5" x2="242.3" y2="327.5"/><line x1="254.4" y1="341.5" x2="254.4" y2="334.5"/><line x1="363.5" y1="291.5" x2="363.5" y2="284.5"/><line x1="351.4" y1="298.5" x2="351.4" y2="291.5"/><line x1="339.3" y1="305.5" x2="339.3" y2="298.5"/><line x1="327.1" y1="312.5" x2="327.1" y2="305.5"/><line x1="315" y1="319.5" x2="315" y2="312.5"/><line x1="302.9" y1="326.5" x2="302.9" y2="319.5"/><line x1="290.8" y1="333.5" x2="290.8" y2="326.5"/><line x1="278.6" y1="340.5" x2="278.6" y2="333.5"/><line x1="266.5" y1="347.5" x2="266.5" y2="340.5"/><line x1="127.1" y1="254" x2="265.6" y2="334"/><line x1="369.6" y1="274" x2="265.6" y2="334"/><line x1="139.2" y1="268" x2="139.2" y2="261"/><line x1="151.3" y1="275" x2="151.3" y2="268"/><line x1="163.5" y1="282" x2="163.5" y2="275"/><line x1="175.6" y1="289" x2="175.6" y2="282"/><line x1="187.7" y1="296" x2="187.7" y2="289"/><line x1="199.8" y1="303" x2="199.8" y2="296"/><line x1="211.9" y1="310" x2="211.9" y2="303"/><line x1="224.1" y1="317" x2="224.1" y2="310"/><line x1="236.2" y1="324" x2="236.2" y2="317"/><line x1="248.3" y1="331" x2="248.3" y2="324"/><line x1="260.4" y1="338" x2="260.4" y2="331"/><line x1="357.4" y1="288" x2="357.4" y2="281"/><line x1="345.3" y1="295" x2="345.3" y2="288"/><line x1="333.2" y1="302" x2="333.2" y2="295"/><line x1="321.1" y1="309" x2="321.1" y2="302"/><line x1="308.9" y1="316" x2="308.9" y2="309"/><line x1="296.8" y1="323" x2="296.8" y2="316"/><line x1="284.7" y1="330" x2="284.7" y2="323"/><line x1="272.6" y1="337" x2="272.6" y2="330"/><line x1="127.1" y1="247" x2="265.6" y2="327"/><line x1="369.6" y1="267" x2="265.6" y2="327"/><line x1="133.1" y1="257.5" x2="133.1" y2="250.5"/><line x1="145.3" y1="264.5" x2="145.3" y2="257.5"/><line x1="157.4" y1="271.5" x2="157.4" y2="264.5"/><line x1="169.5" y1="278.5" x2="169.5" y2="271.5"/><line x1="181.6" y1="285.5" x2="181.6" y2="278.5"/><line x1="193.8" y1="292.5" x2="193.8" y2="285.5"/><line x1="205.9" y1="299.5" x2="205.9" y2="292.5"/><line x1="218" y1="306.5" x2="218" y2="299.5"/><line x1="230.1" y1="313.5" x2="230.1" y2="306.5"/><line x1="242.3" y1="320.5" x2="242.3" y2="313.5"/><line x1="254.4" y1="327.5" x2="254.4" y2="320.5"/><line x1="363.5" y1="277.5" x2="363.5" y2="270.5"/><line x1="351.4" y1="284.5" x2="351.4" y2="277.5"/><line x1="339.3" y1="291.5" x2="339.3" y2="284.5"/><line x1="327.1" y1="298.5" x2="327.1" y2="291.5"/><line x1="315" y1="305.5" x2="315" y2="298.5"/><line x1="302.9" y1="312.5" x2="302.9" y2="305.5"/><line x1="290.8" y1="319.5" x2="290.8" y2="312.5"/><line x1="278.6" y1="326.5" x2="278.6" y2="319.5"/><line x1="266.5" y1="333.5" x2="266.5" y2="326.5"/><line x1="127.1" y1="240" x2="265.6" y2="320"/><line x1="369.6" y1="260" x2="265.6" y2="320"/><line x1="139.2" y1="254" x2="139.2" y2="247"/><line x1="151.3" y1="261" x2="151.3" y2="254"/><line x1="163.5" y1="268" x2="163.5" y2="261"/><line x1="175.6" y1="275" x2="175.6" y2="268"/><line x1="187.7" y1="282" x2="187.7" y2="275"/><line x1="199.8" y1="289" x2="199.8" y2="282"/><line x1="211.9" y1="296" x2="211.9" y2="289"/><line x1="224.1" y1="303" x2="224.1" y2="296"/><line x1="236.2" y1="310" x2="236.2" y2="303"/><line x1="248.3" y1="317" x2="248.3" y2="310"/><line x1="260.4" y1="324" x2="260.4" y2="317"/><line x1="357.4" y1="274" x2="357.4" y2="267"/><line x1="345.3" y1="281" x2="345.3" y2="274"/><line x1="333.2" y1="288" x2="333.2" y2="281"/><line x1="321.1" y1="295" x2="321.1" y2="288"/><line x1="308.9" y1="302" x2="308.9" y2="295"/><line x1="296.8" y1="309" x2="296.8" y2="302"/><line x1="284.7" y1="316" x2="284.7" y2="309"/><line x1="272.6" y1="323" x2="272.6" y2="316"/><line x1="127.1" y1="233" x2="265.6" y2="313"/><line x1="369.6" y1="253" x2="265.6" y2="313"/><line x1="133.1" y1="243.5" x2="133.1" y2="236.5"/><line x1="145.3" y1="250.5" x2="145.3" y2="243.5"/><line x1="157.4" y1="257.5" x2="157.4" y2="250.5"/><line x1="169.5" y1="264.5" x2="169.5" y2="257.5"/><line x1="181.6" y1="271.5" x2="181.6" y2="264.5"/><line x1="193.8" y1="278.5" x2="193.8" y2="271.5"/><line x1="205.9" y1="285.5" x2="205.9" y2="278.5"/><line x1="218" y1="292.5" x2="218" y2="285.5"/><line x1="230.1" y1="299.5" x2="230.1" y2="292.5"/><line x1="242.3" y1="306.5" x2="242.3" y2="299.5"/><line x1="254.4" y1="313.5" x2="254.4" y2="306.5"/><line x1="363.5" y1="263.5" x2="363.5" y2="256.5"/><line x1="351.4" y1="270.5" x2="351.4" y2="263.5"/><line x1="339.3" y1="277.5" x2="339.3" y2="270.5"/><line x1="327.1" y1="284.5" x2="327.1" y2="277.5"/><line x1="315" y1="291.5" x2="315" y2="284.5"/><line x1="302.9" y1="298.5" x2="302.9" y2="291.5"/><line x1="290.8" y1="305.5" x2="290.8" y2="298.5"/><line x1="278.6" y1="312.5" x2="278.6" y2="305.5"/><line x1="266.5" y1="319.5" x2="266.5" y2="312.5"/><line x1="127.1" y1="226" x2="265.6" y2="306"/><line x1="369.6" y1="246" x2="265.6" y2="306"/><line x1="139.2" y1="240" x2="139.2" y2="233"/><line x1="151.3" y1="247" x2="151.3" y2="240"/><line x1="163.5" y1="254" x2="163.5" y2="247"/><line x1="175.6" y1="261" x2="175.6" y2="254"/><line x1="187.7" y1="268" x2="187.7" y2="261"/><line x1="199.8" y1="275" x2="199.8" y2="268"/><line x1="211.9" y1="282" x2="211.9" y2="275"/><line x1="224.1" y1="289" x2="224.1" y2="282"/><line x1="236.2" y1="296" x2="236.2" y2="289"/><line x1="248.3" y1="303" x2="248.3" y2="296"/><line x1="260.4" y1="310" x2="260.4" y2="303"/><line x1="357.4" y1="260" x2="357.4" y2="253"/><line x1="345.3" y1="267" x2="345.3" y2="260"/><line x1="333.2" y1="274" x2="333.2" y2="267"/><line x1="321.1" y1="281" x2="321.1" y2="274"/><line x1="308.9" y1="288" x2="308.9" y2="281"/><line x1="296.8" y1="295" x2="296.8" y2="288"/><line x1="284.7" y1="302" x2="284.7" y2="295"/><line x1="272.6" y1="309" x2="272.6" y2="302"/><line x1="127.1" y1="219" x2="265.6" y2="299"/><line x1="369.6" y1="239" x2="265.6" y2="299"/><line x1="133.1" y1="229.5" x2="133.1" y2="222.5"/><line x1="145.3" y1="236.5" x2="145.3" y2="229.5"/><line x1="157.4" y1="243.5" x2="157.4" y2="236.5"/><line x1="169.5" y1="250.5" x2="169.5" y2="243.5"/><line x1="181.6" y1="257.5" x2="181.6" y2="250.5"/><line x1="193.8" y1="264.5" x2="193.8" y2="257.5"/><line x1="205.9" y1="271.5" x2="205.9" y2="264.5"/><line x1="218" y1="278.5" x2="218" y2="271.5"/><line x1="230.1" y1="285.5" x2="230.1" y2="278.5"/><line x1="242.3" y1="292.5" x2="242.3" y2="285.5"/><line x1="254.4" y1="299.5" x2="254.4" y2="292.5"/><line x1="363.5" y1="249.5" x2="363.5" y2="242.5"/><line x1="351.4" y1="256.5" x2="351.4" y2="249.5"/><line x1="339.3" y1="263.5" x2="339.3" y2="256.5"/><line x1="327.1" y1="270.5" x2="327.1" y2="263.5"/><line x1="315" y1="277.5" x2="315" y2="270.5"/><line x1="302.9" y1="284.5" x2="302.9" y2="277.5"/><line x1="290.8" y1="291.5" x2="290.8" y2="284.5"/><line x1="278.6" y1="298.5" x2="278.6" y2="291.5"/><line x1="266.5" y1="305.5" x2="266.5" y2="298.5"/><line x1="127.1" y1="212" x2="265.6" y2="292"/><line x1="369.6" y1="232" x2="265.6" y2="292"/><line x1="139.2" y1="226" x2="139.2" y2="219"/><line x1="151.3" y1="233" x2="151.3" y2="226"/><line x1="163.5" y1="240" x2="163.5" y2="233"/><line x1="175.6" y1="247" x2="175.6" y2="240"/><line x1="187.7" y1="254" x2="187.7" y2="247"/><line x1="199.8" y1="261" x2="199.8" y2="254"/><line x1="211.9" y1="268" x2="211.9" y2="261"/><line x1="224.1" y1="275" x2="224.1" y2="268"/><line x1="236.2" y1="282" x2="236.2" y2="275"/><line x1="248.3" y1="289" x2="248.3" y2="282"/><line x1="260.4" y1="296" x2="260.4" y2="289"/><line x1="357.4" y1="246" x2="357.4" y2="239"/><line x1="345.3" y1="253" x2="345.3" y2="246"/><line x1="333.2" y1="260" x2="333.2" y2="253"/><line x1="321.1" y1="267" x2="321.1" y2="260"/><line x1="308.9" y1="274" x2="308.9" y2="267"/><line x1="296.8" y1="281" x2="296.8" y2="274"/><line x1="284.7" y1="288" x2="284.7" y2="281"/><line x1="272.6" y1="295" x2="272.6" y2="288"/><line x1="127.1" y1="205" x2="265.6" y2="285"/><line x1="369.6" y1="225" x2="265.6" y2="285"/><line x1="133.1" y1="215.5" x2="133.1" y2="208.5"/><line x1="145.3" y1="222.5" x2="145.3" y2="215.5"/><line x1="157.4" y1="229.5" x2="157.4" y2="222.5"/><line x1="169.5" y1="236.5" x2="169.5" y2="229.5"/><line x1="181.6" y1="243.5" x2="181.6" y2="236.5"/><line x1="193.8" y1="250.5" x2="193.8" y2="243.5"/><line x1="205.9" y1="257.5" x2="205.9" y2="250.5"/><line x1="218" y1="264.5" x2="218" y2="257.5"/><line x1="230.1" y1="271.5" x2="230.1" y2="264.5"/><line x1="242.3" y1="278.5" x2="242.3" y2="271.5"/><line x1="254.4" y1="285.5" x2="254.4" y2="278.5"/><line x1="363.5" y1="235.5" x2="363.5" y2="228.5"/><line x1="351.4" y1="242.5" x2="351.4" y2="235.5"/><line x1="339.3" y1="249.5" x2="339.3" y2="242.5"/><line x1="327.1" y1="256.5" x2="327.1" y2="249.5"/><line x1="315" y1="263.5" x2="315" y2="256.5"/><line x1="302.9" y1="270.5" x2="302.9" y2="263.5"/><line x1="290.8" y1="277.5" x2="290.8" y2="270.5"/><line x1="278.6" y1="284.5" x2="278.6" y2="277.5"/><line x1="266.5" y1="291.5" x2="266.5" y2="284.5"/><line x1="127.1" y1="198" x2="265.6" y2="278"/><line x1="369.6" y1="218" x2="265.6" y2="278"/><line x1="139.2" y1="212" x2="139.2" y2="205"/><line x1="151.3" y1="219" x2="151.3" y2="212"/><line x1="163.5" y1="226" x2="163.5" y2="219"/><line x1="175.6" y1="233" x2="175.6" y2="226"/><line x1="187.7" y1="240" x2="187.7" y2="233"/><line x1="199.8" y1="247" x2="199.8" y2="240"/><line x1="211.9" y1="254" x2="211.9" y2="247"/><line x1="224.1" y1="261" x2="224.1" y2="254"/><line x1="236.2" y1="268" x2="236.2" y2="261"/><line x1="248.3" y1="275" x2="248.3" y2="268"/><line x1="260.4" y1="282" x2="260.4" y2="275"/><line x1="357.4" y1="232" x2="357.4" y2="225"/><line x1="345.3" y1="239" x2="345.3" y2="232"/><line x1="333.2" y1="246" x2="333.2" y2="239"/><line x1="321.1" y1="253" x2="321.1" y2="246"/><line x1="308.9" y1="260" x2="308.9" y2="253"/><line x1="296.8" y1="267" x2="296.8" y2="260"/><line x1="284.7" y1="274" x2="284.7" y2="267"/><line x1="272.6" y1="281" x2="272.6" y2="274"/><line x1="135.2" y1="192.7" x2="257.6" y2="263.3"/><line x1="143.2" y1="190.3" x2="249.5" y2="251.7"/><line x1="151.3" y1="188" x2="241.4" y2="240"/><line x1="159.4" y1="185.7" x2="233.3" y2="228.3"/><line x1="167.5" y1="183.3" x2="225.2" y2="216.7"/><line x1="175.6" y1="181" x2="217.1" y2="205"/><line x1="183.7" y1="178.7" x2="209.1" y2="193.3"/><line x1="191.7" y1="176.3" x2="201" y2="181.7"/></g>
+              <polygon class="c-vidro" points="142.7,254 170.4,270 170.4,240 142.7,224"/><polygon class="c-acesa" points="142.7,254 170.4,270 170.4,240 142.7,224"/><g class="c-caixilho"><polygon class="c-moldura" points="142.7,254 170.4,270 170.4,240 142.7,224"/><line x1="156.5" y1="262" x2="156.5" y2="232"/><line x1="142.7" y1="239" x2="170.4" y2="255"/></g><line class="c-peitoril" x1="142.7" y1="256.4" x2="170.4" y2="272.4"/><polygon class="c-vidro" points="222.3,300 250.1,316 250.1,286 222.3,270"/><polygon class="c-acesa" points="222.3,300 250.1,316 250.1,286 222.3,270"/><g class="c-caixilho"><polygon class="c-moldura" points="222.3,300 250.1,316 250.1,286 222.3,270"/><line x1="236.2" y1="308" x2="236.2" y2="278"/><line x1="222.3" y1="285" x2="250.1" y2="301"/></g><line class="c-peitoril" x1="222.3" y1="302.4" x2="250.1" y2="318.4"/>
+              <polygon class="c-vidro c-vidro-lado" points="354,274 326.3,290 326.3,260 354,244"/><polygon class="c-acesa" points="354,274 326.3,290 326.3,260 354,244"/><g class="c-caixilho"><polygon class="c-moldura" points="354,274 326.3,290 326.3,260 354,244"/><line x1="340.1" y1="282" x2="340.1" y2="252"/><line x1="354" y1="259" x2="326.3" y2="275"/></g><line class="c-peitoril" x1="354" y1="276.4" x2="326.3" y2="292.4"/><polygon class="c-vidro c-vidro-lado" points="308.9,300 281.2,316 281.2,286 308.9,270"/><polygon class="c-acesa" points="308.9,300 281.2,316 281.2,286 308.9,270"/><g class="c-caixilho"><polygon class="c-moldura" points="308.9,300 281.2,316 281.2,286 308.9,270"/><line x1="295.1" y1="308" x2="295.1" y2="278"/><line x1="308.9" y1="285" x2="281.2" y2="301"/></g><line class="c-peitoril" x1="308.9" y1="302.4" x2="281.2" y2="318.4"/>
+              <polygon class="c-vidro" points="189.4,219 203.3,227 203.3,213 189.4,205"/><polygon class="c-acesa" points="189.4,219 203.3,227 203.3,213 189.4,205"/><polygon class="c-moldura" points="189.4,219 203.3,227 203.3,213 189.4,205"/>
+              <polygon class="c-dentro" points="184.2,308 208.5,322 208.5,270 184.2,256"/>
+              <g class="c-porta-fechada"><polygon class="c-folha" points="184.2,308 208.5,322 208.5,270 184.2,256"/><line class="c-macaneta" x1="204.2" y1="295.5" x2="204.2" y2="290.5"/></g>
+              <g class="c-porta-aberta"><polygon class="c-folha" points="184.2,308 213.9,298.1 213.9,246.1 184.2,256"/></g>
+              <polygon class="c-moldura" points="184.2,308 208.5,322 208.5,270 184.2,256"/>
+              <polygon class="c-degrau-topo" points="179,301 213.7,321 203.3,327 168.6,307"/>
+              <polygon class="c-degrau-frente" points="168.6,311 203.3,331 203.3,327 168.6,307"/>
+              <polygon class="c-degrau-lado" points="213.7,325 203.3,331 203.3,327 213.7,321"/>
+            </g>
+            <g class="c-telhado">
+              <polygon class="c-agua-esq" points="308.9,110 231,132.5 109.8,202.5 187.7,180"/>
+              <polygon class="c-chamine-frente" points="288.2,178 302,198 302,142 288.2,134"/>
+              <polygon class="c-chamine-lado" points="315.9,190 302,198 302,142 315.9,134"/>
+              <polygon class="c-agua-dir" points="308.9,110 386.9,222.5 265.6,292.5 187.7,180"/>
+              <g class="c-telhas"><line x1="300.3" y1="115" x2="378.2" y2="227.5"/><line x1="291.6" y1="120" x2="369.6" y2="232.5"/><line x1="283" y1="125" x2="360.9" y2="237.5"/><line x1="274.3" y1="130" x2="352.2" y2="242.5"/><line x1="265.6" y1="135" x2="343.6" y2="247.5"/><line x1="257" y1="140" x2="334.9" y2="252.5"/><line x1="248.3" y1="145" x2="326.3" y2="257.5"/><line x1="239.7" y1="150" x2="317.6" y2="262.5"/><line x1="231" y1="155" x2="308.9" y2="267.5"/><line x1="222.3" y1="160" x2="300.3" y2="272.5"/><line x1="213.7" y1="165" x2="291.6" y2="277.5"/><line x1="205" y1="170" x2="283" y2="282.5"/><line x1="196.4" y1="175" x2="274.3" y2="287.5"/><line x1="324.5" y1="132.5" x2="203.3" y2="202.5"/><line x1="340.1" y1="155" x2="218.9" y2="225"/><line x1="355.7" y1="177.5" x2="234.5" y2="247.5"/><line x1="371.3" y1="200" x2="250.1" y2="270"/></g>
+              <polygon class="c-chamine-topo" points="302,126 315.9,134 302,142 288.2,134"/>
+              <polygon class="c-chamine-lado c-chamine-frente2" points="315.9,189.8 302,197.8 302,142 315.9,134"/>
+              <polygon class="c-beiral" points="109.8,202.5 187.7,180 265.6,292.5 265.6,298.1 187.7,185.6 109.8,208.1"/>
+            </g>
+          </g>
+          <g class="c-fumaca" filter="url(#c-desfoca)"><ellipse class="c-fumo" cx="302" cy="128" rx="7" ry="6" style="animation-delay:0s"/><ellipse class="c-fumo" cx="302" cy="128" rx="7" ry="6" style="animation-delay:1.3s"/><ellipse class="c-fumo" cx="302" cy="128" rx="7" ry="6" style="animation-delay:2.6s"/></g>
+          <g class="c-andaime"><line x1="380" y1="305" x2="380" y2="209"/><line x1="331.5" y1="333" x2="331.5" y2="237"/><line x1="283" y1="361" x2="283" y2="265"/><line x1="380" y1="273" x2="283" y2="329"/><line x1="380" y1="241" x2="283" y2="297"/><line x1="380" y1="213" x2="283" y2="269"/><line x1="380" y1="305" x2="331.5" y2="301"/><line x1="331.5" y1="301" x2="283" y2="297"/><line x1="380" y1="241" x2="331.5" y2="241"/></g>
+          <g class="c-arv c-arv-frente"><line class="a-tronco" x1="255.2" y1="401" x2="255.2" y2="383"/><polygon class="a-clara" points="255.2,335.5 231.3,383 255.2,390.6"/><polygon class="a-escura" points="255.2,335.5 255.2,390.6 279.1,383"/><polygon class="a-clara" points="255.2,317 238.5,353.3 255.2,358.7"/><polygon class="a-escura" points="255.2,317 255.2,358.7 272,353.3"/></g>
+          <g class="c-arv c-arv-frente c-arv-2"><line class="a-tronco" x1="47.4" y1="293" x2="47.4" y2="275"/><polygon class="a-clara" points="47.4,252.4 31.5,275 47.4,280.1"/><polygon class="a-escura" points="47.4,252.4 47.4,280.1 63.3,275"/><polygon class="a-clara" points="47.4,241 36.3,259.7 47.4,263.3"/><polygon class="a-escura" points="47.4,241 47.4,263.3 58.6,259.7"/></g>
+        </g>
+      </svg>
+      <p class="painel-leg"><span class="painel-leg-txt">Sua casa no terreno que já é seu.</span></p>
+    </div>
+  </div>
+</div>
+
+<main class="sb">
+
+  <!-- abertura: o arco da marca nasce grande atras do titulo -->
+  <section class="sb-abre" id="inicio" aria-labelledby="sb-titulo">
+    <div class="sb-sol" aria-hidden="true"><span></span></div>
+    <div class="cont">
+      <span class="sb-rot">Sobre a DPR</span>
+      <h1 id="sb-titulo"><span class="m"><span style="--i:0">Construímos</span></span> <span class="m"><span style="--i:1">o</span></span> <span class="m"><span style="--i:2">lugar</span></span> <span class="m"><span style="--i:3">onde</span></span> <span class="m"><span style="--i:4">a</span></span> <span class="m"><span style="--i:5">vida</span></span> <span class="m"><span style="--i:6"><em>acontece.</em></span></span></h1>
+      <div class="sb-abre-pe">
+        <p>Construtora e incorporadora em Cotia e região. Do primeiro desenho à entrega das chaves, cada escolha é feita pensando em quem vai morar.</p>
+        <span class="sb-desce" aria-hidden="true"><i></i>Role</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- manifesto: as palavras se acendem com a rolagem -->
+  <section class="sb-manifesto" aria-label="Manifesto">
+    <div class="sb-manifesto-fixo cont">
+      <span class="sb-rot">Manifesto</span>
+      <p class="sb-manifesto-txt"><span>Não</span> <span>construímos</span> <span>apenas</span> <span>metros</span> <span>quadrados.</span> <span>Construímos</span> <span>a</span> <span class="dourada">casa</span> <span>onde</span> <span>uma</span> <span class="dourada">vida</span> <span class="dourada">inteira</span> <span>vai</span> <span>acontecer.</span></p>
+      <p class="sb-manifesto-sub">Lugar de voltar no fim do dia, endereço para chamar de seu e, para a maioria das famílias, a maior compra da vida.</p>
+    </div>
+  </section>
+
+  <!-- a pergunta que abre cada projeto -->
+  <section class="sb-pergunta" aria-labelledby="sb-pergunta">
+    <div class="cont" data-revela>
+      <span class="sb-rot">Cada empreendimento começa assim</span>
+      <q id="sb-pergunta">Como este lugar melhora o dia de quem mora nele?</q>
+      <p class="sb-resposta">A resposta está <span class="sb-gira" aria-live="off"><span>na planta</span><span>na fachada</span><span>nos materiais</span><span>na luz que entra</span><span>na segurança da portaria</span><span>em sentir que o lugar é seu</span></span></p>
+      <p class="sb-fecho">Não é sobre metros quadrados. É sobre o dia a dia de quem abre a porta todos os dias.</p>
+    </div>
+  </section>
+
+  <!-- pilares: paineis que se abrem -->
+  <section class="sb-pilares" aria-labelledby="sb-pilares">
+    <div class="cont">
+      <div class="sb-cab" data-revela>
+        <span class="sb-rot">Nossos pilares</span>
+        <h2 id="sb-pilares">O método por trás da estética.</h2>
+        <p>A DPR combina linguagem arquitetônica, rigor técnico e visão comercial para criar empreendimentos desejáveis hoje e relevantes no futuro.</p>
+      </div>
+      <div class="sb-paineis" data-revela>
+        <button class="sb-painel ativo" type="button" aria-expanded="true"><img src="/fotos/caucaia2/centro-comercial.webp" alt="" loading="lazy"><span class="sb-painel-t"><span class="sb-painel-fio"></span><h3>Arquitetura autoral</h3><p>Projetos com identidade própria, presença visual e soluções que fogem do óbvio sem perder funcionalidade.</p></span></button>
+        <button class="sb-painel" type="button" aria-expanded="false"><img src="/fotos/emp/moradas-torres.webp" alt="" loading="lazy"><span class="sb-painel-t"><span class="sb-painel-fio"></span><h3>Engenharia precisa</h3><p>Planejamento técnico, execução controlada e atenção aos detalhes que garantem segurança, durabilidade e qualidade.</p></span></button>
+        <button class="sb-painel" type="button" aria-expanded="false"><img src="/fotos/emp/lotes-aerea-2.webp" alt="" loading="lazy"><span class="sb-painel-t"><span class="sb-painel-fio"></span><h3>Localização inteligente</h3><p>Endereços pensados por potencial de valorização, acesso, conveniência e qualidade de vida.</p></span></button>
+        <button class="sb-painel" type="button" aria-expanded="false"><img src="/fotos/caucaia2/jardim.webp" alt="" loading="lazy"><span class="sb-painel-t"><span class="sb-painel-fio"></span><h3>Bem-estar real</h3><p>Espaços desenhados para luz, ventilação, conforto, privacidade e uma rotina mais leve.</p></span></button>
+      </div>
+    </div>
+  </section>
+
+  <!-- metodo: linha que se desenha -->
+  <section class="sb-metodo" aria-labelledby="sb-metodo">
+    <div class="sb-metodo-fixo cont">
+      <div class="sb-cab">
+        <span class="sb-rot">Experiência DPR</span>
+        <h2 id="sb-metodo">O cuidado está nos detalhes.</h2>
+        <p>Do primeiro desenho à entrega das chaves, as escolhas técnicas são tomadas pensando em durabilidade, custo de manutenção e no dia a dia de quem vai morar.</p>
+      </div>
+      <div class="sb-linha" aria-hidden="true"><span></span></div>
+      <div class="sb-etapas">
+        <div class="sb-etapa"><h3>Estudo do terreno</h3><p>Estudamos o terreno, o sol, o acesso e a vizinhança antes de desenhar a primeira planta.</p></div>
+        <div class="sb-etapa"><h3>Projeto</h3><p>Definimos fachada, áreas comuns, planta e acabamento antes de a obra começar.</p></div>
+        <div class="sb-etapa"><h3>Execução com controle</h3><p>Transformamos projeto em obra entregue, com acompanhamento em cada etapa.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- materiais -->
+  <section class="sb-materiais" aria-labelledby="sb-materiais">
+    <div class="cont">
+      <div class="sb-cab" data-revela>
+        <span class="sb-rot">Materialidade</span>
+        <h2 id="sb-materiais">Materiais que duram.</h2>
+        <p>A escolha dos materiais decide quanto a casa vai dar de trabalho depois. Priorizamos o que envelhece bem, é fácil de limpar e não exige reforma cedo.</p>
+      </div>
+      <div class="sb-mat-grade">
+        <figure class="sb-mat" data-revela><div class="sb-mat-foto"><img src="/fotos/obras/entregue-cozinha.webp" alt="Cozinha de casa entregue pela DPR" loading="lazy"></div><figcaption><b>Natural</b><span>Piso e revestimento que duram</span></figcaption></figure>
+        <figure class="sb-mat" data-revela style="--d:1"><div class="sb-mat-foto"><img src="/fotos/obras/entregue-quarto.webp" alt="Quarto de casa entregue pela DPR" loading="lazy"></div><figcaption><b>Sensorial</b><span>Conforto no dia a dia</span></figcaption></figure>
+        <figure class="sb-mat" data-revela style="--d:2"><div class="sb-mat-foto"><img src="/fotos/emp/caucaia1-casa.webp" alt="Fachada de casa do Villaggio Caucaia I" loading="lazy"></div><figcaption><b>Urbano</b><span>Fachada simples de manter</span></figcaption></figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- onde estamos -->
+  <section class="sb-onde" aria-labelledby="sb-onde">
+    <div class="cont"><span class="sb-rot" id="sb-onde">Onde estamos</span></div>
+    <div class="sb-faixa" aria-hidden="true"><span>Caucaia do Alto <b>·</b> Cotia <b>·</b> Itapevi <b>·</b> Itatinga <b>·</b></span><span>Caucaia do Alto <b>·</b> Cotia <b>·</b> Itapevi <b>·</b> Itatinga <b>·</b></span></div>
+    <p class="so-leitor">Caucaia do Alto, Cotia, Itapevi e Itatinga, em São Paulo.</p>
+  </section>
+
+  <!-- chamada final -->
+  <section class="sb-fim" aria-labelledby="sb-fim">
+    <div class="cont" data-revela>
+      <span class="sb-rot">Próximo passo</span>
+      <h2 id="sb-fim">Vamos construir a sua?</h2>
+      <div class="sb-fim-acoes">
+        <a class="botao botao-escuro" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pela%20p%C3%A1gina%20Sobre%20da%20DPR." target="_blank" rel="noopener">Fale com a DPR</a>
+        <a class="botao botao-escuro" href="/#obras">Ver as obras</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape escuro" id="contato">
+  <div class="cont">
+    <div class="rodape-cta">
+      <span class="rotulo">Fale com a DPR</span>
+      <h2>Pode perguntar. Aqui ninguém fica sem resposta.</h2>
+      <a class="botao" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">Fale com a DPR no WhatsApp</a>
+    </div>
+
+    <div class="rodape-base">
+      <div class="rodape-col rodape-marca">
+        <span class="marca" role="img" aria-label="DPR Construtora"><span class="marca-letras"></span><span class="marca-arco"><span></span></span></span>
+        <p class="chamada">Do projeto à entrega.</p>
+      </div>
+      <div class="rodape-col">
+        <span class="legenda">Contato</span>
+        <a href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener">WhatsApp (11) 93308-5258</a>
+        <a href="tel:+5511933085258">Telefone (11) 93308-5258</a>
+        <a href="mailto:atendimento@dprconstrutora.com.br">atendimento@dprconstrutora.com.br</a>
+        <span>Caucaia do Alto, Cotia, Itapevi e Itatinga · SP</span>
+      </div>
+      <div class="rodape-col">
+        <span class="legenda">Obras</span>
+        <a href="#emp-caucaia2">Villaggio Caucaia II</a>
+        <a href="#emp-caucaia1">Villaggio Caucaia I</a>
+        <a href="#emp-moradas1">Moradas das Roseiras I</a>
+        <a href="#emp-moradas2">Moradas das Roseiras II</a>
+        <a href="#emp-lotes">Lotes Itatinga</a>
+      </div>
+    </div>
+
+    <div class="rodape-fim">
+      <p class="rodape-aviso">A aprovação do crédito é feita pela Caixa, conforme as regras do programa Minha Casa, Minha Vida. A DPR orienta, monta a documentação e acompanha todo o processo. Imagens marcadas como projeto ou ilustrativas não são fotos de obra pronta.</p>
+      <span>© 2026 DPR Construtora e Incorporadora · Desenvolvimento, Projetos e Realizações</span>
+    </div>
+  </div>
+</footer>
+
+<a class="zap" href="https://wa.me/5511933085258?text=Ol%C3%A1%2C%20vim%20pelo%20site%20da%20DPR." target="_blank" rel="noopener" aria-label="Fale com a DPR no WhatsApp">
+  <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38a9.86 9.86 0 0 0 4.74 1.21c5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm0 18.15a8.2 8.2 0 0 1-4.18-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.22 8.22 0 0 1-1.26-4.38c0-4.54 3.7-8.24 8.24-8.24 4.54 0 8.23 3.7 8.23 8.24 0 4.54-3.7 8.24-8.24 8.24zm4.52-6.16c-.25-.12-1.47-.72-1.7-.81-.23-.08-.39-.12-.56.13-.16.25-.64.81-.79.97-.14.17-.29.19-.54.06-.25-.12-1.05-.39-1.99-1.23-.74-.66-1.23-1.47-1.38-1.72-.14-.25-.02-.38.11-.5.11-.11.25-.29.37-.43.13-.15.17-.25.25-.42.08-.17.04-.31-.02-.43-.06-.13-.56-1.34-.76-1.84-.2-.48-.41-.42-.56-.43h-.48c-.17 0-.43.06-.66.31-.23.25-.87.85-.87 2.07 0 1.22.89 2.4 1.01 2.56.12.17 1.75 2.67 4.24 3.74.59.26 1.05.41 1.41.52.59.19 1.13.16 1.56.1.48-.07 1.47-.6 1.67-1.18.21-.58.21-1.07.14-1.18-.06-.1-.22-.16-.47-.28z"/></svg>
+</a>
+
+</body>
+</html>
