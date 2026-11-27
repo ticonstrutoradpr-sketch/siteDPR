@@ -31,7 +31,7 @@
   function medeLetras() { var g = document.createElement('canvas').getContext('2d'); g.font = '200 100px Poppins'; larg = LETRAS.map(function (l) { return Math.max(.3, g.measureText(l).width / 100); }); }
   medeLetras();
   var POS = [[-.24, -.15, 8], [.25, .12, -7], [-.2, .14, 5], [.22, -.16, -6], [-.26, .06, 7], [.18, .16, -5], [0, -.04, 3]];
-  var pedido = false;
+  var pedido = false, mxs = 0, mys = 0;
   function quadro() {
     pedido = false;
     if (calmo) return;
@@ -59,25 +59,25 @@
       q.el.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg)';
     }
     document.body.classList.toggle('na-midia', p > 0 && p < 1);
-    /* videos: em fila, entram pela direita e andam de lado com a rolagem ate o ultimo ficar no centro */
-    var cw = cards.length ? cards[0].offsetWidth : 400, vao = cel ? W * .08 : Math.max(48, W * .05), passoV = cw + vao;
-    var andar = suave(fase(p, .4, .97)), inicio = W / 2 + cw / 2 + 40, total = inicio + (cards.length - 1) * passoV;
-    /* fundo em paralaxe: os pontinhos andam mais devagar que os videos, dando a sensacao de atravessar o espaco */
-    pilula.style.backgroundPosition = 'calc(50% - ' + (andar * total * .18).toFixed(1) + 'px) 50%';
+    /* videos na parede de uma sala circular em volta de quem olha: a rolagem gira a sala. O da frente e o foco;
+       os dos lados vem curvando em direcao a pessoa e somem no fundo. O mouse inclina a sala de leve. */
+    var cw = cards.length ? cards[0].offsetWidth : 400, raio = cel ? W * .92 : Math.max(760, W * .56);
+    var passoA = (cw / raio) * (cel ? 1.12 : 1.2), andar = suave(fase(p, .4, .97));
+    var giro = (-1.6 + andar * (cards.length - 1 + 1.6)) * passoA;
+    mxs += (estado.mx - mxs) * .1; mys += (estado.my - mys) * .1;
+    pilula.style.backgroundPosition = 'calc(50% - ' + (giro * raio * .22).toFixed(1) + 'px) 50%';
     cards.forEach(function (card, k) {
-      var x = inicio + k * passoV - andar * total, y = (k % 2 ? 1 : -1) * H * (cel ? .03 : .05);
-      /* profundidade: o do centro e o foco; os que passaram vao para o fundo (longe, virados, desfocados e apagados);
-         os que chegam entram quase no primeiro plano, virados para o centro */
-      var d = x / (W * .5), foco = 1 - Math.min(1, Math.abs(d)), z, ry, borrao = 0, luz = 1;
-      if (d < 0) { var foi = Math.min(2.2, -d); z = -foi * (cel ? 520 : 780); ry = foi * 24; borrao = foi * 2.6; luz = 1 - foi * .22; }
-      else { z = -d * 140; ry = -d * 10; }
-      var dentro = x < W / 2 + cw / 2 && x > -W * 1.6, op = fase(p, .38, .44) * (dentro ? 1 : 0) * (d < 0 ? 1 - Math.min(1, -d / 2.4) : 1);
+      var th = k * passoA - giro + mxs * .12, a = Math.abs(th);
+      var x = Math.sin(th) * raio, z = -Math.cos(th) * raio + raio * (cel ? .72 : .8), y = mys * -24 + Math.sin(th) * mys * 30;
+      var ry = -th * 180 / Math.PI, rx = mys * 4;
+      var op = fase(p, .38, .44) * (1 - fase(a, 1.05, 1.35));
+      var borrao = Math.max(0, a - .55) * 5, luz = 1 - Math.max(0, a - .4) * .35;
       card.style.opacity = op.toFixed(3);
-      card.style.zIndex = String(Math.round(100 - Math.abs(d) * 20));
+      card.style.zIndex = String(Math.round(100 - a * 40));
       card.style.filter = borrao > .05 ? 'blur(' + borrao.toFixed(2) + 'px) brightness(' + luz.toFixed(3) + ')' : '';
-      /* revelacao: o video abre como cortina enquanto entra pela direita */
-      card.style.setProperty('--rv', limita((W / 2 + cw / 2 - x) / (cw * .9), 0, 1).toFixed(3));
-      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg) scale(' + (1 + foco * .1).toFixed(3) + ')';
+      /* cortina: o video abre enquanto chega pela direita */
+      card.style.setProperty('--rv', limita((1.05 - th) / .55, 0, 1).toFixed(3));
+      card.style.transform = 'translate(-50%, -50%) translate3d(' + x.toFixed(1) + 'px,' + y.toFixed(1) + 'px,' + z.toFixed(1) + 'px) rotateY(' + ry.toFixed(2) + 'deg) rotateX(' + rx.toFixed(2) + 'deg)';
       card.style.pointerEvents = op > .4 ? 'auto' : 'none';
       var v = card.querySelector('video');
       if (op > .03) {
@@ -88,6 +88,8 @@
   }
   window.addEventListener('scroll', function () { if (!pedido) { pedido = true; requestAnimationFrame(quadro); } }, { passive: true });
   window.addEventListener('resize', quadro);
+  var estado = { mx: 0, my: 0 };
+  if (!calmo) fixo.addEventListener('mousemove', function (ev) { estado.mx = (ev.clientX / window.innerWidth) * 2 - 1; estado.my = (ev.clientY / window.innerHeight) * 2 - 1; if (!pedido) { pedido = true; requestAnimationFrame(quadro); } });
   if (document.fonts && document.fonts.load) document.fonts.load('200 100px Poppins').then(function () { medeLetras(); quadro(); }).catch(function () {});
   quadro();
 
